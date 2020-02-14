@@ -3,3 +3,7 @@ Aurkitu zure Tatoo estudioa / Encuentra tu Estudio de Tatoo / Find your Tatoo es
 
 ## Taldea
 2DM3 Txurdinaga 2020
+
+* bat
+* bi
+* hiru
