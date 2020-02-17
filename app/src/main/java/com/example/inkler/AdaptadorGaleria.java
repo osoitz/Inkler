@@ -28,6 +28,7 @@ public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.View
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ImageView tatuaje;
+        //public  TextView tatuaje;
 
 
         public ViewHolder(@NonNull View itemView) {
@@ -48,7 +49,8 @@ public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Meto los datos de libro al selector
         Galeria galeria = listalibro.get(position);
-        holder.tatuaje.setImageResource(galeria.tatuaje);
+        holder.tatuaje.setImageResource(Integer.parseInt(galeria.nombre));
+        //holder.tatuaje.setText(galeria.nombre);
     }
 
     @Override
