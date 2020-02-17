@@ -49,6 +49,7 @@ Contará con información de geolocalización de los estudios.
 
 #### Pantallas
 <a name="pantallas"/>
+
 * Listado de tatuadores
 * Ficha del / la tatuador(a) y el estudio donde trabaja
 * Galeria de trabajos de cada tatuador(a)
@@ -59,6 +60,7 @@ Opcionales
 
 ### Justificación
 <a name="justificacion"/>
+
 Un tatuaje es para toda la vida por lo que es importante encontrar el / la tatuador(a) que se adecue al estilo de tatuaje deseado.
 
 Existen numerosos estudios de tatuaje cada uno intentando darse a conocer por separado, una persona que desee tatuarse no tiene herramientas para tomar una decisión informada.
@@ -68,16 +70,19 @@ Inkler intenta solucionar dicha necesidad.
 
 ### Beneficios
 <a name="beneficios"/>
+
 Gracias a Inkler la persona que desee tatuarse dispondrá de suficientes ejemplos con los que elegir de forma informada en manos de quien poner su tatuaje.
 
 
 ## Objetivo general del proyecto
 <a name="objetivogeneral"/>
+
 El objetivo es desarrollar una aplicación facil de utilizar que de información suficiente a quien se desee tatuar para elegir en manos de quien ponerse.
 
 
 ## Objetivos especificos
 <a name="objetivos especificos"/>
+
 * Recoger los estudios de tatoot de Bilbao y alrededores
 * Mostrar ejemplos de trabajos
 * Situar geograficamente los estudios
@@ -85,11 +90,13 @@ El objetivo es desarrollar una aplicación facil de utilizar que de información
 
 ## Tareas
 <a name="tareas"/>
+
 Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
 
 ## Recursos Humanos
 <a name="recursoshumanos"/>
+
 * Amaro Martinez (Programador)
 * Beñat Garrido (Programador)
 * Kevin Diaz-Medíno (Programador)
@@ -98,6 +105,7 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
 ## Recursos Materiales
 <a name="recursosmateriales"/>
+
 * 4 Portatiles Dell Vostro 15
 * 1 Móvil Xiaomi A1
 * 1 Móvil Xiamoi Redmi 4x
@@ -108,6 +116,7 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
 ## Software
 <a name="software"/>
+
 * Android Studio
 * SQlite
 * MapBox
@@ -119,6 +128,7 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
 ## Riesgos
 <a name="riesgos"/>
+
 * No alcanzar el objetivo en el tiempo disponible
 * Que la aplicación no funcione debidamente
 * Que no satisfaga las necesidades de los usuarios
@@ -134,6 +144,7 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
 ### Presupuesto detallado
 <a name="presupuestodetallado"/>
+
 Pendiente
 
 
@@ -147,8 +158,8 @@ Pendiente
 
 ## Anexos
 <a name="anexos"/>
-No hay todavia
 
+No hay todavia (Diagramas...)
 
 
 ## Bibliografia
