@@ -54,7 +54,8 @@ Contará con información de geolocalización de los estudios.
 * Listado de tatuadores
 * Ficha del / la tatuador(a) y el estudio donde trabaja
 * Galeria de trabajos de cada tatuador(a)
-Opcionales
+
+##### Opcionales
 * Mapa con todos los estudios
 * Selección tipo Tinder de trabajos a ciegas (sin mostrar autor)
 
@@ -66,7 +67,7 @@ Un tatuaje es para toda la vida por lo que es importante encontrar el / la tatua
 
 Existen numerosos estudios de tatuaje cada uno intentando darse a conocer por separado, una persona que desee tatuarse no tiene herramientas para tomar una decisión informada.
 
-Inkler intenta solucionar dicha necesidad.
+Inkler soluciona dicha necesidad.
 
 
 ### Beneficios
@@ -86,7 +87,7 @@ El objetivo es desarrollar una aplicación facil de utilizar que de información
 ### Objetivos especificos
 <a name="objetivos especificos"/>
 
-* Recoger los estudios de tatoot de Bilbao y alrededores
+* Recoger los estudios de tatuaje de Bilbao y alrededores
 * Mostrar ejemplos de trabajos
 * Situar geograficamente los estudios
 
