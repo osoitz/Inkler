@@ -5,21 +5,49 @@ Aurkitu zure Tatoo estudioa / Encuentra tu Estudio de Tatoo / Find your Tatoo es
 <img src="https://github.com/osoitz/Inkler/blob/master/app/src/main/res/drawable/dragonlogo.png" width="64">
 
 ## Introducción
-
-Inkler es una aplicación que permite encontrar tatuadores y los estudios donde trabajan.
-
-Los usuarios de la aplicación son personas que se quieren tatuar, podrán ver estudios de tatoo cercanos y ejemplos de los trabajos realizados.
+Esta aplicación se dirige a personas que deseen tatuarse y permitirá encontrar profesionales del tatuaje.
 
 ### Pantallas
 * Listado de tatuadores
 * Ficha del / la tatuador(a) y el estudio donde trabaja
 * Galeria de trabajos de cada tatuador(a)
-
 Opcionales
 * Mapa con todos los estudios
 * Selección tipo Tinder de trabajos a ciegas (sin mostrar autor)
 
 Los tatuadores que deseen aparecer en la aplicación deberan ponerse en contacto con nosotros.
+
+## Origen y contextualización
+
+### Descripcion
+
+Inkler es una aplicación que permite encontrar tatuadores y los estudios donde trabajan con ejemplos.
+
+Contará con una galeria por artista para poder conocer sus trabajos anteriores.
+
+Contará con información de geolocalización de los estudios.
+
+### Justificación
+Un tatuaje es para toda la vida por lo que es importante encontrar el / la tatuador(a) que se adecue al estilo de tatuaje deseado.
+
+Existen numerosos estudios de tatuaje cada uno intentando darse a conocer por separado, una persona que desee tatuarse no tiene herramientas para tomar una decisión informada.
+
+Inkler intenta solucionar dicha necesidad.
+
+### Beneficios
+Gracias a Inkler la persona que desee tatuarse dispondrá de suficientes ejemplos con los que elegir de forma informada en manos de quien poner su tatuaje.
+
+## Objetivo general del proyecto
+El objetivo es desarrollar una aplicación facil de utilizar que de información suficiente a quien se desee tatuar para elegir en manos de quien ponerse.
+
+## Objetivos especificos
+* Recoger los estudios de tatoot de Bilbao y alrededores
+* Mostrar ejemplos de trabajos
+* Situar geograficamente los estudios
+
+## Tareas
+Ver:  
+
 
 # ESQUEMA
 
