@@ -69,19 +69,22 @@
                     android:layout_width="10dp"
                     android:layout_height="100dp"
                     android:layout_weight="0.33"
-                    android:src="@drawable/pentagono" />
+                    android:src="@drawable/pentagono"
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="100dp"
                     android:layout_weight="0.33"
-                    android:src="@drawable/pentagono" />
+                    android:src="@drawable/pentagono"
+                    tools:ignore="ContentDescription"/>
 
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="100dp"
                     android:layout_weight="0.34"
-                    android:src="@drawable/pentagono" />
+                    android:src="@drawable/pentagono"
+                    tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <TextView
@@ -107,7 +110,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:text="@string/instagram"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -133,7 +136,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:text="@string/email"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -158,7 +161,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:text="@string/web"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -190,8 +193,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
-                    android:text="Nombre:"
+                    android:gravity="start"
+                    android:text="@string/nombre"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -215,8 +218,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
-                    android:text="Dirección:"
+                    android:gravity="start"
+                    android:text="@string/direcci_n"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -240,8 +243,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
-                    android:text="Email:"
+                    android:gravity="start"
+                    android:text="@string/email"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -265,7 +268,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:text="@string/telefono"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -294,7 +297,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:gravity="left"
+                    android:gravity="start"
                     android:text="@string/web"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -302,7 +305,7 @@
                 <TextView
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="left"
+                    android:layout_gravity="start"
                     android:layout_weight="0.5"
                     android:text="arestattoo.com"
                     android:textSize="20sp" />

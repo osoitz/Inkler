@@ -8,4 +8,6 @@
     <string name="sobre_el_estudio">Sobre el estudio:</string>
     <string name="sobre_el_tatuador">Sobre el tatuador:</string>
     <string name="telefono">Telefono:</string>
+    <string name="nombre">Nombre:</string>
+    <string name="direcci_n">Dirección:</string>
 </resources>
