@@ -12,14 +12,16 @@ public class Tatuador {
     private String Apellidos;
     private String Email;
     private String Telefono;
+    private String IDEstudio;
 
 
-    Tatuador(String NombreArt, String Nombre, String Apellidos, String Email, String Telefono){
+    Tatuador(String NombreArt, String Nombre, String Apellidos, String Email, String Telefono, String IDEstudio){
         this.NombreArt = NombreArt;
         this.Nombre = Nombre;
         this.Apellidos = Apellidos;
         this.Email = Email;
         this.Telefono = Telefono;
+        this.IDEstudio = IDEstudio;
     }
 
     String getNombreArt() {
@@ -28,6 +30,14 @@ public class Tatuador {
 
     public void setNombreArt(String dni) {
         this.NombreArt = dni;
+    }
+
+    String getIDEstudio() {
+        return IDEstudio;
+    }
+
+    public void setIDEstudio(String IDEstudio) {
+        this.IDEstudio = IDEstudio;
     }
 
     String getNombre() {
