@@ -1,12 +1,34 @@
 # Inkler
 Aurkitu zure Tatoo estudioa / Encuentra tu Estudio de Tatoo / Find your Tatoo estudio
 
+## Logo
 <img src="https://github.com/osoitz/Inkler/blob/master/app/src/main/res/drawable/dragonlogo.png" width="64">
-## ESQUEMA
+
+## Introducción
+
+Inkler es una aplicación que permite encontrar tatuadores y los estudios donde trabajan.
+
+Los usuarios de la aplicación son personas que se quieren tatuar, podrán ver estudios de tatoo cercanos y ejemplos de los trabajos realizados.
+
+### Pantallas
+* Listado de tatuadores
+* Ficha del / la tatuador(a) y el estudio donde trabaja
+* Galeria de trabajos de cada tatuador(a)
+
+Opcionales
+* Mapa con todos los estudios
+* Selección tipo Tinder de trabajos a ciegas (sin mostrar autor)
+
+Los tatuadores que deseen aparecer en la aplicación deberan ponerse en contacto con nosotros.
+
+# ESQUEMA
 
 PLANTILLA DE COMO REDACTAR EL PROYECTO
-    1. Logo y nombre del proyecto
-    2. Introducción (el diseño, que trata la empresa, a quien va dirigida, etc.)
+
+    ~~1. Logo y nombre del proyecto~~
+    
+    ~~2. Introducción (el diseño, que trata la empresa, a quien va dirigida, etc.)~~
+    
     3. Origen y contextualización del proyecto:
         a. Descripción
         b. Justificación (porque es proyecto)
