@@ -21,24 +21,24 @@ Aurkitu zure Tatoo estudioa / Encuentra tu Estudio de Tatoo / Find your Tatoo es
 * [Anexos](#anexos)
 * [Bibliografia](#bibliografia)
 
-
-
+## Logo
 <a name="logo"/>
-##Logo
 <img src="https://github.com/osoitz/Inkler/blob/master/app/src/main/res/drawable/dragonlogo.png" width="64">
 
 
-<a name="introduccion"/>
+
 ## Introducción
+<a name="introduccion"/>
 Esta aplicación se dirige a personas que deseen tatuarse y permitirá encontrar profesionales del tatuaje.
 
 Los tatuadores que deseen aparecer en la aplicación deberan ponerse en contacto con nosotros.
 
-<a name="origen"/>
-## Origen y contextualización
 
-<a name="descripcion"/>
+## Origen y contextualización
+<a name="origen"/>
+
 ### Descripcion
+<a name="descripcion"/>
 
 Inkler es una aplicación que permite encontrar tatuadores y los estudios donde trabajan con ejemplos.
 
@@ -46,8 +46,9 @@ Contará con una galeria por artista para poder conocer sus trabajos anteriores.
 
 Contará con información de geolocalización de los estudios.
 
-<a name="pantallas"/>
+
 #### Pantallas
+<a name="pantallas"/>
 * Listado de tatuadores
 * Ficha del / la tatuador(a) y el estudio donde trabaja
 * Galeria de trabajos de cada tatuador(a)
@@ -55,41 +56,48 @@ Opcionales
 * Mapa con todos los estudios
 * Selección tipo Tinder de trabajos a ciegas (sin mostrar autor)
 
-<a name="justificacion"/>
+
 ### Justificación
+<a name="justificacion"/>
 Un tatuaje es para toda la vida por lo que es importante encontrar el / la tatuador(a) que se adecue al estilo de tatuaje deseado.
 
 Existen numerosos estudios de tatuaje cada uno intentando darse a conocer por separado, una persona que desee tatuarse no tiene herramientas para tomar una decisión informada.
 
 Inkler intenta solucionar dicha necesidad.
 
-<a name="beneficios"/>
+
 ### Beneficios
+<a name="beneficios"/>
 Gracias a Inkler la persona que desee tatuarse dispondrá de suficientes ejemplos con los que elegir de forma informada en manos de quien poner su tatuaje.
 
-<a name="objetivogeneral"/>
+
 ## Objetivo general del proyecto
+<a name="objetivogeneral"/>
 El objetivo es desarrollar una aplicación facil de utilizar que de información suficiente a quien se desee tatuar para elegir en manos de quien ponerse.
 
-<a name="objetivos especificos"/>
+
 ## Objetivos especificos
+<a name="objetivos especificos"/>
 * Recoger los estudios de tatoot de Bilbao y alrededores
 * Mostrar ejemplos de trabajos
 * Situar geograficamente los estudios
 
-<a name="tareas"/>
+
 ## Tareas
+<a name="tareas"/>
 Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
-<a name="recursoshumanos"/>
+
 ## Recursos Humanos
+<a name="recursoshumanos"/>
 * Amaro Martinez (Programador)
 * Beñat Garrido (Programador)
 * Kevin Diaz-Medíno (Programador)
 * Osoitz Elkorobarrutia (Programador)
 
-<a name="recursosmateriales"/>
+
 ## Recursos Materiales
+<a name="recursosmateriales"/>
 * 4 Portatiles Dell Vostro 15
 * 1 Móvil Xiaomi A1
 * 1 Móvil Xiamoi Redmi 4x
@@ -97,8 +105,9 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 * 1 Mesa común
 * 4 Sillas
 
-<a name="software"/>
+
 ## Software
+<a name="software"/>
 * Android Studio
 * SQlite
 * MapBox
@@ -107,8 +116,9 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 * Git / GitHub
 * Markdown
 
-<a name="riesgos"/>
+
 ## Riesgos
+<a name="riesgos"/>
 * No alcanzar el objetivo en el tiempo disponible
 * Que la aplicación no funcione debidamente
 * Que no satisfaga las necesidades de los usuarios
@@ -116,31 +126,33 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 * Perder la información de la base de datos
 
 
-<a name="presupuesto"/>
+
 ## Presupuesto
+<a name="presupuesto"/>
 
 200 horas x 25 €/hora  = 5.000 € 
 
-
-<a name="presupuestodetallado"/>
 ### Presupuesto detallado
+<a name="presupuestodetallado"/>
 Pendiente
 
 
-<a name="seguimiento"/>
+
 ## Politicas de seguimiento y evaluacion
+<a name="seguimiento"/>
 
 * Se realizarán reuniones diarias para ponernos al día
 * Cada tarea será testada por otro miembro del equipo
 
 
-<a name="anexos"/>
 ## Anexos
+<a name="anexos"/>
 No hay todavia
 
 
-<a name="bibliografia"/>
+
 ## Bibliografia
+<a name="bibliografia"/>
 
 * https://developer.android.com/
 * https://material.io/
