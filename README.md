@@ -49,10 +49,11 @@ El objetivo es desarrollar una aplicación facil de utilizar que de información
 Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
 ## Recursos Humanos
-* Amaro Martinez
-* Beñat Garrido
-* Kevin Diaz-Medíno
-* Osoitz Elkorobarrutia
+* Amaro Martinez (Programador)
+* Beñat Garrido (Programador)
+* Kevin Diaz-Medíno (Programador)
+* Osoitz Elkorobarrutia (Programador)
+
 
 ## Recursos Materiales
 
@@ -72,8 +73,43 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 * Git / GitHub
 * Markdown
 
+## Cronograma
+Ver:  [Tareas]
 
-# ESQUEMA
+## Riesgos
+* No alcanzar el objetivo en el tiempo disponible
+* Que la aplicación no funcione debidamente
+* Que no satisfaga las necesidades de los usuarios
+* Que no quieran aparecer en ella las / los tatuadores
+* Perder la información de la base de datos
+
+## Presupuesto
+
+200 horas x 25 €/hora  = 5.000 € 
+
+### Presupuesto detallado
+Pendiente
+
+## Politicas de seguimiento y evaluacion
+
+* Se realizarán reuniones diarias para ponernos al día
+* Cada tarea será testada por otro miembro del equipo
+
+## Anexos
+No hay todavia
+
+## Bibliografia
+
+* https://developer.android.com/
+* https://material.io/
+* Clean Code: A Handbook of Agile Software Craftsmanship (Richar C Martin)
+* Effective Java (Joshua Bloch)
+* https://www.paginasamarillas.es/ (Para buscar tatuadores)
+
+-----
+
+
+# ESQUEMA EJEMPLO
 
 PLANTILLA DE COMO REDACTAR EL PROYECTO
 
