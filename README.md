@@ -46,7 +46,31 @@ El objetivo es desarrollar una aplicación facil de utilizar que de información
 * Situar geograficamente los estudios
 
 ## Tareas
-Ver:  
+Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
+
+## Recursos Humanos
+* Amaro Martinez
+* Beñat Garrido
+* Kevin Diaz-Medíno
+* Osoitz Elkorobarrutia
+
+## Recursos Materiales
+
+* 4 Portatiles Dell Vostro 15
+* 1 Móvil Xiaomi A1
+* 1 Móvil Xiamoi Redmi 4x
+* 1 Tablet Lenovo tabM10
+* 1 Mesa común
+* 4 Sillas
+
+## Software
+* Android Studio
+* SQlite
+* MapBox
+* GIMP
+* Firefox / Chrome
+* Git / GitHub
+* Markdown
 
 
 # ESQUEMA
