@@ -159,7 +159,7 @@ Pendiente
 ## Anexos
 <a name="anexos"/>
 
-No hay todavia (Diagramas...)
+Ver:  [Documentacion](https://github.com/osoitz/Inkler/tree/master/Documentacion)
 
 
 ## Bibliografia
