@@ -25,9 +25,9 @@ Los tatuadores que deseen aparecer en la aplicación deberan ponerse en contacto
 
 PLANTILLA DE COMO REDACTAR EL PROYECTO
 
-    ~~1. Logo y nombre del proyecto~~
+    ~~ 1. Logo y nombre del proyecto ~~
     
-    ~~2. Introducción (el diseño, que trata la empresa, a quien va dirigida, etc.)~~
+    ~~ 2. Introducción (el diseño, que trata la empresa, a quien va dirigida, etc.) ~~
     
     3. Origen y contextualización del proyecto:
         a. Descripción
