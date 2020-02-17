@@ -74,7 +74,7 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 * Markdown
 
 ## Cronograma
-Ver:  [Tareas]
+Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 
 ## Riesgos
 * No alcanzar el objetivo en el tiempo disponible
