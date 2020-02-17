@@ -9,8 +9,9 @@ Aurkitu zure Tatoo estudioa / Encuentra tu Estudio de Tatoo / Find your Tatoo es
         * [Pantallas](#pantallas)
     * [Justificación](#justificacion)
     * [Beneficio](#beneficio)
-* [Objetivo general del proyecto](#objetivogeneral)
-* [Objetivos especificios](#objetivosespecificos)
+* [Objetivos](#objetivos)
+    * [Objetivo general del proyecto](#objetivogeneral)
+    * [Objetivos especificios](#objetivosespecificos)
 * [Tareas](#tareas)
 * [Recursos Humanos](#recursoshumanos)
 * [Recursos materiales](#recursosmateriales)
@@ -73,14 +74,16 @@ Inkler intenta solucionar dicha necesidad.
 
 Gracias a Inkler la persona que desee tatuarse dispondrá de suficientes ejemplos con los que elegir de forma informada en manos de quien poner su tatuaje.
 
+## Objetivos
+<a name="objetivos"/>
 
-## Objetivo general del proyecto
+### Objetivo general del proyecto
 <a name="objetivogeneral"/>
 
 El objetivo es desarrollar una aplicación facil de utilizar que de información suficiente a quien se desee tatuar para elegir en manos de quien ponerse.
 
 
-## Objetivos especificos
+### Objetivos especificos
 <a name="objetivos especificos"/>
 
 * Recoger los estudios de tatoot de Bilbao y alrededores
