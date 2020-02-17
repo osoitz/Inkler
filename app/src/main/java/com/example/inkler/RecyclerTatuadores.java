@@ -48,16 +48,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
 
         // Iniciar base de datos
         DBHelper dbHelper = new DBHelper(getBaseContext());
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-        ContentValues t1 = new ContentValues();
-        t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO,"Satan");
-        t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,"Beñat");
-        t1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,"Smith");
-        t1.put(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL,"SBS@gmail.com");
-        t1.put(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO,"666666666");
-        t1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO,"001");
-        db.insert(DBHelper.entidadTatuador.TABLE_NAME,null,t1);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         //Columnas
         String[] proyeccion = {DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, DBHelper.entidadTatuador.COLUMN_NAME_EMAIL, DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO, DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};

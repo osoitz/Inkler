@@ -62,7 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
                     entidadEstudio.COLUMN_NAME_LATITUD + " REAL," +
                     entidadEstudio.COLUMN_NAME_LONGITUD + " REAL," +
                     entidadEstudio.COLUMN_NAME_TELEFONO + " TEXT," +
-                    entidadEstudio.COLUMN_NAME_EMAIL+ " INTEGER)";
+                    entidadEstudio.COLUMN_NAME_EMAIL+ " TEXT)";
 
     private static final String SQL_DELETE_TABLE_ESTUDIO =
             "DROP TABLE IF EXISTS " + entidadEstudio.TABLE_NAME;
@@ -98,6 +98,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void onDowngrade (SQLiteDatabase db,int oldVersion, int newVersion){
         onUpgrade(db, oldVersion, newVersion);
+    }
+
+    public void delete (SQLiteDatabase db){
+        db.execSQL(SQL_DELETE_TABLE_TATUADOR);
+        db.execSQL(SQL_DELETE_TABLE_ESTUDIO);
+        db.execSQL(SQL_DELETE_TABLE_WEB);
+        onCreate(db);
     }
 
 }
