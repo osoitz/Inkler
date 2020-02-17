@@ -199,7 +199,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_weight="0.5"
-                            android:text="Nombrer:"
+                            android:text="Nombre:"
                             android:textSize="30sp"
                             android:textStyle="bold" />
 
@@ -273,10 +273,13 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/phone_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:text="946791038"
+                            android:autoLink="phone"
+                            android:linksClickable="true"
                             android:textSize="20sp" />
                     </LinearLayout>
 
