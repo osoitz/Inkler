@@ -1,5 +1,6 @@
 package com.example.inkler;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,12 +12,12 @@ public class RecyclerTatuadores extends AppCompatActivity {
     // Variables necesarias
     RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private AdaptadorAlumnos adaptador;
+    private AdaptadorTatuadores adaptador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_recycler_tatuadores);
 
         sqlite();
 
@@ -24,7 +25,8 @@ public class RecyclerTatuadores extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new AlumnoRecyclerViewListener(this, recyclerView, new AlumnoRecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-
+                Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
+                startActivity(intent);
             }
 
             @Override
@@ -38,11 +40,11 @@ public class RecyclerTatuadores extends AppCompatActivity {
     }
 
     private void sqlite() {
-        Alumno a = new Alumno("A", "A", "A", "A");
-        Alumno.getAlumnoList().add(a);
+        Tatuador a = new Tatuador("PinxaUvas", "Antonio", "Lopez Garcia", "APU@gmail.com", "653951284");
+        Tatuador.getTatuadorList().add(a);
 
         recyclerView = findViewById(R.id.recyclerFragment);
-        adaptador = new AdaptadorAlumnos(getApplicationContext(), Alumno.getAlumnoList());
+        adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());
         recyclerView.setAdapter(adaptador);
         layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         recyclerView.setLayoutManager(layoutManager);

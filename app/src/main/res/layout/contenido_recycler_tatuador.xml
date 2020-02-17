@@ -9,10 +9,10 @@
 
 
     <ImageView
-        android:id="@+id/ivalumno"
+        android:id="@+id/avatar"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/fondorv"
+        android:background="@drawable/calavera"
         android:paddingLeft="16dp"
         android:paddingTop="16dp"
         android:paddingRight="16dp"
@@ -26,12 +26,12 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/DNI"
+        android:id="@+id/NombreArt"
         style="@style/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ivalumno" />
+        app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
     <TextView
         android:id="@+id/Nombre"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/DNI"
+        app:layout_constraintTop_toBottomOf="@+id/NombreArt"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline

@@ -14,25 +14,25 @@ import java.util.List;
 
 // Clase adaptador para el recyclerview de los alumnos
 
-public class AdaptadorAlumnos extends RecyclerView.Adapter<AdaptadorAlumnos.ViewHolder> {
+public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadores.ViewHolder> {
     private LayoutInflater inflador;
-    private List<Alumno> listaalumnos;
+    private List<Tatuador> listatatuadores;
 
     //Constructor
-    AdaptadorAlumnos(Context contexto, List<Alumno> listaalumno){
+    AdaptadorTatuadores(Context contexto, List<Tatuador> listatatuador){
         inflador= (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.listaalumnos = listaalumno;
+        this.listatatuadores = listatatuador;
     }
 
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView DNI;
+        TextView NombreArt;
         TextView Nombre;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            DNI = itemView.findViewById(R.id.DNI);
+            NombreArt = itemView.findViewById(R.id.NombreArt);
             Nombre = itemView.findViewById(R.id.Nombre);
 
         }
@@ -40,21 +40,20 @@ public class AdaptadorAlumnos extends RecyclerView.Adapter<AdaptadorAlumnos.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_trabajador,null);
+        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_tatuador,null);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Meto los datos de alumno al selector
-        Alumno alumno = listaalumnos.get(position);
-        holder.DNI.setText(alumno.getDni());
-        holder.Nombre.setText(alumno.getNombre());
+        Tatuador tatuador = listatatuadores.get(position);
+        holder.NombreArt.setText(tatuador.getNombreArt());
     }
 
     @Override
     public int getItemCount() {
-        return listaalumnos.size();
+        return listatatuadores.size();
     }
 
 }
