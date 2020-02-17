@@ -9,8 +9,9 @@ Aurkitu zure Tatoo estudioa / Encuentra tu Estudio de Tatoo / Find your Tatoo es
         * [Pantallas](#pantallas)
     * [Justificación](#justificacion)
     * [Beneficio](#beneficio)
-* [Objetivo general del proyecto](#objetivogeneral)
-* [Objetivos especificios](#objetivosespecificos)
+* [Objetivos](#objetivos)
+    * [Objetivo general del proyecto](#objetivogeneral)
+    * [Objetivos especificios](#objetivosespecificos)
 * [Tareas](#tareas)
 * [Recursos Humanos](#recursoshumanos)
 * [Recursos materiales](#recursosmateriales)
@@ -53,7 +54,8 @@ Contará con información de geolocalización de los estudios.
 * Listado de tatuadores
 * Ficha del / la tatuador(a) y el estudio donde trabaja
 * Galeria de trabajos de cada tatuador(a)
-Opcionales
+
+##### Opcionales
 * Mapa con todos los estudios
 * Selección tipo Tinder de trabajos a ciegas (sin mostrar autor)
 
@@ -65,7 +67,7 @@ Un tatuaje es para toda la vida por lo que es importante encontrar el / la tatua
 
 Existen numerosos estudios de tatuaje cada uno intentando darse a conocer por separado, una persona que desee tatuarse no tiene herramientas para tomar una decisión informada.
 
-Inkler intenta solucionar dicha necesidad.
+Inkler soluciona dicha necesidad.
 
 
 ### Beneficios
@@ -73,17 +75,19 @@ Inkler intenta solucionar dicha necesidad.
 
 Gracias a Inkler la persona que desee tatuarse dispondrá de suficientes ejemplos con los que elegir de forma informada en manos de quien poner su tatuaje.
 
+## Objetivos
+<a name="objetivos"/>
 
-## Objetivo general del proyecto
+### Objetivo general del proyecto
 <a name="objetivogeneral"/>
 
 El objetivo es desarrollar una aplicación facil de utilizar que de información suficiente a quien se desee tatuar para elegir en manos de quien ponerse.
 
 
-## Objetivos especificos
+### Objetivos especificos
 <a name="objetivos especificos"/>
 
-* Recoger los estudios de tatoot de Bilbao y alrededores
+* Recoger los estudios de tatuaje de Bilbao y alrededores
 * Mostrar ejemplos de trabajos
 * Situar geograficamente los estudios
 
@@ -159,7 +163,7 @@ Pendiente
 ## Anexos
 <a name="anexos"/>
 
-No hay todavia (Diagramas...)
+Ver:  [Documentacion](https://github.com/osoitz/Inkler/tree/master/Documentacion)
 
 
 ## Bibliografia
