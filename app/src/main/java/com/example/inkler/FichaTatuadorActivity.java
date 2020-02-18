@@ -30,22 +30,21 @@ import java.util.ArrayList;
 public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
     private TextView tlfno;
-    private TextView NombreArt;
+
     private TextView NombreTat;
     private TextView EmailTat;
-    public ArrayList<Tatuador>tatuadors;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         String idTat= getIntent().getStringExtra("id");
-        NombreArt=findViewById(R.id.nombreArtistico);
+        Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
+        setContentView(R.layout.activity_ficha_tatuador);
         NombreTat=findViewById(R.id.nombreApellidos);
         EmailTat=findViewById(R.id.TattooMail);
         //tatuadors.clear();
-        recogerTatuador(idTat);
-        rellenar_txt();
-        Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
-        setContentView(R.layout.activity_ficha_tatuador);
+        Tatuador miTatuador = recogerTatuador(idTat);
+        rellenar_txt(miTatuador);
+
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -77,13 +76,14 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         });
     }
 
-    public void recogerTatuador (String id){
-
+    public Tatuador recogerTatuador (String id){
+        Tatuador tatuador = new Tatuador();
         // Iniciar base de datos
         DBHelper dbHelper = new DBHelper(getBaseContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         //Columnas
         String[] projection = {
+                DBHelper.entidadTatuador._ID,
                 DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO,
                 DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,
                 DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,
@@ -91,38 +91,42 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO,
                 DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO
         };
+
         //Respuesta
-        String[] selectionArgs= { id };
+        String[] selectionArgs = new String[] { "" + id } ;
         Cursor cursor = db.query(
                 DBHelper.entidadTatuador.TABLE_NAME,
                 projection,
-                DBHelper.entidadTatuador._ID + " = ? ",
+                 " _ID = ? ",
                 selectionArgs,
                 null,
                 null,
                 null);
         // recoger los datos
-        while (cursor.moveToNext()) {
-            String idtat = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
-            String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
-            String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
-            String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
-            String email = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL));
-            String IDEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
-            String telefono = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO));
-            Tatuador t = new Tatuador(idtat,nombreArt,nombre,apellidos,email,telefono,IDEstudio);
-            tatuadors.add(t);
+        if (cursor.getCount()>0) {
+            cursor.moveToFirst();
+            tatuador.setId(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID)));
+            tatuador.setNombreArt(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO)));
+            tatuador.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE)));
+            tatuador.setApellidos(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS)));
+            tatuador.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL)));
+            tatuador.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
+            tatuador.setIDEstudio(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO)));
+
      }
         cursor.close();
-
+        return tatuador;
 
     }
 
-    public void rellenar_txt(){
-        String nombre = "("+tatuadors.get(0).getNombre()+" "+tatuadors.get(0).getApellidos()+")";
-        NombreArt.setText(tatuadors.get(0).getNombreArt());
+
+    public void rellenar_txt(Tatuador miTatuador){
+        TextView NombreArt;
+       String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";
+        NombreArt = findViewById(R.id.nombreArtistico);
+        NombreArt.setText(miTatuador.getNombreArt());
         NombreTat.setText(nombre);
-        EmailTat.setText(tatuadors.get(0).getEmail());
+        EmailTat.setText(miTatuador.getEmail());
     }
 
     @Override
@@ -182,7 +186,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
+/*
         //noinspection SimplifiableIfStatement
         if (id == R.id.añadir_tatuador) {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
@@ -201,7 +205,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             //startActivity(intent);
             return true;
         }
-
+*/
         return super.onOptionsItemSelected(item);
     }
 
