@@ -119,7 +119,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
 
     }
 
-   
+
     public void rellenar_txt(Tatuador miTatuador){
         TextView NombreArt;
        String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";

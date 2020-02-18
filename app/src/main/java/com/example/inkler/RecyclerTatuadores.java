@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,7 +81,12 @@ public class RecyclerTatuadores extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerFragment);
         adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());
         recyclerView.setAdapter(adaptador);
-        layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        ConstraintLayout cl = findViewById(R.id.recycler_tatuadores);
+        if (cl == null) {
+            layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        } else {
+            layoutManager = new GridLayoutManager(getApplicationContext(), 5);
+        }
         recyclerView.setLayoutManager(layoutManager);
         recyclerView = findViewById(R.id.recyclerFragment);
     }
@@ -99,6 +105,8 @@ public class RecyclerTatuadores extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+       //noinspection SimplifiableIfStatement
 /*
         //noinspection SimplifiableIfStatement
         if (id == R.id.añadir_tatuador) {
