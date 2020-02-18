@@ -26,6 +26,8 @@ public class Tatuador {
         this.IDEstudio = IDEstudio;
     }
 
+    Tatuador(){}
+
     String getNombreArt() {
         return NombreArt;
     }
