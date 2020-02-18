@@ -4,19 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="271dp"
-        android:layout_height="104dp"
-        android:text="Miguel Fernandez"
+        android:layout_width="253dp"
+        android:layout_height="48dp"
+        android:text="PINXAUVAS"
         android:textSize="35sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.516"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(Miguel Fernandez)"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"/>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -29,290 +37,281 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.025" />
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guiadivisoria"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
 
     <ScrollView
-        android:layout_width="660dp"
-        android:layout_height="284dp"
+        android:id="@+id/scrollView2"
+        android:layout_width="652dp"
+        android:layout_height="166dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:weightSum="1">>
+            android:weightSum="1">
 
-            <HorizontalScrollView
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.33"
+                    android:src="@drawable/pentagono" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.33"
+                    android:src="@drawable/pentagono" />
 
-                        <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="100dp"
-                            android:layout_weight="0.33"
-                            android:src="@drawable/pentagono" />
+                <ImageView
+                    android:layout_width="10dp"
+                    android:layout_height="100dp"
+                    android:layout_weight="0.34"
+                    android:src="@drawable/pentagono" />
+            </LinearLayout>
 
-                        <ImageView
-                            android:layout_width="10dp"
-                            android:layout_height="100dp"
-                            android:layout_weight="0.33"
-                            android:src="@drawable/pentagono" />
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/sobre_el_tatuador"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
-                        <ImageView
-                            android:id="@+id/ivvermas"
-                            android:layout_width="10dp"
-                            android:layout_height="100dp"
-                            android:layout_weight="0.34"
-                            android:src="@drawable/plus" />
-                    </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/textView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Sobre el tatuador:"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <TextView
+                    android:id="@+id/labelWeb"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/instagram"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:gravity="right"
-                            android:text="Nombre artistico:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/contentWeb"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:text="miguelfernandestattoo"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Mikel"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/email"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:id="@+id/labelWeb"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Instagram:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:text="arestatto@gmail.com"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:id="@+id/contentWeb"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="miguelfernandestattoo"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/web"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Email:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:text="www.miguel.com"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="arestatto@gmail.com"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sobre_el_estudio"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Web:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="Nombre:"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="www.miguel.com"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:text="Ares tattoo and pierceing"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="Sobre el estudio:"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="Dirección:"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Nombrer:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:text="Itxaropen kalea, 18, 48005,Bilbo"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Ares tattoo and pierceing"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="Email:"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Dirección:"
-                            android:textSize="25sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:text="arestatto@gmail.com"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="Itxaropen kalea, 18, 48005,Bilbo"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/telefono"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Email:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/phone_number"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:autoLink="phone"
+                    android:linksClickable="true"
+                    android:text="946791038"
+                    android:textColor="#0023FF"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="arestatto@gmail.com"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0.5"
+                    android:gravity="left"
+                    android:text="@string/web"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Telefono:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_weight="0.5"
+                    android:text="arestattoo.com"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="946791038"
-                            android:textSize="20sp" />
-                    </LinearLayout>
+            <com.mapbox.mapboxsdk.maps.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="250dp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_weight="0.5"
-                            android:text="Web:"
-                            android:textSize="30sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:text="arestattoo.com"
-                            android:textSize="20sp" />
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/brujulanordica" />
-                </LinearLayout>
-            </HorizontalScrollView>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
