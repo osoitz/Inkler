@@ -147,6 +147,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/TattooMail"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -204,6 +205,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/NombreEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -229,6 +231,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/Dir"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -254,6 +257,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/EstMail"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
