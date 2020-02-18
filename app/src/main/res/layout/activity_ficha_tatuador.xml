@@ -9,34 +9,34 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="253dp"
-        android:layout_height="48dp"
+        android:id="@+id/nombreArtistico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="PINXAUVAS"
-        android:textSize="35sp"
+        android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/nombreApellidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(Miguel Fernandez)"
-        android:textSize="18sp"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"/>
+        app:layout_constraintTop_toBottomOf="@+id/nombreArtistico"/>
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="94dp"
-        android:layout_height="105dp"
+        android:id="@+id/logo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerInside"
         android:src="@drawable/dragonlogo"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
+             />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guiadivisoria"
         android:layout_width="wrap_content"
@@ -45,13 +45,13 @@
         app:layout_constraintGuide_percent="0.5"/>
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="412dp"
-        android:layout_height="537dp"
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0">
+        app:layout_constraintTop_toBottomOf="@id/logo"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,34 +66,39 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="10dp"
+                    android:id="@+id/imagen1"
+                    android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:scaleType="centerInside"
                     android:layout_weight="0.33"
                     android:src="@drawable/pentagono"
                     tools:ignore="ContentDescription" />
 
                 <ImageView
-                    android:layout_width="10dp"
+                    android:id="@+id/imagen2"
+                    android:layout_width="100dp"
                     android:layout_height="100dp"
+                    android:scaleType="centerInside"
                     android:layout_weight="0.33"
                     android:src="@drawable/pentagono"
                     tools:ignore="ContentDescription"/>
 
                 <ImageView
-                    android:layout_width="10dp"
+                    android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:layout_weight="0.34"
+                    android:scaleType="centerInside"
+                    android:layout_weight="0.33"
                     android:src="@drawable/pentagono"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/nombreArtisticoContent"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:text="@string/sobre_el_tatuador"
-                android:textSize="40sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
 
@@ -112,7 +117,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/instagram"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -122,7 +127,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     android:text="miguelfernandestattoo"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -138,7 +143,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/email"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -147,7 +152,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     android:text="arestatto@gmail.com"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -163,7 +168,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/web"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -172,14 +177,14 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     android:text="www.miguel.com"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="@string/sobre_el_estudio"
-                android:textSize="40sp"
+                android:textSize="36sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -195,7 +200,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/nombre"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -204,7 +209,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     android:text="Ares tattoo and pierceing"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -220,7 +225,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/direcci_n"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -229,7 +234,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     android:text="Itxaropen kalea, 18, 48005,Bilbo"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -245,7 +250,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/email"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -254,7 +259,7 @@
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
                     android:text="arestatto@gmail.com"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -270,7 +275,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/telefono"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -283,7 +288,7 @@
                     android:linksClickable="true"
                     android:text="946791038"
                     android:textColor="#0023FF"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -299,7 +304,7 @@
                     android:layout_weight="0.5"
                     android:gravity="start"
                     android:text="@string/web"
-                    android:textSize="24sp"
+                    android:textSize="18dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -308,7 +313,7 @@
                     android:layout_gravity="start"
                     android:layout_weight="0.5"
                     android:text="arestattoo.com"
-                    android:textSize="20sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <com.mapbox.mapboxsdk.maps.MapView
