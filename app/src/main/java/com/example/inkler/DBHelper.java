@@ -44,7 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //Tambien creamos strings de las sentencias SQL CREATE y DELETE que usaremos al inicio (no así los INSERT, SELECT...)
     private static final String SQL_CREATE_TABLE_TATUADOR =
             "CREATE TABLE " + entidadTatuador.TABLE_NAME + " (" +
-                    entidadTatuador._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    entidadTatuador._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
                     entidadTatuador.COLUMN_NAME_NOMBRE + " TEXT," +
                     entidadTatuador.COLUMN_NAME_APELLIDOS + " TEXT," +
                     entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO+ " TEXT," +
