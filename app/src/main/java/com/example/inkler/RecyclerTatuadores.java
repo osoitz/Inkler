@@ -85,21 +85,26 @@ public class RecyclerTatuadores extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerFragment);
     }
 
-    // Menu de la barra con botones atras e inicio
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_actions, menu);
-        menu.setGroupVisible(R.id.gatras, true);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_actions, menu);
+        menu.setGroupVisible(R.id.añadir, true);
         return true;
     }
 
-    //Funcion de los botones del menu
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_atras) {
-            Intent intent = new Intent(RecyclerTatuadores.this, MainActivity.class);
-            startActivity(intent);
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.añadir_tatuador) {
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
