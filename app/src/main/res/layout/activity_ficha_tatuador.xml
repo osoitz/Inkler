@@ -33,10 +33,9 @@
         android:layout_height="100dp"
         android:scaleType="centerInside"
         android:src="@drawable/dragonlogo"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-             />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guiadivisoria"
@@ -48,11 +47,12 @@
     <ScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:paddingBottom="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/logo"
-        >
+        app:layout_constraintTop_toTopOf="@+id/guideline2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -70,8 +70,8 @@
                     android:id="@+id/imagen1"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:scaleType="centerInside"
                     android:layout_weight="0.33"
+                    android:scaleType="centerInside"
                     android:src="@drawable/pentagono"
                     tools:ignore="ContentDescription" />
 
@@ -79,17 +79,17 @@
                     android:id="@+id/imagen2"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:scaleType="centerInside"
                     android:layout_weight="0.33"
+                    android:scaleType="centerInside"
                     android:src="@drawable/pentagono"
-                    tools:ignore="ContentDescription"/>
+                    tools:ignore="ContentDescription" />
 
                 <ImageView
                     android:layout_width="100dp"
                     android:layout_height="100dp"
-                    android:scaleType="centerInside"
                     android:layout_weight="0.33"
-                    android:src="@drawable/pentagono"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/plus"
                     tools:ignore="ContentDescription" />
             </LinearLayout>
 
@@ -101,7 +101,6 @@
                 android:text="@string/sobre_el_tatuador"
                 android:textSize="36sp"
                 android:textStyle="bold" />
-
 
 
             <LinearLayout
@@ -148,6 +147,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/TattooMail"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -205,6 +205,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/NombreEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -230,6 +231,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/Dir"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -255,6 +257,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/EstMail"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -324,4 +327,11 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="100dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
