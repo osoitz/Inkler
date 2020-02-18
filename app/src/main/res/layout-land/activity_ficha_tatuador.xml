@@ -73,10 +73,11 @@
                             android:src="@drawable/pentagono" />
 
                         <ImageView
+                            android:id="@+id/ivvermas"
                             android:layout_width="10dp"
                             android:layout_height="100dp"
                             android:layout_weight="0.34"
-                            android:src="@drawable/pentagono" />
+                            android:src="@drawable/plus" />
                     </LinearLayout>
 
                     <TextView
