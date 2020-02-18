@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.animation.Animator;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.database.Cursor;
@@ -12,7 +13,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
 
 public class GaleriaActivity extends AppCompatActivity {
 
@@ -23,6 +26,7 @@ public class GaleriaActivity extends AppCompatActivity {
     private Galeria BDSQLite;
     private String nombre;
     private int tatuaje;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +66,7 @@ public class GaleriaActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new GaleriaRecyclerViewListener(GaleriaActivity.this, recyclerView, new GaleriaRecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+
 
 
             }

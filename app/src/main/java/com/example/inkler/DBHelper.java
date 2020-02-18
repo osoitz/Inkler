@@ -41,6 +41,11 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_NAME_ID_ESTUDIO ="ID_Estudio";
     }
 
+    public static class entidadFoto implements BaseColumns{
+        public static final String TABLE_NAME = "Fotos";
+        public static final String COLUMN_NAME_ID_TATUADOR ="ID_Tatuador";
+    }
+
     //Tambien creamos strings de las sentencias SQL CREATE y DELETE que usaremos al inicio (no así los INSERT, SELECT...)
     private static final String SQL_CREATE_TABLE_TATUADOR =
             "CREATE TABLE " + entidadTatuador.TABLE_NAME + " (" +
@@ -78,6 +83,15 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_TABLE_WEB =
             "DROP TABLE IF EXISTS " + entidadWeb.TABLE_NAME;
 
+    private static final String SQL_CREATE_TABLE_FOTO =
+            "CREATE TABLE " + entidadFoto.TABLE_NAME + " (" +
+                    entidadFoto._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    entidadFoto.COLUMN_NAME_ID_TATUADOR + " INTEGER)";
+
+    private static final String SQL_DELETE_TABLE_FOTO =
+            "DROP TABLE IF EXISTS " + entidadFoto.TABLE_NAME;
+
+
     //Constructor
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -88,12 +102,14 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_TATUADOR);
         db.execSQL(SQL_CREATE_TABLE_ESTUDIO);
         db.execSQL(SQL_CREATE_TABLE_WEB);
+        db.execSQL(SQL_CREATE_TABLE_FOTO);
     }
 
     public void onUpgrade (SQLiteDatabase db,int oldVersion, int newVersion){
         db.execSQL(SQL_DELETE_TABLE_TATUADOR);
         db.execSQL(SQL_DELETE_TABLE_ESTUDIO);
         db.execSQL(SQL_DELETE_TABLE_WEB);
+        db.execSQL(SQL_CREATE_TABLE_FOTO);
         onCreate(db);
     }
 
@@ -105,6 +121,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_TABLE_TATUADOR);
         db.execSQL(SQL_DELETE_TABLE_ESTUDIO);
         db.execSQL(SQL_DELETE_TABLE_WEB);
+        db.execSQL(SQL_CREATE_TABLE_FOTO);
         onCreate(db);
     }
 
