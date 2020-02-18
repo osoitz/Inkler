@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Bundle;
 import com.mapbox.mapboxsdk.Mapbox;
@@ -30,7 +31,7 @@ import java.util.ArrayList;
 public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
     private TextView tlfno;
-
+    private ImageView vermas;
     private TextView NombreTat;
     private TextView EmailTat;
     @Override
@@ -44,6 +45,14 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         //tatuadors.clear();
         Tatuador miTatuador = recogerTatuador(idTat);
         rellenar_txt(miTatuador);
+
+        vermas = findViewById(R.id.ivvermas);
+        vermas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FichaTatuadorActivity.this, GaleriaActivity.class));
+            }
+        });
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
