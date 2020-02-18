@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.os.Bundle;
@@ -99,6 +102,24 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+
+    // Menu de la barra con botones atras e inicio
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actions, menu);
+        menu.setGroupVisible(R.id.gatras, true);
+        return true;
+    }
+
+    //Funcion de los botones del menu
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_atras) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, RecyclerTatuadores.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
