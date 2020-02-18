@@ -167,21 +167,41 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         mapView.onSaveInstanceState(outState);
     }
 
-    // Menu de la barra con botones atras e inicio
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_actions, menu);
-        menu.setGroupVisible(R.id.gatras, true);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_actions, menu);
+        menu.setGroupVisible(R.id.añadir, true);
+        menu.setGroupVisible(R.id.modificar, true);
         return true;
     }
 
-    //Funcion de los botones del menu
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_atras) {
-            Intent intent = new Intent(FichaTatuadorActivity.this, RecyclerTatuadores.class);
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.añadir_tatuador) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.añadir_estudio) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.modificar_tatuador) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarTatuador.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.modificar_estudio) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarEstudio.class);
             startActivity(intent);
             return true;
         }
+
         return super.onOptionsItemSelected(item);
     }
 
