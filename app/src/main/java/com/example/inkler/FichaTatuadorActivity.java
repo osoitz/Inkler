@@ -186,9 +186,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-/*
+
         //noinspection SimplifiableIfStatement
-        if (id == R.id.añadir_tatuador) {
+        /*if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
@@ -204,8 +204,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarEstudio.class);
             startActivity(intent);
             return true;
-        }
-*/
+
+        }*/
+
         return super.onOptionsItemSelected(item);
     }
 
