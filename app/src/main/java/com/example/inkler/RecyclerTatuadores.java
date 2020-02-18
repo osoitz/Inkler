@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
@@ -80,6 +83,24 @@ public class RecyclerTatuadores extends AppCompatActivity {
         layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView = findViewById(R.id.recyclerFragment);
+    }
+
+    // Menu de la barra con botones atras e inicio
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actions, menu);
+        menu.setGroupVisible(R.id.gatras, true);
+        return true;
+    }
+
+    //Funcion de los botones del menu
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_atras) {
+            Intent intent = new Intent(RecyclerTatuadores.this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
