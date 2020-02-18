@@ -107,7 +107,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
         int id = item.getItemId();
 
        //noinspection SimplifiableIfStatement
-        if (id == R.id.añadir_tatuador) {
+        /*if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
@@ -115,7 +115,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
             startActivity(intent);
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
