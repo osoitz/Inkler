@@ -34,7 +34,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
                 Tatuador tatuador = Tatuador.getTatuadorList().get(position);
-                Log.d("tag","el nombre artistico es: "+tatuador.getId());
+                intent.putExtra("id",tatuador.getId());
                 startActivity(intent);
             }
 
@@ -62,7 +62,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
         Cursor cursor = db.query(DBHelper.entidadTatuador.TABLE_NAME, proyeccion, null, null, null, null, null);
         // recoger los datos
         while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+            String id = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
             String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
             String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
             String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
