@@ -18,49 +18,63 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button rellenardb = findViewById(R.id.rellenardb);
+
+        Button botonAdmin = findViewById(R.id.botonAdmin);
+
         rellenardb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Iniciar base de datos
-                DBHelper dbHelper = new DBHelper(getBaseContext());
-                SQLiteDatabase db = dbHelper.getWritableDatabase();
-
-                dbHelper.delete(db);
-
-                for (int pos = 0;pos < 10;pos++) {
-
-                    ContentValues e1 = new ContentValues();
-                    e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, "Estudio " + pos);
-                    e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, "Direccion " + pos);
-                    e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, "Email " + pos);
-                    e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, "Telefono " + pos);
-                    e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, 43+pos);
-                    e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, -2+pos);
-                    db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
-                    Log.d("Estudio", "Estudio " + pos + " , Direccion " + pos + " , Email " + pos + " , Telefono " + pos);
-
-                    ContentValues t1 = new ContentValues();
-                    t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, "Satan " + pos);
-                    t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, "Beñat " + pos);
-                    t1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, "Smith " + pos);
-                    t1.put(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL, "SBS@gmail.com " + pos);
-                    t1.put(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO, "666666666 " + pos);
-                    t1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, pos+1);
-                    db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, t1);
-                    Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);
-
-                    ContentValues w1 = new ContentValues();
-                    w1.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "URL " + pos);
-                    w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, pos+1);
-                    w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos+1);
-                    db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w1);
-                    Log.d("Web", "URL " + pos);
-
-                }
+                rellenarDB();
                 Intent intent = new Intent(MainActivity.this, RecyclerTatuadores.class);
                 startActivity(intent);
             }
         });
 
+        botonAdmin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Activity_Admin.class);
+                startActivity(intent);
+            }
+        });
+
+    }
+
+    private void rellenarDB () {
+        // Iniciar base de datos
+        DBHelper dbHelper = new DBHelper(getBaseContext());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        dbHelper.delete(db);
+
+        for (int pos = 0;pos < 10;pos++) {
+
+            ContentValues e1 = new ContentValues();
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, "Estudio " + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, "Direccion " + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, "Email " + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, "Telefono " + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, 43 + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, -2 + pos);
+            db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
+            Log.d("Estudio", "Estudio " + pos + " , Direccion " + pos + " , Email " + pos + " , Telefono " + pos);
+
+            ContentValues t1 = new ContentValues();
+            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, "Satan " + pos);
+            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, "Beñat " + pos);
+            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, "Smith " + pos);
+            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL, "SBS@gmail.com " + pos);
+            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO, "666666666 " + pos);
+            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, pos + 1);
+            db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, t1);
+            Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);
+
+            ContentValues w1 = new ContentValues();
+            w1.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "URL " + pos);
+            w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, pos + 1);
+            w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos + 1);
+            db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w1);
+            Log.d("Web", "URL " + pos);
+        }
     }
 }

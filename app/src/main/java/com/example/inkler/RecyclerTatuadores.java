@@ -106,15 +106,13 @@ public class RecyclerTatuadores extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-       //noinspection SimplifiableIfStatement
-
         /*if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
-            startActivity(intent);
+            //Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
+            //startActivity(intent);
             return true;
         }*/
       

@@ -1,30 +1,33 @@
 package com.example.inkler;
 
 public class Estudio {
-    int IdEstudio;
-    String Nombre;
-    String Direccion;
-    double lat;
-    double longitud;
-    String Email;
-    String Web;
+    private int ID;
+    private String Nombre;
+    private String Direccion;
+    private double latitud;
+    private double longitud;
+    private String Email;
+    private String Telefono;
 
-    public Estudio(int IdEstudio, String Nombre, String Direccion, double lat, double longitud, String Email,String Web){
-        this.IdEstudio=IdEstudio;
-        this.Nombre=Nombre;
-        this.Direccion=Direccion;
-        this.lat=lat;
-        this.longitud=longitud;
-        this.Email=Email;
-        this.Web=Web;
+    public Estudio(int ID, String Nombre, String Direccion, double latitud, double longitud, String Email, String Telefono){
+        this.ID = ID;
+        this.Nombre = Nombre;
+        this.Direccion = Direccion;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.Email = Email;
+        this.Telefono = Telefono;
+
     }
 
-    public int getIdEstudio() {
-        return IdEstudio;
+    public Estudio() {}
+
+    public int getID() {
+        return ID;
     }
 
-    public void setIdEstudio(int idEstudio) {
-        IdEstudio = idEstudio;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getNombre() {
@@ -43,12 +46,12 @@ public class Estudio {
         Direccion = direccion;
     }
 
-    public double getLat() {
-        return lat;
+    public double getLatitud() {
+        return latitud;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
+    public void setLatitud(double latitud) {
+        this.latitud = latitud;
     }
 
     public double getLongitud() {
@@ -67,14 +70,14 @@ public class Estudio {
         Email = email;
     }
 
-    public String getWeb() {
-        return Web;
-    }
 
-    public void setWeb(String web) {
-        Web = web;
+    public String getTelefono() {
+        return Telefono;
     }
 
 
+    public void setTelefono(String telefono) {
+        Telefono = telefono;
+    }
 
 }
