@@ -26,6 +26,7 @@ public class GaleriaActivity extends AppCompatActivity {
     private Galeria BDSQLite;
     private String nombre;
     private int tatuaje;
+
     
 
     @Override
