@@ -7,6 +7,7 @@ import java.util.Objects;
 //Clase Tatuador con las listas de alumnos y los getters y setters.
 
 public class Tatuador {
+    private int id;
     private String NombreArt;
     private String Nombre;
     private String Apellidos;
@@ -15,7 +16,8 @@ public class Tatuador {
     private String IDEstudio;
 
 
-    Tatuador(String NombreArt, String Nombre, String Apellidos, String Email, String Telefono, String IDEstudio){
+    Tatuador(int id,String NombreArt, String Nombre, String Apellidos, String Email, String Telefono, String IDEstudio){
+        this.id=id;
         this.NombreArt = NombreArt;
         this.Nombre = Nombre;
         this.Apellidos = Apellidos;
@@ -70,6 +72,14 @@ public class Tatuador {
 
     public void setEmail(String email) {
         this.Email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     private static List<Tatuador> tatuadorList = new ArrayList<>();

@@ -10,4 +10,5 @@
     <string name="telefono">Telefono:</string>
     <string name="nombre">Nombre:</string>
     <string name="direcci_n">Dirección:</string>
+    <string name="atras">atras</string>
 </resources>

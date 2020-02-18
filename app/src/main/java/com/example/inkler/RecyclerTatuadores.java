@@ -5,6 +5,10 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -29,6 +33,8 @@ public class RecyclerTatuadores extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
+                Tatuador tatuador = Tatuador.getTatuadorList().get(position);
+                Log.d("tag","el nombre artistico es: "+tatuador.getId());
                 startActivity(intent);
             }
 
@@ -51,18 +57,19 @@ public class RecyclerTatuadores extends AppCompatActivity {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         //Columnas
-        String[] proyeccion = {DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, DBHelper.entidadTatuador.COLUMN_NAME_EMAIL, DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO, DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
+        String[] proyeccion = {DBHelper.entidadTatuador._ID,DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, DBHelper.entidadTatuador.COLUMN_NAME_EMAIL, DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO, DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
         //Respuesta
         Cursor cursor = db.query(DBHelper.entidadTatuador.TABLE_NAME, proyeccion, null, null, null, null, null);
         // recoger los datos
         while (cursor.moveToNext()) {
-            String NombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
-            String Nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
-            String Apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
-            String Email = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL));
-            String Telefono = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO));
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+            String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
+            String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
+            String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL));
+            String telefono = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO));
             String IDEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
-            Tatuador t = new Tatuador(NombreArt, Nombre, Apellidos, Email, Telefono, IDEstudio);
+            Tatuador t = new Tatuador(id,nombreArt, nombre, apellidos, email, telefono, IDEstudio);
             Tatuador.getTatuadorList().add(t);
         }
         cursor.close();
@@ -76,6 +83,24 @@ public class RecyclerTatuadores extends AppCompatActivity {
         layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView = findViewById(R.id.recyclerFragment);
+    }
+
+    // Menu de la barra con botones atras e inicio
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_actions, menu);
+        menu.setGroupVisible(R.id.gatras, true);
+        return true;
+    }
+
+    //Funcion de los botones del menu
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_atras) {
+            Intent intent = new Intent(RecyclerTatuadores.this, MainActivity.class);
+            startActivity(intent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 }
