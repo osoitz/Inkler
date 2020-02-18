@@ -75,9 +75,9 @@ public class Estudio {
         return Telefono;
     }
 
+
     public void setTelefono(String telefono) {
         Telefono = telefono;
     }
-    
 
 }
