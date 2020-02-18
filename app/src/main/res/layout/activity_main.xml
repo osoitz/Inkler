@@ -33,7 +33,7 @@
         android:fontFamily="@font/aclonica"
         android:gravity="center"
         android:text="@string/inkler"
-        android:textColor="@color/negro"
+        android:textColor="@android:color/black"
         android:textSize="100sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline21"
