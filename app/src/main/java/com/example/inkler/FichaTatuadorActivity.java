@@ -5,21 +5,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -30,17 +25,13 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 
 
 public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
-    private TextView tlfno;
+    private TextView telefono;
 
-    private TextView NombreTat;
-    private TextView EmailTat;
+    private TextView nombreTatuador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +40,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         final Integer INITIAL_ZOOM = 10;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
-        NombreTat=findViewById(R.id.nombreApellidos);
-        EmailTat=findViewById(R.id.TattooMail);
+        nombreTatuador =findViewById(R.id.nombreApellidos);
         Tatuador miTatuador = recogerTatuador(idTat);
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());
         //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
@@ -101,15 +91,15 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 });
             }
         });
-        tlfno = findViewById(R.id.phone_number);
-        SpannableString mitextoU = new SpannableString(tlfno.getText().toString());
+        telefono = findViewById(R.id.phone_number);
+        SpannableString mitextoU = new SpannableString(telefono.getText().toString());
         mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        tlfno.setText(mitextoU);
-        tlfno.setOnClickListener(new View.OnClickListener() {
+        telefono.setText(mitextoU);
+        telefono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                String num= tlfno.getText().toString();
+                String num= telefono.getText().toString();
                 intent.setData(Uri.parse("tel:"+num));
                 startActivity(intent);
             }
@@ -202,14 +192,12 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     }
 
 
-
     public void rellenar_txt(Tatuador miTatuador){
         TextView NombreArt;
-        String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";
+        String nombre = "(" + miTatuador.getNombre() + " " + miTatuador.getApellidos() + ")";
         NombreArt = findViewById(R.id.nombreArtistico);
         NombreArt.setText(miTatuador.getNombreArt());
-        NombreTat.setText(nombre);
-        EmailTat.setText(miTatuador.getEmail());
+        nombreTatuador.setText(nombre);
     }
 
     @Override
