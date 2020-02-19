@@ -267,8 +267,10 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        menu.setGroupVisible(R.id.añadir, true);
-        menu.setGroupVisible(R.id.modificar, true);
+        if (DatosApp.isAdmin()) {
+            menu.setGroupVisible(R.id.añadir, true);
+            menu.setGroupVisible(R.id.modificar, true);
+        }
         return true;
     }
 
