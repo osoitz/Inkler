@@ -19,8 +19,6 @@ public class DBHelper extends SQLiteOpenHelper {
         public static final String COLUMN_NAME_NOMBRE = "Nombre" ;
         public static final String COLUMN_NAME_APELLIDOS="Apellidos";
         public static final String COLUMN_NAME_NOMBRE_ARTISTICO="Nombre_Artistico";
-        public static final String COLUMN_NAME_EMAIL="Email";
-        public static final String COLUMN_NAME_TELEFONO="Telefono";
         public static final String COLUMN_NAME_ID_ESTUDIO="ID_Estudio";
     }
 
@@ -48,8 +46,6 @@ public class DBHelper extends SQLiteOpenHelper {
                     entidadTatuador.COLUMN_NAME_NOMBRE + " TEXT," +
                     entidadTatuador.COLUMN_NAME_APELLIDOS + " TEXT," +
                     entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO+ " TEXT," +
-                    entidadTatuador.COLUMN_NAME_EMAIL + " TEXT," +
-                    entidadTatuador.COLUMN_NAME_TELEFONO + " TEXT," +
                     entidadTatuador.COLUMN_NAME_ID_ESTUDIO+ " INTEGER)";
 
     private static final String SQL_DELETE_TABLE_TATUADOR =
