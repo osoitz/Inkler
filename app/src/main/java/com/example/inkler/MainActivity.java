@@ -9,8 +9,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,21 +20,11 @@ public class MainActivity extends AppCompatActivity {
 
         Button rellenardb = findViewById(R.id.rellenardb);
 
-        Button botonAdmin = findViewById(R.id.botonAdmin);
-
         rellenardb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rellenarDB();
                 Intent intent = new Intent(MainActivity.this, RecyclerTatuadores.class);
-                startActivity(intent);
-            }
-        });
-
-        botonAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Activity_Admin.class);
                 startActivity(intent);
             }
         });
@@ -54,8 +45,8 @@ public class MainActivity extends AppCompatActivity {
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, "Direccion " + pos);
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, "Email " + pos);
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, "Telefono " + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, 43 + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, -2 + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, 43 + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, -2 + pos);
             db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
             Log.d("Estudio", "Estudio " + pos + " , Direccion " + pos + " , Email " + pos + " , Telefono " + pos);
 
@@ -63,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, "Satan " + pos);
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, "Beñat " + pos);
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, "Smith " + pos);
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL, "SBS@gmail.com " + pos);
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO, "666666666 " + pos);
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, pos + 1);
             db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, t1);
             Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);

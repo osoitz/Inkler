@@ -4,19 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Galeria {
-    public int tatuaje;
+    public String tatuaje;
     public String nombre;
 
-    public Galeria(int tatuaje, String nombre){
+    public Galeria(String tatuaje, String nombre){
         this.tatuaje = tatuaje;
         this.nombre = nombre;
     }
 
-    public int gettatuaje() {
+    public String gettatuaje() {
         return tatuaje;
     }
 
-    public void settatuaje(int tatuaje) {
+    public void settatuaje(String tatuaje) {
         this.tatuaje = tatuaje;
     }
 

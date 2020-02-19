@@ -21,4 +21,8 @@
     <string name="apellidos">Abizena:</string>
     <string name="latitud">Latitudea:</string>
     <string name="Longitud">Longitudea:</string>
+    <string name="log_in">Hasi saioa</string>
+    <string name="log_out">Itxi saioa</string>
+
+
 </resources>

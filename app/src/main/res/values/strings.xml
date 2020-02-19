@@ -20,5 +20,7 @@
     <string name="apellidos">Surname:</string>
     <string name="latitud">Latitude:</string>
     <string name="Longitud">Longitude:</string>
+    <string name="log_in">Log in</string>
+    <string name="log_out">Log out</string>
 
 </resources>

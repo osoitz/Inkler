@@ -21,4 +21,8 @@
     <string name="apellidos">Apellidos:</string>
     <string name="latitud">Latitud:</string>
     <string name="Longitud">Longitud:</string>
+    <string name="log_in">Iniciar sesion</string>
+    <string name="log_out">Cerrar sesion</string>
+
+
 </resources>

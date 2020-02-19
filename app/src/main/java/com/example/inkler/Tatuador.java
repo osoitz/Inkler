@@ -11,18 +11,14 @@ public class Tatuador {
     private String NombreArt;
     private String Nombre;
     private String Apellidos;
-    private String Email;
-    private String Telefono;
     private String IDEstudio;
 
 
-    Tatuador(String id,String NombreArt, String Nombre, String Apellidos, String Email, String Telefono, String IDEstudio){
+    Tatuador(String id,String NombreArt, String Nombre, String Apellidos, String IDEstudio){
         this.id=id;
         this.NombreArt = NombreArt;
         this.Nombre = Nombre;
         this.Apellidos = Apellidos;
-        this.Email = Email;
-        this.Telefono = Telefono;
         this.IDEstudio = IDEstudio;
     }
 
@@ -58,22 +54,6 @@ public class Tatuador {
 
     public void setApellidos(String apellidos) {
         this.Apellidos = apellidos;
-    }
-
-    String getTelefono() {
-        return Telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.Telefono = telefono;
-    }
-
-    String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        this.Email = email;
     }
 
     public String getId() {
