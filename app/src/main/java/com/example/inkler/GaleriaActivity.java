@@ -4,17 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.animation.Animator;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 
 public class GaleriaActivity extends AppCompatActivity {
@@ -27,7 +21,7 @@ public class GaleriaActivity extends AppCompatActivity {
     private String nombre;
     private int tatuaje;
 
-    
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,23 +34,23 @@ public class GaleriaActivity extends AppCompatActivity {
         dbHelper = new DBHelper(getBaseContext());
         dbsqlite = dbHelper.getWritableDatabase();
 
-        String [] proyeccion = {DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
-        Cursor alumnosSQLite = dbsqlite.query(DBHelper.entidadTatuador.TABLE_NAME,proyeccion,null,null,null,null,null);
+        String [] proyeccion = {DBHelper.entidadFoto._ID, DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR};
+        Cursor galeriaSQLite = dbsqlite.query(DBHelper.entidadFoto.TABLE_NAME,proyeccion,null,null,null,null,null);
 
         Galeria.getGaleriaList().clear();
 
         Log.d("tag", "antes de entarr: ");
-        while (alumnosSQLite.moveToNext()){
+        while (galeriaSQLite.moveToNext()){
             Log.d("tag", "onCreate: ");
 
-            tatuaje = alumnosSQLite.getInt(alumnosSQLite.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
-            nombre = alumnosSQLite.getString(alumnosSQLite.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
+            tatuaje = galeriaSQLite.getInt(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto._ID));
+            nombre = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR));
             Log.d("tag", "tatu: " + nombre);
             //guardamos los datos de sqlite en guardarsqlite y los pasamos a la clase Alumno
             BDSQLite = new Galeria(tatuaje, nombre);
             Galeria.getGaleriaList().add(BDSQLite);
         }
-        alumnosSQLite.close();
+        galeriaSQLite.close();
 
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
         AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, Galeria.getGaleriaList());
