@@ -13,6 +13,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.provider.BaseColumns;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
@@ -38,16 +39,40 @@ public class GaleriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
-
+        final String idTat = getIntent().getStringExtra("id");
         Log.d("tag", "foto dragon: " + R.drawable.dragonlogo);
         Log.d("tag", "foto pentagono: " + R.drawable.pentagono);
 
         //Iniciar DB
         dbHelper = new DBHelper(getBaseContext());
-        dbsqlite = dbHelper.getWritableDatabase();
 
-        String [] proyeccion = {DBHelper.entidadFoto.COLUMN_NAME_FOTO, DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR};
-        Cursor galeriaSQLite = dbsqlite.query(DBHelper.entidadFoto.TABLE_NAME,proyeccion,null,null,null,null,null);
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        // Definimos la query
+        String[] projection = {
+                BaseColumns._ID,
+                DBHelper.entidadFoto.COLUMN_NAME_FOTO,
+                DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR
+        };
+
+        // Se filtra el resultado dependiendo de idTat
+        String selection =  DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR + " = ?";
+        String[] selectionArgs = { idTat };
+
+        // Ordenamos la query
+        String sortOrder = null;
+
+        Cursor galeriaSQLite = db.query(
+                DBHelper.entidadFoto.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+
+
 
         Galeria.getGaleriaList().clear();
 
