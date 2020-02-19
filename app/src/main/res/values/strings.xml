@@ -18,5 +18,7 @@
     <string name="eliminar_tatuador">Erase tattoo artist</string>
     <string name="eliminar_estudio">Erase studio</string>
     <string name="apellidos">Surname:</string>
+    <string name="latitud">Latitude:</string>
+    <string name="Longitud">Longitude:</string>
 
 </resources>
