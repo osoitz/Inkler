@@ -26,7 +26,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         setContentView(R.layout.activity__anadir_tatuador);
         final Spinner spinner=findViewById(R.id.SpinnerNombreEstudios);
         SpinnerAdapter adapter;
-        adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, rellenarSpinner(cargarSpinner()));
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, rellenarSpinner(cargarSpinner()));
         spinner.setAdapter(adapter);
 
         Button btnAnadirTatuador = findViewById(R.id.btnAñadirTatuador);
@@ -82,6 +82,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
             String nombreEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE));
             stringarray.add(nombreEstudio);
         }
+        cursor.close();
     return stringarray;
 
     }
@@ -117,6 +118,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
 
             idEstudio= cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID));
         }
+        cursor.close();
 
 
 
