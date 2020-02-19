@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Inkler</string>
+    <string name="inkler">Inkler</string>
+    <string name="nombre_artistico">Izen artistikoa:</string>
+    <string name="instagram">Instagram:</string>
+    <string name="email">Maila:</string>
+    <string name="web">Weba:</string>
+    <string name="sobre_el_estudio">Estudioari buruz:</string>
+    <string name="sobre_el_tatuador">Tatuatzaileari buruz:</string>
+    <string name="telefono">Mugikorra:</string>
+    <string name="nombre">Izena:</string>
+    <string name="direcci_n">Helbidea:</string>
+    <string name="atras">atzera</string>
+    <string name="a_adir_estudio">Estudio berria</string>
+    <string name="a_adir_tatuador">Tatuatzaile berria</string>
+    <string name="modificar_tatuador">Tatuatzailea aldatu</string>
+    <string name="modificar_estudio">Estudioa aldatu</string>
+    <string name="eliminar_tatuador">Tatuatzailea ezabatu</string>
+    <string name="eliminar_estudio">Estudioa ezabatu</string>
+</resources>

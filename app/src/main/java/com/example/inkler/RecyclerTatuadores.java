@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,7 +35,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
                 Tatuador tatuador = Tatuador.getTatuadorList().get(position);
-                Log.d("tag","el nombre artistico es: "+tatuador.getId());
+                intent.putExtra("id",tatuador.getId());
                 startActivity(intent);
             }
 
@@ -62,7 +63,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
         Cursor cursor = db.query(DBHelper.entidadTatuador.TABLE_NAME, proyeccion, null, null, null, null, null);
         // recoger los datos
         while (cursor.moveToNext()) {
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+            String id = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
             String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
             String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
             String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
@@ -80,26 +81,41 @@ public class RecyclerTatuadores extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerFragment);
         adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());
         recyclerView.setAdapter(adaptador);
-        layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        ConstraintLayout cl = findViewById(R.id.recycler_tatuadores);
+        if (cl == null) {
+            layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        } else {
+            layoutManager = new GridLayoutManager(getApplicationContext(), 5);
+        }
         recyclerView.setLayoutManager(layoutManager);
         recyclerView = findViewById(R.id.recyclerFragment);
     }
 
-    // Menu de la barra con botones atras e inicio
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_actions, menu);
-        menu.setGroupVisible(R.id.gatras, true);
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_actions, menu);
+        menu.setGroupVisible(R.id.añadir, true);
         return true;
     }
 
-    //Funcion de los botones del menu
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.action_atras) {
-            Intent intent = new Intent(RecyclerTatuadores.this, MainActivity.class);
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        /*if (id == R.id.añadir_tatuador) {
+            Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
-        }
+        } else if (id == R.id.añadir_estudio) {
+            //Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
+            //startActivity(intent);
+            return true;
+        }*/
+      
         return super.onOptionsItemSelected(item);
     }
 
