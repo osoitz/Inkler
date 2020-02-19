@@ -4,8 +4,10 @@
     package="com.example.inkler">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".DatosApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,10 +16,42 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity
+            android:name=".Navegador"
+            android:label="@string/labelgaleiratatuador"
+            android:parentActivityName=".FichaTatuadorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FichaTatuadorActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.Navegador" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity android:name=".Activity_AnadirTatuador"></activity>
         <activity android:name=".Activity_AnadirEstudio" />
-        <activity android:name=".GaleriaActivity" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".GaleriaActivity"
+            android:label="@string/labelgaleiratatuador"
+            android:parentActivityName=".FichaTatuadorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FichaTatuadorActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.GaleriaActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".RecyclerTatuadores"
+            android:label="@string/labelrvtatuadores" />
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,20 +59,19 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecyclerTatuadores"
-            android:label="@string/labelrvtatuadores"
-            android:parentActivityName=".MainActivity">
+            android:name=".FichaTatuadorActivity"
+            android:label="@string/labelfichatatuador"
+            android:parentActivityName=".RecyclerTatuadores">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".RecyclerTatuadores" />
 
             <intent-filter>
-                <action android:name="android.intent.action.RecyclerTatuadores" />
+                <action android:name="android.intent.action.FichaTatuadorActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".FichaTatuadorActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

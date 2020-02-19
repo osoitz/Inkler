@@ -1,18 +1,25 @@
 package com.example.inkler;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
+import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mapbox.mapboxsdk.Mapbox;
@@ -27,6 +34,9 @@ import com.mapbox.mapboxsdk.maps.Style;
 
 import androidx.annotation.NonNull;
 
+import java.net.URL;
+import java.util.ArrayList;
+
 
 public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
@@ -40,22 +50,29 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String idTat = getIntent().getStringExtra("id");
-        Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrNnQ0amF1czAzczEzZW15ZzNzb29zaGkifQ.OsIfKIRR3YwTjiaLzKuSKw");
+        final String idTat = getIntent().getStringExtra("id");
+        Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
         final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Tatuador miTatuador = recogerTatuador(idTat);
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());
         //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(miTatuador, miEstudio);
+        rellenarWebsTatuador(recogerWebsTatuador(miTatuador.getId()));
 
         vermas = findViewById(R.id.ivvermas);
         vermas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FichaTatuadorActivity.this, GaleriaActivity.class));
+                Intent intent = new Intent(FichaTatuadorActivity.this, GaleriaActivity.class);
+
+                intent.putExtra("id",idTat);
+                startActivity(intent);
             }
         });
 
@@ -97,6 +114,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                                 return true;
                             }
                         });
+
                          */
 
                     }
@@ -137,7 +155,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         Cursor cursor = db.query(
                 DBHelper.entidadTatuador.TABLE_NAME,
                 projection,
-                " _ID = ? ",
+                 " _ID = ? ",
                 selectionArgs,
                 null,
                 null,
@@ -151,8 +169,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             tatuador.setApellidos(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS)));
             tatuador.setIDEstudio(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
 
-        }
+     }
         cursor.close();
+        dbHelper.close();
         return tatuador;
 
     }
@@ -196,12 +215,45 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             estudio.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO)));
         }
         cursor.close();
+        dbHelper.close();
         return estudio;
     }
 
+    private ArrayList<String> recogerWebsTatuador (String id) {
+        ArrayList<String> websTatuador = new ArrayList<>();
+        // Iniciar base de datos
+        DBHelper dbHelper = new DBHelper(getBaseContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
 
+        //Columnas
+        String[] projection = {
+                DBHelper.entidadWeb.COLUMN_NAME_URL
+        };
 
-    public void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
+        String selection = DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR + " = ?";
+        String[] selectionArgs = new String[] { "" + id } ;
+        //Respuesta
+
+        Cursor cursor = db.query(
+                DBHelper.entidadWeb.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        ;
+        while(cursor.moveToNext()) {
+            String url = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
+            websTatuador.add(url);
+        }
+        cursor.close();
+        dbHelper.close();
+        return websTatuador;
+    }
+
+    private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
         TextView nombreArtistico = findViewById(R.id.nombreArtistico);
         TextView nombreTatuador =findViewById(R.id.nombreApellidos);
         TextView nombreEstudio =findViewById(R.id.NombreEstudio);
@@ -217,8 +269,22 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         direccionEstudio.setText(miestudio.getDireccion());
         mailEstudio.setText(miestudio.getEmail());
         telefonoEstudio.setText(miestudio.getTelefono());
+    }
 
-
+    private void rellenarWebsTatuador(ArrayList<String> urlsTatuador){
+        String contenidoCampo ="";
+        for (String urlString : urlsTatuador){
+            try {
+                URL miUrl = new URL(urlString);
+                contenidoCampo = contenidoCampo + "<a href='" + urlString + "'>"+ miUrl.getHost() +"</a><br>";
+            }
+            catch (Exception e) {
+                //Nada de nada
+            }
+        }
+        System.out.println(contenidoCampo);
+        TextView websTatuador = findViewById(R.id.websTatuador);
+        websTatuador.setText(Html.fromHtml(contenidoCampo));
     }
 
     @Override
@@ -286,21 +352,41 @@ public class FichaTatuadorActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.admin){
-            DatosApp.setAdmin(true);
-            invalidateOptionsMenu();
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle(getString(R.string.contraseñatitle));
+
+            final EditText input = new EditText(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            input.setLayoutParams(lp);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            alertDialog.setView(input);
+
+            alertDialog.setPositiveButton(getString(R.string.contraseñabtn), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String password = input.getText().toString();
+                    if (getString(R.string.contraseña).equals(password)){
+                        DatosApp.setAdmin(true);
+                        invalidateOptionsMenu();
+                    }
+                }
+            });
+            alertDialog.show();
         } else if (id == R.id.noadmin) {
             DatosApp.setAdmin(false);
             invalidateOptionsMenu();
+        }
+        else if (id == R.id.añadir_tatuador) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
+            startActivity(intent);
+            return true;
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
             startActivity(intent);
             return true;
-        }
-        /*else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
-            startActivity(intent);
-            return true;
-        }  else if (id == R.id.modificar_tatuador) {
+        }/* else if (id == R.id.modificar_tatuador) {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarTatuador.class);
             //startActivity(intent);
             return true;
@@ -308,6 +394,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarEstudio.class);
             //startActivity(intent);
             return true;
+
         }*/
 
         return super.onOptionsItemSelected(item);

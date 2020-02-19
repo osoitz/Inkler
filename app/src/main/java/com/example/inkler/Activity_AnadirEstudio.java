@@ -3,6 +3,7 @@ package com.example.inkler;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -55,12 +56,8 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                     e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud );
                     db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
                     Toast.makeText(getApplicationContext(),"El estudio "+st_nombre+" ha sido creado",Toast.LENGTH_SHORT).show();
-                    et_direccion.setText("");
-                    et_email.setText("");
-                    et_latitud.setText("");
-                    et_longitud.setText("");
-                    et_nombre.setText("");
-                    et_telefono.setText("");
+                    Intent intent = new Intent(Activity_AnadirEstudio.this,RecyclerTatuadores.class);
+                    startActivity(intent);
                 }
             }
         });
