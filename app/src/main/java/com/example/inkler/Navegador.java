@@ -16,6 +16,7 @@ public class Navegador extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navegador);
 
+
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
