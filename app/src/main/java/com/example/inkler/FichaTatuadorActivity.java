@@ -270,6 +270,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         if (DatosApp.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
             menu.setGroupVisible(R.id.modificar, true);
+            menu.setGroupVisible(R.id.logout, true);
+        } else {
+            menu.setGroupVisible(R.id.login, true);
         }
         return true;
     }
@@ -282,8 +285,14 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-
-        /*if (id == R.id.añadir_tatuador) {
+        if (id == R.id.admin){
+            DatosApp.setAdmin(true);
+            invalidateOptionsMenu();
+        } else if (id == R.id.noadmin) {
+            DatosApp.setAdmin(false);
+            invalidateOptionsMenu();
+        }
+        /*else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
