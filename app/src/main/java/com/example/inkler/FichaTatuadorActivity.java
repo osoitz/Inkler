@@ -52,8 +52,8 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         NombreTat=findViewById(R.id.nombreApellidos);
         EmailTat=findViewById(R.id.TattooMail);
         Tatuador miTatuador = recogerTatuador(idTat);
-        Toast.makeText(getApplicationContext(),idTat + " : " + miTatuador.getIDEstudio(), Toast.LENGTH_LONG).show();
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());
+        //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(miTatuador);
 
         mapView = findViewById(R.id.mapView);
@@ -205,7 +205,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
 
     public void rellenar_txt(Tatuador miTatuador){
         TextView NombreArt;
-       String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";
+        String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";
         NombreArt = findViewById(R.id.nombreArtistico);
         NombreArt.setText(miTatuador.getNombreArt());
         NombreTat.setText(nombre);

@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, "Direccion " + pos);
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, "Email " + pos);
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, "Telefono " + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, 43 + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, -2 + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, 43 + pos);
+            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, -2 + pos);
             db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
             Log.d("Estudio", "Estudio " + pos + " , Direccion " + pos + " , Email " + pos + " , Telefono " + pos);
 
