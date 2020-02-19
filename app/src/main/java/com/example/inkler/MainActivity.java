@@ -74,14 +74,14 @@ public class MainActivity extends AppCompatActivity{
 
             //para la galeria
             ContentValues foto = new ContentValues();
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "2131165272");
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
-            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "2131165273");
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
-            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "2131165309");
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.calavera);
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
+            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.dragonlogo);
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
+            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.pentagono);
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 2);
             db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
         }
     }
