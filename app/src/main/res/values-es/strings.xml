@@ -18,6 +18,7 @@
     <string name="modificar_estudio">Modificar estudio</string>
     <string name="eliminar_tatuador">Eliminar tatuador</string>
     <string name="eliminar_estudio">Eliminar estudio</string>
+    <string name="apellidos">Apellidos:</string>
     <string name="log_in">Iniciar sesion</string>
     <string name="log_out">Cerrar sesion</string>
     <string name="labelrvtatuadores">Lista de tatuadores</string>

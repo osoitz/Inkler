@@ -41,7 +41,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String idTat = getIntent().getStringExtra("id");
+        final String idTat = getIntent().getStringExtra("id");
         Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
         final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
@@ -59,7 +59,10 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         vermas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FichaTatuadorActivity.this, GaleriaActivity.class));
+                Intent intent = new Intent(FichaTatuadorActivity.this, GaleriaActivity.class);
+
+                intent.putExtra("id",idTat);
+                startActivity(intent);
             }
         });
 
