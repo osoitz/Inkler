@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
@@ -43,7 +45,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String idTat= getIntent().getStringExtra("id");
+        String idTat = getIntent().getStringExtra("id");
         Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
         final Integer INITIAL_ZOOM = 10;
         final Integer millisecondSpeed = 1000;
@@ -51,6 +53,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         NombreTat=findViewById(R.id.nombreApellidos);
         EmailTat=findViewById(R.id.TattooMail);
         Tatuador miTatuador = recogerTatuador(idTat);
+        Toast.makeText(getApplicationContext(),idTat + " : " + miTatuador.getIDEstudio(), Toast.LENGTH_LONG).show();
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());
         rellenar_txt(miTatuador);
 
@@ -156,8 +159,8 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             tatuador.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE)));
             tatuador.setApellidos(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS)));
             tatuador.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL)));
-            tatuador.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
-            tatuador.setIDEstudio(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO)));
+            tatuador.setIDEstudio(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
+            tatuador.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO)));
 
      }
         cursor.close();
