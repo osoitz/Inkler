@@ -436,17 +436,18 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         }
         else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
+            intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
             startActivity(intent);
             return true;
-        }/* else if (id == R.id.modificar_tatuador) {
-            //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarTatuador.class);
-            //startActivity(intent);
+        } else if (id == R.id.modificar_tatuador) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
+            startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_estudio) {
+        }/* else if (id == R.id.modificar_estudio) {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarEstudio.class);
             //startActivity(intent);
             return true;
