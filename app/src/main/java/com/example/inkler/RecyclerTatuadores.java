@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -23,6 +25,9 @@ public class RecyclerTatuadores extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_tatuadores);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         cargartatuadores();
 
@@ -105,25 +110,23 @@ public class RecyclerTatuadores extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.añadir_estudio) {
-            //Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
-            //startActivity(intent);
-            return true;
-        }
-        /*if (id == R.id.añadir_tatuador) {
         if (id == R.id.admin){
             DatosApp.setAdmin(true);
             invalidateOptionsMenu();
         } else if (id == R.id.noadmin) {
             DatosApp.setAdmin(false);
             invalidateOptionsMenu();
+        }else if (id == R.id.añadir_estudio) {
+            //Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
+            //startActivity(intent);
+            return true;
         }
         /*else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
-        } else */
-      
+        } */
+
         return super.onOptionsItemSelected(item);
     }
 

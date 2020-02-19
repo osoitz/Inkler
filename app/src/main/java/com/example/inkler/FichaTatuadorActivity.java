@@ -5,21 +5,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.os.Bundle;
-import android.widget.Toast;
 
 import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -30,15 +26,15 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import java.util.ArrayList;
 
 
 public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
-    private TextView tlfno;
+    private TextView telefono;
 
+
+    private TextView tlfno;
+    private ImageView vermas;
     private TextView NombreTat;
     private TextView EmailTat;
     @Override
@@ -49,12 +45,19 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         final Integer INITIAL_ZOOM = 10;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
-        NombreTat=findViewById(R.id.nombreApellidos);
-        EmailTat=findViewById(R.id.TattooMail);
+
         Tatuador miTatuador = recogerTatuador(idTat);
-        Toast.makeText(getApplicationContext(),idTat + " : " + miTatuador.getIDEstudio(), Toast.LENGTH_LONG).show();
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());
-        rellenar_txt(miTatuador);
+        //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
+        rellenar_txt(miTatuador, miEstudio);
+
+        vermas = findViewById(R.id.ivvermas);
+        vermas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FichaTatuadorActivity.this, GaleriaActivity.class));
+            }
+        });
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -94,22 +97,21 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                                 return true;
                             }
                         });
-
                          */
 
                     }
                 });
             }
         });
-        tlfno = findViewById(R.id.phone_number);
-        SpannableString mitextoU = new SpannableString(tlfno.getText().toString());
+        telefono = findViewById(R.id.telefonoEstudio);
+        SpannableString mitextoU = new SpannableString(telefono.getText().toString());
         mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        tlfno.setText(mitextoU);
-        tlfno.setOnClickListener(new View.OnClickListener() {
+        telefono.setText(mitextoU);
+        telefono.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                String num= tlfno.getText().toString();
+                String num= telefono.getText().toString();
                 intent.setData(Uri.parse("tel:"+num));
                 startActivity(intent);
             }
@@ -127,8 +129,6 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO,
                 DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,
                 DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,
-                DBHelper.entidadTatuador.COLUMN_NAME_EMAIL,
-                DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO,
                 DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO
         };
 
@@ -137,7 +137,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         Cursor cursor = db.query(
                 DBHelper.entidadTatuador.TABLE_NAME,
                 projection,
-                 " _ID = ? ",
+                " _ID = ? ",
                 selectionArgs,
                 null,
                 null,
@@ -149,11 +149,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             tatuador.setNombreArt(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO)));
             tatuador.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE)));
             tatuador.setApellidos(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS)));
-            tatuador.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL)));
             tatuador.setIDEstudio(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
-            tatuador.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO)));
 
-     }
+        }
         cursor.close();
         return tatuador;
 
@@ -203,13 +201,24 @@ public class FichaTatuadorActivity extends AppCompatActivity {
 
 
 
-    public void rellenar_txt(Tatuador miTatuador){
-        TextView NombreArt;
-       String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";
-        NombreArt = findViewById(R.id.nombreArtistico);
-        NombreArt.setText(miTatuador.getNombreArt());
-        NombreTat.setText(nombre);
-        EmailTat.setText(miTatuador.getEmail());
+    public void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
+        TextView nombreArtistico = findViewById(R.id.nombreArtistico);
+        TextView nombreTatuador =findViewById(R.id.nombreApellidos);
+        TextView nombreEstudio =findViewById(R.id.NombreEstudio);
+        TextView direccionEstudio =findViewById(R.id.direccionEstudio);
+        TextView mailEstudio =findViewById(R.id.mailEstudio);
+        TextView telefonoEstudio =findViewById(R.id.telefonoEstudio);
+
+        nombreArtistico.setText(miTatuador.getNombreArt());
+        String nombre = "(" + miTatuador.getNombre() + " " + miTatuador.getApellidos() + ")";
+        nombreTatuador.setText(nombre);
+
+        nombreEstudio.setText(miestudio.getNombre());
+        direccionEstudio.setText(miestudio.getDireccion());
+        mailEstudio.setText(miestudio.getEmail());
+        telefonoEstudio.setText(miestudio.getTelefono());
+
+
     }
 
     @Override
@@ -258,8 +267,13 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        menu.setGroupVisible(R.id.añadir, true);
-        menu.setGroupVisible(R.id.modificar, true);
+        if (DatosApp.isAdmin()) {
+            menu.setGroupVisible(R.id.añadir, true);
+            menu.setGroupVisible(R.id.modificar, true);
+            menu.setGroupVisible(R.id.logout, true);
+        } else {
+            menu.setGroupVisible(R.id.login, true);
+        }
         return true;
     }
 
@@ -271,16 +285,22 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.añadir_estudio) {
+        if (id == R.id.admin){
+            DatosApp.setAdmin(true);
+            invalidateOptionsMenu();
+        } else if (id == R.id.noadmin) {
+            DatosApp.setAdmin(false);
+            invalidateOptionsMenu();
+        } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
             startActivity(intent);
             return true;
         }
-        /*if (id == R.id.añadir_tatuador) {
+        /*else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
-        } else  else if (id == R.id.modificar_tatuador) {
+        }  else if (id == R.id.modificar_tatuador) {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarTatuador.class);
             //startActivity(intent);
             return true;
@@ -288,7 +308,6 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarEstudio.class);
             //startActivity(intent);
             return true;
-
         }*/
 
         return super.onOptionsItemSelected(item);
