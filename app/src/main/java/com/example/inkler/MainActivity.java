@@ -71,6 +71,18 @@ public class MainActivity extends AppCompatActivity{
             db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w12);
 
             Log.d("Web", "URL " + pos);
+
+            //para la galeria
+            ContentValues foto = new ContentValues();
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "2131165272");
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
+            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "2131165273");
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
+            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "2131165309");
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
+            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
         }
     }
 }

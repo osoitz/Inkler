@@ -6,14 +6,17 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Html;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -50,7 +53,15 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String idTat = getIntent().getStringExtra("id");
+        String idTat = "";
+        if(getIntent().getStringExtra("id") == null){
+            idTat = DatosApp.getIdTat();
+        }else{
+            idTat = getIntent().getStringExtra("id");
+            DatosApp.setIdTat(idTat);
+        }
+
+
         Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
         final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
@@ -71,7 +82,6 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FichaTatuadorActivity.this, GaleriaActivity.class);
 
-                intent.putExtra("id",idTat);
                 startActivity(intent);
             }
         });
@@ -253,6 +263,40 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         return websTatuador;
     }
 
+    private ArrayList<String> recogerWebsEstudio (String id) {
+        ArrayList<String> webs = new ArrayList<>();
+        // Iniciar base de datos
+        DBHelper dbHelper = new DBHelper(getBaseContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        //Columnas
+        String[] projection = {
+                DBHelper.entidadWeb.COLUMN_NAME_URL
+        };
+
+        String selection = DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO + " = ?";
+        String[] selectionArgs = new String[] { "" + id } ;
+        //Respuesta
+
+        Cursor cursor = db.query(
+                DBHelper.entidadWeb.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        ;
+        while(cursor.moveToNext()) {
+            String url = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
+            webs.add(url);
+        }
+        cursor.close();
+        dbHelper.close();
+        return webs;
+    }
+
     private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
         TextView nombreArtistico = findViewById(R.id.nombreArtistico);
         TextView nombreTatuador =findViewById(R.id.nombreApellidos);
@@ -271,20 +315,32 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         telefonoEstudio.setText(miestudio.getTelefono());
     }
 
-    private void rellenarWebsTatuador(ArrayList<String> urlsTatuador){
+    private String crearContenidoHTML(ArrayList<String> urls){
         String contenidoCampo ="";
-        for (String urlString : urlsTatuador){
+        for (String urlString : urls){
+            String host = urlString;
             try {
                 URL miUrl = new URL(urlString);
-                contenidoCampo = contenidoCampo + "<a href='" + urlString + "'>"+ miUrl.getHost() +"</a><br>";
+                host = miUrl.getHost();
             }
             catch (Exception e) {
                 //Nada de nada
             }
+
+            contenidoCampo = contenidoCampo + "<a href='" + urlString + "'>"+ host +"</a><br>";
         }
-        System.out.println(contenidoCampo);
+        //System.out.println(contenidoCampo);
+        return contenidoCampo;
+    }
+
+    private void rellenarWebsTatuador(ArrayList<String> urls){
         TextView websTatuador = findViewById(R.id.websTatuador);
-        websTatuador.setText(Html.fromHtml(contenidoCampo));
+        websTatuador.setText(Html.fromHtml(crearContenidoHTML(urls)));
+    }
+
+    private void rellenarWebsEsrudio(ArrayList<String> urls){
+        TextView websEstudio = findViewById(R.id.websEstudio);
+        websEstudio.setText(Html.fromHtml(crearContenidoHTML(urls)));
     }
 
     @Override

@@ -113,8 +113,7 @@
                     android:id="@+id/websTatuador"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
-                    android:text=""
+                    android:autoLink="web"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -239,21 +238,12 @@
                 android:weightSum="1">
 
                 <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="start"
-                    android:text="@string/web"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
+                    android:id="@+id/websEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_weight="0.5"
-                    android:text="arestattoo.com"
+                    android:text=""
                     android:textSize="16sp" />
             </LinearLayout>
 
