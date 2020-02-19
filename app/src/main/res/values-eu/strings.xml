@@ -23,6 +23,9 @@
     <string name="labelrvtatuadores">Tatuatzaileen zerrenda</string>
     <string name="labelfichatatuador">Tatuatzaileen fitxa</string>
     <string name="labelgaleiratatuador">Galeria</string>
+    <string name="contraseña">1234</string>
+    <string name="contraseñatitle">Pasahitza</string>
+    <string name="contraseñabtn">Sartu</string>
 
 
 
