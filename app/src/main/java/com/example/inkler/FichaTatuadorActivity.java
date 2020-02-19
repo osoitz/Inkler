@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -38,7 +39,7 @@ import java.util.ArrayList;
 public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
     private TextView tlfno;
-
+    private ImageView vermas;
     private TextView NombreTat;
     private TextView EmailTat;
     @Override
@@ -52,9 +53,17 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         NombreTat=findViewById(R.id.nombreApellidos);
         EmailTat=findViewById(R.id.TattooMail);
         Tatuador miTatuador = recogerTatuador(idTat);
-        Toast.makeText(getApplicationContext(),idTat + " : " + miTatuador.getIDEstudio(), Toast.LENGTH_LONG).show();
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());
+        //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(miTatuador);
+
+        vermas = findViewById(R.id.ivvermas);
+        vermas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(FichaTatuadorActivity.this, GaleriaActivity.class));
+            }
+        });
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -205,7 +214,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
 
     public void rellenar_txt(Tatuador miTatuador){
         TextView NombreArt;
-       String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";
+        String nombre = "("+miTatuador.getNombre()+" "+miTatuador.getApellidos()+")";
         NombreArt = findViewById(R.id.nombreArtistico);
         NombreArt.setText(miTatuador.getNombreArt());
         NombreTat.setText(nombre);
@@ -258,8 +267,10 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        menu.setGroupVisible(R.id.añadir, true);
-        menu.setGroupVisible(R.id.modificar, true);
+        if (DatosApp.isAdmin()) {
+            menu.setGroupVisible(R.id.añadir, true);
+            menu.setGroupVisible(R.id.modificar, true);
+        }
         return true;
     }
 
