@@ -42,7 +42,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         String idTat = getIntent().getStringExtra("id");
         Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
-        final Integer INITIAL_ZOOM = 10;
+        final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
 
