@@ -1,6 +1,5 @@
 package com.example.inkler;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -10,39 +9,39 @@ import android.provider.BaseColumns;
 public class DBHelper extends SQLiteOpenHelper {
 
     //si cambiamos el modelo debe cambiar la version de la base de datos, así se ejecutarán los metodos onupgrade u ondowngrade
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "Inkler.db";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "Inkler.db";
 
     //Primero creamos unos string en los que guardar los nombres de tablas, columnas... para centralizar la información por si hay que hacer cambios
-    public static class entidadTatuador implements BaseColumns{
-        public static final String TABLE_NAME = "Tatuador";
-        public static final String COLUMN_NAME_NOMBRE = "Nombre" ;
-        public static final String COLUMN_NAME_APELLIDOS="Apellidos";
-        public static final String COLUMN_NAME_NOMBRE_ARTISTICO="Nombre_Artistico";
-        public static final String COLUMN_NAME_ID_ESTUDIO="ID_Estudio";
+    static class entidadTatuador implements BaseColumns{
+        static final String TABLE_NAME = "Tatuador";
+        static final String COLUMN_NAME_NOMBRE = "Nombre" ;
+        static final String COLUMN_NAME_APELLIDOS="Apellidos";
+        static final String COLUMN_NAME_NOMBRE_ARTISTICO="Nombre_Artistico";
+        static final String COLUMN_NAME_ID_ESTUDIO="ID_Estudio";
     }
 
-    public static class entidadEstudio implements BaseColumns{
-        public static final String TABLE_NAME = "Estudio";
-        public static final String COLUMN_NAME_NOMBRE = "Nombre" ;
-        public static final String COLUMN_NAME_DIRECCION="Direccion";
-        public static final String COLUMN_NAME_LATITUD="Latitud";
-        public static final String COLUMN_NAME_LONGITUD="Longitud";
-        public static final String COLUMN_NAME_EMAIL="Email";
-        public static final String COLUMN_NAME_TELEFONO="Telefono";
+    static class entidadEstudio implements BaseColumns{
+        static final String TABLE_NAME = "Estudio";
+        static final String COLUMN_NAME_NOMBRE = "Nombre" ;
+        static final String COLUMN_NAME_DIRECCION="Direccion";
+        static final String COLUMN_NAME_LATITUD="Latitud";
+        static final String COLUMN_NAME_LONGITUD="Longitud";
+        static final String COLUMN_NAME_EMAIL="Email";
+        static final String COLUMN_NAME_TELEFONO="Telefono";
     }
 
-    public static class entidadWeb implements BaseColumns{
-        public static final String TABLE_NAME = "Web";
-        public static final String COLUMN_NAME_URL ="URL";
-        public static final String COLUMN_NAME_ID_TATUADOR ="ID_Tatuador";
-        public static final String COLUMN_NAME_ID_ESTUDIO ="ID_Estudio";
+    static class entidadWeb implements BaseColumns{
+        static final String TABLE_NAME = "Web";
+        static final String COLUMN_NAME_URL ="URL";
+        static final String COLUMN_NAME_ID_TATUADOR ="ID_Tatuador";
+        static final String COLUMN_NAME_ID_ESTUDIO ="ID_Estudio";
     }
 
-    public static class entidadFoto implements BaseColumns{
-        public static final String TABLE_NAME = "Fotos";
-        public static final String COLUMN_NAME_FOTO ="Nombre";
-        public static final String COLUMN_NAME_ID_TATUADOR ="ID_Tatuador";
+    static class entidadFoto implements BaseColumns{
+        static final String TABLE_NAME = "Fotos";
+        static final String COLUMN_NAME_FOTO ="Nombre";
+        static final String COLUMN_NAME_ID_TATUADOR ="ID_Tatuador";
     }
 
     //Tambien creamos strings de las sentencias SQL CREATE y DELETE que usaremos al inicio (no así los INSERT, SELECT...)
@@ -91,7 +90,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
 
     //Constructor
-    public DBHelper(Context context) {
+    DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -116,7 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void delete (SQLiteDatabase db){
+    void delete(SQLiteDatabase db){
         db.execSQL(SQL_DELETE_TABLE_TATUADOR);
         db.execSQL(SQL_DELETE_TABLE_ESTUDIO);
         db.execSQL(SQL_DELETE_TABLE_WEB);
