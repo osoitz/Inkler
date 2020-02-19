@@ -2,6 +2,7 @@ package com.example.inkler;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -92,7 +93,12 @@ public class GaleriaActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
         AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, Galeria.getGaleriaList());
         recyclerView.setAdapter(adaptador);
-        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(GaleriaActivity.this, 3);
+        ConstraintLayout cl = findViewById(R.id.recycler_galeria);
+        if (cl == null) {
+            layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+        } else {
+            layoutManager = new GridLayoutManager(getApplicationContext(), 5);
+        }
         recyclerView.setLayoutManager(layoutManager);
         //onclick para ver los datos del alumno selccionado en la activity DatosAlumno
         recyclerView.addOnItemTouchListener(new GaleriaRecyclerViewListener(GaleriaActivity.this, recyclerView, new GaleriaRecyclerViewListener.OnItemClickListener() {
