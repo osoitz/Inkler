@@ -40,13 +40,11 @@ public class GaleriaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
-        final String idTat = getIntent().getStringExtra("id");
+
+        String idTat = DatosApp.getIdTat();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
-        Log.d("tag", "foto dragon: " + R.drawable.dragonlogo);
-        Log.d("tag", "foto pentagono: " + R.drawable.pentagono);
 
         //Iniciar DB
         dbHelper = new DBHelper(getBaseContext());
@@ -81,13 +79,10 @@ public class GaleriaActivity extends AppCompatActivity {
 
         Galeria.getGaleriaList().clear();
 
-        Log.d("tag", "antes de entarr: ");
         while (galeriaSQLite.moveToNext()){
-            Log.d("tag", "onCreate: ");
 
             tatuaje = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
             nombre = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR));
-            Log.d("tag", "tatu: " + nombre);
             //guardamos los datos de sqlite en guardarsqlite y los pasamos a la clase Alumno
             BDSQLite = new Galeria(tatuaje, nombre);
             Galeria.getGaleriaList().add(BDSQLite);
@@ -104,7 +99,6 @@ public class GaleriaActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
-                Log.d("tag", "onItemClick: " + imageviewTatuaje.getTag());
                 zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
 
             }

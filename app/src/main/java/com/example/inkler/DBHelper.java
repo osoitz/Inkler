@@ -102,18 +102,6 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_WEB);
         db.execSQL(SQL_CREATE_TABLE_FOTO);
 
-        //para la galeria
-        ContentValues alumnosCanon = new ContentValues();
-        alumnosCanon.put(entidadFoto.COLUMN_NAME_FOTO, "2131165272");
-        alumnosCanon.put(entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
-        db.insert(entidadFoto.TABLE_NAME, null, alumnosCanon);
-        alumnosCanon.put(entidadFoto.COLUMN_NAME_FOTO, "2131165273");
-        alumnosCanon.put(entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
-        db.insert(entidadFoto.TABLE_NAME, null, alumnosCanon);
-        alumnosCanon.put(entidadFoto.COLUMN_NAME_FOTO, "2131165309");
-        alumnosCanon.put(entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
-        db.insert(entidadFoto.TABLE_NAME, null, alumnosCanon);
-
     }
 
     public void onUpgrade (SQLiteDatabase db,int oldVersion, int newVersion){
