@@ -36,13 +36,13 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                 String st_email = et_email.getText().toString();
                 String st_longitud = et_longitud.getText().toString();
                 String st_latitud = et_latitud.getText().toString();
-                double latitud = Double.parseDouble(st_latitud);
-                double longitud = Double.parseDouble(st_longitud);
+
                 if (st_nombre.equals("")||st_direccion.equals("")||st_email.equals("")||st_latitud.equals("")||st_longitud.equals("")||st_telefono.equals("")){
                     Toast.makeText(getApplicationContext(),"Por favor rellena todos los datos",Toast.LENGTH_LONG).show();
                 }
                 else {
-
+                    double latitud = Double.parseDouble(st_latitud);
+                    double longitud = Double.parseDouble(st_longitud);
                     // Iniciar base de datos
                     DBHelper dbHelper = new DBHelper(getBaseContext());
                     SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -54,6 +54,13 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                     e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud );
                     e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud );
                     db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
+                    Toast.makeText(getApplicationContext(),"El estudio "+st_nombre+" ha sido creado",Toast.LENGTH_SHORT).show();
+                    et_direccion.setText("");
+                    et_email.setText("");
+                    et_latitud.setText("");
+                    et_longitud.setText("");
+                    et_nombre.setText("");
+                    et_telefono.setText("");
                 }
             }
         });
