@@ -18,26 +18,12 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        DatosApp.setAdmin(false);
-
         Button rellenardb = findViewById(R.id.rellenardb);
-
-        Button botonAdmin = findViewById(R.id.botonAdmin);
 
         rellenardb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 rellenarDB();
-                Intent intent = new Intent(MainActivity.this, RecyclerTatuadores.class);
-                startActivity(intent);
-            }
-        });
-
-        botonAdmin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                rellenarDB();
-                DatosApp.setAdmin(true);
                 Intent intent = new Intent(MainActivity.this, RecyclerTatuadores.class);
                 startActivity(intent);
             }

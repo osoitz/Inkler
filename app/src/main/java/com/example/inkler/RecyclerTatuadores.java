@@ -95,6 +95,9 @@ public class RecyclerTatuadores extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (DatosApp.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
+            menu.setGroupVisible(R.id.logout, true);
+        } else {
+            menu.setGroupVisible(R.id.login, true);
         }
         return true;
     }
@@ -105,8 +108,14 @@ public class RecyclerTatuadores extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        /*if (id == R.id.añadir_tatuador) {
+        if (id == R.id.admin){
+            DatosApp.setAdmin(true);
+            invalidateOptionsMenu();
+        } else if (id == R.id.noadmin) {
+            DatosApp.setAdmin(false);
+            invalidateOptionsMenu();
+        }
+        /*else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
