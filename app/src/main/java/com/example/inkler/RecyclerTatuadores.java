@@ -139,17 +139,17 @@ public class RecyclerTatuadores extends AppCompatActivity {
         } else if (id == R.id.noadmin) {
             DatosApp.setAdmin(false);
             invalidateOptionsMenu();
+        }else if (id == R.id.añadir_estudio) {
+            Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
+            startActivity(intent);
+            return true;
         }
-        /*else if (id == R.id.añadir_tatuador) {
+        else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.añadir_estudio) {
-            //Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
-            //startActivity(intent);
-            return true;
-        }*/
-      
+        }
+
         return super.onOptionsItemSelected(item);
     }
 

@@ -263,6 +263,40 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         return websTatuador;
     }
 
+    private ArrayList<String> recogerWebsEstudio (String id) {
+        ArrayList<String> webs = new ArrayList<>();
+        // Iniciar base de datos
+        DBHelper dbHelper = new DBHelper(getBaseContext());
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        //Columnas
+        String[] projection = {
+                DBHelper.entidadWeb.COLUMN_NAME_URL
+        };
+
+        String selection = DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO + " = ?";
+        String[] selectionArgs = new String[] { "" + id } ;
+        //Respuesta
+
+        Cursor cursor = db.query(
+                DBHelper.entidadWeb.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        ;
+        while(cursor.moveToNext()) {
+            String url = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
+            webs.add(url);
+        }
+        cursor.close();
+        dbHelper.close();
+        return webs;
+    }
+
     private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
         TextView nombreArtistico = findViewById(R.id.nombreArtistico);
         TextView nombreTatuador =findViewById(R.id.nombreApellidos);
@@ -281,20 +315,32 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         telefonoEstudio.setText(miestudio.getTelefono());
     }
 
-    private void rellenarWebsTatuador(ArrayList<String> urlsTatuador){
+    private String crearContenidoHTML(ArrayList<String> urls){
         String contenidoCampo ="";
-        for (String urlString : urlsTatuador){
+        for (String urlString : urls){
+            String host = urlString;
             try {
                 URL miUrl = new URL(urlString);
-                contenidoCampo = contenidoCampo + "<a href='" + urlString + "'>"+ miUrl.getHost() +"</a><br>";
+                host = miUrl.getHost();
             }
             catch (Exception e) {
                 //Nada de nada
             }
+
+            contenidoCampo = contenidoCampo + "<a href='" + urlString + "'>"+ host +"</a><br>";
         }
-        System.out.println(contenidoCampo);
+        //System.out.println(contenidoCampo);
+        return contenidoCampo;
+    }
+
+    private void rellenarWebsTatuador(ArrayList<String> urls){
         TextView websTatuador = findViewById(R.id.websTatuador);
-        websTatuador.setText(Html.fromHtml(contenidoCampo));
+        websTatuador.setText(Html.fromHtml(crearContenidoHTML(urls)));
+    }
+
+    private void rellenarWebsEsrudio(ArrayList<String> urls){
+        TextView websEstudio = findViewById(R.id.websEstudio);
+        websEstudio.setText(Html.fromHtml(crearContenidoHTML(urls)));
     }
 
     @Override
@@ -388,7 +434,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             DatosApp.setAdmin(false);
             invalidateOptionsMenu();
         }
-        /*else if (id == R.id.añadir_tatuador) {
+        else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
@@ -396,7 +442,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_tatuador) {
+        }/* else if (id == R.id.modificar_tatuador) {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarTatuador.class);
             //startActivity(intent);
             return true;
