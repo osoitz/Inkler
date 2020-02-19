@@ -9,13 +9,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DatosApp.setAdmin(false);
 
         Button rellenardb = findViewById(R.id.rellenardb);
 
@@ -33,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         botonAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Activity_Admin.class);
+                rellenarDB();
+                DatosApp.setAdmin(true);
+                Intent intent = new Intent(MainActivity.this, RecyclerTatuadores.class);
                 startActivity(intent);
             }
         });
