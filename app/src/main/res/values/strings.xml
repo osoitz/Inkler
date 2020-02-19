@@ -18,5 +18,8 @@
     <string name="eliminar_tatuador">Erase tattoo artist</string>
     <string name="eliminar_estudio">Erase studio</string>
     <string name="apellidos">Surname:</string>
+    <string name="log_in">Log in</string>
+    <string name="log_out">Log out</string>
+    <string name="labelrvtatuadores">List of tattooists</string>
 
 </resources>

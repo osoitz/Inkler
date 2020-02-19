@@ -1,15 +1,14 @@
 package com.example.inkler;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.util.Log;
 import android.view.View;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -27,10 +26,13 @@ public class RecyclerTatuadores extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_tatuadores);
 
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         cargartatuadores();
 
         //Acciones del onclick y onlongclick del recycler
-        recyclerView.addOnItemTouchListener(new AlumnoRecyclerViewListener(this, recyclerView, new AlumnoRecyclerViewListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new TatuadoresRecyclerViewListener(this, recyclerView, new TatuadoresRecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
@@ -95,6 +97,9 @@ public class RecyclerTatuadores extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (DatosApp.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
+            menu.setGroupVisible(R.id.logout, true);
+        } else {
+            menu.setGroupVisible(R.id.login, true);
         }
         return true;
     }
@@ -105,8 +110,14 @@ public class RecyclerTatuadores extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        /*if (id == R.id.añadir_tatuador) {
+        if (id == R.id.admin){
+            DatosApp.setAdmin(true);
+            invalidateOptionsMenu();
+        } else if (id == R.id.noadmin) {
+            DatosApp.setAdmin(false);
+            invalidateOptionsMenu();
+        }
+        /*else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;

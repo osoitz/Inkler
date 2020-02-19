@@ -138,24 +138,6 @@
                 android:orientation="horizontal"
                 android:weightSum="1">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="start"
-                    android:text="@string/email"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/TattooMail"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:text="arestatto@gmail.com"
-                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -212,7 +194,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:text="Ares tattoo and pierceing"
+                    android:text=""
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -233,12 +215,12 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/Dir"
+                    android:id="@+id/direccionEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:text="Itxaropen kalea, 18, 48005,Bilbo"
+                    android:text=""
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -259,12 +241,12 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/EstMail"
+                    android:id="@+id/mailEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:text="arestatto@gmail.com"
+                    android:text=""
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -285,7 +267,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/phone_number"
+                    android:id="@+id/telefonoEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
