@@ -81,7 +81,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FichaTatuadorActivity.this, GaleriaActivity.class);
-                
+
                 startActivity(intent);
             }
         });
