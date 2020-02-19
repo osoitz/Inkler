@@ -1,5 +1,6 @@
 package com.example.inkler;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -45,6 +46,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         final Integer INITIAL_ZOOM = 10;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Tatuador miTatuador = recogerTatuador(idTat);
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());

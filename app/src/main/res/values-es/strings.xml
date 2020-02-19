@@ -21,6 +21,9 @@
     <string name="log_in">Iniciar sesion</string>
     <string name="log_out">Cerrar sesion</string>
     <string name="labelrvtatuadores">Lista de tatuadores</string>
+    <string name="labelfichatatuador">Ficha del tatuador</string>
+    <string name="labelgaleiratatuador">Galeria</string>
+
 
 
 </resources>
