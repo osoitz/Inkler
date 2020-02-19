@@ -43,6 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public static class entidadFoto implements BaseColumns{
         public static final String TABLE_NAME = "Fotos";
+        public static final String COLUMN_NAME_FOTO ="Nombre";
         public static final String COLUMN_NAME_ID_TATUADOR ="ID_Tatuador";
     }
 
@@ -86,6 +87,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TABLE_FOTO =
             "CREATE TABLE " + entidadFoto.TABLE_NAME + " (" +
                     entidadFoto._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    entidadFoto.COLUMN_NAME_FOTO + " TEXT," +
                     entidadFoto.COLUMN_NAME_ID_TATUADOR + " INTEGER)";
 
     private static final String SQL_DELETE_TABLE_FOTO =
@@ -103,13 +105,26 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_CREATE_TABLE_ESTUDIO);
         db.execSQL(SQL_CREATE_TABLE_WEB);
         db.execSQL(SQL_CREATE_TABLE_FOTO);
+
+        //para la galeria
+        ContentValues alumnosCanon = new ContentValues();
+        alumnosCanon.put(entidadFoto.COLUMN_NAME_FOTO, "2131165272");
+        alumnosCanon.put(entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
+        db.insert(entidadFoto.TABLE_NAME, null, alumnosCanon);
+        alumnosCanon.put(entidadFoto.COLUMN_NAME_FOTO, "2131165273");
+        alumnosCanon.put(entidadFoto.COLUMN_NAME_ID_TATUADOR, 0);
+        db.insert(entidadFoto.TABLE_NAME, null, alumnosCanon);
+        alumnosCanon.put(entidadFoto.COLUMN_NAME_FOTO, "2131165309");
+        alumnosCanon.put(entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
+        db.insert(entidadFoto.TABLE_NAME, null, alumnosCanon);
+
     }
 
     public void onUpgrade (SQLiteDatabase db,int oldVersion, int newVersion){
         db.execSQL(SQL_DELETE_TABLE_TATUADOR);
         db.execSQL(SQL_DELETE_TABLE_ESTUDIO);
         db.execSQL(SQL_DELETE_TABLE_WEB);
-        db.execSQL(SQL_CREATE_TABLE_FOTO);
+        db.execSQL(SQL_DELETE_TABLE_FOTO);
         onCreate(db);
     }
 
@@ -121,7 +136,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_TABLE_TATUADOR);
         db.execSQL(SQL_DELETE_TABLE_ESTUDIO);
         db.execSQL(SQL_DELETE_TABLE_WEB);
-        db.execSQL(SQL_CREATE_TABLE_FOTO);
+        db.execSQL(SQL_DELETE_TABLE_FOTO);
         onCreate(db);
     }
 
