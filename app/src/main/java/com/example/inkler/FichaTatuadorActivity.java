@@ -44,12 +44,7 @@ import java.util.ArrayList;
 public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
     private TextView telefono;
-
-
-    private TextView tlfno;
     private ImageView vermas;
-    private TextView NombreTat;
-    private TextView EmailTat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,11 +56,12 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             DatosApp.setIdTat(idTat);
         }
 
-
-        Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
+        Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
         final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
+
+
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -75,6 +71,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(miTatuador, miEstudio);
         rellenarWebsTatuador(recogerWebsTatuador(miTatuador.getId()));
+        rellenarWebsEstudio(recogerWebsEstudio(Integer.toString(miEstudio.getID())));
 
         vermas = findViewById(R.id.ivvermas);
         vermas.setOnClickListener(new View.OnClickListener() {
@@ -338,7 +335,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         websTatuador.setText(Html.fromHtml(crearContenidoHTML(urls)));
     }
 
-    private void rellenarWebsEsrudio(ArrayList<String> urls){
+    private void rellenarWebsEstudio(ArrayList<String> urls){
         TextView websEstudio = findViewById(R.id.websEstudio);
         websEstudio.setText(Html.fromHtml(crearContenidoHTML(urls)));
     }
