@@ -23,6 +23,7 @@
     <string name="labelrvtatuadores">List of tattooists</string>
     <string name="labelfichatatuador">Tattoo artist</string>
     <string name="labelgaleiratatuador">Gallery</string>
+    <string name="labelnavegador">Navigator</string>
     <string name="contraseña">1234</string>
     <string name="contraseñatitle">Password</string>
     <string name="contraseñabtn">Log in</string>
