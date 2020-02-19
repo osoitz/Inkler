@@ -17,14 +17,11 @@ public class Estudio {
         this.longitud = longitud;
         this.Email = Email;
         this.Telefono = Telefono;
-
     }
 
     public Estudio() {}
 
-    public int getID() {
-        return ID;
-    }
+    public int getID() {return ID;}
 
     public void setID(int ID) {
         this.ID = ID;

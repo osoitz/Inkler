@@ -13,7 +13,6 @@
         android:id="@+id/nombreArtistico"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="PINXAUVAS"
         android:textSize="36sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,7 +22,6 @@
         android:id="@+id/nombreApellidos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="(Miguel Fernandez)"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nombreArtistico"/>
@@ -146,7 +144,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:text=""
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -172,7 +169,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:text=""
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -198,7 +194,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="0.5"
-                    android:text=""
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -226,8 +221,6 @@
                     android:layout_weight="0.5"
                     android:autoLink="phone"
                     android:linksClickable="true"
-                    android:text="946791038"
-                    android:textColor="#0023FF"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -243,8 +236,9 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
                     android:layout_weight="0.5"
-                    android:text=""
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:autoLink="web"
+                    />
             </LinearLayout>
 
             <com.mapbox.mapboxsdk.maps.MapView
