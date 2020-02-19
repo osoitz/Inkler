@@ -434,7 +434,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             DatosApp.setAdmin(false);
             invalidateOptionsMenu();
         }
-        /*else if (id == R.id.añadir_tatuador) {
+        else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
@@ -442,7 +442,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_tatuador) {
+        }/* else if (id == R.id.modificar_tatuador) {
             //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarTatuador.class);
             //startActivity(intent);
             return true;
