@@ -1,5 +1,6 @@
 package com.example.inkler;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,10 @@ public class GaleriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
         final String idTat = getIntent().getStringExtra("id");
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
         Log.d("tag", "foto dragon: " + R.drawable.dragonlogo);
         Log.d("tag", "foto pentagono: " + R.drawable.pentagono);
 

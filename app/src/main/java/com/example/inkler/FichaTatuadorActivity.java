@@ -1,5 +1,6 @@
 package com.example.inkler;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -42,9 +43,12 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         final String idTat = getIntent().getStringExtra("id");
         Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
-        final Integer INITIAL_ZOOM = 10;
+        final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
+
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         Tatuador miTatuador = recogerTatuador(idTat);
         final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());

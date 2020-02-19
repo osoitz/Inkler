@@ -18,9 +18,16 @@
     <string name="modificar_estudio">Estudioa aldatu</string>
     <string name="eliminar_tatuador">Tatuatzailea ezabatu</string>
     <string name="eliminar_estudio">Estudioa ezabatu</string>
+    <string name="apellidos">Abizenak:</string>
     <string name="log_in">Hasi saioa</string>
     <string name="log_out">Itxi saioa</string>
     <string name="labelrvtatuadores">Tatuatzaileen zerrenda</string>
+    <string name="labelfichatatuador">Tatuatzaileen fitxa</string>
+    <string name="labelgaleiratatuador">Galeria</string>
+    <string name="contraseña">1234</string>
+    <string name="contraseñatitle">Pasahitza</string>
+    <string name="contraseñabtn">Sartu</string>
+
 
 
 </resources>

@@ -18,9 +18,15 @@
     <string name="modificar_estudio">Modificar estudio</string>
     <string name="eliminar_tatuador">Eliminar tatuador</string>
     <string name="eliminar_estudio">Eliminar estudio</string>
+    <string name="apellidos">Apellidos:</string>
     <string name="log_in">Iniciar sesion</string>
     <string name="log_out">Cerrar sesion</string>
     <string name="labelrvtatuadores">Lista de tatuadores</string>
+    <string name="labelfichatatuador">Ficha del tatuador</string>
+    <string name="labelgaleiratatuador">Galeria</string>
+    <string name="contraseña">1234</string>
+    <string name="contraseñatitle">Contraseña</string>
+    <string name="contraseñabtn">Entrar</string>
 
 
 </resources>
