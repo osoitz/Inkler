@@ -9,13 +9,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DatosApp.setAdmin(false);
 
         Button rellenardb = findViewById(R.id.rellenardb);
 
@@ -33,7 +36,9 @@ public class MainActivity extends AppCompatActivity {
         botonAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Activity_Admin.class);
+                rellenarDB();
+                DatosApp.setAdmin(true);
+                Intent intent = new Intent(MainActivity.this, RecyclerTatuadores.class);
                 startActivity(intent);
             }
         });
@@ -63,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, "Satan " + pos);
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, "Beñat " + pos);
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, "Smith " + pos);
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_EMAIL, "SBS@gmail.com " + pos);
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_TELEFONO, "666666666 " + pos);
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, pos + 1);
             db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, t1);
             Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);

@@ -10,6 +10,7 @@
 
     <style name="textview">
         <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorNegro</item>
         <item name="android:layout_width">120dp</item>
         <item name="android:layout_height">wrap_content</item>
     </style>

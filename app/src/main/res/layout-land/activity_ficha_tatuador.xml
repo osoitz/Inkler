@@ -86,6 +86,7 @@
                     tools:ignore="ContentDescription" />
 
                 <ImageView
+                    android:id="@+id/ivvermas"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:layout_weight="0.33"
@@ -258,7 +259,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/EstMail"
+                    android:id="@+id/mailEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -284,7 +285,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/phone_number"
+                    android:id="@+id/telefonoEstudio"
                     android:layout_width="100dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
