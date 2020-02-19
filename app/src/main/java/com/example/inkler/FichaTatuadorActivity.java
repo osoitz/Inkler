@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,7 +49,15 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final String idTat = getIntent().getStringExtra("id");
+        String idTat = "";
+        if(getIntent().getStringExtra("id") == null){
+            idTat = DatosApp.getIdTat();
+        }else{
+            idTat = getIntent().getStringExtra("id");
+            DatosApp.setIdTat(idTat);
+        }
+
+
         Mapbox.getInstance(this, "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw");
         final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
@@ -66,7 +77,6 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(FichaTatuadorActivity.this, GaleriaActivity.class);
 
-                intent.putExtra("id",idTat);
                 startActivity(intent);
             }
         });
