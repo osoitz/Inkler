@@ -1,14 +1,11 @@
 package com.example.inkler;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.util.Log;
 import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -30,7 +27,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
         cargartatuadores();
 
         //Acciones del onclick y onlongclick del recycler
-        recyclerView.addOnItemTouchListener(new AlumnoRecyclerViewListener(this, recyclerView, new AlumnoRecyclerViewListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new TatuadoresRecyclerViewListener(this, recyclerView, new TatuadoresRecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);

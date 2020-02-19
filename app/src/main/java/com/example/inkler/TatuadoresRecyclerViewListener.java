@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //Clase que gestiona el listener del recyclerview
 
-public class AlumnoRecyclerViewListener implements RecyclerView.OnItemTouchListener {
+public class TatuadoresRecyclerViewListener implements RecyclerView.OnItemTouchListener {
     private OnItemClickListener mListener;
 
 
@@ -22,7 +22,7 @@ public class AlumnoRecyclerViewListener implements RecyclerView.OnItemTouchListe
     private GestureDetector mGestureDetector;
 
     //El lisener con las opciones
-    AlumnoRecyclerViewListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener){
+    TatuadoresRecyclerViewListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener){
     mListener = listener;
         mGestureDetector = new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
             @Override
