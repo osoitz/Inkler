@@ -15,7 +15,18 @@
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity android:name=".Activity_AnadirEstudio" />
-        <activity android:name=".GaleriaActivity" />
+        <activity android:name=".GaleriaActivity"
+            android:label="@string/labelgaleiratatuador"
+            android:parentActivityName=".FichaTatuadorActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FichaTatuadorActivity"/>
+            <intent-filter>
+                <action android:name="android.intent.action.GaleriaActivity" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".RecyclerTatuadores" android:label="@string/labelrvtatuadores" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,18 +34,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RecyclerTatuadores"
-            android:label="@string/labelrvtatuadores"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".FichaTatuadorActivity"
+            android:label="@string/labelfichatatuador"
+            android:parentActivityName=".RecyclerTatuadores">
             <meta-data android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value=".RecyclerTatuadores"/>
             <intent-filter>
-                <action android:name="android.intent.action.RecyclerTatuadores" />
+                <action android:name="android.intent.action.FichaTatuadorActivity" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".FichaTatuadorActivity" />
+        <activity android:name=".RecyclerTatuadores" android:label="@string/labelrvtatuadores" />
 
         <meta-data
             android:name="preloaded_fonts"

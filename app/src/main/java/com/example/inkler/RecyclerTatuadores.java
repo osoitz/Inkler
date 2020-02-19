@@ -26,9 +26,6 @@ public class RecyclerTatuadores extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_tatuadores);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-
         cargartatuadores();
 
         //Acciones del onclick y onlongclick del recycler
