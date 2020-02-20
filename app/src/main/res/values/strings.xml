@@ -33,6 +33,7 @@
     <string name="contraseña">1234</string>
     <string name="contraseñatitle">Password</string>
     <string name="contraseñabtn">Log in</string>
+    <string name="ModificarTatuador">Modificar Tatuador</string>
 
 
 </resources>
