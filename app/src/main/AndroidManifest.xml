@@ -34,6 +34,20 @@
 
 
         <activity android:name=".Activity_AnadirEstudio"
+            android:label="@string/labelanadirestudio"
+            android:parentActivityName=".RecyclerTatuadores">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RecyclerTatuadores" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.Activity_AnadirEstudio" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Activity_AnadirTatuador"
             android:label="@string/labelanadirtatuador"
             android:parentActivityName=".RecyclerTatuadores">
             <meta-data
@@ -46,7 +60,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        
+
         <activity
             android:name=".GaleriaActivity"
             android:label="@string/labelgaleiratatuador"
