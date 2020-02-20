@@ -38,14 +38,22 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         et_nombre = findViewById(R.id.contentNombre);
         et_apellidos = findViewById(R.id.contentApellido);
         et_nombreArt = findViewById(R.id.contentNombreArtistico);
-        boolean anadir = getIntent().getBooleanExtra("añadir", false);
+        final boolean anadir = getIntent().getBooleanExtra("añadir", false);
         final Spinner spinner=findViewById(R.id.SpinnerNombreEstudios);
         SpinnerAdapter adapter;
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, rellenarSpinner(cargarSpinner()));
         spinner.setAdapter(adapter);
         Button btnAnadirTatuador = findViewById(R.id.btnAñadirTatuador);
+        if(!anadir){
+            btnAnadirTatuador.setText(getString(R.string.modificar_tatuador));
+            String idTat =DatosApp.getIdTat();
+            Tatuador tatuador = db.recogerTatuador(idTat);
+            et_nombre.setText(tatuador.getNombre());
+            et_apellidos.setText(tatuador.getApellidos());
+            et_nombreArt.setText(tatuador.getNombreArt());
+            spinner.setSelection(posicionEstudio(cargarSpinner(),tatuador.getIDEstudio()));
+        }
 
-        if (anadir) {
             btnAnadirTatuador.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -53,35 +61,29 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
                     String st_apellidos = et_apellidos.getText().toString();
                     String st_nombreArtistico = et_nombreArt.getText().toString();
                     String st_Estudio = spinner.getSelectedItem().toString();
-
+                    int IdEstudio = db.RecogerIdEstudio(st_Estudio);
                     if (st_nombre.equals("") || st_apellidos.equals("") || st_nombreArtistico.equals("") || st_Estudio.equals("")) {
                         Toast.makeText(getApplicationContext(), "You may fill every empty land to insert something", Toast.LENGTH_SHORT).show();
-                    } else {
-                        int IdEstudio = db.RecogerIdEstudio(st_Estudio);
+                    } else if(anadir) {
+
                         db.insertarTatuador(st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
                         Toast.makeText(getApplicationContext(), "El tatuador " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Activity_AnadirTatuador.this, RecyclerTatuadores.class);
                         startActivity(intent);
+                    } else{
+                        db.modificarTatuador(DatosApp.getIdTat(),st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
+                        Toast.makeText(getApplicationContext(),"Los cambios se han realizado con exito", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(Activity_AnadirTatuador.this,FichaTatuadorActivity.class);
+                        intent.putExtra("id",DatosApp.getIdTat());
+                        startActivity(intent);
+
                     }
                 }
             });
-        }else{
-            btnAnadirTatuador.setText("Modificar Tatuador");
-            String idTat =DatosApp.getIdTat();
-            Tatuador tatuador = db.recogerTatuador(idTat);
-            et_nombre.setText(tatuador.getNombre());
-            et_apellidos.setText(tatuador.getApellidos());
-            et_nombreArt.setText(tatuador.getNombreArt());
-            spinner.setSelection(posicionEstudio(cargarSpinner(),tatuador.getIDEstudio()));
-            btnAnadirTatuador.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
 
-                }
-            });
         }
 
-    }
+
 
     public ArrayList<String> cargarSpinner(){
         ArrayList<String> stringarray = new ArrayList<>();
