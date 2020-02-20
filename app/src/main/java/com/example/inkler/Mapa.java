@@ -2,10 +2,13 @@ package com.example.inkler;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -50,7 +53,7 @@ public class Mapa extends AppCompatActivity {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
-                        DBlocal db = new DBlocal(getApplicationContext());
+                        final DBlocal db = new DBlocal(getApplicationContext());
                         ArrayList<Estudio> estudios = db.recogerEstudios();
                         Double minLat = 90.0; //Estan al reves a posta, no lo corrijais!
                         Double maxLat = -90.0;
@@ -62,6 +65,7 @@ public class Mapa extends AppCompatActivity {
                             mapboxMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(estudio.getLatitud(), estudio.getLongitud()))
                                     .title(estudio.getNombre())
+                                    .setSnippet(estudio.getDireccion())
                             );
 
                             //Calculamos lat y lon min y max
@@ -95,6 +99,19 @@ public class Mapa extends AppCompatActivity {
                             public void onClick(View v) {
                                 Intent intent = new Intent(getApplicationContext(), RecyclerTatuadores.class);
                                 startActivity(intent);
+                            }
+                        });
+
+                        //Listener markers
+                        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Toast.makeText(Mapa.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), FichaEstudio.class);
+                                intent.putExtra("id", db.RecogerIdEstudio(marker.getTitle()));
+                                startActivity(intent);
+                                //Si pasamos por aqui es que no nos hemos ido (creo)
+                                return false;
                             }
                         });
 
