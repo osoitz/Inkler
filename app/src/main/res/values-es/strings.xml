@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="mapBoxAcessToken">pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw</string>
     <string name="app_name">Inkler</string>
     <string name="inkler">Inkler</string>
     <string name="nombre_artistico">Nombre artistico:</string>

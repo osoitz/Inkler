@@ -12,17 +12,22 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.BaseColumns;
+import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -33,7 +38,10 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 
@@ -49,22 +57,28 @@ public class GaleriaActivity extends AppCompatActivity {
     private int shortAnimationDuration;
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
-    private static final int SELECT_FILE = 1;
+    private static final int PICK_IMAGE = 100;
+    private Uri imageUri;
+    private String idTat;
+    private DBlocal db;
+    private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
+
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
 
-        String idTat = DatosApp.getIdTat();
+        idTat = DatosApp.getIdTat();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
         //Iniciar DB
-        dbHelper = new DBHelper(getBaseContext());
+     /*   dbHelper = new DBHelper(getBaseContext());
 
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
@@ -105,7 +119,10 @@ public class GaleriaActivity extends AppCompatActivity {
             Galeria.getGaleriaList().add(BDSQLite);
         }
         galeriaSQLite.close();
+*/
 
+        db.recogerFotos(idTat);
+        Log.d("tag", "onCreate: "+ db.recogerFotos(idTat));
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
         AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, Galeria.getGaleriaList());
         recyclerView.setAdapter(adaptador);
@@ -324,69 +341,67 @@ public class GaleriaActivity extends AppCompatActivity {
         } else if (id == R.id.noadmin) {
             DatosApp.setAdmin(false);
             invalidateOptionsMenu();
-        }
-        else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(GaleriaActivity.this, Activity_AnadirTatuador.class);
-            intent.putExtra("añadir",true);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(GaleriaActivity.this, Activity_AnadirEstudio.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.modificar_tatuador) {
-            Intent intent = new Intent(GaleriaActivity.this, Activity_AnadirTatuador.class);
-            startActivity(intent);
-            return true;
+
         }else if (id == R.id.añadir_foto) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(
-                        Intent.createChooser(intent, "Seleccione una imagen"),
-                        SELECT_FILE);
+            openGallery();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    protected void onActivityResult(int requestCode, int resultCode,
-                                    Intent imageReturnedIntent) {
-        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
-        Uri selectedImageUri = null;
-        Uri selectedImage;
+    private void openGallery(){
+        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+        startActivityForResult(gallery, PICK_IMAGE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+            imageUri = data.getData();
+            Log.d("tag", "onActivityResult: " + data.getData());
+            final ImageView imageviewTatuaje = findViewById(R.id.imagenGrande);
+            imageviewTatuaje.setVisibility(View.VISIBLE);
+            imageviewTatuaje.setImageURI(imageUri);
+            Log.d("tag", "imageviewTatuaje: " + imageviewTatuaje.getDrawable());
 
-        String filePath = null;
-        switch (requestCode) {
-            case SELECT_FILE:
-                if (resultCode == Activity.RESULT_OK) {
-                    selectedImage = imageReturnedIntent.getData();
-                    String selectedPath=selectedImage.getPath();
-                    if (requestCode == SELECT_FILE) {
+            BitmapDrawable drawable = (BitmapDrawable) imageviewTatuaje.getDrawable();
+            Bitmap bitmap = drawable.getBitmap();
 
-                        if (selectedPath != null) {
-                            InputStream imageStream = null;
-                            try {
-                                imageStream = getContentResolver().openInputStream(
-                                        selectedImage);
-                            } catch (FileNotFoundException e) {
-                                e.printStackTrace();
-                            }
 
-                            // Transformamos la URI de la imagen a inputStream y este a un Bitmap
-                            Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+            // convert bitmap to byte
+            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            byte imageInByte[] = stream.toByteArray();
+            db.insertarFoto(bitmap, idTat);
+            //guardarImagen(imageInByte);
 
-                            // Ponemos nuestro bitmap en un ImageView que tengamos en la vista
-                            ImageView mImg = (ImageView) findViewById(R.id.imagenGrande);
-                            mImg.setVisibility(View.VISIBLE);
-                            mImg.setImageBitmap(bmp);
-
-                        }
-                    }
-                }
-                break;
         }
+    }
+
+    private void saveImage(Bitmap finalBitmap) {
+
+    }
+
+
+    public void guardarImagen( byte bitmap[]){
+        // tamaño del baos depende del tamaño de tus imagenes en promedio
+      /*  ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 0 , baos);
+        byte[] blob = baos.toByteArray();
+        // aqui tenemos el byte[] con el imagen comprimido, ahora lo guardemos en SQLite
+        SQLiteDatabase db = DBHelper.entidadFoto.();
+
+        String sql = "INSERT INTO entidadFoto (id, img) VALUES(?,?)";
+        SQLiteStatement insert = db.compileStatement(sql);
+        insert.clearBindings();
+        insert.bindBlob(2, blob);
+        insert.executeInsert();
+*/
+        // Gets the data repository in write mode
+
+
+
+
     }
 
 }
