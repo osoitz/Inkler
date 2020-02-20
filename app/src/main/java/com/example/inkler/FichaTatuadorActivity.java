@@ -144,7 +144,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         telefonoEstudio.setText(miestudio.getTelefono());
     }
 
-   
+
     private void rellenarWebsTatuador(ArrayList<String> urls){
         TextView websTatuador = findViewById(R.id.websTatuador);
         websTatuador.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
