@@ -41,6 +41,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     private TextView telefono;
     private ImageView vermas;
     private boolean anadir;
+    private MetodosComunes metodosComunes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Instanciamos la clasde que tiene los metodos de la DB
@@ -59,7 +60,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         final Integer INITIAL_ZOOM = 16;
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
-
+        metodosComunes=new MetodosComunes();
 
 
         ActionBar actionBar = getSupportActionBar();
@@ -106,23 +107,6 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                                 .build();
                         mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), millisecondSpeed);
 
-                        //Listener
-                        /*
-                        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
-                            @Override
-                            public boolean onMarkerClick(@NonNull Marker marker) {
-                                //Soinua
-                                MediaPlayer mediaPlayer = MediaPlayer.create(getApplicationContext(), R.raw.misc021);
-                                mediaPlayer.start();
-                                //Toast.makeText(Mapa.this, marker.getTitle(), Toast.LENGTH_LONG).show();
-                                Intent i = new Intent(getApplicationContext(), Fitxa.class);
-                                startActivity(i);
-                                return true;
-                            }
-                        });
-
-                         */
-
                     }
                 });
             }
@@ -160,32 +144,15 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         telefonoEstudio.setText(miestudio.getTelefono());
     }
 
-    private String crearContenidoHTML(ArrayList<String> urls){
-        String contenidoCampo ="";
-        for (String urlString : urls){
-            String host = urlString;
-            try {
-                URL miUrl = new URL(urlString);
-                host = miUrl.getHost();
-            }
-            catch (Exception e) {
-                //Nada de nada
-            }
-
-            contenidoCampo = contenidoCampo + "<a href='" + urlString + "'>"+ host +"</a><br>";
-        }
-        //System.out.println(contenidoCampo);
-        return contenidoCampo;
-    }
 
     private void rellenarWebsTatuador(ArrayList<String> urls){
         TextView websTatuador = findViewById(R.id.websTatuador);
-        websTatuador.setText(Html.fromHtml(crearContenidoHTML(urls)));
+        websTatuador.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
     }
 
     private void rellenarWebsEstudio(ArrayList<String> urls){
         TextView websEstudio = findViewById(R.id.websEstudio);
-        websEstudio.setText(Html.fromHtml(crearContenidoHTML(urls)));
+        websEstudio.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
     }
 
     @Override
