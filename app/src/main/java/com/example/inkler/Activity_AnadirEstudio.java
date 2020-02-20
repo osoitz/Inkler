@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class Activity_AnadirEstudio extends AppCompatActivity {
 
 
@@ -30,7 +32,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         final EditText et_longitud = findViewById(R.id.contentLongitud);
         final EditText et_latitud = findViewById(R.id.contentLatitud);
 
-        Button btn_anadir_estudio = findViewById(R.id.btnAñadirEstudio);
+        FloatingActionButton fab = findViewById(R.id.btnAñadirEstudio);
 
         if (!anadir) {
             String idTat = DatosApp.getIdTat();
@@ -42,7 +44,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
             et_longitud.setText(String.valueOf(db.recogerEstudio(idEst).getLongitud()));
             et_latitud.setText(String.valueOf(db.recogerEstudio(idEst).getLatitud()));
         }
-        btn_anadir_estudio.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String st_nombre = et_nombre.getText().toString();
