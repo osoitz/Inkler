@@ -26,6 +26,8 @@
     <string name="labelrvtatuadores">Tatuatzaileen zerrenda</string>
     <string name="labelfichatatuador">Tatuatzaileen fitxa</string>
     <string name="labelgaleiratatuador">Galeria</string>
+    <string name="labelanadirtatuador">Gehitu/Aldatu Tatuatzailea</string>
+    <string name="labelanadirestudio">Gehitu/Aldatu Estudioa</string>
     <string name="labelnavegador">Nabigatzailea</string>
     <string name="contraseña">1234</string>
     <string name="contraseñatitle">Pasahitza</string>

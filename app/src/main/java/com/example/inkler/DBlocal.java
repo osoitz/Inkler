@@ -1,8 +1,10 @@
 package com.example.inkler;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 
 import java.util.ArrayList;
 
@@ -159,5 +161,86 @@ public class DBlocal   {
         //dbHelper.close();
         return webs;
     }
+
+    public int RecogerIdEstudio (String nombreEstudio){
+        int idEstudio=0;
+
+        //Columnas
+        String[] proyeccion = {DBHelper.entidadEstudio._ID};
+        String selection = DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE + " = ?";
+        String[] selectionArgs = new String[] { "" + nombreEstudio } ;
+        //Respuesta
+        Cursor cursor = db.query(
+                DBHelper.entidadEstudio.TABLE_NAME,
+                proyeccion,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        if (cursor.getCount()>0){
+            cursor.moveToFirst();
+
+            idEstudio= cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID));
+        }
+        cursor.close();
+
+
+
+        return idEstudio;
+    }
+
+    public void insertarTatuador(String st_nombre,String st_apellidos, String st_nombreArtistico, int IdEstudio){
+        ContentValues e1 = new ContentValues();
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, st_nombreArtistico);
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, IdEstudio);
+        db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, e1);
+    }
+
+
+    public void modificarTatuador(String id, String st_nombre, String st_apellidos, String st_nombreArtistico, int IdEstudio){
+        ContentValues e1 = new ContentValues();
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, st_nombreArtistico);
+        e1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, IdEstudio);
+        //Columnas del where
+        String selection = DBHelper.entidadTatuador._ID + " = ?";
+        //Argumentos del where
+        String [] selectionargs = {id};
+        db.update(DBHelper.entidadTatuador.TABLE_NAME,e1,selection,selectionargs);
+    }
+
+    public void insertarEstudio (String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+        ContentValues e1 = new ContentValues();
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, email);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, Telefono);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud);
+        db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
+    }
+
+    public void modificarEstudio (String id, String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+
+        ContentValues e1 = new ContentValues();
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, email);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, Telefono);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud);
+        //Columnas del where
+        String selection = DBHelper.entidadEstudio._ID + " = ?";
+        //Argumentos del where
+        String [] selectionargs = {id};
+        db.update(DBHelper.entidadEstudio.TABLE_NAME,e1,selection,selectionargs);
+
+    }
+
+
 
 }

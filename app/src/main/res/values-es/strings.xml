@@ -26,10 +26,10 @@
     <string name="labelrvtatuadores">Lista de tatuadores</string>
     <string name="labelfichatatuador">Ficha del tatuador</string>
     <string name="labelgaleiratatuador">Galeria</string>
+    <string name="labelanadirtatuador">Añadir/Modificar Tatuador</string>
+    <string name="labelanadirestudio">Añadir/Modificar Estudio</string>
     <string name="labelnavegador">Navegador</string>
     <string name="contraseña">1234</string>
     <string name="contraseñatitle">Contraseña</string>
     <string name="contraseñabtn">Entrar</string>
-
-
 </resources>

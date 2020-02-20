@@ -40,6 +40,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
     private TextView telefono;
     private ImageView vermas;
+    private boolean anadir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Instanciamos la clasde que tiene los metodos de la DB
@@ -280,23 +281,25 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         }
         else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
-            intent.putExtra("añadir",true);
+            anadir = true;
+            intent.putExtra("añadir",anadir);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
+            intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
             startActivity(intent);
             return true;
-        }/* else if (id == R.id.modificar_estudio) {
-            //Intent intent = new Intent(FichaTatuadorActivity.this, Activity_ModificarEstudio.class);
-            //startActivity(intent);
+        } else if (id == R.id.modificar_estudio) {
+            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
+            startActivity(intent);
             return true;
 
-        }*/
+        }
 
         return super.onOptionsItemSelected(item);
     }
