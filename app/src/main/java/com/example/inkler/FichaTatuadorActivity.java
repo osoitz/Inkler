@@ -124,6 +124,21 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
+        ImageView img = findViewById(R.id.logo);
+        img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FichaTatuadorActivity.this,FichaEstudio.class);
+                startActivity(intent);
+            }
+        });
+
+
+
+
+
     }
 
     private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
