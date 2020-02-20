@@ -14,6 +14,7 @@
     <string name="atras">Back</string>
     <string name="a_adir_estudio">New studio</string>
     <string name="a_adir_tatuador">New tattoo artist</string>
+    <string name="a_adir_foto">New Photo</string>
     <string name="modificar_tatuador">Edit tattoo artist</string>
     <string name="modificar_estudio">Edit studio</string>
     <string name="eliminar_tatuador">Erase tattoo artist</string>
@@ -33,5 +34,5 @@
     <string name="contraseña">1234</string>
     <string name="contraseñatitle">Password</string>
     <string name="contraseñabtn">Log in</string>
-    <string name="ModificarTatuador">Modificar Tatuador</string>
+    <string name="ModificarTatuador">Modify Tattooist</string>
 </resources>

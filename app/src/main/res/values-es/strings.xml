@@ -14,6 +14,7 @@
     <string name="atras">atras</string>
     <string name="a_adir_estudio">Añadir estudio</string>
     <string name="a_adir_tatuador">Añadir tatuador</string>
+    <string name="a_adir_foto">Añadir foto</string>
     <string name="modificar_tatuador">Modificar tatuador</string>
     <string name="modificar_estudio">Modificar estudio</string>
     <string name="eliminar_tatuador">Eliminar tatuador</string>
@@ -24,6 +25,7 @@
     <string name="log_in">Iniciar sesion</string>
     <string name="log_out">Cerrar sesion</string>
     <string name="labelrvtatuadores">Lista de tatuadores</string>
+    <string name="tattoo_studio">Tattoo estudio</string>
     <string name="labelfichatatuador">Ficha del tatuador</string>
     <string name="labelgaleiratatuador">Galeria</string>
     <string name="labelanadirtatuador">Añadir/Modificar Tatuador</string>
@@ -32,4 +34,5 @@
     <string name="contraseña">1234</string>
     <string name="contraseñatitle">Contraseña</string>
     <string name="contraseñabtn">Entrar</string>
+    <string name="ModificarTatuador">Modificar Tatuador</string>
 </resources>

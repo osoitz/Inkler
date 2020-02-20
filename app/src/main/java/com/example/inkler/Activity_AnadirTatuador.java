@@ -21,6 +21,8 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 import java.util.ArrayList;
 
 public class Activity_AnadirTatuador extends AppCompatActivity {
@@ -43,9 +45,8 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         SpinnerAdapter adapter;
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, rellenarSpinner(cargarSpinner()));
         spinner.setAdapter(adapter);
-        Button btnAnadirTatuador = findViewById(R.id.btnAñadirTatuador);
+        FloatingActionButton fab = findViewById(R.id.btnAñadirTatuador);
         if(!anadir){
-            btnAnadirTatuador.setText(getString(R.string.modificar_tatuador));
             String idTat =DatosApp.getIdTat();
             Tatuador tatuador = db.recogerTatuador(idTat);
             et_nombre.setText(tatuador.getNombre());
@@ -54,7 +55,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
             spinner.setSelection(posicionEstudio(cargarSpinner(),tatuador.getIDEstudio()));
         }
 
-            btnAnadirTatuador.setOnClickListener(new View.OnClickListener() {
+            fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     String st_nombre = et_nombre.getText().toString();

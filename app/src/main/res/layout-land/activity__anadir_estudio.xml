@@ -8,12 +8,13 @@
     tools:context=".Activity_AnadirEstudio">
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_margin="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,8 +31,7 @@
                 android:layout_weight="0.5"
                 android:text="@string/nombre"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
 
             <EditText
@@ -52,9 +52,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textSize="20sp"
+                android:text="@string/telefono"
                 android:textColor="@color/colorNegro"
-                android:text="@string/telefono" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/contentTelefono"
@@ -75,20 +75,34 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/labelDireccion"
+                android:id="@+id/labelMail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textSize="20sp"
+                android:text="@string/email"
                 android:textColor="@color/colorNegro"
-                android:text="@string/direcci_n" />
+                android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/contentDireccion"
+                android:id="@+id/contentMail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5" />
         </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline4"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,16 +111,16 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/labelMail"
+                android:id="@+id/labelDireccion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textSize="20sp"
+                android:text="@string/direcci_n"
                 android:textColor="@color/colorNegro"
-                android:text="@string/email" />
+                android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/contentMail"
+                android:id="@+id/contentDireccion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5" />
@@ -123,9 +137,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textSize="20sp"
+                android:text="@string/latitud"
                 android:textColor="@color/colorNegro"
-                android:text="@string/latitud" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/contentLatitud"
@@ -146,9 +160,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textSize="20sp"
+                android:text="@string/Longitud"
                 android:textColor="@color/colorNegro"
-                android:text="@string/Longitud" />
+                android:textSize="20sp" />
 
             <EditText
                 android:id="@+id/contentLongitud"
@@ -171,5 +185,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:maxImageSize="48dp"
         app:srcCompat="@android:drawable/ic_menu_save" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
