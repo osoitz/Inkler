@@ -244,7 +244,8 @@
             <com.mapbox.mapboxsdk.maps.MapView
                 android:id="@+id/mapView"
                 android:layout_width="match_parent"
-                android:layout_height="250dp" />
+                android:layout_height="250dp"
+                android:background="@drawable/mapbox_compass_icon" />
         </LinearLayout>
     </ScrollView>
 
@@ -254,4 +255,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="100dp" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
