@@ -45,6 +45,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     private MapView mapView;
     private TextView telefono;
     private ImageView vermas;
+    private boolean anadir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -433,7 +434,8 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         }
         else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
-            intent.putExtra("añadir",true);
+            anadir = true;
+            intent.putExtra("añadir",anadir);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {

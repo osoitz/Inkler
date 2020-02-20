@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
@@ -20,27 +21,29 @@ import java.util.ArrayList;
 
 public class Activity_AnadirTatuador extends AppCompatActivity {
 
-    private TextView et_nombre;
-    private TextView et_apellidos;
-    private TextView et_nombreArt;
+    private EditText et_nombre;
+    private EditText et_apellidos;
+    private EditText et_nombreArt;
+    private boolean anadir;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity__anadir_tatuador);
-        boolean añadir = getIntent().getBooleanExtra("añadir",true);
+        et_nombre = findViewById(R.id.contentNombre);
+        et_apellidos = findViewById(R.id.contentApellido);
+        et_nombreArt = findViewById(R.id.contentNombreArtistico);
+        anadir = getIntent().getBooleanExtra("añadir",false);
         final Spinner spinner=findViewById(R.id.SpinnerNombreEstudios);
         SpinnerAdapter adapter;
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, rellenarSpinner(cargarSpinner()));
         spinner.setAdapter(adapter);
         Button btnAnadirTatuador = findViewById(R.id.btnAñadirTatuador);
 
-        if (añadir) {
+        if (anadir) {
             btnAnadirTatuador.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    et_nombre = findViewById(R.id.contentNombre);
-                    et_apellidos = findViewById(R.id.contentApellido);
-                    et_nombreArt = findViewById(R.id.contentNombreArtistico);
+
 
                     String st_nombre = et_nombre.getText().toString();
                     String st_apellidos = et_apellidos.getText().toString();
@@ -70,8 +73,12 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
                 }
             });
         }else{
+            Log.d("tag","Entra a modificar");
             String idTat =DatosApp.getIdTat();
-            et_nombre.setText(recogerTatuador(idTat).getNombre());
+            Tatuador tatuador = recogerTatuador(idTat);
+            et_nombre.setText(tatuador.getNombreArt());
+            et_apellidos.setText(tatuador.getNombre());
+            et_nombreArt.setText(tatuador.getApellidos());
         }
 
     }
@@ -138,13 +145,17 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         DBHelper dbHelper = new DBHelper(getBaseContext());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         //Columnas
-        String[] proyeccion = {DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO,DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO};
+        String[] projection = {
+                DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,
+                DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,
+                DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO,
+                DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
         String selection = DBHelper.entidadTatuador._ID + " = ?";
         String[] selectionArgs = new String[] { "" + IdTatuador } ;
         //Respuesta
         Cursor cursor = db.query(
-                DBHelper.entidadEstudio.TABLE_NAME,
-                proyeccion,
+                DBHelper.entidadTatuador.TABLE_NAME,
+                projection,
                 selection,
                 selectionArgs,
                 null,
