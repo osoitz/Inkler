@@ -54,7 +54,6 @@ public class DBlocal   {
         cursor.close();
         //dbHelper.close();
         return tatuador;
-
     }
 
     public Estudio recogerEstudio (String id) {
