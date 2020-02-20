@@ -40,8 +40,6 @@ public class RecyclerTatuadores extends AppCompatActivity {
             }
         });
 
-
-
         cargartatuadores();
 
         //Acciones del onclick y onlongclick del recycler
