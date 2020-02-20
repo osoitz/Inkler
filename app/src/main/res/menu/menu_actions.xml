@@ -37,4 +37,14 @@
             android:title="@string/modificar_estudio"
             app:showAsAction="never" />
     </group>
+    <group
+        android:id="@+id/foto"
+        android:visible="false">
+        <item
+            android:id="@+id/añadir_foto"
+            android:title="@string/a_adir_foto"
+            app:showAsAction="never" />
+    </group>
+
+
 </menu>
