@@ -37,8 +37,7 @@ import java.util.ArrayList;
 
 
 public class FichaTatuadorActivity extends AppCompatActivity {
-    private MapView mapView;
-    private TextView telefono;
+
     private ImageView vermas;
     private boolean anadir;
     private MetodosComunes metodosComunes;
@@ -46,7 +45,6 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         //Instanciamos la clasde que tiene los metodos de la DB
         DBlocal db = new DBlocal(getApplicationContext());
-
         super.onCreate(savedInstanceState);
         String idTat = "";
         if(getIntent().getStringExtra("id") == null){
@@ -55,24 +53,15 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             idTat = getIntent().getStringExtra("id");
             DatosApp.setIdTat(idTat);
         }
-
-        Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
-        final Integer INITIAL_ZOOM = 16;
-        final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_tatuador);
         metodosComunes=new MetodosComunes();
-
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-
         Tatuador miTatuador = db.recogerTatuador(idTat);
         final Estudio miEstudio = db.recogerEstudio(miTatuador.getIDEstudio());
         //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(miTatuador, miEstudio);
         rellenarWebsTatuador(db.recogerWebsTatuador(miTatuador.getId()));
-        rellenarWebsEstudio(db.recogerWebsEstudio(Integer.toString(miEstudio.getID())));
-
         vermas = findViewById(R.id.ivvermas);
         vermas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,55 +71,14 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        mapView = findViewById(R.id.mapView);
-        mapView.onCreate(savedInstanceState);
-        mapView.getMapAsync(new OnMapReadyCallback() {
-            @Override
-            public void onMapReady(@NonNull final MapboxMap mapboxMap) {
-                mapboxMap.setStyle(Style.MAPBOX_STREETS, new Style.OnStyleLoaded() {
-                    @Override
-                    public void onStyleLoaded(@NonNull Style style) {
-
-                        // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
-                        //Markagailua
-                        mapboxMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(miEstudio.getLatitud(), miEstudio.getLongitud()))
-                                .title(miEstudio.getNombre())
-                        );
-
-                        //Kamera posiziora
-                        CameraPosition position = new CameraPosition.Builder()
-                                .target(new LatLng(miEstudio.getLatitud(), miEstudio.getLongitud()))
-                                .zoom(INITIAL_ZOOM)
-                                .tilt(20)
-                                .build();
-                        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), millisecondSpeed);
-
-                    }
-                });
-            }
-        });
-        telefono = findViewById(R.id.telefonoEstudio);
-        SpannableString mitextoU = new SpannableString(telefono.getText().toString());
-        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        telefono.setText(mitextoU);
-        telefono.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                String num= telefono.getText().toString();
-                intent.setData(Uri.parse("tel:"+num));
-                startActivity(intent);
-            }
-        });
-
-
-        ImageView img = findViewById(R.id.logo);
-        img.setOnClickListener(new View.OnClickListener() {
+        TextView et_nombreEstudio = findViewById(R.id.nombreEstudio);
+        String nombreEstudio = et_nombreEstudio.getText().toString();
+        final int idEstudio = db.RecogerIdEstudio(nombreEstudio);
+        et_nombreEstudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FichaTatuadorActivity.this,FichaEstudio.class);
+                intent.putExtra("idEstudio",idEstudio);
                 startActivity(intent);
             }
         });
@@ -144,19 +92,13 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
         TextView nombreArtistico = findViewById(R.id.nombreArtistico);
         TextView nombreTatuador =findViewById(R.id.nombreApellidos);
-        TextView nombreEstudio =findViewById(R.id.NombreEstudio);
-        TextView direccionEstudio =findViewById(R.id.direccionEstudio);
-        TextView mailEstudio =findViewById(R.id.mailEstudio);
-        TextView telefonoEstudio =findViewById(R.id.telefonoEstudio);
+        TextView nombreEstudio =findViewById(R.id.nombreEstudio);
 
         nombreArtistico.setText(miTatuador.getNombreArt());
         String nombre = "(" + miTatuador.getNombre() + " " + miTatuador.getApellidos() + ")";
         nombreTatuador.setText(nombre);
 
         nombreEstudio.setText(miestudio.getNombre());
-        direccionEstudio.setText(miestudio.getDireccion());
-        mailEstudio.setText(miestudio.getEmail());
-        telefonoEstudio.setText(miestudio.getTelefono());
     }
 
 
@@ -165,51 +107,42 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         websTatuador.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
     }
 
-    private void rellenarWebsEstudio(ArrayList<String> urls){
-        TextView websEstudio = findViewById(R.id.websEstudio);
-        websEstudio.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
-    }
-
     @Override
     public void onStart() {
         super.onStart();
-        mapView.onStart();
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        mapView.onResume();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        mapView.onPause();
+
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        mapView.onStop();
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        mapView.onLowMemory();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mapView.onDestroy();
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
     }
 
     @Override

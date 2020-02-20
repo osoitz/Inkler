@@ -32,18 +32,11 @@ public class FichaEstudio extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         DBlocal db = new DBlocal(getApplicationContext());
         metodosComunes=new MetodosComunes();
-        String idTat = "";
-        if(getIntent().getStringExtra("id") == null){
-            idTat = DatosApp.getIdTat();
-        }else{
-            idTat = getIntent().getStringExtra("id");
-            DatosApp.setIdTat(idTat);
-        }
-        Tatuador miTatuador = db.recogerTatuador(idTat);
+        int idEstudio = getIntent().getIntExtra("idEstudio",0);
+        final Estudio estudio = db.recogerEstudio(Integer.toString(idEstudio));
         final Integer INITIAL_ZOOM = 16;
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
-        final Estudio miEstudio = db.recogerEstudio(miTatuador.getIDEstudio());
         final Integer millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_estudio);
 
@@ -59,13 +52,13 @@ public class FichaEstudio extends AppCompatActivity {
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
                         //Markagailua
                         mapboxMap.addMarker(new MarkerOptions()
-                                .position(new LatLng(miEstudio.getLatitud(), miEstudio.getLongitud()))
-                                .title(miEstudio.getNombre())
+                                .position(new LatLng(estudio.getLatitud(), estudio.getLongitud()))
+                                .title(estudio.getNombre())
                         );
 
                         //Kamera posiziora
                         CameraPosition position = new CameraPosition.Builder()
-                                .target(new LatLng(miEstudio.getLatitud(), miEstudio.getLongitud()))
+                                .target(new LatLng(estudio.getLatitud(), estudio.getLongitud()))
                                 .zoom(INITIAL_ZOOM)
                                 .tilt(20)
                                 .build();
@@ -77,12 +70,12 @@ public class FichaEstudio extends AppCompatActivity {
         });
 
         TextView NombreEstudio = findViewById(R.id.labelNombreEstudio);
-        NombreEstudio.setText(miEstudio.getNombre());
+        NombreEstudio.setText(estudio.getNombre());
         TextView DireccionEstudio = findViewById(R.id.printDireccion);
-        DireccionEstudio.setText(miEstudio.getDireccion());
-        rellenarWebsEstudio(db.recogerWebsEstudio(Integer.toString(miEstudio.getID())));
+        DireccionEstudio.setText(estudio.getDireccion());
+        rellenarWebsEstudio(db.recogerWebsEstudio(Integer.toString(estudio.getID())));
         TextView Email = findViewById(R.id.contentMailEstudio);
-        Email.setText(miEstudio.getEmail());
+        Email.setText(estudio.getEmail());
 
 
 
