@@ -274,8 +274,6 @@
                     android:layout_weight="0.5"
                     android:autoLink="phone"
                     android:linksClickable="true"
-                    android:text="946791038"
-                    android:textColor="#0023FF"
                     android:textSize="16sp" />
             </LinearLayout>
 

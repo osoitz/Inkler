@@ -54,12 +54,9 @@ public class RecyclerTatuadores extends AppCompatActivity {
 
             @Override
             public void onLongItemClick(View view, int position) {
-
-
+            //Nichts
             }
         }));
-
-
     }
 
     private void cargartatuadores() {

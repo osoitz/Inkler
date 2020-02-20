@@ -99,6 +99,47 @@ public class DBlocal   {
         return estudio;
     }
 
+    public ArrayList<Estudio> recogerEstudios () {
+        ArrayList<Estudio> estudios = new ArrayList<>();
+        //Columnas
+        String[] projection = {
+                DBHelper.entidadEstudio._ID,
+                DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE,
+                DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION,
+                DBHelper.entidadEstudio.COLUMN_NAME_LATITUD,
+                DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD,
+                DBHelper.entidadEstudio.COLUMN_NAME_EMAIL,
+                DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO,
+        };
+
+        //Respuesta
+        //String[] selectionArgs = new String[] { "" + id } ;
+
+        Cursor cursor = db.query(
+                DBHelper.entidadEstudio.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null);
+        // recoger los datos
+        while(cursor.moveToNext()) {
+            Estudio estudio = new Estudio();
+            estudio.setID(Integer.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
+            estudio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE)));
+            estudio.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION)));
+            estudio.setLatitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
+            estudio.setLongitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD))));
+            estudio.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL)));
+            estudio.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO)));
+            estudios.add(estudio);
+        }
+
+        cursor.close();
+        return estudios;
+    }
+
     public ArrayList<String> recogerWebsTatuador (String id) {
         ArrayList<String> websTatuador = new ArrayList<>();
 
