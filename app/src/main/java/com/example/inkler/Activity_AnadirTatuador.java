@@ -76,9 +76,10 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
             Log.d("tag","Entra a modificar");
             String idTat =DatosApp.getIdTat();
             Tatuador tatuador = recogerTatuador(idTat);
-            et_nombre.setText(tatuador.getNombreArt());
-            et_apellidos.setText(tatuador.getNombre());
-            et_nombreArt.setText(tatuador.getApellidos());
+            et_nombre.setText(tatuador.getNombre());
+            et_apellidos.setText(tatuador.getApellidos());
+            et_nombreArt.setText(tatuador.getNombreArt());
+            
         }
 
     }
@@ -164,10 +165,11 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         if (cursor.getCount()>0){
             cursor.moveToFirst();
             String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
+            Log.d("tag","Se pierde aqui? "+nombre);
             String apellido = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
             String nombreArtistico = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
             String idEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
-            tatuador= new Tatuador(IdTatuador,nombre,apellido,nombreArtistico,idEstudio);
+            tatuador= new Tatuador(IdTatuador,nombreArtistico,nombre,apellido,idEstudio);
         }
         return tatuador;
     }
