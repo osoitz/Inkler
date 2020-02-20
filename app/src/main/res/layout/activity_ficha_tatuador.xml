@@ -1,260 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:background="@color/colorFondo"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/nombreArtistico"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="36sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/nombreApellidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nombreArtistico"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/dragonlogo"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/nombreArtistico"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="36sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guiadivisoria"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/nombreApellidos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nombreArtistico" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/dragonlogo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
+        android:weightSum="1">
 
-    <ScrollView
-        android:id="@+id/scrollview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2">
+
+
+        <TextView
+            android:id="@+id/nombreArtisticoContent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/sobre_el_tatuador"
+            android:textSize="36sp"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:weightSum="1">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <ImageView
-                    android:id="@+id/imagen1"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="0.33"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/pentagono"
-                    tools:ignore="ContentDescription" />
-
-                <ImageView
-                    android:id="@+id/imagen2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="0.33"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/pentagono"
-                    tools:ignore="ContentDescription" />
-
-                <ImageView
-                    android:id="@+id/ivvermas"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_weight="0.33"
-                    android:scaleType="centerInside"
-                    android:src="@drawable/plus"
-                    tools:ignore="ContentDescription" />
-            </LinearLayout>
-
             <TextView
-                android:id="@+id/nombreArtisticoContent"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="@string/sobre_el_tatuador"
-                android:textSize="36sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
+                android:id="@+id/websTatuador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-                <TextView
-                    android:id="@+id/websTatuador"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:autoLink="web"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/sobre_el_estudio"
-                android:textSize="36sp"
-                android:textStyle="bold" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="start"
-                    android:text="@string/nombre"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/NombreEstudio"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="start"
-                    android:text="@string/direcci_n"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/direccionEstudio"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="start"
-                    android:text="@string/email"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/mailEstudio"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:gravity="start"
-                    android:text="@string/telefono"
-                    android:textSize="18dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/telefonoEstudio"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="0.5"
-                    android:autoLink="phone"
-                    android:linksClickable="true"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="1">
-
-                <TextView
-                    android:id="@+id/websEstudio"
-                    android:layout_width="100dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_weight="0.5"
-                    android:textSize="16sp"
-                    android:autoLink="web"
-                    />
-            </LinearLayout>
-
-            <com.mapbox.mapboxsdk.maps.MapView
-                android:id="@+id/mapView"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:background="@drawable/mapbox_compass_icon" />
+                android:autoLink="web"
+                android:textSize="16sp" />
         </LinearLayout>
-    </ScrollView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/nombreEstudio"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/sobre_el_estudio"
+            android:textSize="36sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="100dp" />
+        android:weightSum="1">
 
+        <ImageView
+            android:id="@+id/imagen1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.33"
+            android:scaleType="centerInside"
+            android:src="@drawable/pentagono"
+            tools:ignore="ContentDescription" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/imagen2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.33"
+            android:scaleType="centerInside"
+            android:src="@drawable/pentagono"
+            tools:ignore="ContentDescription" />
+
+        <ImageView
+            android:id="@+id/ivvermas"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="0.33"
+            android:scaleType="centerInside"
+            android:src="@drawable/plus"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
+</LinearLayout>
