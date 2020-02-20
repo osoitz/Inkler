@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,97 +12,113 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:weightSum="1">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/labelNombre"
-            android:layout_width="0dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorNegro"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/nombre" />
+            android:layout_margin="16dp"
+            android:weightSum="1">
 
-        <EditText
-            android:id="@+id/contentNombre"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/labelNombreArtistico"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/nombre_artistico"
+                android:textColor="@color/colorNegro"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/contentNombreArtistico"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
+            android:layout_margin="16dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/labelNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/nombre"
+                android:textColor="@color/colorNegro"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/contentNombre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/labelApellido"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/apellidos"
+                android:textColor="@color/colorNegro"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/contentApellido"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/labelEstudio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/tattoo_studio"
+                android:textColor="@color/colorNegro"
+                android:textSize="20sp" />
+
+            <Spinner
+                android:id="@+id/SpinnerNombreEstudios"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5" />
+        </LinearLayout>
+
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/labelNombreArtistico"
-            android:layout_width="0dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorNegro"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/nombre_artistico" />
-
-        <EditText
-            android:id="@+id/contentNombreArtistico"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/labelApellido"
-            android:layout_width="0dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorNegro"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/apellidos" />
-
-        <EditText
-            android:id="@+id/contentApellido"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:weightSum="1">
-
-        <TextView
-            android:id="@+id/labelEstudio"
-            android:layout_width="0dp"
-            android:textSize="20sp"
-            android:textColor="@color/colorNegro"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="@string/tattoo_studio" />
-
-        <Spinner
-            android:id="@+id/SpinnerNombreEstudios"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5" />
-    </LinearLayout>
-
-    <Button
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btnAñadirTatuador"
-        android:layout_weight="0.1"
-        android:textSize="24sp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/a_adir_tatuador"/>
-</LinearLayout>
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="56dp"
+        android:backgroundTint="@color/colorFondo"
+        app:srcCompat="@drawable/plus" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
