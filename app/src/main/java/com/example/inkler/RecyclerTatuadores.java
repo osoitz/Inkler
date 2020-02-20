@@ -18,17 +18,29 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class RecyclerTatuadores extends AppCompatActivity {
 
     // Variables necesarias
     RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private AdaptadorTatuadores adaptador;
+    private DBlocal db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_tatuadores);
+         db = new DBlocal(getApplicationContext());
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Mapa.class);
+                startActivity(intent);
+            }
+        });
 
         cargartatuadores();
 
@@ -44,40 +56,19 @@ public class RecyclerTatuadores extends AppCompatActivity {
 
             @Override
             public void onLongItemClick(View view, int position) {
-
-
+            //Nichts
             }
         }));
-
-
     }
 
     private void cargartatuadores() {
 
         Tatuador.getTatuadorList().clear();
 
-        // Iniciar base de datos
-        DBHelper dbHelper = new DBHelper(getBaseContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        //Columnas
-        String[] proyeccion = {DBHelper.entidadTatuador._ID,DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
-        //Respuesta
-        Cursor cursor = db.query(DBHelper.entidadTatuador.TABLE_NAME, proyeccion, null, null, null, null, null);
-        // recoger los datos
-        while (cursor.moveToNext()) {
-            String id = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
-            String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
-            String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
-            String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
-            String IDEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
-            Tatuador t = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
-            Tatuador.getTatuadorList().add(t);
-        }
-        cursor.close();
-
+        db.cargarTatuadores();
         /*Tatuador t = new Tatuador("PinxaUvas", "Antonio", "Lopez Garcia", "APU@gmail.com", "653951284", "Hola");
         Tatuador.getTatuadorList().add(t);*/
+
 
         recyclerView = findViewById(R.id.recyclerFragment);
         adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());

@@ -7,7 +7,6 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:usesCleartextTraffic="true"
         android:name=".DatosApp"
         android:allowBackup="true"
         android:icon="@drawable/iconsquare"
@@ -15,7 +14,9 @@
         android:roundIcon="@drawable/iconround"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity android:name=".Mapa" />
         <activity
             android:name=".Navegador"
             android:label="@string/labelgaleiratatuador"
@@ -30,8 +31,36 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity_AnadirTatuador"></activity>
-        <activity android:name=".Activity_AnadirEstudio" />
+
+
+        <activity android:name=".Activity_AnadirEstudio"
+            android:label="@string/labelanadirestudio"
+            android:parentActivityName=".RecyclerTatuadores">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RecyclerTatuadores" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.Activity_AnadirEstudio" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Activity_AnadirTatuador"
+            android:label="@string/labelanadirtatuador"
+            android:parentActivityName=".RecyclerTatuadores">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RecyclerTatuadores" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.Activity_AnadirTatuador" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
         <activity
             android:name=".GaleriaActivity"
             android:label="@string/labelgaleiratatuador"

@@ -28,10 +28,11 @@
     <string name="tattoo_studio">Tattoo studio</string>
     <string name="labelfichatatuador">Tattoo artist</string>
     <string name="labelgaleiratatuador">Gallery</string>
+    <string name="labelanadirtatuador">Add/Modify Tattooist</string>
+    <string name="labelanadirestudio">Add/Modify Study</string>
     <string name="labelnavegador">Navigator</string>
     <string name="contraseña">1234</string>
     <string name="contraseñatitle">Password</string>
     <string name="contraseñabtn">Log in</string>
-
-
+    <string name="ModificarTatuador">Modify Tattooist</string>
 </resources>
