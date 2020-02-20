@@ -47,6 +47,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     private ImageView vermas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //Instanciamos la clasde que tiene los metodos de la DB
+        DBlocal db = new DBlocal(getApplicationContext());
+
         super.onCreate(savedInstanceState);
         String idTat = "";
         if(getIntent().getStringExtra("id") == null){
@@ -66,12 +69,12 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        Tatuador miTatuador = recogerTatuador(idTat);
-        final Estudio miEstudio = recogerEstudio(miTatuador.getIDEstudio());
+        Tatuador miTatuador = db.recogerTatuador(idTat);
+        final Estudio miEstudio = db.recogerEstudio(miTatuador.getIDEstudio());
         //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(miTatuador, miEstudio);
-        rellenarWebsTatuador(recogerWebsTatuador(miTatuador.getId()));
-        rellenarWebsEstudio(recogerWebsEstudio(Integer.toString(miEstudio.getID())));
+        rellenarWebsTatuador(db.recogerWebsTatuador(miTatuador.getId()));
+        rellenarWebsEstudio(db.recogerWebsEstudio(Integer.toString(miEstudio.getID())));
 
         vermas = findViewById(R.id.ivvermas);
         vermas.setOnClickListener(new View.OnClickListener() {
@@ -141,157 +144,6 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-
-    private Tatuador recogerTatuador (String id){
-        Tatuador tatuador = new Tatuador();
-        // Iniciar base de datos
-        DBHelper dbHelper = new DBHelper(getBaseContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        //Columnas
-        String[] projection = {
-                DBHelper.entidadTatuador._ID,
-                DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO,
-                DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,
-                DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,
-                DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO
-        };
-
-        //Respuesta
-        String[] selectionArgs = new String[] { "" + id } ;
-        Cursor cursor = db.query(
-                DBHelper.entidadTatuador.TABLE_NAME,
-                projection,
-                 " _ID = ? ",
-                selectionArgs,
-                null,
-                null,
-                null);
-        // recoger los datos
-        if (cursor.getCount()>0) {
-            cursor.moveToFirst();
-            tatuador.setId(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID)));
-            tatuador.setNombreArt(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO)));
-            tatuador.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE)));
-            tatuador.setApellidos(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS)));
-            tatuador.setIDEstudio(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
-
-     }
-        cursor.close();
-        dbHelper.close();
-        return tatuador;
-
-    }
-
-    private Estudio recogerEstudio (String id) {
-        Estudio estudio = new Estudio();
-        // Iniciar base de datos
-        DBHelper dbHelper = new DBHelper(getBaseContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        //Columnas
-        String[] projection = {
-                DBHelper.entidadEstudio._ID,
-                DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE,
-                DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION,
-                DBHelper.entidadEstudio.COLUMN_NAME_LATITUD,
-                DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD,
-                DBHelper.entidadEstudio.COLUMN_NAME_EMAIL,
-                DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO,
-        };
-
-        //Respuesta
-        String[] selectionArgs = new String[] { "" + id } ;
-        Cursor cursor = db.query(
-                DBHelper.entidadEstudio.TABLE_NAME,
-                projection,
-                " _ID = ? ",
-                selectionArgs,
-                null,
-                null,
-                null);
-        // recoger los datos
-        if (cursor.getCount()>0) {
-            cursor.moveToFirst();
-            estudio.setID(Integer.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
-            estudio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE)));
-            estudio.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION)));
-            estudio.setLatitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
-            estudio.setLongitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD))));
-            estudio.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL)));
-            estudio.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO)));
-        }
-        cursor.close();
-        dbHelper.close();
-        return estudio;
-    }
-
-    private ArrayList<String> recogerWebsTatuador (String id) {
-        ArrayList<String> websTatuador = new ArrayList<>();
-        // Iniciar base de datos
-        DBHelper dbHelper = new DBHelper(getBaseContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        //Columnas
-        String[] projection = {
-                DBHelper.entidadWeb.COLUMN_NAME_URL
-        };
-
-        String selection = DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR + " = ?";
-        String[] selectionArgs = new String[] { "" + id } ;
-        //Respuesta
-
-        Cursor cursor = db.query(
-                DBHelper.entidadWeb.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null);
-        ;
-        while(cursor.moveToNext()) {
-            String url = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
-            websTatuador.add(url);
-        }
-        cursor.close();
-        dbHelper.close();
-        return websTatuador;
-    }
-
-    private ArrayList<String> recogerWebsEstudio (String id) {
-        ArrayList<String> webs = new ArrayList<>();
-        // Iniciar base de datos
-        DBHelper dbHelper = new DBHelper(getBaseContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        //Columnas
-        String[] projection = {
-                DBHelper.entidadWeb.COLUMN_NAME_URL
-        };
-
-        String selection = DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO + " = ?";
-        String[] selectionArgs = new String[] { "" + id } ;
-        //Respuesta
-
-        Cursor cursor = db.query(
-                DBHelper.entidadWeb.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null);
-        ;
-        while(cursor.moveToNext()) {
-            String url = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
-            webs.add(url);
-        }
-        cursor.close();
-        dbHelper.close();
-        return webs;
     }
 
     private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
