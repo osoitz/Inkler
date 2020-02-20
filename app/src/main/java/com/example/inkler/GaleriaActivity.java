@@ -1,6 +1,7 @@
 package com.example.inkler;
 
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -10,16 +11,30 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.BaseColumns;
+import android.text.InputType;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 
 
 public class GaleriaActivity extends AppCompatActivity {
@@ -34,6 +49,7 @@ public class GaleriaActivity extends AppCompatActivity {
     private int shortAnimationDuration;
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
+    private static final int SELECT_FILE = 1;
 
 
 
@@ -258,4 +274,119 @@ public class GaleriaActivity extends AppCompatActivity {
             }
         });
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_actions, menu);
+        if (DatosApp.isAdmin()) {
+            menu.setGroupVisible(R.id.añadir, false);
+            menu.setGroupVisible(R.id.modificar, false);
+            menu.setGroupVisible(R.id.logout, false);
+            menu.setGroupVisible(R.id.foto, true);
+        } else {
+            menu.setGroupVisible(R.id.login, true);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.admin){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle(getString(R.string.contraseñatitle));
+
+            final EditText input = new EditText(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            input.setLayoutParams(lp);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            alertDialog.setView(input);
+
+            alertDialog.setPositiveButton(getString(R.string.contraseñabtn), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String password = input.getText().toString();
+                    if (getString(R.string.contraseña).equals(password)){
+                        DatosApp.setAdmin(true);
+                        invalidateOptionsMenu();
+                    }
+                }
+            });
+            alertDialog.show();
+        } else if (id == R.id.noadmin) {
+            DatosApp.setAdmin(false);
+            invalidateOptionsMenu();
+        }
+        else if (id == R.id.añadir_tatuador) {
+            Intent intent = new Intent(GaleriaActivity.this, Activity_AnadirTatuador.class);
+            intent.putExtra("añadir",true);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.añadir_estudio) {
+            Intent intent = new Intent(GaleriaActivity.this, Activity_AnadirEstudio.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.modificar_tatuador) {
+            Intent intent = new Intent(GaleriaActivity.this, Activity_AnadirTatuador.class);
+            startActivity(intent);
+            return true;
+        }else if (id == R.id.añadir_foto) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(
+                        Intent.createChooser(intent, "Seleccione una imagen"),
+                        SELECT_FILE);
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    Intent imageReturnedIntent) {
+        super.onActivityResult(requestCode, resultCode, imageReturnedIntent);
+        Uri selectedImageUri = null;
+        Uri selectedImage;
+
+        String filePath = null;
+        switch (requestCode) {
+            case SELECT_FILE:
+                if (resultCode == Activity.RESULT_OK) {
+                    selectedImage = imageReturnedIntent.getData();
+                    String selectedPath=selectedImage.getPath();
+                    if (requestCode == SELECT_FILE) {
+
+                        if (selectedPath != null) {
+                            InputStream imageStream = null;
+                            try {
+                                imageStream = getContentResolver().openInputStream(
+                                        selectedImage);
+                            } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            }
+
+                            // Transformamos la URI de la imagen a inputStream y este a un Bitmap
+                            Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+
+                            // Ponemos nuestro bitmap en un ImageView que tengamos en la vista
+                            ImageView mImg = (ImageView) findViewById(R.id.imagenGrande);
+                            mImg.setVisibility(View.VISIBLE);
+                            mImg.setImageBitmap(bmp);
+
+                        }
+                    }
+                }
+                break;
+        }
+    }
+
 }
