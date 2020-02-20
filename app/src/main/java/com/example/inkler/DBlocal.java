@@ -1,5 +1,6 @@
 package com.example.inkler;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -159,5 +160,35 @@ public class DBlocal   {
         //dbHelper.close();
         return webs;
     }
+
+    public void insertarEstudio (String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+        ContentValues e1 = new ContentValues();
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, email);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, Telefono);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud);
+        db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
+    }
+
+    public void modificarEstudio (String id, String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+
+        ContentValues e1 = new ContentValues();
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, email);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, Telefono);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud);
+        e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud);
+        //Columnas del where
+        String selection = DBHelper.entidadEstudio._ID + " = ?";
+        //Argumentos del where
+        String [] selectionargs = {id};
+        db.update(DBHelper.entidadEstudio.TABLE_NAME,e1,selection,selectionargs);
+
+    }
+
+
 
 }
