@@ -4,7 +4,12 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.os.Environment;
+import android.provider.BaseColumns;
 
+import java.io.File;
+import java.io.FileOutputStream;
 
 import java.util.ArrayList;
 
@@ -12,6 +17,7 @@ public class DBlocal   {
 
     private DBHelper dbHelper;
     private SQLiteDatabase db;
+
 
     public DBlocal(Context context){
         //Local BD
@@ -218,6 +224,79 @@ public class DBlocal   {
         cursor.close();
         //dbHelper.close();
         return webs;
+    }
+
+    public ArrayList<String> recogerFotos (String id){
+        ArrayList<String> fotos = new ArrayList<>();
+
+        // Definimos la query
+        String[] projection = {
+                BaseColumns._ID,
+                DBHelper.entidadFoto.COLUMN_NAME_FOTO,
+                DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR
+        };
+
+        // Se filtra el resultado dependiendo de idTat
+        String selection =  DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR + " = ?";
+        String[] selectionArgs = { id };
+
+        // Ordenamos la query
+        String sortOrder = null;
+
+        Cursor galeriaSQLite = db.query(
+                DBHelper.entidadFoto.TABLE_NAME,
+                projection,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                sortOrder
+        );
+
+        Galeria.getGaleriaList().clear();
+
+        while (galeriaSQLite.moveToNext()){
+
+            String tatuaje = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
+            String nombre = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR));
+            //guardamos los datos de sqlite en guardarsqlite y los pasamos a la clase Alumno
+            Galeria BDSQLite = new Galeria(tatuaje, nombre);
+            Galeria.getGaleriaList().add(BDSQLite);
+        }
+        galeriaSQLite.close();
+        return fotos;
+    }
+    public void insertarFoto (Bitmap bitmap, String id) {
+        // Create a new map of values, where column names are the keys
+   /*    ContentValues values = new ContentValues();
+        values.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, bitmap);
+        values.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, id);
+
+        // Insert the new row, returning the primary key value of the new row
+        db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
+*/
+
+        //Con este metodo guardaremos la foto tanto en la base de datos como en la memoria interna
+        //del telefono
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR,id);
+        //System.out.println(sUsuario);
+        long newRowId = db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
+        String IDfoto = String.valueOf(newRowId);
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+        String fname = IDfoto +".jpg";
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete ();
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public int RecogerIdEstudio (String nombreEstudio){
