@@ -3,8 +3,6 @@ package com.example.inkler;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -141,7 +139,7 @@ public class FichaEstudio extends AppCompatActivity {
         String nombreEstudio = estudio.getNombre();
         int idEstudio = db.RecogerIdEstudio(nombreEstudio);
         String idEstudioMetodo = String.valueOf(idEstudio);
-        db.cargarTatuadoresFiltrado(idEstudioMetodo);
+        db.recogerTatuadoresEstudio(idEstudioMetodo);
 
         recyclerView = findViewById(R.id.recyclerTatEstudio);
         adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());

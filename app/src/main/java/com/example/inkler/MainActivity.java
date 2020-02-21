@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity{
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, 43 + pos);
             e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, -2 + pos);
             db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
-            Log.d("Estudio", "Estudio " + pos + " , Direccion " + pos + " , Email " + pos + " , Telefono " + pos);
+            //Log.d("Estudio", "Estudio " + pos + " , Direccion " + pos + " , Email " + pos + " , Telefono " + pos);
 
             ContentValues t1 = new ContentValues();
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, "Satan " + pos);
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity{
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, "Smith " + pos);
             t1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, pos + 1);
             db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, t1);
-            Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);
+            //Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);
 
             ContentValues w1 = new ContentValues();
             w1.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "URL " + pos);
@@ -69,9 +69,10 @@ public class MainActivity extends AppCompatActivity{
             w12.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos + 1);
             db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w12);
 
-            Log.d("Web", "URL " + pos);
+            //Log.d("Web", "URL " + pos);
 
             //para la galeria
+            /*
             ContentValues foto = new ContentValues();
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.calavera);
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
@@ -82,6 +83,8 @@ public class MainActivity extends AppCompatActivity{
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "content://com.google.android.apps.photos.contentprovider/0/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F109/ORIGINAL/NONE/image%2Fjpeg/729250479");
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 2);
             db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
+
+             */
         }
     }
 }
