@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBlocal   {
 
@@ -201,9 +202,8 @@ public class DBlocal   {
         return estudios;
     }
 
-    public ArrayList<String> recogerWebsTatuador (String id) {
-        ArrayList<String> websTatuador = new ArrayList<>();
-
+    public List<Web> recogerWebsTatuador (String id) {
+        List<Web> webs = new ArrayList<>();
         //Columnas
         String[] projection = {
                 DBHelper.entidadWeb.COLUMN_NAME_URL
@@ -221,15 +221,15 @@ public class DBlocal   {
                 null,
                 null,
                 null);
-        ;
+
         while(cursor.moveToNext()) {
-            String url = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
-            websTatuador.add(url);
+            Web web = new Web();
+            web.setURL(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL)));
+            webs.add(web);
         }
         cursor.close();
         //dbHelper.close();
-        return websTatuador;
+        return webs;
     }
 
     public ArrayList<String> recogerWebsEstudio (String id) {
