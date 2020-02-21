@@ -77,10 +77,6 @@ public class FichaEstudio extends AppCompatActivity {
             }
         }));
 
-
-
-
-
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
@@ -143,6 +139,22 @@ public class FichaEstudio extends AppCompatActivity {
         layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerViewWeb.setLayoutManager(layoutManagerWeb);
         recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
+
+        //Acciones del onclick y onlongclick del recycler
+        recyclerViewWeb.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(FichaEstudio.this, Navegador.class);
+                Web w = webs.get(position);
+                intent.putExtra("URL", w.getURL());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                //Nichts
+            }
+        }));
     }
     private void cargartatuadores() {
 
