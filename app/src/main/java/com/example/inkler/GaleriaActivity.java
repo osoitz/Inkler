@@ -106,8 +106,6 @@ public class GaleriaActivity extends AppCompatActivity {
                 sortOrder
         );
 
-
-
         Galeria.getGaleriaList().clear();
 
         while (galeriaSQLite.moveToNext()){
@@ -355,14 +353,15 @@ public class GaleriaActivity extends AppCompatActivity {
         startActivityForResult(gallery, PICK_IMAGE);
     }
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        if(resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             Log.d("tag", "onActivityResult: " + data.getData());
             final ImageView imageviewTatuaje = findViewById(R.id.imagenGrande);
             imageviewTatuaje.setVisibility(View.VISIBLE);
             imageviewTatuaje.setImageURI(imageUri);
-            Log.d("tag", "imageviewTatuaje: " + imageviewTatuaje.getDrawable());
+            Log.d("tag", "imageviewTatuaje: " + imageUri);
 
             BitmapDrawable drawable = (BitmapDrawable) imageviewTatuaje.getDrawable();
             Bitmap bitmap = drawable.getBitmap();

@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity{
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.dragonlogo);
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
             db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.pentagono);
+            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "content://com.google.android.apps.photos.contentprovider/0/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F109/ORIGINAL/NONE/image%2Fjpeg/729250479");
             foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 2);
             db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
         }
