@@ -1,6 +1,9 @@
 package com.example.inkler;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+
+import static android.provider.FontsContract.Columns.RESULT_CODE;
 
 public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.ViewHolder> {
     private LayoutInflater inflador;
@@ -49,8 +54,16 @@ public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.View
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Meto los datos de libro al selector
         Galeria galeria = listalibro.get(position);
-        holder.tatuaje.setImageResource(Integer.parseInt(galeria.tatuaje));
-        holder.tatuaje.setTag(Integer.parseInt(galeria.tatuaje));
+        try{
+            Log.d("tag", "onBindViewHolder: "+ galeria.tatuaje);
+            holder.tatuaje.setImageResource(Integer.parseInt(galeria.tatuaje));
+            holder.tatuaje.setTag(Integer.parseInt(galeria.tatuaje));
+        } catch (Exception e) {
+            Log.d("tag", "onBindViewHolder: "+ galeria.tatuaje);
+            holder.tatuaje.setImageURI(Uri.parse(galeria.tatuaje));
+            holder.tatuaje.setTag(Uri.parse(galeria.tatuaje));
+        }
+
         //holder.tatuaje.setText(galeria.nombre);
     }
 

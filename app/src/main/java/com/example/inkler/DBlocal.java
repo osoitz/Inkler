@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.os.Environment;
 import android.provider.BaseColumns;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -297,6 +298,7 @@ public class DBlocal   {
             String tatuaje = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
             String nombre = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR));
             //guardamos los datos de sqlite en guardarsqlite y los pasamos a la clase Alumno
+            Log.d("tag", "recogerFotos: "+ tatuaje);
             Galeria BDSQLite = new Galeria(tatuaje, nombre);
             Galeria.getGaleriaList().add(BDSQLite);
         }
