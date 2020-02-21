@@ -32,8 +32,12 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FichaEstudio extends AppCompatActivity {
+    RecyclerView recyclerViewWeb;
+    private RecyclerView.LayoutManager layoutManagerWeb;
+    private AdaptadorTatuadorWeb adaptadorWeb;
     private MapView mapView;
     private MetodosComunes metodosComunes;
     private DBlocal db;
@@ -41,6 +45,8 @@ public class FichaEstudio extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private AdaptadorTatuadores adaptador;
     private Estudio estudio;
+    List<Web> webs = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = new DBlocal(getApplicationContext());
@@ -129,9 +135,14 @@ public class FichaEstudio extends AppCompatActivity {
             }
         });
     }
-    private void rellenarWebsEstudio(ArrayList<String> urls){
-        TextView websEstudio = findViewById(R.id.contentWebEstudio);
-        websEstudio.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
+    private void rellenarWebsEstudio(List<Web> urls){
+        webs.addAll(urls);
+        recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
+        adaptadorWeb = new AdaptadorTatuadorWeb(getApplicationContext(), webs);
+        recyclerViewWeb.setAdapter(adaptadorWeb);
+        layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerViewWeb.setLayoutManager(layoutManagerWeb);
+        recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
     }
     private void cargartatuadores() {
 
