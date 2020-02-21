@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.InputType;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,15 +15,20 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FichaTatuadorActivity extends AppCompatActivity {
-
+    RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private AdaptadorTatuadorWeb adaptador;
     private ImageView vermas;
     private boolean anadir;
     private MetodosComunes metodosComunes;
+    List<Web> webs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Instanciamos la clasde que tiene los metodos de la DB
@@ -67,7 +71,22 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             }
         });
 
+        //Acciones del onclick y onlongclick del recycler
+        recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(FichaTatuadorActivity.this, Navegador.class);
 
+                Web w = webs.get(position);
+                intent.putExtra("URL", w.getURL());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                //Nichts
+            }
+        }));
 
 
 
@@ -86,9 +105,14 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     }
 
 
-    private void rellenarWebsTatuador(ArrayList<String> urls){
-        TextView websTatuador = findViewById(R.id.websTatuador);
-        websTatuador.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
+    private void rellenarWebsTatuador(List<Web> urls){
+        webs.addAll(urls);
+        recyclerView = findViewById(R.id.recyclertatuadorweb);
+        adaptador = new AdaptadorTatuadorWeb(getApplicationContext(), webs);
+        recyclerView.setAdapter(adaptador);
+        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = findViewById(R.id.recyclertatuadorweb);
     }
 
     @Override
