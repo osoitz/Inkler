@@ -15,6 +15,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
@@ -30,27 +31,23 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 
 public class GaleriaActivity extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private DBHelper dbHelper;
-    private SQLiteDatabase dbsqlite;
-    private Galeria BDSQLite;
-    private String nombre;
-    private String tatuaje;
     private int shortAnimationDuration;
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
     private static final int PICK_IMAGE = 100;
-    private Uri imageUri;
     private String idTatuador;
     private DBlocal db;
-    private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
+
+    //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
 
 
@@ -60,16 +57,23 @@ public class GaleriaActivity extends AppCompatActivity {
         db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
-
-        idTatuador = DatosApp.getIdTatuador();
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        db.recogerFotos(idTatuador);
+        idTatuador = getIntent().getStringExtra("idTatuador");
+        //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
+        ArrayList<Bitmap> fotos = new ArrayList<>();
+        try {
+            fotos = db.recogerFotosTatuador(idTatuador);
+            Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
+        }
 
         //Log.d("tag", "onCreate: "+ db.recogerFotos(idTatuador));
+
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
-        AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, Galeria.getGaleriaList());
+        AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, fotos);
         recyclerView.setAdapter(adaptador);
         ConstraintLayout cl = findViewById(R.id.recycler_galeria);
         if (cl == null) {
@@ -303,55 +307,27 @@ public class GaleriaActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            imageUri = data.getData();
-            Log.d("tag", "onActivityResult: " + data.getData());
+            //TODO STring
+            Toast.makeText(getApplicationContext(), "Añadiendo foto a la BD", Toast.LENGTH_SHORT).show();
+            Uri imageUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imageUri);
+                long rowid = db.insertarFoto(DBBitmapUtility.getBytes(bitmap), idTatuador);
+                Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                Log.e("Error","exceptions"+e);
+            }
 
-            //Mostramos la foto recien subida
-            final ImageView imageviewTatuaje = findViewById(R.id.imagenGrande);
-            imageviewTatuaje.setVisibility(View.VISIBLE);
-            imageviewTatuaje.setImageURI(imageUri);
-            Log.d("tag", "imageviewTatuaje: " + imageUri);
-
-            //Convertimos a bitmap
-            BitmapDrawable drawable = (BitmapDrawable) imageviewTatuaje.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-
-
-            // convert bitmap to byte
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte imageInByte[] = stream.toByteArray();
 
             db.insertarFoto(bitmap, idTatuador);
             //guardarImagen(imageInByte);
 
+
         }
     }
 
-    private void saveImage(Bitmap finalBitmap) {
 
-    }
-
-
-    public void guardarImagen( byte bitmap[]){
-        // tamaño del baos depende del tamaño de tus imagenes en promedio
-      /*  ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0 , baos);
-        byte[] blob = baos.toByteArray();
-        // aqui tenemos el byte[] con el imagen comprimido, ahora lo guardemos en SQLite
-        SQLiteDatabase db = DBHelper.entidadFoto.();
-
-        String sql = "INSERT INTO entidadFoto (id, img) VALUES(?,?)";
-        SQLiteStatement insert = db.compileStatement(sql);
-        insert.clearBindings();
-        insert.bindBlob(2, blob);
-        insert.executeInsert();
-*/
-        // Gets the data repository in write mode
-
-
-
-
-    }
 
 }

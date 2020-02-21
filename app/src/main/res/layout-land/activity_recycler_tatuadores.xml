@@ -27,7 +27,9 @@
         app:srcCompat="@drawable/mapbox_compass_icon"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:maxImageSize="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/mapbox_compass_icon"
+        app:maxImageSize="56dp"
         />
 
 

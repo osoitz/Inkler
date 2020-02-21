@@ -5,21 +5,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.os.Environment;
-import android.provider.BaseColumns;
 import android.util.Log;
-
-import java.io.File;
-import java.io.FileOutputStream;
+import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class DBlocal   {
 
     private DBHelper dbHelper;
     private SQLiteDatabase db;
-
 
     public DBlocal(Context context){
         //Local BD
@@ -44,7 +38,7 @@ public class DBlocal   {
         }
         cursor.close();
     }
-    public void cargarTatuadoresFiltrado (String idEstudio){
+    public void recogerTatuadoresEstudio(String idEstudio){
         //Columnas
         String[] proyeccion = {
                 DBHelper.entidadTatuador._ID,
@@ -52,8 +46,6 @@ public class DBlocal   {
                 DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,
                 DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,
                 DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
-
-
 
         //Respuesta
         String selection = DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO + " = ?";
@@ -69,6 +61,7 @@ public class DBlocal   {
                 null,
                 null
         );
+
         // recoger los datos
         while (cursor.moveToNext()) {
             String id = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
@@ -97,6 +90,7 @@ public class DBlocal   {
 
         //Respuesta
         String[] selectionArgs = new String[] { "" + id } ;
+
         Cursor cursor = db.query(
                 DBHelper.entidadTatuador.TABLE_NAME,
                 projection,
@@ -105,6 +99,7 @@ public class DBlocal   {
                 null,
                 null,
                 null);
+
         // recoger los datos
         if (cursor.getCount()>0) {
             cursor.moveToFirst();
@@ -120,9 +115,9 @@ public class DBlocal   {
         return tatuador;
     }
 
+
     public Estudio recogerEstudio (String id) {
         Estudio estudio = new Estudio();
-
 
         //Columnas
         String[] projection = {
@@ -161,6 +156,7 @@ public class DBlocal   {
         return estudio;
     }
 
+
     public ArrayList<Estudio> recogerEstudios () {
         ArrayList<Estudio> estudios = new ArrayList<>();
         //Columnas
@@ -185,6 +181,7 @@ public class DBlocal   {
                 null,
                 null,
                 null);
+
         // recoger los datos
         while(cursor.moveToNext()) {
             Estudio estudio = new Estudio();
@@ -202,8 +199,10 @@ public class DBlocal   {
         return estudios;
     }
 
-    public List<Web> recogerWebsTatuador (String id) {
-        List<Web> webs = new ArrayList<>();
+
+    public ArrayList<String> recogerWebsTatuador (String id) {
+        ArrayList<String> websTatuador = new ArrayList<>();
+
         //Columnas
         String[] projection = {
                 DBHelper.entidadWeb.COLUMN_NAME_URL
@@ -221,20 +220,19 @@ public class DBlocal   {
                 null,
                 null,
                 null);
-
+        ;
         while(cursor.moveToNext()) {
-            Web web = new Web();
-            web.setURL(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL)));
-            Log.i("TAG", "WEB TATUADOR: " + cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL)));
-            webs.add(web);
+            String url = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
+            websTatuador.add(url);
         }
         cursor.close();
         //dbHelper.close();
-        return webs;
+        return websTatuador;
     }
 
-    public List<Web> recogerWebsEstudio (String id) {
-        List<Web> webs = new ArrayList<>();
+    public ArrayList<String> recogerWebsEstudio (String id) {
+        ArrayList<String> webs = new ArrayList<>();
 
 
         //Columnas
@@ -254,82 +252,65 @@ public class DBlocal   {
                 null,
                 null,
                 null);
-
+        ;
         while(cursor.moveToNext()) {
-            Web web = new Web();
-            web.setURL(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL)));
-            Log.i("TAG", "WEB ESTUDIO: " + cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL)));
-            webs.add(web);
+            String url = cursor.getString(
+                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
+            webs.add(url);
         }
         cursor.close();
         //dbHelper.close();
         return webs;
     }
 
-    public ArrayList<String> recogerFotos (String id){
-        ArrayList<String> fotos = new ArrayList<>();
+    public ArrayList<Bitmap> recogerFotosTatuador (String id){
+        Log.d("HOLA!", "entramos en recogerFotosTatuador! " + id);
+        ArrayList<Bitmap> fotos = new ArrayList<>();
 
         // Definimos la query
         String[] projection = {
-                BaseColumns._ID,
                 DBHelper.entidadFoto.COLUMN_NAME_FOTO,
-                DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR
         };
 
-        // Se filtra el resultado dependiendo de idTat
+        // Se filtra el resultado dependiendo de idTatuador
         String selection =  DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR + " = ?";
-        String[] selectionArgs = { id };
+        String[] selectionArgs = new String[] { "" + id } ;;
 
-        // Ordenamos la query
-        String sortOrder = null;
-
-        Cursor galeriaSQLite = db.query(
+        Cursor cursor = db.query(
                 DBHelper.entidadFoto.TABLE_NAME,
                 projection,
                 selection,
                 selectionArgs,
                 null,
                 null,
-                sortOrder
+                null
         );
 
-        Galeria.getGaleriaList().clear();
-
-        while (galeriaSQLite.moveToNext()){
-
-            String tatuaje = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
-            String nombre = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR));
-            //guardamos los datos de sqlite en guardar sqlite y los pasamos a la clase Alumno
-            //Log.d("tag", "recogerFotos: "+ tatuaje);
-            Galeria BDSQLite = new Galeria(tatuaje, nombre);
-            Galeria.getGaleriaList().add(BDSQLite);
+        while (cursor.moveToNext()){
+            Log.d("HOLA!", "Estamos en el bucle de recogerFotosTatuador!");
+            byte[] fotoStream = cursor.getBlob(cursor.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
+            Bitmap foto = DBBitmapUtility.getImage(fotoStream);
+            fotos.add(foto);
+            //System.out.println("Hola");
         }
-        galeriaSQLite.close();
+
+        cursor.close();
+        Log.d("HOLA!", "Nos vamos de recogerFotosTatuador! " + fotos.size());
         return fotos;
     }
-    public void insertarFoto (Bitmap bitmap, String id) {
+    public long insertarFoto (byte[] bitmap, String id) {
 
         //Con este metodo guardaremos la foto tanto en la base de datos como en la memoria interna
         //del telefono
         ContentValues values = new ContentValues();
         values.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR,id);
-        //System.out.println(sUsuario);
+        values.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO,bitmap);
+
+        System.out.println(id);
         long newRowId = db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
-        String IDfoto = String.valueOf(newRowId);
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/saved_images");
-        myDir.mkdirs();
-        String fname = IDfoto +".jpg";
-        File file = new File(myDir, fname);
-        if (file.exists()) file.delete ();
-        try {
-            FileOutputStream out = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            out.flush();
-            out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+        return newRowId;
+
     }
 
     public int RecogerIdEstudio (String nombreEstudio){
@@ -354,8 +335,6 @@ public class DBlocal   {
             idEstudio= cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID));
         }
         cursor.close();
-
-
 
         return idEstudio;
     }

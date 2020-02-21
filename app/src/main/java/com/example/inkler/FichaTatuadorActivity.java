@@ -36,18 +36,19 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         //Instanciamos la clasde que tiene los metodos de la DB
         DBlocal db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
-        String idTat = "";
+
+        final String idTatuador;
         if(getIntent().getStringExtra("id") == null){
-            idTat = DatosApp.getIdTatuador();
+            idTatuador = DatosApp.getIdTatuador();
         }else{
-            idTat = getIntent().getStringExtra("id");
-            DatosApp.setIdTatuador(idTat);
+            idTatuador = getIntent().getStringExtra("id");
+            DatosApp.setIdTatuador(idTatuador);
         }
         setContentView(R.layout.activity_ficha_tatuador);
         metodosComunes=new MetodosComunes();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        Tatuador miTatuador = db.recogerTatuador(idTat);
+        Tatuador miTatuador = db.recogerTatuador(idTatuador);
         final Estudio miEstudio = db.recogerEstudio(miTatuador.getIDEstudio());
         //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(miTatuador, miEstudio);
@@ -57,7 +58,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(FichaTatuadorActivity.this, GaleriaActivity.class);
-
+                intent.putExtra("idTatuador", idTatuador);
                 startActivity(intent);
             }
         });

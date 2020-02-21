@@ -162,7 +162,7 @@ public class FichaEstudio extends AppCompatActivity {
         String nombreEstudio = estudio.getNombre();
         int idEstudio = db.RecogerIdEstudio(nombreEstudio);
         String idEstudioMetodo = String.valueOf(idEstudio);
-        db.cargarTatuadoresFiltrado(idEstudioMetodo);
+        db.recogerTatuadoresEstudio(idEstudioMetodo);
 
         recyclerView = findViewById(R.id.recyclerTatEstudio);
         adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());
