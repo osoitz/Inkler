@@ -36,5 +36,6 @@
     <string name="contraseñabtn">Entrar</string>
     <string name="ModificarTatuador">Modificar Tatuador</string>
     <string name="labelFichaEstudio">Ficha del estudio</string>
+    <string name="nuevaWeb">Nueva Web</string>
 
 </resources>

@@ -52,6 +52,9 @@ public class GaleriaActivity extends AppCompatActivity {
     private DBlocal db;
     private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = new DBlocal(getApplicationContext());
@@ -81,6 +84,7 @@ public class GaleriaActivity extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
                 zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
+
             }
 
             @Override
@@ -320,6 +324,7 @@ public class GaleriaActivity extends AppCompatActivity {
 
             db.insertarFoto(bitmap, idTatuador);
             //guardarImagen(imageInByte);
+
         }
     }
 
