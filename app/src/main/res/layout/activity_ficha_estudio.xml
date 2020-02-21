@@ -101,6 +101,13 @@
         android:layout_height="250dp"
         android:background="@drawable/mapbox_compass_icon" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerTatEstudio"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:foregroundGravity="center"
+        android:scrollbars="vertical" />
+
 
 
 </LinearLayout>

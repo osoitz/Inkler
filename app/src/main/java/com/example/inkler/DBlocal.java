@@ -42,6 +42,43 @@ public class DBlocal   {
         }
         cursor.close();
     }
+    public void cargarTatuadoresFiltrado (String idEstudio){
+        //Columnas
+        String[] proyeccion = {
+                DBHelper.entidadTatuador._ID,
+                DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO,
+                DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE,
+                DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS,
+                DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
+
+
+
+        //Respuesta
+        String selection = DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO + " = ?";
+        String[] selectionArgs = new String[] { "" + idEstudio } ;
+
+        //Respuesta
+        Cursor cursor = db.query(
+                DBHelper.entidadTatuador.TABLE_NAME,
+                proyeccion,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null
+        );
+        // recoger los datos
+        while (cursor.moveToNext()) {
+            String id = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+            String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
+            String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
+            String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
+            String IDEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
+            Tatuador t = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
+            Tatuador.getTatuadorList().add(t);
+        }
+        cursor.close();
+    }
 
     public Tatuador recogerTatuador (String id){
         Tatuador tatuador = new Tatuador();
