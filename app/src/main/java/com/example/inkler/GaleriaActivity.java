@@ -11,22 +11,15 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.app.Activity;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteStatement;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.BaseColumns;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
@@ -39,10 +32,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
 
 
 public class GaleriaActivity extends AppCompatActivity {
@@ -132,7 +121,7 @@ public class GaleriaActivity extends AppCompatActivity {
         }
         recyclerView.setLayoutManager(layoutManager);
         //onclick para ver los datos del alumno selccionado en la activity DatosAlumno
-        recyclerView.addOnItemTouchListener(new GaleriaRecyclerViewListener(GaleriaActivity.this, recyclerView, new GaleriaRecyclerViewListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerViewListener(GaleriaActivity.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
