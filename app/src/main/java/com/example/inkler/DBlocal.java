@@ -418,10 +418,11 @@ public class DBlocal   {
 
     }
 
-    public void insertarWeb (String id, String web) {
+    public void insertarWeb (String idEs, String web,String idTat) {
         ContentValues insWeb = new ContentValues();
         insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_URL, web);
-        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, id);
+        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, idEs);
+        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, idTat);
 
         db.insert(DBHelper.entidadWeb.TABLE_NAME, null, insWeb);
     }

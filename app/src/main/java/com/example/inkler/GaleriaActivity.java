@@ -61,7 +61,7 @@ public class GaleriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
 
-        idTat = DatosApp.getIdTat();
+        idTat = DatosApp.getIdTatuador();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);

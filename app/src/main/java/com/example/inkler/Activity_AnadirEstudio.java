@@ -3,16 +3,11 @@ package com.example.inkler;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -36,18 +31,18 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         final EditText et_latitud = findViewById(R.id.contentLatitud);
 
         FloatingActionButton fab = findViewById(R.id.btnAñadirEstudio);
-        FloatingActionButton nuevaWeb = findViewById(R.id.btnAñadirWeb);
-
+        FloatingActionButton nuevaWeb = findViewById(R.id.estuAñadirWeb);
+        nuevaWeb.setVisibility(View.GONE);
         if (!anadir) {
-            final String idTat = DatosApp.getIdTat();
-            String idEst = db.recogerTatuador(idTat).getIDEstudio();
+            final String idTat = DatosApp.getIdTatuador();
+            final String idEst = db.recogerTatuador(idTat).getIDEstudio();
             et_nombre.setText(db.recogerEstudio(idTat).getNombre());
             et_direccion.setText(db.recogerEstudio(idEst).getDireccion());
             et_email.setText(db.recogerEstudio(idEst).getEmail());
             et_telefono.setText(db.recogerEstudio(idEst).getTelefono());
             et_longitud.setText(String.valueOf(db.recogerEstudio(idEst).getLongitud()));
             et_latitud.setText(String.valueOf(db.recogerEstudio(idEst).getLatitud()));
-
+            nuevaWeb.setVisibility(View.VISIBLE);
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -66,7 +61,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String web = input.getText().toString();
-                            db.insertarWeb(idTat, web);
+                            db.insertarWeb(idEst, web, idTat);
                         }
                     });
                     alertDialog.show();
@@ -93,7 +88,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         db.insertarEstudio(st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
                     } else {
-                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTat()).getIDEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
+                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTatuador()).getIDEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido modificado", Toast.LENGTH_SHORT).show();
                     }
                     Intent intent = new Intent(Activity_AnadirEstudio.this, RecyclerTatuadores.class);
