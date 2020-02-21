@@ -2,6 +2,8 @@ package com.example.inkler;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +47,11 @@ public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuador
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Meto los datos de alumno al selector
         Web web = listatatuadoresweb.get(position);
-        holder.Web.setText(web.getURL());
+        String url = web.getURL();
+        String host = MetodosComunes.extraerhost(url);
+        SpannableString mitextoU = new SpannableString(host);
+        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
+        holder.Web.setText(mitextoU);
     }
 
     @Override

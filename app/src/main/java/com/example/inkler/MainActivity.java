@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity{
             db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w1);
 
             ContentValues w12 = new ContentValues();
-            w12.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "https://www.wikipedia.com");
+            w12.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "https://www.wikipedia.com/jkngsersnjgdkngrlkmñgsekmlñsgelkm");
             w12.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, pos + 1);
             w12.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos + 1);
             db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w12);
