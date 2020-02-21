@@ -48,7 +48,7 @@ public class GaleriaActivity extends AppCompatActivity {
     private ImageView imageviewTatuaje;
     private static final int PICK_IMAGE = 100;
     private Uri imageUri;
-    private String idTat;
+    private String idTatuador;
     private DBlocal db;
     private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
@@ -61,55 +61,13 @@ public class GaleriaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
 
-        idTat = DatosApp.getIdTatuador();
+        idTatuador = DatosApp.getIdTatuador();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+        db.recogerFotos(idTatuador);
 
-        //Iniciar DB
-     /*   dbHelper = new DBHelper(getBaseContext());
-
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-
-        // Definimos la query
-        String[] projection = {
-                BaseColumns._ID,
-                DBHelper.entidadFoto.COLUMN_NAME_FOTO,
-                DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR
-        };
-
-        // Se filtra el resultado dependiendo de idTat
-        String selection =  DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR + " = ?";
-        String[] selectionArgs = { idTat };
-
-        // Ordenamos la query
-        String sortOrder = null;
-
-        Cursor galeriaSQLite = db.query(
-                DBHelper.entidadFoto.TABLE_NAME,
-                projection,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                sortOrder
-        );
-
-        Galeria.getGaleriaList().clear();
-
-        while (galeriaSQLite.moveToNext()){
-
-            tatuaje = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
-            nombre = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR));
-            //guardamos los datos de sqlite en guardarsqlite y los pasamos a la clase Alumno
-            BDSQLite = new Galeria(tatuaje, nombre);
-            Galeria.getGaleriaList().add(BDSQLite);
-        }
-        galeriaSQLite.close();
-*/
-
-        db.recogerFotos(idTat);
-        Log.d("tag", "onCreate: "+ db.recogerFotos(idTat));
+        //Log.d("tag", "onCreate: "+ db.recogerFotos(idTatuador));
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
         AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, Galeria.getGaleriaList());
         recyclerView.setAdapter(adaptador);
@@ -131,8 +89,7 @@ public class GaleriaActivity extends AppCompatActivity {
 
             @Override
             public void onLongItemClick(View view, int position) {
-
-
+                //Nicths
             }
         }));
 
@@ -341,17 +298,21 @@ public class GaleriaActivity extends AppCompatActivity {
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
     }
+    //Este es el metodo que coge la foto de la galeria y la guarda en la BD
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
             imageUri = data.getData();
             Log.d("tag", "onActivityResult: " + data.getData());
+
+            //Mostramos la foto recien subida
             final ImageView imageviewTatuaje = findViewById(R.id.imagenGrande);
             imageviewTatuaje.setVisibility(View.VISIBLE);
             imageviewTatuaje.setImageURI(imageUri);
             Log.d("tag", "imageviewTatuaje: " + imageUri);
 
+            //Convertimos a bitmap
             BitmapDrawable drawable = (BitmapDrawable) imageviewTatuaje.getDrawable();
             Bitmap bitmap = drawable.getBitmap();
 
@@ -360,7 +321,8 @@ public class GaleriaActivity extends AppCompatActivity {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
             byte imageInByte[] = stream.toByteArray();
-            db.insertarFoto(bitmap, idTat);
+
+            db.insertarFoto(bitmap, idTatuador);
             //guardarImagen(imageInByte);
 
         }

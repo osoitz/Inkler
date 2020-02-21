@@ -33,6 +33,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.btnAñadirEstudio);
         FloatingActionButton nuevaWeb = findViewById(R.id.estuAñadirWeb);
         nuevaWeb.setVisibility(View.GONE);
+
         if (!anadir) {
             final String idTat = DatosApp.getIdTatuador();
             final String idEst = db.recogerTatuador(idTat).getIDEstudio();
