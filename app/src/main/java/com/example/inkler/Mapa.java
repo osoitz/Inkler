@@ -1,11 +1,20 @@
 package com.example.inkler;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.annotations.Marker;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
@@ -15,6 +24,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -50,7 +60,7 @@ public class Mapa extends AppCompatActivity {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
-                        DBlocal db = new DBlocal(getApplicationContext());
+                        final DBlocal db = new DBlocal(getApplicationContext());
                         ArrayList<Estudio> estudios = db.recogerEstudios();
                         Double minLat = 90.0; //Estan al reves a posta, no lo corrijais!
                         Double maxLat = -90.0;
@@ -62,6 +72,7 @@ public class Mapa extends AppCompatActivity {
                             mapboxMap.addMarker(new MarkerOptions()
                                     .position(new LatLng(estudio.getLatitud(), estudio.getLongitud()))
                                     .title(estudio.getNombre())
+                                    .setSnippet(estudio.getDireccion())
                             );
 
                             //Calculamos lat y lon min y max
@@ -98,8 +109,18 @@ public class Mapa extends AppCompatActivity {
                             }
                         });
 
-
-
+                        //Listener markers
+                        mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
+                            @Override
+                            public boolean onMarkerClick(@NonNull Marker marker) {
+                                Toast.makeText(Mapa.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), FichaEstudio.class);
+                                intent.putExtra("idEstudio", db.RecogerIdEstudio(marker.getTitle()));
+                                startActivity(intent);
+                                //Si pasamos por aqui es que no nos hemos ido (creo)
+                                return false;
+                            }
+                        });
                     }
                 });
             }
@@ -148,4 +169,77 @@ public class Mapa extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_actions, menu);
+        if (DatosApp.isAdmin()) {
+            menu.setGroupVisible(R.id.añadir, true);
+            menu.setGroupVisible(R.id.modificar, true);
+            menu.setGroupVisible(R.id.logout, true);
+        } else {
+            menu.setGroupVisible(R.id.login, true);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.admin){
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            alertDialog.setTitle(getString(R.string.contraseñatitle));
+
+            final EditText input = new EditText(this);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.MATCH_PARENT);
+            input.setLayoutParams(lp);
+            input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+            alertDialog.setView(input);
+
+            alertDialog.setPositiveButton(getString(R.string.contraseñabtn), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    String password = input.getText().toString();
+                    if (getString(R.string.contraseña).equals(password)){
+                        DatosApp.setAdmin(true);
+                        invalidateOptionsMenu();
+                    }
+                }
+            });
+            alertDialog.show();
+        } else if (id == R.id.noadmin) {
+            DatosApp.setAdmin(false);
+            invalidateOptionsMenu();
+        }
+        else if (id == R.id.añadir_tatuador) {
+            Intent intent = new Intent(Mapa.this, Activity_AnadirTatuador.class);
+            intent.putExtra("añadir",true);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.añadir_estudio) {
+            Intent intent = new Intent(Mapa.this, Activity_AnadirEstudio.class);
+            intent.putExtra("añadir",true);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.modificar_tatuador) {
+            Intent intent = new Intent(Mapa.this, Activity_AnadirTatuador.class);
+            startActivity(intent);
+            return true;
+        } else if (id == R.id.modificar_estudio) {
+            Intent intent = new Intent(Mapa.this, Activity_AnadirEstudio.class);
+            startActivity(intent);
+            return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
 }

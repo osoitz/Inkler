@@ -131,11 +131,13 @@ public class RecyclerTatuadores extends AppCompatActivity {
             invalidateOptionsMenu();
         }else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
+            intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
+            intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         }

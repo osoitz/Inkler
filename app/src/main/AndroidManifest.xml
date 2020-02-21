@@ -16,8 +16,32 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".FichaEstudio"></activity>
-        <activity android:name=".Mapa" />
+        <activity android:name=".FichaEstudio"
+            android:label="@string/labelFichaEstudio"
+            android:parentActivityName=".FichaTatuadorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FichaTatuadorActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.FichaEstudio" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Mapa"
+            android:label="Mapa"
+            android:parentActivityName=".FichaTatuadorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".FichaTatuadorActivity" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.Mapa" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Navegador"
             android:label="@string/labelgaleiratatuador"
