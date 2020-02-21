@@ -6,8 +6,7 @@
     <string name="instagram">Instagram:</string>
     <string name="email">Email:</string>
     <string name="web">Web:</string>
-    <string name="sobre_el_estudio">Sobre el estudio:</string>
-    <string name="sobre_el_tatuador">Sobre el tatuador:</string>
+    <string name="sobre_el_tatuador">Webs</string>
     <string name="telefono">Telefono:</string>
     <string name="nombre">Nombre:</string>
     <string name="direcci_n">Dirección:</string>
@@ -35,7 +34,7 @@
     <string name="contraseñatitle">Contraseña</string>
     <string name="contraseñabtn">Entrar</string>
     <string name="ModificarTatuador">Modificar Tatuador</string>
-    <string name="labelFichaEstudio">Ficha del estudio</string>
+    <string name="labelFichaEstudio">Estudio</string>
     <string name="nuevaWeb">Nueva Web</string>
 
 </resources>

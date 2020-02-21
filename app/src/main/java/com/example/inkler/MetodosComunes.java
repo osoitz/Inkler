@@ -27,6 +27,16 @@ public class MetodosComunes {
         return contenidoCampo;
     }
 
-
+    public static String extraerhost(String urlString){
+            String host = urlString;
+            try {
+                URL miUrl = new URL(urlString);
+                host = miUrl.getHost();
+            }
+            catch (Exception e) {
+                //Nada de nada
+            }
+        return host;
+    }
 
 }

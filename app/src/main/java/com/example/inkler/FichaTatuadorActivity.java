@@ -8,6 +8,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -101,7 +103,9 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         String nombre = "(" + miTatuador.getNombre() + " " + miTatuador.getApellidos() + ")";
         nombreTatuador.setText(nombre);
 
-        nombreEstudio.setText(miestudio.getNombre());
+        SpannableString mitextoU = new SpannableString(miestudio.getNombre());
+        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
+        nombreEstudio.setText(mitextoU);
     }
 
 
