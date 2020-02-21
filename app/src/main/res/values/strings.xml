@@ -35,4 +35,5 @@
     <string name="contraseñatitle">Password</string>
     <string name="contraseñabtn">Log in</string>
     <string name="ModificarTatuador">Modify Tattooist</string>
+    <string name="labelFichaEstudio">Studio Info</string>
 </resources>
