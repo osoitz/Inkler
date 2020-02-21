@@ -80,7 +80,7 @@ public class GaleriaActivity extends AppCompatActivity {
         }
         recyclerView.setLayoutManager(layoutManager);
         //onclick para ver los datos del alumno selccionado en la activity DatosAlumno
-        recyclerView.addOnItemTouchListener(new GaleriaRecyclerViewListener(GaleriaActivity.this, recyclerView, new GaleriaRecyclerViewListener.OnItemClickListener() {
+        recyclerView.addOnItemTouchListener(new RecyclerViewListener(GaleriaActivity.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
