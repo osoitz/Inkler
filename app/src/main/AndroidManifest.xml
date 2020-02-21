@@ -44,7 +44,7 @@
         </activity>
         <activity
             android:name=".Navegador"
-            android:label="@string/labelgaleiratatuador"
+            android:label="@string/labelnavegador"
             android:parentActivityName=".FichaTatuadorActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
