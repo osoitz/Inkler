@@ -416,6 +416,14 @@ public class DBlocal   {
 
     }
 
+    public void insertarWeb (String id, String web) {
+        ContentValues insWeb = new ContentValues();
+        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_URL, web);
+        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, id);
+
+        db.insert(DBHelper.entidadWeb.TABLE_NAME, null, insWeb);
+    }
+
 
 
 }

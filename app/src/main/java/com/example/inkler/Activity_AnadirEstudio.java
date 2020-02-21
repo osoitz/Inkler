@@ -4,14 +4,17 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -33,9 +36,10 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         final EditText et_latitud = findViewById(R.id.contentLatitud);
 
         FloatingActionButton fab = findViewById(R.id.btnAñadirEstudio);
+        FloatingActionButton nuevaWeb = findViewById(R.id.btnAñadirWeb);
 
         if (!anadir) {
-            String idTat = DatosApp.getIdTat();
+            final String idTat = DatosApp.getIdTat();
             String idEst = db.recogerTatuador(idTat).getIDEstudio();
             et_nombre.setText(db.recogerEstudio(idTat).getNombre());
             et_direccion.setText(db.recogerEstudio(idEst).getDireccion());
@@ -43,6 +47,31 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
             et_telefono.setText(db.recogerEstudio(idEst).getTelefono());
             et_longitud.setText(String.valueOf(db.recogerEstudio(idEst).getLongitud()));
             et_latitud.setText(String.valueOf(db.recogerEstudio(idEst).getLatitud()));
+
+            nuevaWeb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(Activity_AnadirEstudio.this);
+                    alertDialog.setTitle(getString(R.string.nuevaWeb));
+
+                    final EditText input = new EditText(Activity_AnadirEstudio.this);
+                    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.MATCH_PARENT);
+                    input.setLayoutParams(lp);
+                    input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
+                    alertDialog.setView(input);
+
+                    alertDialog.setPositiveButton(getString(R.string.contraseñabtn), new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            String web = input.getText().toString();
+                            db.insertarWeb(idTat, web);
+                        }
+                    });
+                    alertDialog.show();
+                }
+            });
         }
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,6 +101,9 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                 }
             }
         });
+
+
+
     }
 
 

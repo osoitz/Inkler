@@ -157,7 +157,15 @@
                 android:layout_weight="0.5"
                 android:inputType="numberSigned|numberDecimal" />
         </LinearLayout>
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btnAñadirWeb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/fab_margin"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="48dp"
+            app:srcCompat="@drawable/plus" />
 
     </LinearLayout>
 
