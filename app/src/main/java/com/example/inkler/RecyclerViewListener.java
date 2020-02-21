@@ -8,7 +8,9 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class GaleriaRecyclerViewListener implements RecyclerView.OnItemTouchListener {
+//Clase que gestiona el listener del recyclerview
+
+public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
     private OnItemClickListener mListener;
 
 
@@ -20,7 +22,7 @@ public class GaleriaRecyclerViewListener implements RecyclerView.OnItemTouchList
     private GestureDetector mGestureDetector;
 
     //El lisener con las opciones
-    GaleriaRecyclerViewListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener){
+    RecyclerViewListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener){
     mListener = listener;
         mGestureDetector = new GestureDetector(context,new GestureDetector.SimpleOnGestureListener(){
             @Override
