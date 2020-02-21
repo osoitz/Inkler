@@ -31,16 +31,24 @@ import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class FichaTatuadorActivity extends AppCompatActivity {
-
+    RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private AdaptadorTatuadorWeb adaptador;
     private ImageView vermas;
     private boolean anadir;
     private MetodosComunes metodosComunes;
+    List<Web> webs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //Instanciamos la clasde que tiene los metodos de la DB
@@ -83,7 +91,22 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             }
         });
 
+        //Acciones del onclick y onlongclick del recycler
+        recyclerView.addOnItemTouchListener(new TatuadoresRecyclerViewListener(this, recyclerView, new TatuadoresRecyclerViewListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(FichaTatuadorActivity.this, Navegador.class);
 
+                Web w = webs.get(position);
+                intent.putExtra("URL", w.getURL());
+                startActivity(intent);
+            }
+
+            @Override
+            public void onLongItemClick(View view, int position) {
+                //Nichts
+            }
+        }));
 
 
 
@@ -102,9 +125,14 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     }
 
 
-    private void rellenarWebsTatuador(ArrayList<String> urls){
-        TextView websTatuador = findViewById(R.id.websTatuador);
-        websTatuador.setText(Html.fromHtml(metodosComunes.crearContenidoHTML(urls)));
+    private void rellenarWebsTatuador(List<Web> urls){
+        webs.addAll(urls);
+        recyclerView = findViewById(R.id.recyclertatuadorweb);
+        adaptador = new AdaptadorTatuadorWeb(getApplicationContext(), webs);
+        recyclerView.setAdapter(adaptador);
+        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView = findViewById(R.id.recyclertatuadorweb);
     }
 
     @Override

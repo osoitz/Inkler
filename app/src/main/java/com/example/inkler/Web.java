@@ -1,5 +1,8 @@
 package com.example.inkler;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Web {
     String URL;
     int IdTatuador;
@@ -35,4 +38,5 @@ public class Web {
     public void setIdEstudio(int idEstudio) {
         IdEstudio = idEstudio;
     }
+
 }
