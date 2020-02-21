@@ -299,8 +299,8 @@ public class DBlocal   {
 
             String tatuaje = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
             String nombre = galeriaSQLite.getString(galeriaSQLite.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR));
-            //guardamos los datos de sqlite en guardarsqlite y los pasamos a la clase Alumno
-            Log.d("tag", "recogerFotos: "+ tatuaje);
+            //guardamos los datos de sqlite en guardar sqlite y los pasamos a la clase Alumno
+            //Log.d("tag", "recogerFotos: "+ tatuaje);
             Galeria BDSQLite = new Galeria(tatuaje, nombre);
             Galeria.getGaleriaList().add(BDSQLite);
         }
@@ -308,14 +308,6 @@ public class DBlocal   {
         return fotos;
     }
     public void insertarFoto (Bitmap bitmap, String id) {
-        // Create a new map of values, where column names are the keys
-   /*    ContentValues values = new ContentValues();
-        values.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, bitmap);
-        values.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, id);
-
-        // Insert the new row, returning the primary key value of the new row
-        db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
-*/
 
         //Con este metodo guardaremos la foto tanto en la base de datos como en la memoria interna
         //del telefono

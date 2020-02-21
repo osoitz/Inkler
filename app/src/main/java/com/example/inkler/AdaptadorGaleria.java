@@ -55,7 +55,7 @@ public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.View
         //Meto los datos de libro al selector
         Galeria galeria = listalibro.get(position);
         try{
-            Log.d("tag", "onBindViewHolder: "+ galeria.tatuaje);
+            //Log.d("tag", "onBindViewHolder: "+ galeria.tatuaje);
             holder.tatuaje.setImageResource(Integer.parseInt(galeria.tatuaje));
             holder.tatuaje.setTag(Integer.parseInt(galeria.tatuaje));
         } catch (Exception e) {

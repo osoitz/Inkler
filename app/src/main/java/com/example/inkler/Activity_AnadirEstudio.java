@@ -1,16 +1,10 @@
 package com.example.inkler;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ContentValues;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -35,7 +29,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.btnAñadirEstudio);
 
         if (!anadir) {
-            String idTat = DatosApp.getIdTat();
+            String idTat = DatosApp.getIdTatuador();
             String idEst = db.recogerTatuador(idTat).getIDEstudio();
             et_nombre.setText(db.recogerEstudio(idTat).getNombre());
             et_direccion.setText(db.recogerEstudio(idEst).getDireccion());
@@ -64,7 +58,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         db.insertarEstudio(st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
                     } else {
-                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTat()).getIDEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
+                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTatuador()).getIDEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido modificado", Toast.LENGTH_SHORT).show();
                     }
                     Intent intent = new Intent(Activity_AnadirEstudio.this, RecyclerTatuadores.class);
