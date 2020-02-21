@@ -88,12 +88,18 @@
             android:textStyle="bold"
             android:layout_weight="0.5"
             android:text="@string/web"/>
-        <TextView
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerestudioweb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
-            android:id="@+id/contentWebEstudio"
-            />
+            android:foregroundGravity="center"
+            android:scrollbars="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"
