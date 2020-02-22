@@ -5,7 +5,7 @@ import android.app.Application;
 public class DatosApp extends Application {
 
     private static boolean admin;
-    private static String idTatuador;
+    private static int idTatuador;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -24,11 +24,11 @@ public class DatosApp extends Application {
         DatosApp.admin = admin;
     }
 
-    public static String getIdTatuador() {
+    public static int getIdTatuador() {
         return idTatuador;
     }
 
-    public static void setIdTatuador(String idTatuador) {
+    public static void setIdTatuador(int idTatuador) {
         DatosApp.idTatuador = idTatuador;
     }
 }

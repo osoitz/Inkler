@@ -44,7 +44,7 @@ public class GaleriaActivity extends AppCompatActivity {
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
     private static final int PICK_IMAGE = 100;
-    private String idTatuador;
+    private int idTatuador;
     private DBlocal db;
 
     //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
@@ -59,7 +59,7 @@ public class GaleriaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_galeria);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        idTatuador = getIntent().getStringExtra("idTatuador");
+        idTatuador = getIntent().getIntExtra("idTatuador", -1);
         //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
         ArrayList<Bitmap> fotos = new ArrayList<>();
         try {

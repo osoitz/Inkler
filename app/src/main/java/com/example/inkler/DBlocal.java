@@ -29,17 +29,17 @@ public class DBlocal   {
         Cursor cursor = db.query(DBHelper.entidadTatuador.TABLE_NAME, proyeccion, null, null, null, null, null);
         // recoger los datos
         while (cursor.moveToNext()) {
-            String id = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+            Integer id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
             String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
             String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
             String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
-            String IDEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
+            Integer IDEstudio = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
             Tatuador t = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
             Tatuador.getTatuadorList().add(t);
         }
         cursor.close();
     }
-    public void recogerTatuadoresEstudio(String idEstudio){
+    public void recogerTatuadoresEstudio(Integer idEstudio){
         //Columnas
         String[] proyeccion = {
                 DBHelper.entidadTatuador._ID,
@@ -65,18 +65,18 @@ public class DBlocal   {
 
         // recoger los datos
         while (cursor.moveToNext()) {
-            String id = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+            Integer id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
             String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
             String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
             String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
-            String IDEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
+            Integer IDEstudio = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
             Tatuador t = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
             Tatuador.getTatuadorList().add(t);
         }
         cursor.close();
     }
 
-    public Tatuador recogerTatuador (String id){
+    public Tatuador recogerTatuador (Integer id){
         Tatuador tatuador = new Tatuador();
         // Iniciar base de datos
 
@@ -104,11 +104,11 @@ public class DBlocal   {
         // recoger los datos
         if (cursor.getCount()>0) {
             cursor.moveToFirst();
-            tatuador.setId(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID)));
+            tatuador.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID)));
             tatuador.setNombreArt(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO)));
             tatuador.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE)));
             tatuador.setApellidos(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS)));
-            tatuador.setIDEstudio(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
+            tatuador.setIDEstudio(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
 
         }
         cursor.close();
@@ -117,7 +117,7 @@ public class DBlocal   {
     }
 
 
-    public Estudio recogerEstudio (String id) {
+    public Estudio recogerEstudio (Integer id) {
         Estudio estudio = new Estudio();
 
         //Columnas
@@ -144,11 +144,11 @@ public class DBlocal   {
         // recoger los datos
         if (cursor.getCount()>0) {
             cursor.moveToFirst();
-            estudio.setID(Integer.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
+            estudio.setID(Integer.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
             estudio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE)));
             estudio.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION)));
-            estudio.setLatitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
-            estudio.setLongitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD))));
+            estudio.setLatitud(Double.valueOf(cursor.getDouble(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
+            estudio.setLongitud(Double.valueOf(cursor.getDouble(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD))));
             estudio.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL)));
             estudio.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO)));
         }
@@ -186,11 +186,11 @@ public class DBlocal   {
         // recoger los datos
         while(cursor.moveToNext()) {
             Estudio estudio = new Estudio();
-            estudio.setID(Integer.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
+            estudio.setID(Integer.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
             estudio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE)));
             estudio.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION)));
-            estudio.setLatitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
-            estudio.setLongitud(Double.valueOf(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD))));
+            estudio.setLatitud(Double.valueOf(cursor.getDouble(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
+            estudio.setLongitud(Double.valueOf(cursor.getDouble(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD))));
             estudio.setEmail(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL)));
             estudio.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO)));
             estudios.add(estudio);
@@ -201,7 +201,7 @@ public class DBlocal   {
     }
 
 
-    public List<Web> recogerWebsTatuador (String id) {
+    public List<Web> recogerWebsTatuador (Integer id) {
         //ArrayList<String> websTatuador = new ArrayList<>();
         List<Web> webs= new ArrayList<Web>();
 
@@ -227,7 +227,7 @@ public class DBlocal   {
             String url = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
             Web web = new Web();
             web.setURL(url);
-            web.setIdTatuador(Integer.valueOf(id));
+            web.setIdTatuador(id);
             webs.add(web);
         }
         cursor.close();
@@ -235,7 +235,7 @@ public class DBlocal   {
         return webs;
     }
 
-    public List<Web> recogerWebsEstudio (String id) {
+    public List<Web> recogerWebsEstudio (Integer id) {
         //ArrayList<String> webs = new ArrayList<>();
         List<Web> webs= new ArrayList<Web>();
 
@@ -263,7 +263,7 @@ public class DBlocal   {
                     cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
             Web web = new Web();
             web.setURL(url);
-            web.setIdEstudio(Integer.valueOf(id));
+            web.setIdEstudio(id);
             webs.add(web);
         }
 
@@ -272,7 +272,7 @@ public class DBlocal   {
         return webs;
     }
 
-    public ArrayList<Bitmap> recogerFotosTatuador (String id){
+    public ArrayList<Bitmap> recogerFotosTatuador (Integer id){
         Log.d("HOLA!", "entramos en recogerFotosTatuador! " + id);
         ArrayList<Bitmap> fotos = new ArrayList<>();
 
@@ -307,7 +307,7 @@ public class DBlocal   {
         Log.d("HOLA!", "Nos vamos de recogerFotosTatuador! " + fotos.size());
         return fotos;
     }
-    public long insertarFoto (byte[] bitmap, String id) {
+    public long insertarFoto (byte[] bitmap, Integer id) {
 
         //Con este metodo guardaremos la foto tanto en la base de datos como en la memoria interna
         //del telefono
@@ -357,7 +357,7 @@ public class DBlocal   {
         db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, e1);
     }
 
-    public void modificarTatuador(String id, String st_nombre, String st_apellidos, String st_nombreArtistico, int IdEstudio){
+    public void modificarTatuador(Integer idTatuador, String st_nombre, String st_apellidos, String st_nombreArtistico, Integer IdEstudio){
         ContentValues e1 = new ContentValues();
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
@@ -366,7 +366,7 @@ public class DBlocal   {
         //Columnas del where
         String selection = DBHelper.entidadTatuador._ID + " = ?";
         //Argumentos del where
-        String [] selectionargs = {id};
+        String [] selectionargs = { "" + idTatuador };
         db.update(DBHelper.entidadTatuador.TABLE_NAME,e1,selection,selectionargs);
     }
 
@@ -381,7 +381,7 @@ public class DBlocal   {
         db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
     }
 
-    public void modificarEstudio (String id, String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+    public void modificarEstudio (Integer idEstudio, String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
 
         ContentValues e1 = new ContentValues();
         e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
@@ -393,16 +393,16 @@ public class DBlocal   {
         //Columnas del where
         String selection = DBHelper.entidadEstudio._ID + " = ?";
         //Argumentos del where
-        String [] selectionargs = {id};
+        String [] selectionargs = { "" + idEstudio };
         db.update(DBHelper.entidadEstudio.TABLE_NAME,e1,selection,selectionargs);
 
     }
 
-    public void insertarWeb (String idEs, String web,String idTat) {
+    public void insertarWeb (Integer idEstudio, String web, Integer idTatuador) {
         ContentValues insWeb = new ContentValues();
         insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_URL, web);
-        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, idEs);
-        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, idTat);
+        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, idEstudio);
+        insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, idTatuador);
 
         db.insert(DBHelper.entidadWeb.TABLE_NAME, null, insWeb);
     }

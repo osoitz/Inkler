@@ -45,9 +45,9 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         FloatingActionButton nuevaWeb = findViewById(R.id.tatuAñadirWeb);
         nuevaWeb.setVisibility(View.GONE);
         if(!anadir){
-            final String idTat =DatosApp.getIdTatuador();
-            final String idEst = db.recogerTatuador(idTat).getIDEstudio();
-            Tatuador tatuador = db.recogerTatuador(idTat);
+            final int idTatuador =DatosApp.getIdTatuador();
+            final int idEstudio = db.recogerTatuador(idTatuador).getIDEstudio();
+            Tatuador tatuador = db.recogerTatuador(idTatuador);
             et_nombre.setText(tatuador.getNombre());
             et_apellidos.setText(tatuador.getApellidos());
             et_nombreArt.setText(tatuador.getNombreArt());
@@ -71,7 +71,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String web = input.getText().toString();
-                            db.insertarWeb(idEst, web, idTat);
+                            db.insertarWeb(idEstudio, web, idTatuador);
                         }
                     });
                     alertDialog.show();
@@ -136,14 +136,15 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         }
         return  nombres;
     }
-    public int posicionEstudio(ArrayList<String>stringarray,String nombreEstudio){
+    public int posicionEstudio(ArrayList<String>stringarray, int idEstudio){
         int posicionEstudio=0;
 
-        String EstudioNombre= db.recogerEstudio(nombreEstudio).getNombre();
+        String EstudioNombre = db.recogerEstudio(idEstudio).getNombre();
 
+        //TODO Mejorable?
         for(int i=0;i<stringarray.size();i++){
             if(stringarray.get(i).equals(EstudioNombre)){
-                posicionEstudio=i;
+                posicionEstudio = i;
             }
         }
 
