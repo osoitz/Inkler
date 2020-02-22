@@ -50,8 +50,6 @@ public class GaleriaActivity extends AppCompatActivity {
     //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = new DBlocal(getApplicationContext());
@@ -279,9 +277,15 @@ public class GaleriaActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
+                    //TODO usuarios reales
                     if (getString(R.string.contraseña).equals(password)){
                         DatosApp.setAdmin(true);
                         invalidateOptionsMenu();
+                        Toast.makeText(getApplicationContext(), R.string.log_successful, Toast.LENGTH_SHORT).show();
+
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), R.string.log_unsuccessful, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
@@ -307,7 +311,7 @@ public class GaleriaActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            //TODO STring
+
             Toast.makeText(getApplicationContext(), "Añadiendo foto a la BD", Toast.LENGTH_SHORT).show();
             Uri imageUri = data.getData();
             try {
