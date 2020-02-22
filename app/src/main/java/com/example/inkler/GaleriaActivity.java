@@ -314,16 +314,14 @@ public class GaleriaActivity extends AppCompatActivity {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imageUri);
                 long rowid = db.insertarFoto(DBBitmapUtility.getBytes(bitmap), idTatuador);
                 Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
+                db.insertarFoto(DBBitmapUtility.getBytes(bitmap), idTatuador);
             }
             catch (Exception e) {
                 e.printStackTrace();
                 Log.e("Error","exceptions"+e);
             }
 
-
-            db.insertarFoto(bitmap, idTatuador);
             //guardarImagen(imageInByte);
-
 
         }
     }

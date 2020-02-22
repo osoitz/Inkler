@@ -9,6 +9,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DBlocal   {
 
@@ -200,8 +201,9 @@ public class DBlocal   {
     }
 
 
-    public ArrayList<String> recogerWebsTatuador (String id) {
-        ArrayList<String> websTatuador = new ArrayList<>();
+    public List<Web> recogerWebsTatuador (String id) {
+        //ArrayList<String> websTatuador = new ArrayList<>();
+        List<Web> webs= new ArrayList<Web>();
 
         //Columnas
         String[] projection = {
@@ -222,17 +224,20 @@ public class DBlocal   {
                 null);
         ;
         while(cursor.moveToNext()) {
-            String url = cursor.getString(
-                    cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
-            websTatuador.add(url);
+            String url = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
+            Web web = new Web();
+            web.setURL(url);
+            web.setIdTatuador(Integer.valueOf(id));
+            webs.add(web);
         }
         cursor.close();
         //dbHelper.close();
-        return websTatuador;
+        return webs;
     }
 
-    public ArrayList<String> recogerWebsEstudio (String id) {
-        ArrayList<String> webs = new ArrayList<>();
+    public List<Web> recogerWebsEstudio (String id) {
+        //ArrayList<String> webs = new ArrayList<>();
+        List<Web> webs= new ArrayList<Web>();
 
 
         //Columnas
@@ -242,8 +247,8 @@ public class DBlocal   {
 
         String selection = DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO + " = ?";
         String[] selectionArgs = new String[] { "" + id } ;
-        //Respuesta
 
+        //Respuesta
         Cursor cursor = db.query(
                 DBHelper.entidadWeb.TABLE_NAME,
                 projection,
@@ -252,12 +257,16 @@ public class DBlocal   {
                 null,
                 null,
                 null);
-        ;
+
         while(cursor.moveToNext()) {
             String url = cursor.getString(
                     cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
-            webs.add(url);
+            Web web = new Web();
+            web.setURL(url);
+            web.setIdEstudio(Integer.valueOf(id));
+            webs.add(web);
         }
+
         cursor.close();
         //dbHelper.close();
         return webs;
