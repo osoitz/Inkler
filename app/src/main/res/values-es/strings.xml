@@ -36,5 +36,7 @@
     <string name="ModificarTatuador">Modificar Tatuador</string>
     <string name="labelFichaEstudio">Estudio</string>
     <string name="nuevaWeb">Nueva Web</string>
+    <string name="log_successful">Sesion iniciada exitosamente</string>
+    <string name="log_unsuccessful">No se pudo iniciar sesión</string>
 
 </resources>
