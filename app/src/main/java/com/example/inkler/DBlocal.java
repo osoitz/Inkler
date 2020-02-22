@@ -13,16 +13,23 @@ import java.util.List;
 
 public class DBlocal   {
 
-    private DBHelper dbHelper;
-    private SQLiteDatabase db;
+    //private DBHelper dbHelper;
+    //private SQLiteDatabase db;
+    private Context context;
 
     public DBlocal(Context context){
         //Local BD
-        dbHelper = new DBHelper(context);
-        db = dbHelper.getWritableDatabase();
+        this.context = context;
+    }
+
+    public SQLiteDatabase abrirDB(){
+        DBHelper dbHelper = new DBHelper(this.context);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        return db;
     }
 
     public void cargarTatuadores (){
+        SQLiteDatabase db = abrirDB();
         //Columnas
         String[] proyeccion = {DBHelper.entidadTatuador._ID,DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
         //Respuesta
@@ -38,8 +45,10 @@ public class DBlocal   {
             Tatuador.getTatuadorList().add(t);
         }
         cursor.close();
+        db.close();
     }
     public void recogerTatuadoresEstudio(Integer idEstudio){
+        SQLiteDatabase db = abrirDB();
         //Columnas
         String[] proyeccion = {
                 DBHelper.entidadTatuador._ID,
@@ -74,9 +83,11 @@ public class DBlocal   {
             Tatuador.getTatuadorList().add(t);
         }
         cursor.close();
+        db.close();
     }
 
     public Tatuador recogerTatuador (Integer id){
+        SQLiteDatabase db = abrirDB();
         Tatuador tatuador = new Tatuador();
         // Iniciar base de datos
 
@@ -112,12 +123,13 @@ public class DBlocal   {
 
         }
         cursor.close();
-        //dbHelper.close();
+        db.close();
         return tatuador;
     }
 
 
     public Estudio recogerEstudio (Integer id) {
+        SQLiteDatabase db = abrirDB();
         Estudio estudio = new Estudio();
 
         //Columnas
@@ -153,12 +165,13 @@ public class DBlocal   {
             estudio.setTelefono(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO)));
         }
         cursor.close();
-        //dbHelper.close();
+        db.close();
         return estudio;
     }
 
 
     public ArrayList<Estudio> recogerEstudios () {
+        SQLiteDatabase db = abrirDB();
         ArrayList<Estudio> estudios = new ArrayList<>();
         //Columnas
         String[] projection = {
@@ -197,11 +210,13 @@ public class DBlocal   {
         }
 
         cursor.close();
+        db.close();
         return estudios;
     }
 
 
     public List<Web> recogerWebsTatuador (Integer id) {
+        SQLiteDatabase db = abrirDB();
         //ArrayList<String> websTatuador = new ArrayList<>();
         List<Web> webs= new ArrayList<Web>();
 
@@ -231,11 +246,12 @@ public class DBlocal   {
             webs.add(web);
         }
         cursor.close();
-        //dbHelper.close();
+        db.close();
         return webs;
     }
 
     public List<Web> recogerWebsEstudio (Integer id) {
+        SQLiteDatabase db = abrirDB();
         //ArrayList<String> webs = new ArrayList<>();
         List<Web> webs= new ArrayList<Web>();
 
@@ -268,11 +284,12 @@ public class DBlocal   {
         }
 
         cursor.close();
-        //dbHelper.close();
+        db.close();
         return webs;
     }
 
     public ArrayList<Bitmap> recogerFotosTatuador (Integer id){
+        SQLiteDatabase db = abrirDB();
         Log.d("HOLA!", "entramos en recogerFotosTatuador! " + id);
         ArrayList<Bitmap> fotos = new ArrayList<>();
 
@@ -304,10 +321,12 @@ public class DBlocal   {
         }
 
         cursor.close();
+        db.close();
         Log.d("HOLA!", "Nos vamos de recogerFotosTatuador! " + fotos.size());
         return fotos;
     }
     public long insertarFoto (byte[] bitmap, Integer id) {
+        SQLiteDatabase db = abrirDB();
 
         //Con este metodo guardaremos la foto tanto en la base de datos como en la memoria interna
         //del telefono
@@ -323,6 +342,7 @@ public class DBlocal   {
     }
 
     public int RecogerIdEstudio (String nombreEstudio){
+        SQLiteDatabase db = abrirDB();
         int idEstudio=0;
 
         //Columnas
@@ -344,20 +364,23 @@ public class DBlocal   {
             idEstudio= cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID));
         }
         cursor.close();
-
+        db.close();
         return idEstudio;
     }
 
     public void insertarTatuador(String st_nombre,String st_apellidos, String st_nombreArtistico, int IdEstudio){
+        SQLiteDatabase db = abrirDB();
         ContentValues e1 = new ContentValues();
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, st_nombreArtistico);
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, IdEstudio);
         db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, e1);
+        db.close();
     }
 
     public void modificarTatuador(Integer idTatuador, String st_nombre, String st_apellidos, String st_nombreArtistico, Integer IdEstudio){
+        SQLiteDatabase db = abrirDB();
         ContentValues e1 = new ContentValues();
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
         e1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
@@ -368,9 +391,11 @@ public class DBlocal   {
         //Argumentos del where
         String [] selectionargs = { "" + idTatuador };
         db.update(DBHelper.entidadTatuador.TABLE_NAME,e1,selection,selectionargs);
+        db.close();
     }
 
     public void insertarEstudio (String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+        SQLiteDatabase db = abrirDB();
         ContentValues e1 = new ContentValues();
         e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
         e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
@@ -379,10 +404,11 @@ public class DBlocal   {
         e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud);
         e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud);
         db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
+        db.close();
     }
 
     public void modificarEstudio (Integer idEstudio, String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
-
+        SQLiteDatabase db = abrirDB();
         ContentValues e1 = new ContentValues();
         e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
         e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
@@ -395,16 +421,18 @@ public class DBlocal   {
         //Argumentos del where
         String [] selectionargs = { "" + idEstudio };
         db.update(DBHelper.entidadEstudio.TABLE_NAME,e1,selection,selectionargs);
-
+        db.close();
     }
 
     public void insertarWeb (Integer idEstudio, String web, Integer idTatuador) {
+        SQLiteDatabase db = abrirDB();
         ContentValues insWeb = new ContentValues();
         insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_URL, web);
         insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, idEstudio);
         insWeb.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, idTatuador);
 
         db.insert(DBHelper.entidadWeb.TABLE_NAME, null, insWeb);
+        db.close();
     }
 
 
