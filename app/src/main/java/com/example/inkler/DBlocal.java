@@ -28,8 +28,9 @@ public class DBlocal   {
         return db;
     }
 
-    public void cargarTatuadores (){
+    public List<Tatuador> recogerTatuadores(){
         SQLiteDatabase db = abrirDB();
+        List<Tatuador> tatuadores = new ArrayList<>();
         //Columnas
         String[] proyeccion = {DBHelper.entidadTatuador._ID,DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO};
         //Respuesta
@@ -41,14 +42,17 @@ public class DBlocal   {
             String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
             String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
             Integer IDEstudio = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
-            Tatuador t = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
-            Tatuador.getTatuadorList().add(t);
+            Tatuador tatuador = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
+            tatuadores.add(tatuador);
+            //Tatuador.getTatuadorList().add(t);
         }
         cursor.close();
         db.close();
+        return tatuadores;
     }
-    public void recogerTatuadoresEstudio(Integer idEstudio){
+    public List<Tatuador> recogerTatuadoresEstudio(int idEstudio){
         SQLiteDatabase db = abrirDB();
+        List<Tatuador> tatuadores = new ArrayList<>();
         //Columnas
         String[] proyeccion = {
                 DBHelper.entidadTatuador._ID,
@@ -74,19 +78,21 @@ public class DBlocal   {
 
         // recoger los datos
         while (cursor.moveToNext()) {
-            Integer id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
             String nombreArt = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO));
             String nombre = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE));
             String apellidos = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS));
-            Integer IDEstudio = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
-            Tatuador t = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
-            Tatuador.getTatuadorList().add(t);
+            int IDEstudio = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO));
+            Tatuador tatuador = new Tatuador(id,nombreArt, nombre, apellidos, IDEstudio);
+            tatuadores.add(tatuador);
+            //Tatuador.getTatuadorList().add(t);
         }
         cursor.close();
         db.close();
+        return tatuadores;
     }
 
-    public Tatuador recogerTatuador (Integer id){
+    public Tatuador recogerTatuador (int idTatuador){
         SQLiteDatabase db = abrirDB();
         Tatuador tatuador = new Tatuador();
         // Iniciar base de datos
@@ -101,7 +107,7 @@ public class DBlocal   {
         };
 
         //Respuesta
-        String[] selectionArgs = new String[] { "" + id } ;
+        String[] selectionArgs = new String[] { "" + idTatuador } ;
 
         Cursor cursor = db.query(
                 DBHelper.entidadTatuador.TABLE_NAME,
@@ -128,7 +134,7 @@ public class DBlocal   {
     }
 
 
-    public Estudio recogerEstudio (Integer id) {
+    public Estudio recogerEstudio (int idEstudio) {
         SQLiteDatabase db = abrirDB();
         Estudio estudio = new Estudio();
 
@@ -144,7 +150,7 @@ public class DBlocal   {
         };
 
         //Respuesta
-        String[] selectionArgs = new String[] { "" + id } ;
+        String[] selectionArgs = new String[] { "" + idEstudio } ;
         Cursor cursor = db.query(
                 DBHelper.entidadEstudio.TABLE_NAME,
                 projection,

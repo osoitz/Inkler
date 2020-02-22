@@ -18,6 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class RecyclerTatuadores extends AppCompatActivity {
 
     // Variables necesarias
@@ -25,6 +28,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private AdaptadorTatuadores adaptador;
     private DBlocal db;
+    List<Tatuador> tatuadores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +44,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
             }
         });
 
+        //Alimentamos el adaptador desde la BD
         cargartatuadores();
 
         //Acciones del onclick y onlongclick del recycler
@@ -47,7 +52,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
-                Tatuador tatuador = Tatuador.getTatuadorList().get(position);
+                Tatuador tatuador = tatuadores.get(position);
                 intent.putExtra("idTatuador",tatuador.getId());
                 startActivity(intent);
             }
@@ -61,15 +66,10 @@ public class RecyclerTatuadores extends AppCompatActivity {
 
     private void cargartatuadores() {
 
-        Tatuador.getTatuadorList().clear();
-
-        db.cargarTatuadores();
-        /*Tatuador t = new Tatuador("PinxaUvas", "Antonio", "Lopez Garcia", "APU@gmail.com", "653951284", "Hola");
-        Tatuador.getTatuadorList().add(t);*/
-
+        tatuadores = db.recogerTatuadores();
 
         recyclerView = findViewById(R.id.recyclerFragment);
-        adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());
+        adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
         recyclerView.setAdapter(adaptador);
         ConstraintLayout cl = findViewById(R.id.recycler_tatuadores);
         if (cl == null) {
