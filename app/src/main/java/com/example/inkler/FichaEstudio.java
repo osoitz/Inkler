@@ -46,6 +46,7 @@ public class FichaEstudio extends AppCompatActivity {
     private AdaptadorTatuadores adaptador;
     private Estudio estudio;
     List<Web> webs = new ArrayList<>();
+    List<Tatuador> tatuadores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,7 +67,7 @@ public class FichaEstudio extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(FichaEstudio.this, FichaTatuadorActivity.class);
-                Tatuador tatuador = Tatuador.getTatuadorList().get(position);
+                Tatuador tatuador = tatuadores.get(position);
                 intent.putExtra("id",tatuador.getId());
                 startActivity(intent);
             }
@@ -158,14 +159,14 @@ public class FichaEstudio extends AppCompatActivity {
     }
     private void cargartatuadores() {
 
-        Tatuador.getTatuadorList().clear();
+
         String nombreEstudio = estudio.getNombre();
         int idEstudio = db.RecogerIdEstudio(nombreEstudio);
         //String idEstudioMetodo = String.valueOf(idEstudio);
-        db.recogerTatuadoresEstudio(idEstudio);
+        tatuadores = db.recogerTatuadoresEstudio(idEstudio);
 
         recyclerView = findViewById(R.id.recyclerTatEstudio);
-        adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());
+        adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
         recyclerView.setAdapter(adaptador);
         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);

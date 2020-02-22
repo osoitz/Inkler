@@ -64,13 +64,6 @@ public class Tatuador {
         this.id = id;
     }
 
-    private static List<Tatuador> tatuadorList = new ArrayList<>();
-
-    // Getter de la lista de alumnos
-    static List<Tatuador> getTatuadorList() {
-        return tatuadorList;
-    }
-
     //Hashcode and equals
     @Override
     public boolean equals(Object o) {
