@@ -34,8 +34,8 @@ import java.util.ArrayList;
 public class Mapa extends AppCompatActivity {
 
     private MapView mapView;
-    Integer INITIAL_ZOOM = 5;
-    Integer millisecondSpeed = 1000;
+    private int INITIAL_ZOOM = 5;
+    private int millisecondSpeed = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

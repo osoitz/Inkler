@@ -52,11 +52,11 @@ public class FichaEstudio extends AppCompatActivity {
         db = new DBlocal(getApplicationContext());
         metodosComunes=new MetodosComunes();
         final int idEstudio = getIntent().getIntExtra("idEstudio",0);
-        estudio = db.recogerEstudio(Integer.toString(idEstudio));
-        final Integer INITIAL_ZOOM = 16;
+        estudio = db.recogerEstudio(idEstudio);
+        final int INITIAL_ZOOM = 16;
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
-        final Integer millisecondSpeed = 1000;
+        final int millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_estudio);
 
         cargartatuadores();
@@ -110,7 +110,7 @@ public class FichaEstudio extends AppCompatActivity {
         NombreEstudio.setText(estudio.getNombre());
         TextView DireccionEstudio = findViewById(R.id.printDireccion);
         DireccionEstudio.setText(estudio.getDireccion());
-        rellenarWebsEstudio(db.recogerWebsEstudio(Integer.toString(estudio.getID())));
+        rellenarWebsEstudio(db.recogerWebsEstudio(estudio.getID()));
         TextView Email = findViewById(R.id.contentMailEstudio);
         Email.setText(estudio.getEmail());
 
@@ -161,8 +161,8 @@ public class FichaEstudio extends AppCompatActivity {
         Tatuador.getTatuadorList().clear();
         String nombreEstudio = estudio.getNombre();
         int idEstudio = db.RecogerIdEstudio(nombreEstudio);
-        String idEstudioMetodo = String.valueOf(idEstudio);
-        db.recogerTatuadoresEstudio(idEstudioMetodo);
+        //String idEstudioMetodo = String.valueOf(idEstudio);
+        db.recogerTatuadoresEstudio(idEstudio);
 
         recyclerView = findViewById(R.id.recyclerTatEstudio);
         adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());

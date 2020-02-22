@@ -82,7 +82,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TABLE_FOTO =
             "CREATE TABLE " + entidadFoto.TABLE_NAME + " (" +
                     entidadFoto._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-                    entidadFoto.COLUMN_NAME_FOTO + " BLOG," +
+                    entidadFoto.COLUMN_NAME_FOTO + " BLOB," +
                     entidadFoto.COLUMN_NAME_ID_TATUADOR + " INTEGER)";
 
     private static final String SQL_DELETE_TABLE_FOTO =

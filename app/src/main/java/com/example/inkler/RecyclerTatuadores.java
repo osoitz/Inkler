@@ -48,7 +48,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
                 Tatuador tatuador = Tatuador.getTatuadorList().get(position);
-                intent.putExtra("id",tatuador.getId());
+                intent.putExtra("idTatuador",tatuador.getId());
                 startActivity(intent);
             }
 

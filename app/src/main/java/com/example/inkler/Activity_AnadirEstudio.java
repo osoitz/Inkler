@@ -35,14 +35,14 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         nuevaWeb.setVisibility(View.GONE);
 
         if (!anadir) {
-            final String idTat = DatosApp.getIdTatuador();
-            final String idEst = db.recogerTatuador(idTat).getIDEstudio();
-            et_nombre.setText(db.recogerEstudio(idTat).getNombre());
-            et_direccion.setText(db.recogerEstudio(idEst).getDireccion());
-            et_email.setText(db.recogerEstudio(idEst).getEmail());
-            et_telefono.setText(db.recogerEstudio(idEst).getTelefono());
-            et_longitud.setText(String.valueOf(db.recogerEstudio(idEst).getLongitud()));
-            et_latitud.setText(String.valueOf(db.recogerEstudio(idEst).getLatitud()));
+            final int idTatuador = DatosApp.getIdTatuador();
+            final int idEstudio = db.recogerTatuador(idTatuador).getIDEstudio();
+            et_nombre.setText(db.recogerEstudio(idTatuador).getNombre());
+            et_direccion.setText(db.recogerEstudio(idEstudio).getDireccion());
+            et_email.setText(db.recogerEstudio(idEstudio).getEmail());
+            et_telefono.setText(db.recogerEstudio(idEstudio).getTelefono());
+            et_longitud.setText(String.valueOf(db.recogerEstudio(idEstudio).getLongitud()));
+            et_latitud.setText(String.valueOf(db.recogerEstudio(idEstudio).getLatitud()));
             nuevaWeb.setVisibility(View.VISIBLE);
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -62,7 +62,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String web = input.getText().toString();
-                            db.insertarWeb(idEst, web, idTat);
+                            db.insertarWeb(idEstudio, web, idTatuador);
                         }
                     });
                     alertDialog.show();

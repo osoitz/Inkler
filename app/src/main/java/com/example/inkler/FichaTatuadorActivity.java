@@ -37,11 +37,12 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         DBlocal db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
 
-        final String idTatuador;
-        if(getIntent().getStringExtra("id") == null){
+        final int idTatuador;
+
+        if(getIntent().getIntExtra("idTatuador", -1) == -1){
             idTatuador = DatosApp.getIdTatuador();
         }else{
-            idTatuador = getIntent().getStringExtra("id");
+            idTatuador = getIntent().getIntExtra("idTatuador", -1);
             DatosApp.setIdTatuador(idTatuador);
         }
         setContentView(R.layout.activity_ficha_tatuador);
