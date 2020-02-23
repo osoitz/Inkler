@@ -114,7 +114,7 @@ public class Mapa extends AppCompatActivity {
                             public boolean onMarkerClick(@NonNull Marker marker) {
                                 Toast.makeText(Mapa.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), FichaEstudio.class);
-                                intent.putExtra("idEstudio", db.RecogerIdEstudio(marker.getTitle()));
+                                intent.putExtra("idEstudio", db.recogerIdEstudio(marker.getTitle()));
                                 startActivity(intent);
                                 //Si pasamos por aqui es que no nos hemos ido (creo)
                                 return false;

@@ -65,7 +65,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         });
         TextView et_nombreEstudio = findViewById(R.id.nombreEstudio);
         String nombreEstudio = et_nombreEstudio.getText().toString();
-        final int idEstudio = db.RecogerIdEstudio(nombreEstudio);
+        final int idEstudio = db.recogerIdEstudio(nombreEstudio);
         et_nombreEstudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
