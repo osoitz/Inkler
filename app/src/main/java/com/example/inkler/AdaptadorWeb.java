@@ -39,7 +39,7 @@ public class AdaptadorWeb extends RecyclerView.Adapter<AdaptadorWeb.ViewHolder> 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_tatuador_web,null);
+        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_web,null);
         return new ViewHolder(v);
     }
 

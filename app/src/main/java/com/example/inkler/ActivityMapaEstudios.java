@@ -48,7 +48,7 @@ public class ActivityMapaEstudios extends AppCompatActivity {
         Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
 
 // This contains the MapView in XML and needs to be called after the access token is configured.
-        setContentView(R.layout.activity_mapa);
+        setContentView(R.layout.activity_mapa_estudios);
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);

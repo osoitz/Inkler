@@ -32,7 +32,7 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__anadir_tatuador);
+        setContentView(R.layout.activity_anadir_tatuador);
         et_nombre = findViewById(R.id.contentNombre);
         et_apellidos = findViewById(R.id.contentApellido);
         et_nombreArt = findViewById(R.id.contentNombreArtistico);
