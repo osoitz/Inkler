@@ -10,16 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 //Clase que gestiona el listener del recyclerview
 
-public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
-    private OnItemClickListener mListener;
+class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
+    private final OnItemClickListener mListener;
 
 
     //Creacion interface para el click listener
     public interface OnItemClickListener{
          void onItemClick(View view, int position);
-         void onLongItemClick(View view, int position);
+         //void onLongItemClick(View view, int position);
     }
-    private GestureDetector mGestureDetector;
+    private final GestureDetector mGestureDetector;
 
     //El lisener con las opciones
     RecyclerViewListener(Context context, final RecyclerView recyclerView, OnItemClickListener listener){
@@ -29,6 +29,7 @@ public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
             public boolean onSingleTapUp(MotionEvent event){
                 return true;
             }
+            /*
             @Override
             public void onLongPress (MotionEvent event){
                 View child = recyclerView.findChildViewUnder(event.getX(), event.getY());
@@ -36,6 +37,7 @@ public class RecyclerViewListener implements RecyclerView.OnItemTouchListener {
                     mListener.onLongItemClick(child, recyclerView.getChildAdapterPosition(child));
                 }
             }
+             */
         });
     }
 

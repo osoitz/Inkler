@@ -31,6 +31,7 @@
                 android:text="@string/nombre"
                 android:textColor="@color/colorNegro"
                 android:textSize="20sp"
+                android:labelFor="@+id/contentNombre"
                 />
 
 
@@ -38,7 +39,9 @@
                 android:id="@+id/contentNombre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -54,7 +57,9 @@
                 android:layout_weight="0.5"
                 android:textSize="20sp"
                 android:textColor="@color/colorNegro"
-                android:text="@string/telefono" />
+                android:text="@string/telefono"
+                android:labelFor="@id/contentTelefono"
+                />
 
             <EditText
                 android:id="@+id/contentTelefono"
@@ -81,13 +86,17 @@
                 android:layout_weight="0.5"
                 android:textSize="20sp"
                 android:textColor="@color/colorNegro"
-                android:text="@string/direcci_n" />
+                android:text="@string/direcci_n"
+                android:labelFor="@id/contentDireccion"
+                />
 
             <EditText
                 android:id="@+id/contentDireccion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -103,13 +112,17 @@
                 android:layout_weight="0.5"
                 android:textSize="20sp"
                 android:textColor="@color/colorNegro"
-                android:text="@string/email" />
+                android:text="@string/email"
+                android:labelFor="@id/contentMail"
+                />
 
             <EditText
                 android:id="@+id/contentMail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -125,7 +138,9 @@
                 android:layout_weight="0.5"
                 android:textSize="20sp"
                 android:textColor="@color/colorNegro"
-                android:text="@string/latitud" />
+                android:text="@string/latitud"
+                android:labelFor="@id/contentLatitud"
+                />
 
             <EditText
                 android:id="@+id/contentLatitud"
@@ -148,7 +163,9 @@
                 android:layout_weight="0.5"
                 android:textSize="20sp"
                 android:textColor="@color/colorNegro"
-                android:text="@string/Longitud" />
+                android:text="@string/Longitud"
+                android:labelFor="@id/contentLongitud"
+                />
 
             <EditText
                 android:id="@+id/contentLongitud"

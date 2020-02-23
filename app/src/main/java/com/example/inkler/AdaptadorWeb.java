@@ -17,8 +17,8 @@ import java.util.List;
 // Clase adaptador para el recyclerview de las webs
 
 public class AdaptadorWeb extends RecyclerView.Adapter<AdaptadorWeb.ViewHolder> {
-    private LayoutInflater inflador;
-    private List<Web> webs;
+    private final LayoutInflater inflador;
+    private final List<Web> webs;
 
     //Constructor
     AdaptadorWeb(Context contexto, List<Web> webs){
@@ -29,7 +29,7 @@ public class AdaptadorWeb extends RecyclerView.Adapter<AdaptadorWeb.ViewHolder> 
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView nombreWeb;
+        final TextView nombreWeb;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);

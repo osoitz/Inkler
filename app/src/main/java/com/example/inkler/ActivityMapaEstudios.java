@@ -36,8 +36,8 @@ import java.util.ArrayList;
 public class ActivityMapaEstudios extends AppCompatActivity {
 
     private MapView mapView;
-    private int INITIAL_ZOOM = 5;
-    private int millisecondSpeed = 1000;
+    private final int INITIAL_ZOOM = 5;
+    private final int millisecondSpeed = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +47,7 @@ public class ActivityMapaEstudios extends AppCompatActivity {
 
 // Mapbox access token is configured here. This needs to be called either in your application
 // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
+        Mapbox.getInstance(this, App.mapBoxAcessToken);
 
 // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_mapa_estudios);
@@ -172,7 +172,7 @@ public class ActivityMapaEstudios extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
@@ -197,7 +197,7 @@ public class ActivityMapaEstudios extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));

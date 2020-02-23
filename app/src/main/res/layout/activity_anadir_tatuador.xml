@@ -32,13 +32,17 @@
                 android:layout_weight="0.5"
                 android:text="@string/nombre_artistico"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentNombreArtistico"
+                />
 
             <EditText
                 android:id="@+id/contentNombreArtistico"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -54,13 +58,17 @@
                 android:layout_weight="0.5"
                 android:text="@string/nombre"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentNombre"
+                />
 
             <EditText
                 android:id="@+id/contentNombre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -76,13 +84,17 @@
                 android:layout_weight="0.5"
                 android:text="@string/apellidos"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentApellido"
+                />
 
             <EditText
                 android:id="@+id/contentApellido"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -98,7 +110,9 @@
                 android:layout_weight="0.5"
                 android:text="@string/tattoo_studio"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/SpinnerNombreEstudios"
+                />
 
             <Spinner
                 android:id="@+id/SpinnerNombreEstudios"

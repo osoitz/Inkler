@@ -25,7 +25,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
     // Variables necesarias
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private AdaptadorTatuadores adaptador;
+    //private AdaptadorTatuadores adaptador;
     private List<Tatuador> tatuadores;
 
     @Override
@@ -55,10 +55,12 @@ public class ActivityListaTatuadores extends AppCompatActivity {
                 startActivity(intent);
             }
 
+/*
             @Override
             public void onLongItemClick(View view, int position) {
             //Nichts
             }
+*/
         }));
     }
 
@@ -67,9 +69,11 @@ public class ActivityListaTatuadores extends AppCompatActivity {
         tatuadores = db.recogerTatuadores();
 
         recyclerView = findViewById(R.id.recyclerFragment);
-        adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
+        AdaptadorTatuadores adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
         recyclerView.setAdapter(adaptador);
-        ConstraintLayout cl = findViewById(R.id.recycler_tatuadores);
+
+        //TODO: ¿Podemos hacer esto sin cargarnos el id del layout?
+        ConstraintLayout cl = findViewById(R.id.activity_lista_tatuadores);
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         } else {

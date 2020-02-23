@@ -2,8 +2,6 @@ package com.example.inkler;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,26 +11,25 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.ViewHolder> {
-    private LayoutInflater inflador;
-    protected ArrayList<Bitmap> fotos;
-    private Context contexto;
+    private final LayoutInflater inflador;
+    private final ArrayList<Bitmap> fotos;
+    //private final Context contexto;
 
 
-    public AdaptadorGaleria(Context contexto, ArrayList<Bitmap> fotos){
+    AdaptadorGaleria(Context contexto, ArrayList<Bitmap> fotos){
         inflador= (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.fotos = fotos;
-        this.contexto = contexto;
+        //this.contexto = contexto;
     }
 
 
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        public ImageView tatuaje;
+    static class ViewHolder extends RecyclerView.ViewHolder{
+        final ImageView tatuaje;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
             tatuaje = itemView.findViewById(R.id.tatuaje);
         }
@@ -40,7 +37,7 @@ public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = inflador.inflate(R.layout.galeria_selector,null);
+        View v = inflador.inflate(R.layout.galeria_selector,null); //TODO Layout inflation without a parent, avoid passing null
         return new ViewHolder(v);
     }
 

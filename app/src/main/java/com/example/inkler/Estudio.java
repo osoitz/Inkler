@@ -1,6 +1,6 @@
 package com.example.inkler;
 
-public class Estudio {
+class Estudio {
     private int idEstudio;
     private String nombre;
     private String direccion;
@@ -9,7 +9,8 @@ public class Estudio {
     private String email;
     private String telefono;
 
-    public Estudio(int idEstudio, String Nombre, String Direccion, double latitud, double longitud, String Email, String Telefono){
+    /*
+    Estudio(int idEstudio, String Nombre, String Direccion, double latitud, double longitud, String Email, String Telefono){
         this.idEstudio = idEstudio;
         this.nombre = Nombre;
         this.direccion = Direccion;
@@ -18,62 +19,62 @@ public class Estudio {
         this.email = Email;
         this.telefono = Telefono;
     }
+*/
+    Estudio() {}
 
-    public Estudio() {}
+    int getIdEstudio() {return idEstudio;}
 
-    public int getIdEstudio() {return idEstudio;}
-
-    public void setIdEstudio(int idEstudio) {
+    void setIdEstudio(int idEstudio) {
         this.idEstudio = idEstudio;
     }
 
-    public String getNombre() {
+    String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
+    void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public String getDireccion() {
+    String getDireccion() {
         return direccion;
     }
 
-    public void setDireccion(String direccion) {
+    void setDireccion(String direccion) {
         this.direccion = direccion;
     }
 
-    public double getLatitud() {
+    double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(double latitud) {
+    void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 
-    public double getLongitud() {
+    double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(double longitud) {
+    void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 
-    public String getEmail() {
+    String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    void setEmail(String email) {
         this.email = email;
     }
 
 
-    public String getTelefono() {
+    String getTelefono() {
         return telefono;
     }
 
 
-    public void setTelefono(String telefono) {
+    void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

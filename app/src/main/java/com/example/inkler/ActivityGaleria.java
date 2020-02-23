@@ -1,6 +1,5 @@
 package com.example.inkler;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -51,8 +50,12 @@ public class ActivityGaleria extends AppCompatActivity {
         db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //ActionBar actionBar = getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
         idTatuador = getIntent().getIntExtra("idTatuador", -1);
         //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
         ArrayList<Bitmap> fotos = new ArrayList<>();
@@ -69,7 +72,7 @@ public class ActivityGaleria extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
         AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
         recyclerView.setAdapter(adaptador);
-        ConstraintLayout cl = findViewById(R.id.recycler_galeria);
+        ConstraintLayout cl = findViewById(R.id.activity_galeria);
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         } else {
@@ -84,11 +87,13 @@ public class ActivityGaleria extends AppCompatActivity {
                 zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
 
             }
-
+/*
             @Override
             public void onLongItemClick(View view, int position) {
                 //Nicths
             }
+
+ */
         }));
 
         shortAnimationDuration = getResources().getInteger(
@@ -103,8 +108,7 @@ public class ActivityGaleria extends AppCompatActivity {
         }
 
         // Load the high-resolution "zoomed-in" image.
-        final ImageView expandedImageView = (ImageView) findViewById(
-                R.id.imagenGrande);
+        final ImageView expandedImageView = findViewById(R.id.imagenGrande);
         expandedImageView.setImageResource(imageResId);
 
         // Calculate the starting and ending bounds for the zoomed-in image.
@@ -256,7 +260,7 @@ public class ActivityGaleria extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));

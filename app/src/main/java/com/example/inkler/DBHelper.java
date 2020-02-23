@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 
-public class DBHelper extends SQLiteOpenHelper {
+class DBHelper extends SQLiteOpenHelper {
 
     //si cambiamos el modelo debe cambiar la version de la base de datos, así se ejecutarán los metodos onupgrade u ondowngrade
     private static final int DATABASE_VERSION = 1;

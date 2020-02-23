@@ -15,8 +15,8 @@ import java.util.List;
 // Clase adaptador para el recyclerview de los tatuadores
 
 public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadores.ViewHolder> {
-    private LayoutInflater inflador;
-    private List<Tatuador> tatuadores;
+    private final LayoutInflater inflador;
+    private final List<Tatuador> tatuadores;
 
     //Constructor
     AdaptadorTatuadores(Context contexto, List<Tatuador> tatuadores){
@@ -27,13 +27,13 @@ public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadore
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView nombreArtistico;
-        TextView nombre;
+        final TextView nombreArtistico;
+        //final TextView nombre;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
             nombreArtistico = itemView.findViewById(R.id.nombreArtistico);
-            nombre = itemView.findViewById(R.id.nombre);
+            //nombre = itemView.findViewById(R.id.nombre);
 
         }
     }

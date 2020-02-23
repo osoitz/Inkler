@@ -34,17 +34,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityFichaEstudio extends AppCompatActivity {
-    RecyclerView recyclerViewWeb;
-    private RecyclerView.LayoutManager layoutManagerWeb;
-    private AdaptadorWeb adaptadorWeb;
-    private MapView mapView;
+    private RecyclerView recyclerViewWeb;
+    //private RecyclerView.LayoutManager layoutManagerWeb;
+    //private AdaptadorWeb adaptadorWeb;
+    //private MapView mapView;
     private DBlocal db;
-    RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private AdaptadorTatuadores adaptador;
+    private RecyclerView recyclerView;
+    //private RecyclerView.LayoutManager layoutManager;
+    //private AdaptadorTatuadores adaptador;
     private Estudio estudio;
-    List<Web> webs = new ArrayList<>();
-    List<Tatuador> tatuadores = new ArrayList<>();
+    private final List<Web> webs = new ArrayList<>();
+    private List<Tatuador> tatuadores = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +53,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         estudio = db.recogerEstudio(idEstudio);
         final int INITIAL_ZOOM = 14;
         super.onCreate(savedInstanceState);
-        Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
+        Mapbox.getInstance(this, App.mapBoxAcessToken);
         final int millisecondSpeed = 1000;
         setContentView(R.layout.activity_ficha_estudio);
 
@@ -68,14 +68,15 @@ public class ActivityFichaEstudio extends AppCompatActivity {
                 intent.putExtra("id",tatuador.getId());
                 startActivity(intent);
             }
-
+/*
             @Override
             public void onLongItemClick(View view, int position) {
                 //Nichts
             }
+  */
         }));
 
-        mapView = findViewById(R.id.mapView);
+        MapView mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -132,9 +133,9 @@ public class ActivityFichaEstudio extends AppCompatActivity {
     private void rellenarWebsEstudio(List<Web> urls){
         webs.addAll(urls);
         recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
-        adaptadorWeb = new AdaptadorWeb(getApplicationContext(), webs);
+        AdaptadorWeb adaptadorWeb = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerViewWeb.setAdapter(adaptadorWeb);
-        layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerViewWeb.setLayoutManager(layoutManagerWeb);
         recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
 
@@ -147,11 +148,13 @@ public class ActivityFichaEstudio extends AppCompatActivity {
                 intent.putExtra("url", w.getUrl());
                 startActivity(intent);
             }
-
+/*
             @Override
             public void onLongItemClick(View view, int position) {
                 //Nichts
             }
+
+ */
         }));
     }
     private void cargartatuadores() {
@@ -163,9 +166,9 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         tatuadores = db.recogerTatuadoresEstudio(idEstudio);
 
         recyclerView = findViewById(R.id.recyclerTatEstudio);
-        adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
+        AdaptadorTatuadores adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
         recyclerView.setAdapter(adaptador);
-        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
         recyclerView.setLayoutManager(layoutManager);
     }
 
@@ -190,7 +193,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));

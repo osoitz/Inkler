@@ -7,10 +7,14 @@ import android.graphics.BitmapFactory;
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
 
+//Linter dice "Can be package-private, pero no"
 public class App extends Application {
 
     private static boolean admin;
     private static int idTatuador;
+    static final String mapBoxAcessToken = "pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw";
+
+    /*
     @Override
     public void onCreate() {
         super.onCreate();
@@ -20,6 +24,7 @@ public class App extends Application {
     public void onLowMemory(){
         super.onLowMemory();
     }
+*/
 
     public static boolean isAdmin() {
         return admin;

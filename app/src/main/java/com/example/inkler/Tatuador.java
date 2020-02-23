@@ -4,7 +4,7 @@ import java.util.Objects;
 
 //Clase Tatuador con los getters y setters.
 
-public class Tatuador {
+class Tatuador {
     private int id;
     private String nombreArtistico;
     private String nombre;
