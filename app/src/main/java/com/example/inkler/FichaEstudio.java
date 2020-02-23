@@ -160,7 +160,7 @@ public class FichaEstudio extends AppCompatActivity {
 
 
         String nombreEstudio = estudio.getNombre();
-        int idEstudio = db.RecogerIdEstudio(nombreEstudio);
+        int idEstudio = db.recogerIdEstudio(nombreEstudio);
         //String idEstudioMetodo = String.valueOf(idEstudio);
         tatuadores = db.recogerTatuadoresEstudio(idEstudio);
 

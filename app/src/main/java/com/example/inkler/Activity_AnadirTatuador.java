@@ -86,7 +86,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
                     String st_apellidos = et_apellidos.getText().toString();
                     String st_nombreArtistico = et_nombreArt.getText().toString();
                     String st_Estudio = spinner.getSelectedItem().toString();
-                    int IdEstudio = db.RecogerIdEstudio(st_Estudio);
+                    int IdEstudio = db.recogerIdEstudio(st_Estudio);
                     if (st_nombre.equals("") || st_apellidos.equals("") || st_nombreArtistico.equals("") || st_Estudio.equals("")) {
                         Toast.makeText(getApplicationContext(), "You may fill every empty land to insert something", Toast.LENGTH_SHORT).show();
                     } else if(anadir) {
