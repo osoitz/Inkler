@@ -228,6 +228,35 @@ public class DBlocal   {
         return estudios;
     }
 
+    public ArrayList<String> recogerNombresEstudios () {
+        SQLiteDatabase db = abrirDB();
+        ArrayList<String> nombresEstudios = new ArrayList<>();
+        //Columnas
+        String[] projection = {
+                DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE,
+        };
+
+        //Respuesta
+        //String[] selectionArgs = new String[] { "" + id } ;
+
+        Cursor cursor = db.query(
+                DBHelper.entidadEstudio.TABLE_NAME,
+                projection,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+        // recoger los datos
+        while(cursor.moveToNext()) {
+            nombresEstudios.add(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE)));
+        }
+        cursor.close();
+        db.close();
+        return nombresEstudios;
+    }
+
 
     public List<Web> recogerWebsTatuador (int id) {
         SQLiteDatabase db = abrirDB();

@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-
+//Todo, ¿es posible reducir llamadas a la BD y complejidad ciclomatica?
 public class ActivityAnadirTatuador extends AppCompatActivity {
 
     private EditText et_nombre;
@@ -32,26 +32,27 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__anadir_tatuador);
+        setContentView(R.layout.activity_anadir_tatuador);
         et_nombre = findViewById(R.id.contentNombre);
         et_apellidos = findViewById(R.id.contentApellido);
         et_nombreArt = findViewById(R.id.contentNombreArtistico);
         final boolean anadir = getIntent().getBooleanExtra("añadir", false);
         final Spinner spinner=findViewById(R.id.SpinnerNombreEstudios);
         SpinnerAdapter adapter;
-        adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, rellenarSpinner(cargarSpinner()));
+        ArrayList<String> nombresEstudios = db.recogerNombresEstudios();
+        adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, rellenarSpinner(nombresEstudios));
         spinner.setAdapter(adapter);
         FloatingActionButton fab = findViewById(R.id.btnAñadirTatuador);
         FloatingActionButton nuevaWeb = findViewById(R.id.tatuAñadirWeb);
         nuevaWeb.setVisibility(View.GONE);
+
         if(!anadir){
             final int idTatuador = App.getIdTatuador();
-            final int idEstudio = db.recogerTatuador(idTatuador).getIdEstudio();
-            Tatuador tatuador = db.recogerTatuador(idTatuador);
-            et_nombre.setText(tatuador.getNombre());
-            et_apellidos.setText(tatuador.getApellidos());
-            et_nombreArt.setText(tatuador.getNombreArtistico());
-            spinner.setSelection(posicionEstudio(cargarSpinner(),tatuador.getIdEstudio()));
+            final Tatuador tatuador = db.recogerTatuador(idTatuador);
+
+            rellenarDatosTatuador(tatuador);
+
+            spinner.setSelection(posicionEstudio(nombresEstudios,tatuador.getIdEstudio()));
             nuevaWeb.setVisibility(View.VISIBLE);
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,7 +72,7 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String web = input.getText().toString();
-                            db.insertarWeb(idEstudio, web, idTatuador);
+                            db.insertarWeb(tatuador.getIdEstudio(), web, idTatuador);
                         }
                     });
                     alertDialog.show();
@@ -108,27 +109,13 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
 
         }
 
-
-
-    public ArrayList<String> cargarSpinner(){
-        ArrayList<String> stringarray = new ArrayList<>();
-        stringarray.clear();
-        // Iniciar base de datos
-        DBHelper dbHelper = new DBHelper(getBaseContext());
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        //Columnas
-        String[] proyeccion = {DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE};
-        //Respuesta
-        Cursor cursor = db.query(DBHelper.entidadEstudio.TABLE_NAME,proyeccion,null,null,null,null,null);
-        while (cursor.moveToNext()){
-            String nombreEstudio = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE));
-            stringarray.add(nombreEstudio);
-        }
-        cursor.close();
-    return stringarray;
-
+    private void rellenarDatosTatuador(Tatuador tatuador){
+        et_nombre.setText(tatuador.getNombre());
+        et_apellidos.setText(tatuador.getApellidos());
+        et_nombreArt.setText(tatuador.getNombreArtistico());
     }
-    public String[] rellenarSpinner (ArrayList<String> stringarray){
+
+    private String[] rellenarSpinner (ArrayList<String> stringarray){
         String[] nombres = new String[stringarray.size()];
 
         for(int i=0; i<stringarray.size();i++){
@@ -136,19 +123,17 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         }
         return  nombres;
     }
-    public int posicionEstudio(ArrayList<String>stringarray, int idEstudio){
+
+    private int posicionEstudio(ArrayList<String> estudios, int idEstudio){
         int posicionEstudio=0;
 
-        String EstudioNombre = db.recogerEstudio(idEstudio).getNombre();
+        String nombreEstudio = db.recogerEstudio(idEstudio).getNombre();
 
-        //TODO Mejorable?
-        for(int i=0;i<stringarray.size();i++){
-            if(stringarray.get(i).equals(EstudioNombre)){
+        for(int i=0;i<estudios.size();i++){
+            if(estudios.get(i).equals(nombreEstudio)){
                 posicionEstudio = i;
             }
         }
-
-
 
         return posicionEstudio;
     }

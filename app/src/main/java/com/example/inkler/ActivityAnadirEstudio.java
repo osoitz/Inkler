@@ -20,7 +20,7 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__anadir_estudio);
+        setContentView(R.layout.activity_anadir_estudio);
         final DBlocal db = new DBlocal(getApplicationContext());
         final boolean anadir = getIntent().getBooleanExtra("añadir",false);
         final EditText et_nombre = findViewById(R.id.contentNombre);
