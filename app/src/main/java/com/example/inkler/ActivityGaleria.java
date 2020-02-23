@@ -33,7 +33,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class GaleriaActivity extends AppCompatActivity {
+public class ActivityGaleria extends AppCompatActivity {
 
     private RecyclerView.LayoutManager layoutManager;
     private int shortAnimationDuration;
@@ -67,7 +67,7 @@ public class GaleriaActivity extends AppCompatActivity {
         //Log.d("tag", "onCreate: "+ db.recogerFotos(idTatuador));
 
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
-        AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, fotos);
+        AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
         recyclerView.setAdapter(adaptador);
         ConstraintLayout cl = findViewById(R.id.recycler_galeria);
         if (cl == null) {
@@ -76,8 +76,8 @@ public class GaleriaActivity extends AppCompatActivity {
             layoutManager = new GridLayoutManager(getApplicationContext(), 5);
         }
         recyclerView.setLayoutManager(layoutManager);
-        //onclick para ver los datos del alumno selccionado en la activity DatosAlumno
-        recyclerView.addOnItemTouchListener(new RecyclerViewListener(GaleriaActivity.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+        //onclick para ver la foto en grande
+        recyclerView.addOnItemTouchListener(new RecyclerViewListener(ActivityGaleria.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);

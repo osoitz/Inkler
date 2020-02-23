@@ -6,7 +6,6 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View v) {
                 rellenarDB();
-                Intent intent = new Intent(MainActivity.this, RecyclerTatuadores.class);
+                Intent intent = new Intent(MainActivity.this, ActivityListaTatuadores.class);
                 startActivity(intent);
             }
         });

@@ -2,7 +2,7 @@ package com.example.inkler;
 
 import java.util.Objects;
 
-//Clase Tatuador con las listas de alumnos y los getters y setters.
+//Clase Tatuador con los getters y setters.
 
 public class Tatuador {
     private int id;

@@ -31,7 +31,7 @@ import java.util.ArrayList;
 /**
  * The most basic example of adding a map to an activity.
  */
-public class Mapa extends AppCompatActivity {
+public class ActivityMapaEstudios extends AppCompatActivity {
 
     private MapView mapView;
     private int INITIAL_ZOOM = 5;
@@ -103,7 +103,7 @@ public class Mapa extends AppCompatActivity {
                         fabLista.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(getApplicationContext(), RecyclerTatuadores.class);
+                                Intent intent = new Intent(getApplicationContext(), ActivityListaTatuadores.class);
                                 startActivity(intent);
                             }
                         });
@@ -112,8 +112,8 @@ public class Mapa extends AppCompatActivity {
                         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(@NonNull Marker marker) {
-                                Toast.makeText(Mapa.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), FichaEstudio.class);
+                                Toast.makeText(ActivityMapaEstudios.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), ActivityFichaEstudio.class);
                                 intent.putExtra("idEstudio", db.recogerIdEstudio(marker.getTitle()));
                                 startActivity(intent);
                                 //Si pasamos por aqui es que no nos hemos ido (creo)
@@ -218,21 +218,21 @@ public class Mapa extends AppCompatActivity {
             invalidateOptionsMenu();
         }
         else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirTatuador.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_tatuador) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirTatuador.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_estudio) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirEstudio.class);
             startActivity(intent);
             return true;
 

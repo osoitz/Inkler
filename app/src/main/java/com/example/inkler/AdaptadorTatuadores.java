@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-// Clase adaptador para el recyclerview de los alumnos
+// Clase adaptador para el recyclerview de los tatuadores
 
 public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadores.ViewHolder> {
     private LayoutInflater inflador;
@@ -47,7 +47,7 @@ public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadore
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Meto los datos de alumno al selector
+        //Meto los datos de tatuador al selector
         Tatuador tatuador = tatuadores.get(position);
         holder.nombreArtistico.setText(tatuador.getNombreArtistico());
     }
