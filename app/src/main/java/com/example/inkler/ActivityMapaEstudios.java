@@ -22,6 +22,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.maps.UiSettings;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -59,6 +61,12 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
+
+                        //Desactivamos la inclinacion del mapa, de esa forma no pueden aparecer los puntos dos veces
+                        UiSettings uiSettings = mapboxMap.getUiSettings();
+                        uiSettings.setTiltGesturesEnabled(false);
+
+                        //Añadimos los markers de los estudios y posicionameos la camara
                         final DBlocal db = new DBlocal(getApplicationContext());
                         ArrayList<Estudio> estudios = db.recogerEstudios();
                         Double minLat = 90.0; //Estan al reves a posta, no lo corrijais!
