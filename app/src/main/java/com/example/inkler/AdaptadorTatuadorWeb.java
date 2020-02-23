@@ -48,7 +48,7 @@ public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuador
         //Meto los datos de alumno al selector
         Web web = webs.get(position);
         String url = web.getUrl();
-        String host = MetodosComunes.extraerHost(url);
+        String host = App.extraerHost(url);
         SpannableString mitextoU = new SpannableString(host);
         mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
         holder.webTatuador.setText(mitextoU);

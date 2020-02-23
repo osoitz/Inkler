@@ -329,7 +329,7 @@ public class DBlocal   {
         while (cursor.moveToNext()){
             Log.d("HOLA!", "Estamos en el bucle de recogerFotosTatuador!");
             byte[] fotoStream = cursor.getBlob(cursor.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
-            Bitmap foto = DBBitmapUtility.getImage(fotoStream);
+            Bitmap foto = App.getImage(fotoStream);
             fotos.add(foto);
             //System.out.println("Hola");
         }

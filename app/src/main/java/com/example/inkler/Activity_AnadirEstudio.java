@@ -35,7 +35,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         nuevaWeb.setVisibility(View.GONE);
 
         if (!anadir) {
-            final int idTatuador = DatosApp.getIdTatuador();
+            final int idTatuador = App.getIdTatuador();
             final int idEstudio = db.recogerTatuador(idTatuador).getIdEstudio();
             et_nombre.setText(db.recogerEstudio(idTatuador).getNombre());
             et_direccion.setText(db.recogerEstudio(idEstudio).getDireccion());
@@ -89,7 +89,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         db.insertarEstudio(st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
                     } else {
-                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTatuador()).getIdEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
+                        db.modificarEstudio(db.recogerTatuador(App.getIdTatuador()).getIdEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido modificado", Toast.LENGTH_SHORT).show();
                     }
                     Intent intent = new Intent(Activity_AnadirEstudio.this, RecyclerTatuadores.class);

@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class RecyclerTatuadores extends AppCompatActivity {
@@ -85,7 +84,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        if (DatosApp.isAdmin()) {
+        if (App.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
             menu.setGroupVisible(R.id.logout, true);
         } else {
@@ -117,7 +116,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
                     if (getString(R.string.contraseña).equals(password)){
-                        DatosApp.setAdmin(true);
+                        App.setAdmin(true);
                         invalidateOptionsMenu();
                     }
                 }
@@ -125,7 +124,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
             alertDialog.show();
 
         } else if (id == R.id.noadmin) {
-            DatosApp.setAdmin(false);
+            App.setAdmin(false);
             invalidateOptionsMenu();
         }else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
