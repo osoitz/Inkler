@@ -36,7 +36,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
 
         if (!anadir) {
             final int idTatuador = DatosApp.getIdTatuador();
-            final int idEstudio = db.recogerTatuador(idTatuador).getIDEstudio();
+            final int idEstudio = db.recogerTatuador(idTatuador).getIdEstudio();
             et_nombre.setText(db.recogerEstudio(idTatuador).getNombre());
             et_direccion.setText(db.recogerEstudio(idEstudio).getDireccion());
             et_email.setText(db.recogerEstudio(idEstudio).getEmail());
@@ -80,7 +80,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                 String st_latitud = et_latitud.getText().toString();
 
                 if (st_nombre.equals("") || st_direccion.equals("") || st_email.equals("") || st_latitud.equals("") || st_longitud.equals("") || st_telefono.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Por favor rellena todos los datos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.fill_all, Toast.LENGTH_LONG).show();
                 } else {
                     double latitud = Double.parseDouble(st_latitud);
                     double longitud = Double.parseDouble(st_longitud);
@@ -89,7 +89,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         db.insertarEstudio(st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
                     } else {
-                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTatuador()).getIDEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
+                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTatuador()).getIdEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido modificado", Toast.LENGTH_SHORT).show();
                     }
                     Intent intent = new Intent(Activity_AnadirEstudio.this, RecyclerTatuadores.class);

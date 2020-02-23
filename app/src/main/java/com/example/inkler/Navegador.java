@@ -18,7 +18,7 @@ public class Navegador extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
-        String web = getIntent().getStringExtra("URL");
+        String web = getIntent().getStringExtra("url");
         WebView webView = findViewById(R.id.webview);
         webView.loadUrl(web);
         webView.setWebViewClient(new WebViewClient());

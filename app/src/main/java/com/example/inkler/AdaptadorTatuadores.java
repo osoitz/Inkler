@@ -16,27 +16,28 @@ import java.util.List;
 
 public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadores.ViewHolder> {
     private LayoutInflater inflador;
-    private List<Tatuador> listatatuadores;
+    private List<Tatuador> tatuadores;
 
     //Constructor
-    AdaptadorTatuadores(Context contexto, List<Tatuador> listatatuador){
+    AdaptadorTatuadores(Context contexto, List<Tatuador> tatuadores){
         inflador= (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.listatatuadores = listatatuador;
+        this.tatuadores = tatuadores;
     }
 
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView NombreArt;
-        TextView Nombre;
+        TextView nombreArtistico;
+        TextView nombre;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            NombreArt = itemView.findViewById(R.id.NombreArt);
-            Nombre = itemView.findViewById(R.id.Nombre);
+            nombreArtistico = itemView.findViewById(R.id.nombreArtistico);
+            nombre = itemView.findViewById(R.id.nombre);
 
         }
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -47,13 +48,13 @@ public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadore
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Meto los datos de alumno al selector
-        Tatuador tatuador = listatatuadores.get(position);
-        holder.NombreArt.setText(tatuador.getNombreArt());
+        Tatuador tatuador = tatuadores.get(position);
+        holder.nombreArtistico.setText(tatuador.getNombreArtistico());
     }
 
     @Override
     public int getItemCount() {
-        return listatatuadores.size();
+        return tatuadores.size();
     }
 
 }

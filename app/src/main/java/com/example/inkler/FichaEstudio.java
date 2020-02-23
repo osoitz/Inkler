@@ -10,7 +10,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.Html;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
@@ -51,10 +50,10 @@ public class FichaEstudio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = new DBlocal(getApplicationContext());
-        metodosComunes=new MetodosComunes();
+        metodosComunes = new MetodosComunes();
         final int idEstudio = getIntent().getIntExtra("idEstudio",0);
         estudio = db.recogerEstudio(idEstudio);
-        final int INITIAL_ZOOM = 16;
+        final int INITIAL_ZOOM = 14;
         super.onCreate(savedInstanceState);
         Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
         final int millisecondSpeed = 1000;
@@ -111,7 +110,7 @@ public class FichaEstudio extends AppCompatActivity {
         NombreEstudio.setText(estudio.getNombre());
         TextView DireccionEstudio = findViewById(R.id.printDireccion);
         DireccionEstudio.setText(estudio.getDireccion());
-        rellenarWebsEstudio(db.recogerWebsEstudio(estudio.getID()));
+        rellenarWebsEstudio(db.recogerWebsEstudio(estudio.getIdEstudio()));
         TextView Email = findViewById(R.id.contentMailEstudio);
         Email.setText(estudio.getEmail());
 
@@ -147,7 +146,7 @@ public class FichaEstudio extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(FichaEstudio.this, Navegador.class);
                 Web w = webs.get(position);
-                intent.putExtra("URL", w.getURL());
+                intent.putExtra("url", w.getUrl());
                 startActivity(intent);
             }
 
