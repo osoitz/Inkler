@@ -29,7 +29,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     private AdaptadorTatuadorWeb adaptador;
     private ImageView vermas;
     private boolean anadir;
-    private MetodosComunes metodosComunes;
+
     List<Web> webs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +40,13 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         final int idTatuador;
 
         if(getIntent().getIntExtra("idTatuador", -1) == -1){
-            idTatuador = DatosApp.getIdTatuador();
+            idTatuador = App.getIdTatuador();
         }else{
             idTatuador = getIntent().getIntExtra("idTatuador", -1);
-            DatosApp.setIdTatuador(idTatuador);
+            App.setIdTatuador(idTatuador);
         }
         setContentView(R.layout.activity_ficha_tatuador);
-        metodosComunes=new MetodosComunes();
+        //metodosComunes=new MetodosComunes();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         Tatuador tatuador = db.recogerTatuador(idTatuador);
@@ -163,7 +163,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        if (DatosApp.isAdmin()) {
+        if (App.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
             menu.setGroupVisible(R.id.modificar, true);
             menu.setGroupVisible(R.id.logout, true);
@@ -198,14 +198,14 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
                     if (getString(R.string.contraseña).equals(password)){
-                        DatosApp.setAdmin(true);
+                        App.setAdmin(true);
                         invalidateOptionsMenu();
                     }
                 }
             });
             alertDialog.show();
         } else if (id == R.id.noadmin) {
-            DatosApp.setAdmin(false);
+            App.setAdmin(false);
             invalidateOptionsMenu();
         }
         else if (id == R.id.añadir_tatuador) {

@@ -13,12 +13,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -33,7 +30,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 
@@ -242,7 +238,7 @@ public class GaleriaActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        if (DatosApp.isAdmin()) {
+        if (App.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, false);
             menu.setGroupVisible(R.id.modificar, false);
             menu.setGroupVisible(R.id.logout, false);
@@ -279,7 +275,7 @@ public class GaleriaActivity extends AppCompatActivity {
                     String password = input.getText().toString();
                     //TODO usuarios reales
                     if (getString(R.string.contraseña).equals(password)){
-                        DatosApp.setAdmin(true);
+                        App.setAdmin(true);
                         invalidateOptionsMenu();
                         Toast.makeText(getApplicationContext(), R.string.log_successful, Toast.LENGTH_SHORT).show();
 
@@ -291,7 +287,7 @@ public class GaleriaActivity extends AppCompatActivity {
             });
             alertDialog.show();
         } else if (id == R.id.noadmin) {
-            DatosApp.setAdmin(false);
+            App.setAdmin(false);
             invalidateOptionsMenu();
 
         }else if (id == R.id.añadir_foto) {
@@ -316,9 +312,9 @@ public class GaleriaActivity extends AppCompatActivity {
             Uri imageUri = data.getData();
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imageUri);
-                long rowid = db.insertarFoto(DBBitmapUtility.getBytes(bitmap), idTatuador);
+                long rowid = db.insertarFoto(App.getBytes(bitmap), idTatuador);
                 Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
-                db.insertarFoto(DBBitmapUtility.getBytes(bitmap), idTatuador);
+                db.insertarFoto(App.getBytes(bitmap), idTatuador);
             }
             catch (Exception e) {
                 e.printStackTrace();

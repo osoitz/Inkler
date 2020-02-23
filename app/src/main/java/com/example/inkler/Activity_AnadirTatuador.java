@@ -45,7 +45,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         FloatingActionButton nuevaWeb = findViewById(R.id.tatuAñadirWeb);
         nuevaWeb.setVisibility(View.GONE);
         if(!anadir){
-            final int idTatuador =DatosApp.getIdTatuador();
+            final int idTatuador = App.getIdTatuador();
             final int idEstudio = db.recogerTatuador(idTatuador).getIdEstudio();
             Tatuador tatuador = db.recogerTatuador(idTatuador);
             et_nombre.setText(tatuador.getNombre());
@@ -96,10 +96,10 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
                         Intent intent = new Intent(Activity_AnadirTatuador.this, RecyclerTatuadores.class);
                         startActivity(intent);
                     } else{
-                        db.modificarTatuador(DatosApp.getIdTatuador(),st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
+                        db.modificarTatuador(App.getIdTatuador(),st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
                         Toast.makeText(getApplicationContext(),"Los cambios se han realizado con exito", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(Activity_AnadirTatuador.this,FichaTatuadorActivity.class);
-                        intent.putExtra("id",DatosApp.getIdTatuador());
+                        intent.putExtra("id", App.getIdTatuador());
                         startActivity(intent);
 
                     }

@@ -172,7 +172,7 @@ public class Mapa extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        if (DatosApp.isAdmin()) {
+        if (App.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
             menu.setGroupVisible(R.id.modificar, true);
             menu.setGroupVisible(R.id.logout, true);
@@ -207,14 +207,14 @@ public class Mapa extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
                     if (getString(R.string.contraseña).equals(password)){
-                        DatosApp.setAdmin(true);
+                        App.setAdmin(true);
                         invalidateOptionsMenu();
                     }
                 }
             });
             alertDialog.show();
         } else if (id == R.id.noadmin) {
-            DatosApp.setAdmin(false);
+            App.setAdmin(false);
             invalidateOptionsMenu();
         }
         else if (id == R.id.añadir_tatuador) {
