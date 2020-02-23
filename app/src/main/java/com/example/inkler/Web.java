@@ -1,22 +1,22 @@
 package com.example.inkler;
 
-public class Web {
-    String url;
-    int idTatuador;
-    int idEstudio;
+class Web {
+    private String url;
+    private int idTatuador;
+    private int idEstudio;
 
     public Web (String url, int IdTatuador, int IdEstudio){
         this.url = url;
         this.idEstudio =IdEstudio;
         this.idTatuador =IdTatuador;
     }
-    public Web(){}
+    Web(){}
 
-    public String getUrl() {
+    String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
+    void setUrl(String url) {
         this.url = url;
     }
 
@@ -24,7 +24,7 @@ public class Web {
         return idTatuador;
     }
 
-    public void setIdTatuador(int idTatuador) {
+    void setIdTatuador(int idTatuador) {
         this.idTatuador = idTatuador;
     }
 
@@ -32,7 +32,7 @@ public class Web {
         return idEstudio;
     }
 
-    public void setIdEstudio(int idEstudio) {
+    void setIdEstudio(int idEstudio) {
         this.idEstudio = idEstudio;
     }
 

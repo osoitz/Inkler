@@ -1,6 +1,6 @@
 package com.example.inkler;
 
-import androidx.appcompat.app.ActionBar;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -24,13 +24,13 @@ import java.util.List;
 
 
 public class ActivityFichaTatuador extends AppCompatActivity {
-    RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
-    private AdaptadorWeb adaptador;
-    private ImageView vermas;
-    private boolean anadir;
+    private RecyclerView recyclerView;
+    //private RecyclerView.LayoutManager layoutManager;
+    //private AdaptadorWeb adaptador;
+    //private ImageView vermas;
+    //private boolean anadir;
 
-    List<Web> webs = new ArrayList<>();
+    private final List<Web> webs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,8 +42,13 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             App.setIdTatuador(idTatuador);
         }
         setContentView(R.layout.activity_ficha_tatuador);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        //ActionBar actionBar = getSupportActionBar();
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
 
         //Instanciamos la clase que tiene los metodos de la DB
         DBlocal db = new DBlocal(getApplicationContext());
@@ -52,7 +57,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),estudio.getLatitud() + " : " + estudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(tatuador, estudio);
         rellenarWebsTatuador(db.recogerWebsTatuador(tatuador.getId()));
-        vermas = findViewById(R.id.ivvermas);
+        ImageView vermas = findViewById(R.id.ivvermas);
         vermas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,11 +88,13 @@ public class ActivityFichaTatuador extends AppCompatActivity {
                 intent.putExtra("url", w.getUrl());
                 startActivity(intent);
             }
-
+/*
             @Override
             public void onLongItemClick(View view, int position) {
                 //Nichts
             }
+
+ */
         }));
 
 
@@ -112,9 +119,9 @@ public class ActivityFichaTatuador extends AppCompatActivity {
     private void rellenarWebsTatuador(List<Web> urls){
         webs.addAll(urls);
         recyclerView = findViewById(R.id.recyclertatuadorweb);
-        adaptador = new AdaptadorWeb(getApplicationContext(), webs);
+        AdaptadorWeb adaptador = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerView.setAdapter(adaptador);
-        layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView = findViewById(R.id.recyclertatuadorweb);
     }
@@ -142,18 +149,20 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         super.onStop();
     }
 
+    /*
     @Override
     public void onLowMemory() {
         super.onLowMemory();
     }
 
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
     }
-
+*/
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
     }
 
@@ -178,7 +187,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));
@@ -208,8 +217,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         }
         else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirTatuador.class);
-            anadir = true;
-            intent.putExtra("añadir",anadir);
+            //boolean anadir = true;
+            intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
