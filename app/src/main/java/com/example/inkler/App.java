@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class App extends Application {
 
@@ -39,6 +38,7 @@ public class App extends Application {
     }
 
     //Metodos comunes
+    /*
     public static String crearContenidoHTML(ArrayList<String> urls){
         String contenidoCampo ="";
         for (String urlString : urls){
@@ -48,7 +48,7 @@ public class App extends Application {
         //System.out.println(contenidoCampo);
         return contenidoCampo;
     }
-
+*/
 
 
     public static String extraerHost(String urlString){

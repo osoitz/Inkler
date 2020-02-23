@@ -23,17 +23,16 @@ import java.util.List;
 public class ActivityListaTatuadores extends AppCompatActivity {
 
     // Variables necesarias
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private AdaptadorTatuadores adaptador;
-    private DBlocal db;
-    List<Tatuador> tatuadores;
+    private List<Tatuador> tatuadores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_tatuadores);
-         db = new DBlocal(getApplicationContext());
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,7 +63,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
     }
 
     private void cargartatuadores() {
-
+        DBlocal db = new DBlocal(getApplicationContext());
         tatuadores = db.recogerTatuadores();
 
         recyclerView = findViewById(R.id.recyclerFragment);

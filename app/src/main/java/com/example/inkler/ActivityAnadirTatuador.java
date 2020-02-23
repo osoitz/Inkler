@@ -138,5 +138,4 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         return posicionEstudio;
     }
 
-
 }
