@@ -2,7 +2,6 @@ package com.example.inkler;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-//Todo, ¿es posible reducir llamadas a la BD y complejidad ciclomatica?
+//TODO: ¿es posible reducir llamadas a la BD y complejidad ciclomatica?
 public class ActivityAnadirTatuador extends AppCompatActivity {
 
     private EditText et_nombre;
