@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity{
             //Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);
 
             ContentValues w1 = new ContentValues();
-            w1.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "URL " + pos);
+            w1.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "url " + pos);
             w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, pos + 1);
             w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos + 1);
             db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w1);
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity{
             w12.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos + 1);
             db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w12);
 
-            //Log.d("Web", "URL " + pos);
+            //Log.d("webTatuador", "url " + pos);
 
             //para la galeria
             /*

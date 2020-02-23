@@ -46,12 +46,12 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
         nuevaWeb.setVisibility(View.GONE);
         if(!anadir){
             final int idTatuador =DatosApp.getIdTatuador();
-            final int idEstudio = db.recogerTatuador(idTatuador).getIDEstudio();
+            final int idEstudio = db.recogerTatuador(idTatuador).getIdEstudio();
             Tatuador tatuador = db.recogerTatuador(idTatuador);
             et_nombre.setText(tatuador.getNombre());
             et_apellidos.setText(tatuador.getApellidos());
-            et_nombreArt.setText(tatuador.getNombreArt());
-            spinner.setSelection(posicionEstudio(cargarSpinner(),tatuador.getIDEstudio()));
+            et_nombreArt.setText(tatuador.getNombreArtistico());
+            spinner.setSelection(posicionEstudio(cargarSpinner(),tatuador.getIdEstudio()));
             nuevaWeb.setVisibility(View.VISIBLE);
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override

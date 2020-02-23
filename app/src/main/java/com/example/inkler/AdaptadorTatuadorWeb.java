@@ -18,22 +18,22 @@ import java.util.List;
 
 public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuadorWeb.ViewHolder> {
     private LayoutInflater inflador;
-    private List<Web> listatatuadoresweb;
+    private List<Web> webs;
 
     //Constructor
-    AdaptadorTatuadorWeb(Context contexto, List<Web> listatatuador){
+    AdaptadorTatuadorWeb(Context contexto, List<Web> webs){
         inflador= (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.listatatuadoresweb = listatatuador;
+        this.webs = webs;
     }
 
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView Web;
+        TextView webTatuador;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Web = itemView.findViewById(R.id.WebTat);
+            webTatuador = itemView.findViewById(R.id.webTatuador);
         }
     }
     @NonNull
@@ -46,17 +46,17 @@ public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuador
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         //Meto los datos de alumno al selector
-        Web web = listatatuadoresweb.get(position);
-        String url = web.getURL();
-        String host = MetodosComunes.extraerhost(url);
+        Web web = webs.get(position);
+        String url = web.getUrl();
+        String host = MetodosComunes.extraerHost(url);
         SpannableString mitextoU = new SpannableString(host);
         mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        holder.Web.setText(mitextoU);
+        holder.webTatuador.setText(mitextoU);
     }
 
     @Override
     public int getItemCount() {
-        return listatatuadoresweb.size();
+        return webs.size();
     }
 
 }

@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,10 +121,10 @@ public class DBlocal   {
         if (cursor.getCount()>0) {
             cursor.moveToFirst();
             tatuador.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID)));
-            tatuador.setNombreArt(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO)));
+            tatuador.setNombreArtistico(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO)));
             tatuador.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE)));
             tatuador.setApellidos(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS)));
-            tatuador.setIDEstudio(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
+            tatuador.setIdEstudio(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO)));
 
         }
         cursor.close();
@@ -162,7 +161,7 @@ public class DBlocal   {
         // recoger los datos
         if (cursor.getCount()>0) {
             cursor.moveToFirst();
-            estudio.setID(Integer.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
+            estudio.setIdEstudio(Integer.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
             estudio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE)));
             estudio.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION)));
             estudio.setLatitud(Double.valueOf(cursor.getDouble(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
@@ -205,7 +204,7 @@ public class DBlocal   {
         // recoger los datos
         while(cursor.moveToNext()) {
             Estudio estudio = new Estudio();
-            estudio.setID(Integer.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
+            estudio.setIdEstudio(Integer.valueOf(cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio._ID))));
             estudio.setNombre(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE)));
             estudio.setDireccion(cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION)));
             estudio.setLatitud(Double.valueOf(cursor.getDouble(cursor.getColumnIndexOrThrow(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD))));
@@ -247,7 +246,7 @@ public class DBlocal   {
         while(cursor.moveToNext()) {
             String url = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
             Web web = new Web();
-            web.setURL(url);
+            web.setUrl(url);
             web.setIdTatuador(id);
             webs.add(web);
         }
@@ -284,7 +283,7 @@ public class DBlocal   {
             String url = cursor.getString(
                     cursor.getColumnIndexOrThrow(DBHelper.entidadWeb.COLUMN_NAME_URL));
             Web web = new Web();
-            web.setURL(url);
+            web.setUrl(url);
             web.setIdEstudio(id);
             webs.add(web);
         }

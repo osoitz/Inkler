@@ -49,11 +49,11 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         metodosComunes=new MetodosComunes();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
-        Tatuador miTatuador = db.recogerTatuador(idTatuador);
-        final Estudio miEstudio = db.recogerEstudio(miTatuador.getIDEstudio());
-        //Toast.makeText(getApplicationContext(),miEstudio.getLatitud() + " : " + miEstudio.getLongitud(), Toast.LENGTH_LONG).show();
-        rellenar_txt(miTatuador, miEstudio);
-        rellenarWebsTatuador(db.recogerWebsTatuador(miTatuador.getId()));
+        Tatuador tatuador = db.recogerTatuador(idTatuador);
+        final Estudio estudio = db.recogerEstudio(tatuador.getIdEstudio());
+        //Toast.makeText(getApplicationContext(),estudio.getLatitud() + " : " + estudio.getLongitud(), Toast.LENGTH_LONG).show();
+        rellenar_txt(tatuador, estudio);
+        rellenarWebsTatuador(db.recogerWebsTatuador(tatuador.getId()));
         vermas = findViewById(R.id.ivvermas);
         vermas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +82,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
                 Intent intent = new Intent(FichaTatuadorActivity.this, Navegador.class);
 
                 Web w = webs.get(position);
-                intent.putExtra("URL", w.getURL());
+                intent.putExtra("url", w.getUrl());
                 startActivity(intent);
             }
 
@@ -101,7 +101,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         TextView nombreTatuador =findViewById(R.id.nombreApellidos);
         TextView nombreEstudio =findViewById(R.id.nombreEstudio);
 
-        nombreArtistico.setText(miTatuador.getNombreArt());
+        nombreArtistico.setText(miTatuador.getNombreArtistico());
         String nombre = "(" + miTatuador.getNombre() + " " + miTatuador.getApellidos() + ")";
         nombreTatuador.setText(nombre);
 

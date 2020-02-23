@@ -38,5 +38,6 @@
     <string name="nuevaWeb">New Web</string>
     <string name="log_successful">Logged in succesfully</string>
     <string name="log_unsuccessful">Could not log in</string>
+    <string name="fill_all">Please fill all the fields</string>
 
 </resources>

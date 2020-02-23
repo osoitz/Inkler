@@ -26,7 +26,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/NombreArt"
+        android:id="@+id/nombreArtistico"
         style="@style/textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
@@ -34,13 +34,13 @@
         app:layout_constraintTop_toBottomOf="@+id/avatar" />
 
     <TextView
-        android:id="@+id/Nombre"
+        android:id="@+id/nombre"
         style="@style/textview"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.474"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NombreArt"
+        app:layout_constraintTop_toBottomOf="@+id/nombreArtistico"
         app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.Guideline

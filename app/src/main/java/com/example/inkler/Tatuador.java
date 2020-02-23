@@ -1,59 +1,57 @@
 package com.example.inkler;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 //Clase Tatuador con las listas de alumnos y los getters y setters.
 
 public class Tatuador {
     private int id;
-    private String NombreArt;
-    private String Nombre;
-    private String Apellidos;
-    private int IDEstudio;
+    private String nombreArtistico;
+    private String nombre;
+    private String apellidos;
+    private int idEstudio;
 
 
-    Tatuador(int id,String NombreArt, String Nombre, String Apellidos, int IDEstudio){
+    Tatuador(int id, String nombreArtistico, String Nombre, String Apellidos, int idEstudio){
         this.id=id;
-        this.NombreArt = NombreArt;
-        this.Nombre = Nombre;
-        this.Apellidos = Apellidos;
-        this.IDEstudio = IDEstudio;
+        this.nombreArtistico = nombreArtistico;
+        this.nombre = Nombre;
+        this.apellidos = Apellidos;
+        this.idEstudio = idEstudio;
     }
 
     Tatuador(){}
 
-    String getNombreArt() {
-        return NombreArt;
+    String getNombreArtistico() {
+        return nombreArtistico;
     }
 
-    void setNombreArt(String dni) {
-        this.NombreArt = dni;
+    void setNombreArtistico(String dni) {
+        this.nombreArtistico = dni;
     }
 
-    int getIDEstudio() {
-        return IDEstudio;
+    int getIdEstudio() {
+        return idEstudio;
     }
 
-    void setIDEstudio(int IDEstudio) {
-        this.IDEstudio = IDEstudio;
+    void setIdEstudio(int idEstudio) {
+        this.idEstudio = idEstudio;
     }
 
     String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
-        this.Nombre = nombre;
+        this.nombre = nombre;
     }
 
     String getApellidos() {
-        return Apellidos;
+        return apellidos;
     }
 
     void setApellidos(String apellidos) {
-        this.Apellidos = apellidos;
+        this.apellidos = apellidos;
     }
 
     public int getId() {
@@ -69,12 +67,12 @@ public class Tatuador {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Tatuador alumno = (Tatuador) o;
-        return NombreArt.equals(alumno.NombreArt);
+        Tatuador tatuador = (Tatuador) o;
+        return nombreArtistico.equals(tatuador.nombreArtistico);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(NombreArt);
+        return Objects.hash(nombreArtistico);
     }
 }
