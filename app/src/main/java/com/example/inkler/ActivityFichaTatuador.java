@@ -33,12 +33,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
     List<Web> webs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //Instanciamos la clasde que tiene los metodos de la DB
-        DBlocal db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
-
         final int idTatuador;
-
         if(getIntent().getIntExtra("idTatuador", -1) == -1){
             idTatuador = App.getIdTatuador();
         }else{
@@ -46,9 +42,11 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             App.setIdTatuador(idTatuador);
         }
         setContentView(R.layout.activity_ficha_tatuador);
-        //metodosComunes=new MetodosComunes();
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
+
+        //Instanciamos la clase que tiene los metodos de la DB
+        DBlocal db = new DBlocal(getApplicationContext());
         Tatuador tatuador = db.recogerTatuador(idTatuador);
         final Estudio estudio = db.recogerEstudio(tatuador.getIdEstudio());
         //Toast.makeText(getApplicationContext(),estudio.getLatitud() + " : " + estudio.getLongitud(), Toast.LENGTH_LONG).show();
