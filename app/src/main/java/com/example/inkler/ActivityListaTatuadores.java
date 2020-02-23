@@ -20,7 +20,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
 
-public class RecyclerTatuadores extends AppCompatActivity {
+public class ActivityListaTatuadores extends AppCompatActivity {
 
     // Variables necesarias
     RecyclerView recyclerView;
@@ -38,7 +38,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Mapa.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityMapaEstudios.class);
                 startActivity(intent);
             }
         });
@@ -50,7 +50,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
+                Intent intent = new Intent(ActivityListaTatuadores.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
                 intent.putExtra("idTatuador",tatuador.getId());
                 startActivity(intent);
@@ -127,13 +127,13 @@ public class RecyclerTatuadores extends AppCompatActivity {
             App.setAdmin(false);
             invalidateOptionsMenu();
         }else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityListaTatuadores.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityListaTatuadores.this, ActivityAnadirTatuador.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;

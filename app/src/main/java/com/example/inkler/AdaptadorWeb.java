@@ -14,14 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-// Clase adaptador para el recyclerview de los alumnos
+// Clase adaptador para el recyclerview de las webs
 
-public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuadorWeb.ViewHolder> {
+public class AdaptadorWeb extends RecyclerView.Adapter<AdaptadorWeb.ViewHolder> {
     private LayoutInflater inflador;
     private List<Web> webs;
 
     //Constructor
-    AdaptadorTatuadorWeb(Context contexto, List<Web> webs){
+    AdaptadorWeb(Context contexto, List<Web> webs){
         inflador= (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.webs = webs;
     }
@@ -29,11 +29,11 @@ public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuador
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView webTatuador;
+        TextView nombreWeb;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            webTatuador = itemView.findViewById(R.id.webTatuador);
+            nombreWeb = itemView.findViewById(R.id.nombreWeb);
         }
     }
     @NonNull
@@ -45,13 +45,13 @@ public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuador
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Meto los datos de alumno al selector
+        //Meto los datos de la web al selector
         Web web = webs.get(position);
         String url = web.getUrl();
         String host = App.extraerHost(url);
-        SpannableString mitextoU = new SpannableString(host);
-        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        holder.webTatuador.setText(mitextoU);
+        SpannableString nombreDecorado = new SpannableString(host);
+        nombreDecorado.setSpan(new UnderlineSpan(), 0, nombreDecorado.length(), 0);
+        holder.nombreWeb.setText(nombreDecorado);
     }
 
     @Override

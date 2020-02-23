@@ -33,10 +33,10 @@ import com.mapbox.mapboxsdk.maps.Style;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FichaEstudio extends AppCompatActivity {
+public class ActivityFichaEstudio extends AppCompatActivity {
     RecyclerView recyclerViewWeb;
     private RecyclerView.LayoutManager layoutManagerWeb;
-    private AdaptadorTatuadorWeb adaptadorWeb;
+    private AdaptadorWeb adaptadorWeb;
     private MapView mapView;
     private DBlocal db;
     RecyclerView recyclerView;
@@ -63,7 +63,7 @@ public class FichaEstudio extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(FichaEstudio.this, FichaTatuadorActivity.class);
+                Intent intent = new Intent(ActivityFichaEstudio.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
                 intent.putExtra("id",tatuador.getId());
                 startActivity(intent);
@@ -132,7 +132,7 @@ public class FichaEstudio extends AppCompatActivity {
     private void rellenarWebsEstudio(List<Web> urls){
         webs.addAll(urls);
         recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
-        adaptadorWeb = new AdaptadorTatuadorWeb(getApplicationContext(), webs);
+        adaptadorWeb = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerViewWeb.setAdapter(adaptadorWeb);
         layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerViewWeb.setLayoutManager(layoutManagerWeb);
@@ -142,7 +142,7 @@ public class FichaEstudio extends AppCompatActivity {
         recyclerViewWeb.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(FichaEstudio.this, Navegador.class);
+                Intent intent = new Intent(ActivityFichaEstudio.this, ActivityNavegador.class);
                 Web w = webs.get(position);
                 intent.putExtra("url", w.getUrl());
                 startActivity(intent);
@@ -219,21 +219,21 @@ public class FichaEstudio extends AppCompatActivity {
             invalidateOptionsMenu();
         }
         else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(FichaEstudio.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirTatuador.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(FichaEstudio.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_tatuador) {
-            Intent intent = new Intent(FichaEstudio.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirTatuador.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_estudio) {
-            Intent intent = new Intent(FichaEstudio.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
             startActivity(intent);
             return true;
 

@@ -21,7 +21,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
-public class Activity_AnadirTatuador extends AppCompatActivity {
+public class ActivityAnadirTatuador extends AppCompatActivity {
 
     private EditText et_nombre;
     private EditText et_apellidos;
@@ -56,10 +56,10 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(Activity_AnadirTatuador.this);
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(ActivityAnadirTatuador.this);
                     alertDialog.setTitle(getString(R.string.nuevaWeb));
 
-                    final EditText input = new EditText(Activity_AnadirTatuador.this);
+                    final EditText input = new EditText(ActivityAnadirTatuador.this);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT);
@@ -93,12 +93,12 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
 
                         db.insertarTatuador(st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
                         Toast.makeText(getApplicationContext(), "El tatuador " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Activity_AnadirTatuador.this, RecyclerTatuadores.class);
+                        Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityListaTatuadores.class);
                         startActivity(intent);
                     } else{
                         db.modificarTatuador(App.getIdTatuador(),st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
                         Toast.makeText(getApplicationContext(),"Los cambios se han realizado con exito", Toast.LENGTH_LONG).show();
-                        Intent intent = new Intent(Activity_AnadirTatuador.this,FichaTatuadorActivity.class);
+                        Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityFichaTatuador.class);
                         intent.putExtra("id", App.getIdTatuador());
                         startActivity(intent);
 

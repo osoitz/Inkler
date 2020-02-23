@@ -14,7 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Activity_AnadirEstudio extends AppCompatActivity {
+public class ActivityAnadirEstudio extends AppCompatActivity {
 
 
     @Override
@@ -47,10 +47,10 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(Activity_AnadirEstudio.this);
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(ActivityAnadirEstudio.this);
                     alertDialog.setTitle(getString(R.string.nuevaWeb));
 
-                    final EditText input = new EditText(Activity_AnadirEstudio.this);
+                    final EditText input = new EditText(ActivityAnadirEstudio.this);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT);
@@ -92,7 +92,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         db.modificarEstudio(db.recogerTatuador(App.getIdTatuador()).getIdEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido modificado", Toast.LENGTH_SHORT).show();
                     }
-                    Intent intent = new Intent(Activity_AnadirEstudio.this, RecyclerTatuadores.class);
+                    Intent intent = new Intent(ActivityAnadirEstudio.this, ActivityListaTatuadores.class);
                     startActivity(intent);
                 }
             }

@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class FichaTatuadorActivity extends AppCompatActivity {
+public class ActivityFichaTatuador extends AppCompatActivity {
     RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private AdaptadorTatuadorWeb adaptador;
+    private AdaptadorWeb adaptador;
     private ImageView vermas;
     private boolean anadir;
 
@@ -58,7 +58,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         vermas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FichaTatuadorActivity.this, GaleriaActivity.class);
+                Intent intent = new Intent(ActivityFichaTatuador.this, ActivityGaleria.class);
                 intent.putExtra("idTatuador", idTatuador);
                 startActivity(intent);
             }
@@ -69,7 +69,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         et_nombreEstudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FichaTatuadorActivity.this,FichaEstudio.class);
+                Intent intent = new Intent(ActivityFichaTatuador.this, ActivityFichaEstudio.class);
                 intent.putExtra("idEstudio",idEstudio);
                 startActivity(intent);
             }
@@ -79,7 +79,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
         recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(FichaTatuadorActivity.this, Navegador.class);
+                Intent intent = new Intent(ActivityFichaTatuador.this, ActivityNavegador.class);
 
                 Web w = webs.get(position);
                 intent.putExtra("url", w.getUrl());
@@ -114,7 +114,7 @@ public class FichaTatuadorActivity extends AppCompatActivity {
     private void rellenarWebsTatuador(List<Web> urls){
         webs.addAll(urls);
         recyclerView = findViewById(R.id.recyclertatuadorweb);
-        adaptador = new AdaptadorTatuadorWeb(getApplicationContext(), webs);
+        adaptador = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerView.setAdapter(adaptador);
         layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
@@ -209,22 +209,22 @@ public class FichaTatuadorActivity extends AppCompatActivity {
             invalidateOptionsMenu();
         }
         else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirTatuador.class);
             anadir = true;
             intent.putExtra("añadir",anadir);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_tatuador) {
-            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirTatuador.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_estudio) {
-            Intent intent = new Intent(FichaTatuadorActivity.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirEstudio.class);
             startActivity(intent);
             return true;
 
