@@ -37,13 +37,13 @@ public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.View
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v = inflador.inflate(R.layout.galeria_selector,null); //TODO Layout inflation without a parent, avoid passing null
+        View v = inflador.inflate(R.layout.galeria_selector, null); //TODO Layout inflation without a parent, avoid passing null
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Meto los datos de libro al selector
+        //Meto los datos al selector
         Bitmap foto = fotos.get(position);
         try{
             //Log.d("tag", "onBindViewHolder: "+ galeria.tatuaje);

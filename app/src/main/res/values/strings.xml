@@ -1,7 +1,9 @@
 <resources>
+    <string name="mapBoxAcessToken">pk.eyJ1IjoiZXF1aXBhc28xIiwiYSI6ImNrMnhhMjg0YzA5cmEzanBtNndxejQ0ZWgifQ.QLRB9ZbTIevBBxwNYvjelw</string>
     <string name="app_name">Inkler</string>
     <string name="inkler">Inkler</string>
     <string name="nombre_artistico">Artist name:</string>
+    <string name="instagram">Instagram:</string>
     <string name="email">Email:</string>
     <string name="web">Web:</string>
     <string name="sobre_el_tatuador">Webs</string>
@@ -38,5 +40,6 @@
     <string name="log_unsuccessful">Could not log in</string>
     <string name="fill_all">Please fill all the fields</string>
     <string name="tatoo">Tatoo</string>
+    <string name="add">Add</string>
 
 </resources>

@@ -3,20 +3,28 @@ package com.example.inkler;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
@@ -29,6 +37,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 
@@ -41,6 +51,10 @@ public class ActivityGaleria extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private int idTatuador;
     private DBlocal db;
+    Bitmap bmp;
+    ArrayList<Bitmap> fotos;
+    AdaptadorGaleria adaptador;
+    RecyclerView recyclerView;
 
     //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
@@ -50,28 +64,20 @@ public class ActivityGaleria extends AppCompatActivity {
         db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
+
+        solicitarPermisos();
+
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         idTatuador = getIntent().getIntExtra("idTatuador", -1);
         //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
-        ArrayList<Bitmap> fotos = new ArrayList<>();
-        try {
-            fotos = db.recogerFotosTatuador(idTatuador);
-            Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e){
-            Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
-        }
 
-        //Log.d("tag", "onCreate: "+ db.recogerFotos(idTatuador));
+        recyclerView = findViewById(R.id.recyclerGaleria);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
-        AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
-        recyclerView.setAdapter(adaptador);
+        rellenarAdaptador();
+
         ConstraintLayout cl = findViewById(R.id.activity_galeria);
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
@@ -80,27 +86,46 @@ public class ActivityGaleria extends AppCompatActivity {
         }
         recyclerView.setLayoutManager(layoutManager);
         //onclick para ver la foto en grande
-        recyclerView.addOnItemTouchListener(new RecyclerViewListener(ActivityGaleria.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+
+        RecyclerViewListener fotoClick = new RecyclerViewListener(ActivityGaleria.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
-                zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
-
-            }
-/*
-            @Override
-            public void onLongItemClick(View view, int position) {
-                //Nicths
+                Drawable foto = imageviewTatuaje.getDrawable();
+                //zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
+                zoomImageFromThumb(imageviewTatuaje, foto);
             }
 
- */
-        }));
+        });
+
+        recyclerView.addOnItemTouchListener(fotoClick);
+
+
+
+
 
         shortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
     }
-    private void zoomImageFromThumb(final View thumbView, int imageResId) {
+
+    private void rellenarAdaptador() {
+
+        //AAA
+        fotos = new ArrayList<>();
+        try {
+            fotos = db.recogerFotosTatuador(idTatuador);
+            Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
+        }
+        //AAA
+        adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
+        recyclerView.setAdapter(adaptador);
+    }
+
+    private void zoomImageFromThumb(final View thumbView, Drawable foto) { //int imageResId
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
         if (currentAnimator != null) {
@@ -109,7 +134,8 @@ public class ActivityGaleria extends AppCompatActivity {
 
         // Load the high-resolution "zoomed-in" image.
         final ImageView expandedImageView = findViewById(R.id.imagenGrande);
-        expandedImageView.setImageResource(imageResId);
+        //expandedImageView.setImageResource(imageResId);
+        expandedImageView.setImageDrawable(foto);
 
         // Calculate the starting and ending bounds for the zoomed-in image.
         // This step involves lots of math. Yay, math.
@@ -260,7 +286,6 @@ public class ActivityGaleria extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));
@@ -282,7 +307,6 @@ public class ActivityGaleria extends AppCompatActivity {
                         App.setAdmin(true);
                         invalidateOptionsMenu();
                         Toast.makeText(getApplicationContext(), R.string.log_successful, Toast.LENGTH_SHORT).show();
-
                     }
                     else{
                         Toast.makeText(getApplicationContext(), R.string.log_unsuccessful, Toast.LENGTH_SHORT).show();
@@ -295,41 +319,57 @@ public class ActivityGaleria extends AppCompatActivity {
             invalidateOptionsMenu();
 
         }else if (id == R.id.añadir_foto) {
-            openGallery();
+            //openGallery();
+            sacarFoto();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void openGallery(){
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
+    /******************************
+     *  FOTOS
+     ******************************/
+    //Este metodo lo usaremos para sacar la foto
+    public void sacarFoto(){
+        //Mediante un intente llamaremos a la camara para sacar una foto
+        Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(i,0);
     }
-    //Este es el metodo que coge la foto de la galeria y la guarda en la BD
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-
-            Toast.makeText(getApplicationContext(), "Añadiendo foto a la BD", Toast.LENGTH_SHORT).show();
-            Uri imageUri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imageUri);
-                long rowid = db.insertarFoto(App.getBytes(bitmap), idTatuador);
-                Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
-                db.insertarFoto(App.getBytes(bitmap), idTatuador);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                Log.e("Error","exceptions"+e);
-            }
-
-            //guardarImagen(imageInByte);
-
+        if (resultCode == Activity.RESULT_OK) {
+            //Una vez sacada esa foto vamos a cojerla del intent y la guardaremos en forma de bitmap
+            Bundle ext = data.getExtras();
+            bmp = (Bitmap) ext.get("data");
+            System.out.println("exito");
+            //saveTempBitmap(bmp);
+            saveImage(bmp);
         }
     }
 
 
+    private void saveImage(Bitmap finalBitmap) {
+        //Guardamos la foto en la base de datos
+        long rowid = db.insertarFoto(App.getBytes(finalBitmap), idTatuador);
+        //Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
+        //Volvemos a rellenar el adaptador para que se vean todas las fotos
+        rellenarAdaptador();
+    }
+
+    //Comprobamos si tenemos permisos de escritura, y si no los pediremos
+    private void solicitarPermisos(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisocamara = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.CAMERA);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED || permisocamara != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para la camara!.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE}, 225);
+        } else {
+            Log.i("Mensaje", "Tienes permiso para usar la camara.");
+        }
+    }
 
 }

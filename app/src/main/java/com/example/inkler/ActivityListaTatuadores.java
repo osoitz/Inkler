@@ -43,7 +43,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
         });
 
         //Alimentamos el adaptador desde la BD
-        cargartatuadores();
+        cargarTatuadores();
 
         //Acciones del onclick y onlongclick del recycler
         recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
@@ -64,7 +64,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
         }));
     }
 
-    private void cargartatuadores() {
+    private void cargarTatuadores() {
         DBlocal db = new DBlocal(getApplicationContext());
         tatuadores = db.recogerTatuadores();
 
