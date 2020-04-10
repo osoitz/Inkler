@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_AnadirEstudio">
+    tools:context=".ActivityAnadirEstudio">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -31,14 +31,18 @@
                 android:layout_weight="0.5"
                 android:text="@string/nombre"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentNombre"
+                />
 
 
             <EditText
                 android:id="@+id/contentNombre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -54,7 +58,9 @@
                 android:layout_weight="0.5"
                 android:text="@string/telefono"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentTelefono"
+                />
 
             <EditText
                 android:id="@+id/contentTelefono"
@@ -81,13 +87,17 @@
                 android:layout_weight="0.5"
                 android:text="@string/email"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentMail"
+                />
 
             <EditText
                 android:id="@+id/contentMail"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
 
@@ -117,13 +127,17 @@
                 android:layout_weight="0.5"
                 android:text="@string/direcci_n"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentDireccion"
+                />
 
             <EditText
                 android:id="@+id/contentDireccion"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -139,7 +153,9 @@
                 android:layout_weight="0.5"
                 android:text="@string/latitud"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentLatitud"
+                />
 
             <EditText
                 android:id="@+id/contentLatitud"
@@ -162,7 +178,9 @@
                 android:layout_weight="0.5"
                 android:text="@string/Longitud"
                 android:textColor="@color/colorNegro"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:labelFor="@id/contentLongitud"
+                />
 
             <EditText
                 android:id="@+id/contentLongitud"
@@ -200,5 +218,16 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    android:id="@+id/btnAñadirEstudio"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom|end"
+    android:layout_margin="@dimen/fab_margin"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:maxImageSize="48dp"
+    app:srcCompat="@android:drawable/ic_menu_save" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -37,5 +37,9 @@
     <string name="labelFichaEstudio">Estudioa</string>
     <string name="nuevaWeb">Web Berria</string>
     <string name="add">Gehitu</string>
+    <string name="log_successful">Saioa ongi hasi da</string>
+    <string name="log_unsuccessful">Ezin izan da saioa hasi</string>
+    <string name="fill_all">Bete eremu guztiak mesedez</string>
+    <string name="tatoo">Tatoo</string>
 
 </resources>

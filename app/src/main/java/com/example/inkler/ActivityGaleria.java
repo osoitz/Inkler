@@ -1,6 +1,5 @@
 package com.example.inkler;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -13,11 +12,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -30,29 +27,22 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
 
 
-public class GaleriaActivity extends AppCompatActivity {
+public class ActivityGaleria extends AppCompatActivity {
 
-    RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private DBHelper dbHelper;
-    private SQLiteDatabase dbsqlite;
-    private Galeria BDSQLite;
-    private String nombre;
-    private String tatuaje;
     private int shortAnimationDuration;
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
     private static final int PICK_IMAGE = 100;
-    private Uri imageUri;
-    private String idTatuador;
+    private int idTatuador;
     private DBlocal db;
-    private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
-
+    //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
 
     @Override
@@ -60,37 +50,50 @@ public class GaleriaActivity extends AppCompatActivity {
         db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
+        //ActionBar actionBar = getSupportActionBar();
+        //actionBar.setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null){
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        idTatuador = DatosApp.getIdTatuador();
-
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
-        db.recogerFotos(idTatuador);
+        idTatuador = getIntent().getIntExtra("idTatuador", -1);
+        //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
+        ArrayList<Bitmap> fotos = new ArrayList<>();
+        try {
+            fotos = db.recogerFotosTatuador(idTatuador);
+            Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
+        }
 
         //Log.d("tag", "onCreate: "+ db.recogerFotos(idTatuador));
+
         RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
-        AdaptadorGaleria adaptador = new AdaptadorGaleria(GaleriaActivity.this, Galeria.getGaleriaList());
+        AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
         recyclerView.setAdapter(adaptador);
-        ConstraintLayout cl = findViewById(R.id.recycler_galeria);
+        ConstraintLayout cl = findViewById(R.id.activity_galeria);
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         } else {
             layoutManager = new GridLayoutManager(getApplicationContext(), 5);
         }
         recyclerView.setLayoutManager(layoutManager);
-        //onclick para ver los datos del alumno selccionado en la activity DatosAlumno
-        recyclerView.addOnItemTouchListener(new RecyclerViewListener(GaleriaActivity.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+        //onclick para ver la foto en grande
+        recyclerView.addOnItemTouchListener(new RecyclerViewListener(ActivityGaleria.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
                 zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
 
             }
-
+/*
             @Override
             public void onLongItemClick(View view, int position) {
                 //Nicths
             }
+
+ */
         }));
 
         shortAnimationDuration = getResources().getInteger(
@@ -105,8 +108,7 @@ public class GaleriaActivity extends AppCompatActivity {
         }
 
         // Load the high-resolution "zoomed-in" image.
-        final ImageView expandedImageView = (ImageView) findViewById(
-                R.id.imagenGrande);
+        final ImageView expandedImageView = findViewById(R.id.imagenGrande);
         expandedImageView.setImageResource(imageResId);
 
         // Calculate the starting and ending bounds for the zoomed-in image.
@@ -240,7 +242,7 @@ public class GaleriaActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        if (DatosApp.isAdmin()) {
+        if (App.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, false);
             menu.setGroupVisible(R.id.modificar, false);
             menu.setGroupVisible(R.id.logout, false);
@@ -258,7 +260,7 @@ public class GaleriaActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));
@@ -275,15 +277,21 @@ public class GaleriaActivity extends AppCompatActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
+                    //TODO usuarios reales
                     if (getString(R.string.contraseña).equals(password)){
-                        DatosApp.setAdmin(true);
+                        App.setAdmin(true);
                         invalidateOptionsMenu();
+                        Toast.makeText(getApplicationContext(), R.string.log_successful, Toast.LENGTH_SHORT).show();
+
+                    }
+                    else{
+                        Toast.makeText(getApplicationContext(), R.string.log_unsuccessful, Toast.LENGTH_SHORT).show();
                     }
                 }
             });
             alertDialog.show();
         } else if (id == R.id.noadmin) {
-            DatosApp.setAdmin(false);
+            App.setAdmin(false);
             invalidateOptionsMenu();
 
         }else if (id == R.id.añadir_foto) {
@@ -303,55 +311,25 @@ public class GaleriaActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-            imageUri = data.getData();
-            Log.d("tag", "onActivityResult: " + data.getData());
 
-            //Mostramos la foto recien subida
-            final ImageView imageviewTatuaje = findViewById(R.id.imagenGrande);
-            imageviewTatuaje.setVisibility(View.VISIBLE);
-            imageviewTatuaje.setImageURI(imageUri);
-            Log.d("tag", "imageviewTatuaje: " + imageUri);
+            Toast.makeText(getApplicationContext(), "Añadiendo foto a la BD", Toast.LENGTH_SHORT).show();
+            Uri imageUri = data.getData();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imageUri);
+                long rowid = db.insertarFoto(App.getBytes(bitmap), idTatuador);
+                Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
+                db.insertarFoto(App.getBytes(bitmap), idTatuador);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                Log.e("Error","exceptions"+e);
+            }
 
-            //Convertimos a bitmap
-            BitmapDrawable drawable = (BitmapDrawable) imageviewTatuaje.getDrawable();
-            Bitmap bitmap = drawable.getBitmap();
-
-
-            // convert bitmap to byte
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            byte imageInByte[] = stream.toByteArray();
-
-            db.insertarFoto(bitmap, idTatuador);
             //guardarImagen(imageInByte);
 
         }
     }
 
-    private void saveImage(Bitmap finalBitmap) {
 
-    }
-
-
-    public void guardarImagen( byte bitmap[]){
-        // tamaño del baos depende del tamaño de tus imagenes en promedio
-      /*  ByteArrayOutputStream baos = new ByteArrayOutputStream(20480);
-        bitmap.compress(Bitmap.CompressFormat.PNG, 0 , baos);
-        byte[] blob = baos.toByteArray();
-        // aqui tenemos el byte[] con el imagen comprimido, ahora lo guardemos en SQLite
-        SQLiteDatabase db = DBHelper.entidadFoto.();
-
-        String sql = "INSERT INTO entidadFoto (id, img) VALUES(?,?)";
-        SQLiteStatement insert = db.compileStatement(sql);
-        insert.clearBindings();
-        insert.bindBlob(2, blob);
-        insert.executeInsert();
-*/
-        // Gets the data repository in write mode
-
-
-
-
-    }
 
 }

@@ -5,17 +5,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity_AnadirEstudio">
+    android:layout_margin="16dp"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context=".ActivityAnadirTatuador">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:weightSum="1">
+
+            <TextView
+                android:id="@+id/labelNombreArtistico"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="@string/nombre_artistico"
+                android:textColor="@color/colorNegro"
+                android:textSize="20sp"
+                android:labelFor="@id/contentNombreArtistico"
+                />
+
+            <EditText
+                android:id="@+id/contentNombreArtistico"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -31,14 +59,16 @@
                 android:text="@string/nombre"
                 android:textColor="@color/colorNegro"
                 android:textSize="20sp"
+                android:labelFor="@id/contentNombre"
                 />
-
 
             <EditText
                 android:id="@+id/contentNombre"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -48,24 +78,23 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/labelTelefono"
+                android:id="@+id/labelApellido"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textSize="20sp"
+                android:text="@string/apellidos"
                 android:textColor="@color/colorNegro"
-                android:text="@string/telefono" />
-
-            <EditText
-                android:id="@+id/contentTelefono"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:inputType="numberSigned"
-                android:maxLength="9"
-
+                android:textSize="20sp"
+                android:labelFor="@id/contentApellido"
                 />
 
+            <EditText
+                android:id="@+id/contentApellido"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:inputType="text"
+                />
         </LinearLayout>
 
         <LinearLayout
@@ -75,90 +104,24 @@
             android:weightSum="1">
 
             <TextView
-                android:id="@+id/labelDireccion"
+                android:id="@+id/labelEstudio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:textSize="20sp"
+                android:text="@string/tattoo_studio"
                 android:textColor="@color/colorNegro"
-                android:text="@string/direcci_n" />
+                android:textSize="20sp"
+                android:labelFor="@id/SpinnerNombreEstudios"
+                />
 
-            <EditText
-                android:id="@+id/contentDireccion"
+            <Spinner
+                android:id="@+id/SpinnerNombreEstudios"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/labelMail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:textSize="20sp"
-                android:textColor="@color/colorNegro"
-                android:text="@string/email" />
-
-            <EditText
-                android:id="@+id/contentMail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/labelLatitud"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:textSize="20sp"
-                android:textColor="@color/colorNegro"
-                android:text="@string/latitud" />
-
-            <EditText
-                android:id="@+id/contentLatitud"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:inputType="numberSigned|numberDecimal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:weightSum="1">
-
-            <TextView
-                android:id="@+id/labelLongitud"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:textSize="20sp"
-                android:textColor="@color/colorNegro"
-                android:text="@string/Longitud" />
-
-            <EditText
-                android:id="@+id/contentLongitud"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.5"
-                android:inputType="numberSigned|numberDecimal" />
         </LinearLayout>
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/estuAñadirWeb"
+            android:id="@+id/tatuAñadirWeb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
@@ -166,11 +129,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:maxImageSize="48dp"
             app:srcCompat="@drawable/plus" />
-
     </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnAñadirEstudio"
+        android:id="@+id/btnAñadirTatuador"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"

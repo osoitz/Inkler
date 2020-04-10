@@ -14,13 +14,13 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class Activity_AnadirEstudio extends AppCompatActivity {
+public class ActivityAnadirEstudio extends AppCompatActivity {
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__anadir_estudio);
+        setContentView(R.layout.activity_anadir_estudio);
         final DBlocal db = new DBlocal(getApplicationContext());
         final boolean anadir = getIntent().getBooleanExtra("añadir",false);
         final EditText et_nombre = findViewById(R.id.contentNombre);
@@ -35,22 +35,22 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
         nuevaWeb.setVisibility(View.GONE);
 
         if (!anadir) {
-            final String idTat = DatosApp.getIdTatuador();
-            final String idEst = db.recogerTatuador(idTat).getIDEstudio();
-            et_nombre.setText(db.recogerEstudio(idTat).getNombre());
-            et_direccion.setText(db.recogerEstudio(idEst).getDireccion());
-            et_email.setText(db.recogerEstudio(idEst).getEmail());
-            et_telefono.setText(db.recogerEstudio(idEst).getTelefono());
-            et_longitud.setText(String.valueOf(db.recogerEstudio(idEst).getLongitud()));
-            et_latitud.setText(String.valueOf(db.recogerEstudio(idEst).getLatitud()));
+            final int idTatuador = App.getIdTatuador();
+            final int idEstudio = db.recogerTatuador(idTatuador).getIdEstudio();
+            et_nombre.setText(db.recogerEstudio(idTatuador).getNombre());
+            et_direccion.setText(db.recogerEstudio(idEstudio).getDireccion());
+            et_email.setText(db.recogerEstudio(idEstudio).getEmail());
+            et_telefono.setText(db.recogerEstudio(idEstudio).getTelefono());
+            et_longitud.setText(String.valueOf(db.recogerEstudio(idEstudio).getLongitud()));
+            et_latitud.setText(String.valueOf(db.recogerEstudio(idEstudio).getLatitud()));
             nuevaWeb.setVisibility(View.VISIBLE);
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(Activity_AnadirEstudio.this);
+                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(ActivityAnadirEstudio.this);
                     alertDialog.setTitle(getString(R.string.nuevaWeb));
 
-                    final EditText input = new EditText(Activity_AnadirEstudio.this);
+                    final EditText input = new EditText(ActivityAnadirEstudio.this);
                     LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.MATCH_PARENT);
@@ -62,7 +62,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String web = input.getText().toString();
-                            db.insertarWeb(idEst, web, idTat);
+                            db.insertarWeb(idEstudio, web, idTatuador);
                         }
                     });
                     alertDialog.show();
@@ -80,7 +80,7 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                 String st_latitud = et_latitud.getText().toString();
 
                 if (st_nombre.equals("") || st_direccion.equals("") || st_email.equals("") || st_latitud.equals("") || st_longitud.equals("") || st_telefono.equals("")) {
-                    Toast.makeText(getApplicationContext(), "Por favor rellena todos los datos", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.fill_all, Toast.LENGTH_LONG).show();
                 } else {
                     double latitud = Double.parseDouble(st_latitud);
                     double longitud = Double.parseDouble(st_longitud);
@@ -89,10 +89,10 @@ public class Activity_AnadirEstudio extends AppCompatActivity {
                         db.insertarEstudio(st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
                     } else {
-                        db.modificarEstudio(db.recogerTatuador(DatosApp.getIdTatuador()).getIDEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
+                        db.modificarEstudio(db.recogerTatuador(App.getIdTatuador()).getIdEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
                         Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido modificado", Toast.LENGTH_SHORT).show();
                     }
-                    Intent intent = new Intent(Activity_AnadirEstudio.this, RecyclerTatuadores.class);
+                    Intent intent = new Intent(ActivityAnadirEstudio.this, ActivityListaTatuadores.class);
                     startActivity(intent);
                 }
             }

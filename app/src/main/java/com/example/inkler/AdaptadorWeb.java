@@ -14,49 +14,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-// Clase adaptador para el recyclerview de los alumnos
+// Clase adaptador para el recyclerview de las webs
 
-public class AdaptadorTatuadorWeb extends RecyclerView.Adapter<AdaptadorTatuadorWeb.ViewHolder> {
-    private LayoutInflater inflador;
-    private List<Web> listatatuadoresweb;
+public class AdaptadorWeb extends RecyclerView.Adapter<AdaptadorWeb.ViewHolder> {
+    private final LayoutInflater inflador;
+    private final List<Web> webs;
 
     //Constructor
-    AdaptadorTatuadorWeb(Context contexto, List<Web> listatatuador){
+    AdaptadorWeb(Context contexto, List<Web> webs){
         inflador= (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.listatatuadoresweb = listatatuador;
+        this.webs = webs;
     }
 
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView Web;
+        final TextView nombreWeb;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Web = itemView.findViewById(R.id.WebTat);
+            nombreWeb = itemView.findViewById(R.id.nombreWeb);
         }
     }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_tatuador_web,null);
+        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_web,null);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Meto los datos de alumno al selector
-        Web web = listatatuadoresweb.get(position);
-        String url = web.getURL();
-        String host = MetodosComunes.extraerhost(url);
-        SpannableString mitextoU = new SpannableString(host);
-        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        holder.Web.setText(mitextoU);
+        //Meto los datos de la web al selector
+        Web web = webs.get(position);
+        String url = web.getUrl();
+        String host = App.extraerHost(url);
+        SpannableString nombreDecorado = new SpannableString(host);
+        nombreDecorado.setSpan(new UnderlineSpan(), 0, nombreDecorado.length(), 0);
+        holder.nombreWeb.setText(nombreDecorado);
     }
 
     @Override
     public int getItemCount() {
-        return listatatuadoresweb.size();
+        return webs.size();
     }
 
 }

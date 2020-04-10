@@ -22,6 +22,8 @@ import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
+import com.mapbox.mapboxsdk.maps.UiSettings;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,11 +33,11 @@ import java.util.ArrayList;
 /**
  * The most basic example of adding a map to an activity.
  */
-public class Mapa extends AppCompatActivity {
+public class ActivityMapaEstudios extends AppCompatActivity {
 
     private MapView mapView;
-    Integer INITIAL_ZOOM = 5;
-    Integer millisecondSpeed = 1000;
+    private final int INITIAL_ZOOM = 5;
+    private final int millisecondSpeed = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +47,10 @@ public class Mapa extends AppCompatActivity {
 
 // Mapbox access token is configured here. This needs to be called either in your application
 // object or in the same activity which contains the mapview.
-        Mapbox.getInstance(this, getString(R.string.mapBoxAcessToken));
+        Mapbox.getInstance(this, App.mapBoxAcessToken);
 
 // This contains the MapView in XML and needs to be called after the access token is configured.
-        setContentView(R.layout.activity_mapa);
+        setContentView(R.layout.activity_mapa_estudios);
 
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -59,6 +61,12 @@ public class Mapa extends AppCompatActivity {
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
+
+                        //Desactivamos la inclinacion del mapa, de esa forma no pueden aparecer los puntos dos veces
+                        UiSettings uiSettings = mapboxMap.getUiSettings();
+                        uiSettings.setTiltGesturesEnabled(false);
+
+                        //Añadimos los markers de los estudios y posicionameos la camara
                         final DBlocal db = new DBlocal(getApplicationContext());
                         ArrayList<Estudio> estudios = db.recogerEstudios();
                         Double minLat = 90.0; //Estan al reves a posta, no lo corrijais!
@@ -103,7 +111,7 @@ public class Mapa extends AppCompatActivity {
                         fabLista.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Intent intent = new Intent(getApplicationContext(), RecyclerTatuadores.class);
+                                Intent intent = new Intent(getApplicationContext(), ActivityListaTatuadores.class);
                                 startActivity(intent);
                             }
                         });
@@ -112,9 +120,9 @@ public class Mapa extends AppCompatActivity {
                         mapboxMap.setOnMarkerClickListener(new MapboxMap.OnMarkerClickListener() {
                             @Override
                             public boolean onMarkerClick(@NonNull Marker marker) {
-                                Toast.makeText(Mapa.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(getApplicationContext(), FichaEstudio.class);
-                                intent.putExtra("idEstudio", db.RecogerIdEstudio(marker.getTitle()));
+                                Toast.makeText(ActivityMapaEstudios.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), ActivityFichaEstudio.class);
+                                intent.putExtra("idEstudio", db.recogerIdEstudio(marker.getTitle()));
                                 startActivity(intent);
                                 //Si pasamos por aqui es que no nos hemos ido (creo)
                                 return false;
@@ -164,7 +172,7 @@ public class Mapa extends AppCompatActivity {
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
     }
@@ -172,7 +180,7 @@ public class Mapa extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        if (DatosApp.isAdmin()) {
+        if (App.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
             menu.setGroupVisible(R.id.modificar, true);
             menu.setGroupVisible(R.id.logout, true);
@@ -189,7 +197,7 @@ public class Mapa extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));
@@ -207,32 +215,32 @@ public class Mapa extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
                     if (getString(R.string.contraseña).equals(password)){
-                        DatosApp.setAdmin(true);
+                        App.setAdmin(true);
                         invalidateOptionsMenu();
                     }
                 }
             });
             alertDialog.show();
         } else if (id == R.id.noadmin) {
-            DatosApp.setAdmin(false);
+            App.setAdmin(false);
             invalidateOptionsMenu();
         }
         else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirTatuador.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_tatuador) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirTatuador.class);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_estudio) {
-            Intent intent = new Intent(Mapa.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirEstudio.class);
             startActivity(intent);
             return true;
 

@@ -37,5 +37,9 @@
     <string name="labelFichaEstudio">Estudio</string>
     <string name="nuevaWeb">Nueva Web</string>
     <string name="add">Añadir</string>
+    <string name="log_successful">Sesion iniciada exitosamente</string>
+    <string name="log_unsuccessful">No se pudo iniciar sesión</string>
+    <string name="fill_all">Por favor rellena todos los datos</string>
+    <string name="tatoo">Tatoo</string>
 
 </resources>
