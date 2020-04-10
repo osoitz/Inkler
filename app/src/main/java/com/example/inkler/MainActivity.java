@@ -4,8 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -14,18 +17,22 @@ public class MainActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button rellenardb = findViewById(R.id.rellenardb);
+        DBlocal db = new DBlocal(getApplicationContext());
+        boolean llena = db.checkEmpty();
+        if (llena){
+            Log.d("DBCHECK", "LA BASE DE DATOS TIENE INFORMACION");
+        } else {
+            Log.d("DBCHECK", "LA BASE DE DATOS ESTA VACIA, RELLENANDO...");
+            db.rellenarDB(getApplicationContext());
+        }
 
-        rellenardb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //TODO txapu
-                DBlocal db = new DBlocal(getApplicationContext());
-                db.rellenarDB(getApplicationContext());
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 Intent intent = new Intent(MainActivity.this, ActivityListaTatuadores.class);
                 startActivity(intent);
             }
-        });
+        }, 2000);   //2 seconds
 
     }
 
