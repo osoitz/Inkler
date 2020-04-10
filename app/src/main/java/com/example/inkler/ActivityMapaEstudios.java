@@ -66,6 +66,9 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                         UiSettings uiSettings = mapboxMap.getUiSettings();
                         uiSettings.setTiltGesturesEnabled(false);
 
+                        //Limitar el zoom del mapa (tamaño españa)
+                        mapboxMap.setMinZoomPreference(5);
+
                         //Añadimos los markers de los estudios y posicionameos la camara
                         final DBlocal db = new DBlocal(getApplicationContext());
                         ArrayList<Estudio> estudios = db.recogerEstudios();
