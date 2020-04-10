@@ -3,20 +3,27 @@ package com.example.inkler;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.Manifest;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.app.Activity;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
@@ -29,6 +36,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 
@@ -41,6 +50,7 @@ public class ActivityGaleria extends AppCompatActivity {
     private static final int PICK_IMAGE = 100;
     private int idTatuador;
     private DBlocal db;
+    Bitmap bmp;
 
     //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
@@ -52,6 +62,7 @@ public class ActivityGaleria extends AppCompatActivity {
         setContentView(R.layout.activity_galeria);
         //ActionBar actionBar = getSupportActionBar();
         //actionBar.setDisplayHomeAsUpEnabled(true);
+        solicitarPermisos();
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -260,7 +271,6 @@ public class ActivityGaleria extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-
         if (id == R.id.admin){
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setTitle(getString(R.string.contraseñatitle));
@@ -282,7 +292,6 @@ public class ActivityGaleria extends AppCompatActivity {
                         App.setAdmin(true);
                         invalidateOptionsMenu();
                         Toast.makeText(getApplicationContext(), R.string.log_successful, Toast.LENGTH_SHORT).show();
-
                     }
                     else{
                         Toast.makeText(getApplicationContext(), R.string.log_unsuccessful, Toast.LENGTH_SHORT).show();
@@ -295,13 +304,89 @@ public class ActivityGaleria extends AppCompatActivity {
             invalidateOptionsMenu();
 
         }else if (id == R.id.añadir_foto) {
-            openGallery();
+            //openGallery();
+            sacarFoto();
             return true;
         }
 
         return super.onOptionsItemSelected(item);
     }
 
+    /******************************
+     *  Metodo "nuevo"
+     ******************************/
+
+    //Este metodo lo usaremos para sacar la foto
+    public void sacarFoto(){
+        //Mediante un intente llamaremos a la camara para sacar una foto
+        Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(i,0);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == Activity.RESULT_OK) {
+            //Una vez sacada esa foto vamos a cojerla del intent y la guardaremos en forma de bitmap
+            Bundle ext = data.getExtras();
+            bmp = (Bitmap) ext.get("data");
+            System.out.println("exito");
+            //saveTempBitmap(bmp);
+            saveImage(bmp);
+        }
+    }
+    //Aqui comprobaremos si tenemos los permisos de escritura y si no lo tenemos los pediremos
+    private void solicitarPermisos(){
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisocamara = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.CAMERA);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED || permisocamara != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para la camara!.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE}, 225);
+        } else {
+            Log.i("Mensaje", "Tienes permiso para usar la camara.");
+        }
+    }
+
+    private void saveImage(Bitmap finalBitmap) {
+        //Con este metodo guardaremos la foto en la base de datos
+        //ContentValues values = new ContentValues();
+        long rowid = db.insertarFoto(App.getBytes(finalBitmap), idTatuador);
+        Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
+
+        /*
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/saved_images");
+        myDir.mkdirs();
+        String fname = IDfoto +".jpg";
+        File file = new File(myDir, fname);
+        if (file.exists()) file.delete ();
+        try {
+            //FileOutputStream out = new FileOutputStream(file);
+            //finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            //out.flush();
+            //out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+         */
+    }
+
+    /* Aqui se comprobara si el almacenamiento esta disponible para leerlo y escribirlo */
+    public boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(state)) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    /*******************************
+     *  Metodo "antiguo"
+     *****************************/
+    /*
     private void openGallery(){
         Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         startActivityForResult(gallery, PICK_IMAGE);
@@ -329,7 +414,7 @@ public class ActivityGaleria extends AppCompatActivity {
 
         }
     }
-
+    */
 
 
 }
