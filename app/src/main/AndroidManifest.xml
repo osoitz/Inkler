@@ -5,9 +5,12 @@
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".DatosApp"
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/iconsquare"
         android:label="@string/app_name"
@@ -16,12 +19,12 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".FichaEstudio"
+        <activity android:name=".ActivityFichaEstudio"
             android:label="@string/labelFichaEstudio"
-            android:parentActivityName=".FichaTatuadorActivity">
+            android:parentActivityName=".ActivityFichaTatuador">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FichaTatuadorActivity" />
+                android:value=".ActivityFichaTatuador" />
 
             <intent-filter>
                 <action android:name="android.intent.action.FichaEstudio" />
@@ -30,12 +33,12 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".Mapa"
+        <activity android:name=".ActivityMapaEstudios"
             android:label="Mapa"
-            android:parentActivityName=".FichaTatuadorActivity">
+            android:parentActivityName=".ActivityFichaTatuador">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FichaTatuadorActivity" />
+                android:value=".ActivityFichaTatuador" />
 
             <intent-filter>
                 <action android:name="android.intent.action.Mapa" />
@@ -43,12 +46,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Navegador"
+            android:name=".ActivityNavegador"
             android:label="@string/labelnavegador"
-            android:parentActivityName=".FichaTatuadorActivity">
+            android:parentActivityName=".ActivityFichaTatuador">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FichaTatuadorActivity" />
+                android:value=".ActivityFichaTatuador" />
 
             <intent-filter>
                 <action android:name="android.intent.action.Navegador" />
@@ -57,12 +60,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity_AnadirEstudio"
+            android:name=".ActivityAnadirEstudio"
             android:label="@string/labelanadirestudio"
-            android:parentActivityName=".RecyclerTatuadores">
+            android:parentActivityName=".ActivityListaTatuadores">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".RecyclerTatuadores" />
+                android:value=".ActivityListaTatuadores" />
 
             <intent-filter>
                 <action android:name="android.intent.action.Activity_AnadirEstudio" />
@@ -71,12 +74,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activity_AnadirTatuador"
+            android:name=".ActivityAnadirTatuador"
             android:label="@string/labelanadirtatuador"
-            android:parentActivityName=".RecyclerTatuadores">
+            android:parentActivityName=".ActivityListaTatuadores">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".RecyclerTatuadores" />
+                android:value=".ActivityListaTatuadores" />
 
             <intent-filter>
                 <action android:name="android.intent.action.Activity_AnadirTatuador" />
@@ -85,12 +88,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GaleriaActivity"
+            android:name=".ActivityGaleria"
             android:label="@string/labelgaleiratatuador"
-            android:parentActivityName=".FichaTatuadorActivity">
+            android:parentActivityName=".ActivityFichaTatuador">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".FichaTatuadorActivity" />
+                android:value=".ActivityFichaTatuador" />
 
             <intent-filter>
                 <action android:name="android.intent.action.GaleriaActivity" />
@@ -99,7 +102,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RecyclerTatuadores"
+            android:name=".ActivityListaTatuadores"
             android:label="@string/labelrvtatuadores" />
         <activity
             android:name=".MainActivity"
@@ -111,12 +114,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FichaTatuadorActivity"
+            android:name=".ActivityFichaTatuador"
             android:label="@string/labelfichatatuador"
-            android:parentActivityName=".RecyclerTatuadores">
+            android:parentActivityName=".ActivityListaTatuadores">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".RecyclerTatuadores" />
+                android:value=".ActivityListaTatuadores" />
 
             <intent-filter>
                 <action android:name="android.intent.action.FichaTatuadorActivity" />

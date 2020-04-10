@@ -18,60 +18,62 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-public class RecyclerTatuadores extends AppCompatActivity {
+import java.util.List;
+
+public class ActivityListaTatuadores extends AppCompatActivity {
 
     // Variables necesarias
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private AdaptadorTatuadores adaptador;
-    private DBlocal db;
+    //private AdaptadorTatuadores adaptador;
+    private List<Tatuador> tatuadores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recycler_tatuadores);
-         db = new DBlocal(getApplicationContext());
+        setContentView(R.layout.activity_lista_tatuadores);
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Mapa.class);
+                Intent intent = new Intent(getApplicationContext(), ActivityMapaEstudios.class);
                 startActivity(intent);
             }
         });
 
+        //Alimentamos el adaptador desde la BD
         cargartatuadores();
 
         //Acciones del onclick y onlongclick del recycler
         recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                Intent intent = new Intent(RecyclerTatuadores.this, FichaTatuadorActivity.class);
-                Tatuador tatuador = Tatuador.getTatuadorList().get(position);
-                intent.putExtra("id",tatuador.getId());
+                Intent intent = new Intent(ActivityListaTatuadores.this, ActivityFichaTatuador.class);
+                Tatuador tatuador = tatuadores.get(position);
+                intent.putExtra("idTatuador",tatuador.getId());
                 startActivity(intent);
             }
 
+/*
             @Override
             public void onLongItemClick(View view, int position) {
             //Nichts
             }
+*/
         }));
     }
 
     private void cargartatuadores() {
-
-        Tatuador.getTatuadorList().clear();
-
-        db.cargarTatuadores();
-        /*Tatuador t = new Tatuador("PinxaUvas", "Antonio", "Lopez Garcia", "APU@gmail.com", "653951284", "Hola");
-        Tatuador.getTatuadorList().add(t);*/
-
+        DBlocal db = new DBlocal(getApplicationContext());
+        tatuadores = db.recogerTatuadores();
 
         recyclerView = findViewById(R.id.recyclerFragment);
-        adaptador = new AdaptadorTatuadores(getApplicationContext(), Tatuador.getTatuadorList());
+        AdaptadorTatuadores adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
         recyclerView.setAdapter(adaptador);
-        ConstraintLayout cl = findViewById(R.id.recycler_tatuadores);
+
+        //TODO: ¿Podemos hacer esto sin cargarnos el id del layout?
+        ConstraintLayout cl = findViewById(R.id.activity_lista_tatuadores);
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         } else {
@@ -85,7 +87,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
-        if (DatosApp.isAdmin()) {
+        if (App.isAdmin()) {
             menu.setGroupVisible(R.id.añadir, true);
             menu.setGroupVisible(R.id.logout, true);
         } else {
@@ -117,7 +119,7 @@ public class RecyclerTatuadores extends AppCompatActivity {
                 public void onClick(DialogInterface dialog, int which) {
                     String password = input.getText().toString();
                     if (getString(R.string.contraseña).equals(password)){
-                        DatosApp.setAdmin(true);
+                        App.setAdmin(true);
                         invalidateOptionsMenu();
                     }
                 }
@@ -125,16 +127,16 @@ public class RecyclerTatuadores extends AppCompatActivity {
             alertDialog.show();
 
         } else if (id == R.id.noadmin) {
-            DatosApp.setAdmin(false);
+            App.setAdmin(false);
             invalidateOptionsMenu();
         }else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirEstudio.class);
+            Intent intent = new Intent(ActivityListaTatuadores.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
         }
         else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(RecyclerTatuadores.this, Activity_AnadirTatuador.class);
+            Intent intent = new Intent(ActivityListaTatuadores.this, ActivityAnadirTatuador.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;

@@ -1,80 +1,81 @@
 package com.example.inkler;
 
-public class Estudio {
-    private int ID;
-    private String Nombre;
-    private String Direccion;
+class Estudio {
+    private int idEstudio;
+    private String nombre;
+    private String direccion;
     private double latitud;
     private double longitud;
-    private String Email;
-    private String Telefono;
+    private String email;
+    private String telefono;
 
-    public Estudio(int ID, String Nombre, String Direccion, double latitud, double longitud, String Email, String Telefono){
-        this.ID = ID;
-        this.Nombre = Nombre;
-        this.Direccion = Direccion;
+    /*
+    Estudio(int idEstudio, String Nombre, String Direccion, double latitud, double longitud, String Email, String Telefono){
+        this.idEstudio = idEstudio;
+        this.nombre = Nombre;
+        this.direccion = Direccion;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.Email = Email;
-        this.Telefono = Telefono;
+        this.email = Email;
+        this.telefono = Telefono;
+    }
+*/
+    Estudio() {}
+
+    int getIdEstudio() {return idEstudio;}
+
+    void setIdEstudio(int idEstudio) {
+        this.idEstudio = idEstudio;
     }
 
-    public Estudio() {}
-
-    public int getID() {return ID;}
-
-    public void setID(int ID) {
-        this.ID = ID;
+    String getNombre() {
+        return nombre;
     }
 
-    public String getNombre() {
-        return Nombre;
+    void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    String getDireccion() {
+        return direccion;
     }
 
-    public String getDireccion() {
-        return Direccion;
+    void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
-    public void setDireccion(String direccion) {
-        Direccion = direccion;
-    }
-
-    public double getLatitud() {
+    double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(double latitud) {
+    void setLatitud(double latitud) {
         this.latitud = latitud;
     }
 
-    public double getLongitud() {
+    double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(double longitud) {
+    void setLongitud(double longitud) {
         this.longitud = longitud;
     }
 
-    public String getEmail() {
-        return Email;
+    String getEmail() {
+        return email;
     }
 
-    public void setEmail(String email) {
-        Email = email;
-    }
-
-
-    public String getTelefono() {
-        return Telefono;
+    void setEmail(String email) {
+        this.email = email;
     }
 
 
-    public void setTelefono(String telefono) {
-        Telefono = telefono;
+    String getTelefono() {
+        return telefono;
+    }
+
+
+    void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
 }

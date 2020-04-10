@@ -3,11 +3,9 @@
     <string name="app_name">Inkler</string>
     <string name="inkler">Inkler</string>
     <string name="nombre_artistico">Nombre artistico:</string>
-    <string name="instagram">Instagram:</string>
     <string name="email">Email:</string>
     <string name="web">Web:</string>
-    <string name="sobre_el_estudio">Sobre el estudio:</string>
-    <string name="sobre_el_tatuador">Sobre el tatuador:</string>
+    <string name="sobre_el_tatuador">Webs</string>
     <string name="telefono">Telefono:</string>
     <string name="nombre">Nombre:</string>
     <string name="direcci_n">Dirección:</string>
@@ -35,7 +33,11 @@
     <string name="contraseñatitle">Contraseña</string>
     <string name="contraseñabtn">Entrar</string>
     <string name="ModificarTatuador">Modificar Tatuador</string>
-    <string name="labelFichaEstudio">Ficha del estudio</string>
+    <string name="labelFichaEstudio">Estudio</string>
     <string name="nuevaWeb">Nueva Web</string>
+    <string name="log_successful">Sesion iniciada exitosamente</string>
+    <string name="log_unsuccessful">No se pudo iniciar sesión</string>
+    <string name="fill_all">Por favor rellena todos los datos</string>
+    <string name="tatoo">Tatoo</string>
 
 </resources>

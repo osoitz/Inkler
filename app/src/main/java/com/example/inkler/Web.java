@@ -1,42 +1,39 @@
 package com.example.inkler;
 
-import java.util.ArrayList;
-import java.util.List;
+class Web {
+    private String url;
+    private int idTatuador;
+    private int idEstudio;
 
-public class Web {
-    String URL;
-    int IdTatuador;
-    int IdEstudio;
-
-    public Web (String URL, int IdTatuador, int IdEstudio){
-        this.URL=URL;
-        this.IdEstudio=IdEstudio;
-        this.IdTatuador=IdTatuador;
+    public Web (String url, int IdTatuador, int IdEstudio){
+        this.url = url;
+        this.idEstudio =IdEstudio;
+        this.idTatuador =IdTatuador;
     }
-    public Web(){}
+    Web(){}
 
-    public String getURL() {
-        return URL;
+    String getUrl() {
+        return url;
     }
 
-    public void setURL(String URL) {
-        this.URL = URL;
+    void setUrl(String url) {
+        this.url = url;
     }
 
     public int getIdTatuador() {
-        return IdTatuador;
+        return idTatuador;
     }
 
-    public void setIdTatuador(int idTatuador) {
-        IdTatuador = idTatuador;
+    void setIdTatuador(int idTatuador) {
+        this.idTatuador = idTatuador;
     }
 
     public int getIdEstudio() {
-        return IdEstudio;
+        return idEstudio;
     }
 
-    public void setIdEstudio(int idEstudio) {
-        IdEstudio = idEstudio;
+    void setIdEstudio(int idEstudio) {
+        this.idEstudio = idEstudio;
     }
 
 }

@@ -2,6 +2,8 @@ package com.example.inkler;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,49 +14,49 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-// Clase adaptador para el recyclerview de los tatuadores
+// Clase adaptador para el recyclerview de las webs
 
-public class AdaptadorTatuadores extends RecyclerView.Adapter<AdaptadorTatuadores.ViewHolder> {
+public class AdaptadorWeb extends RecyclerView.Adapter<AdaptadorWeb.ViewHolder> {
     private final LayoutInflater inflador;
-    private final List<Tatuador> tatuadores;
+    private final List<Web> webs;
 
     //Constructor
-    AdaptadorTatuadores(Context contexto, List<Tatuador> tatuadores){
+    AdaptadorWeb(Context contexto, List<Web> webs){
         inflador= (LayoutInflater) contexto.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        this.tatuadores = tatuadores;
+        this.webs = webs;
     }
 
 
     //Clase ViewHolder
     static class ViewHolder extends RecyclerView.ViewHolder{
-        final TextView nombreArtistico;
-        //final TextView nombre;
+        final TextView nombreWeb;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            nombreArtistico = itemView.findViewById(R.id.nombreArtistico);
-            //nombre = itemView.findViewById(R.id.nombre);
-
+            nombreWeb = itemView.findViewById(R.id.nombreWeb);
         }
     }
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_tatuador,null);
+        @SuppressLint("InflateParams") View v = inflador.inflate(R.layout.contenido_recycler_web,null);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Meto los datos de tatuador al selector
-        Tatuador tatuador = tatuadores.get(position);
-        holder.nombreArtistico.setText(tatuador.getNombreArtistico());
+        //Meto los datos de la web al selector
+        Web web = webs.get(position);
+        String url = web.getUrl();
+        String host = App.extraerHost(url);
+        SpannableString nombreDecorado = new SpannableString(host);
+        nombreDecorado.setSpan(new UnderlineSpan(), 0, nombreDecorado.length(), 0);
+        holder.nombreWeb.setText(nombreDecorado);
     }
 
     @Override
     public int getItemCount() {
-        return tatuadores.size();
+        return webs.size();
     }
 
 }

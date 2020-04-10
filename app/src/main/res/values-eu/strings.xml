@@ -3,11 +3,9 @@
     <string name="app_name">Inkler</string>
     <string name="inkler">Inkler</string>
     <string name="nombre_artistico">Izen artistikoa:</string>
-    <string name="instagram">Instagram:</string>
     <string name="email">Maila:</string>
     <string name="web">Weba:</string>
-    <string name="sobre_el_estudio">Estudioari buruz:</string>
-    <string name="sobre_el_tatuador">Tatuatzaileari buruz:</string>
+    <string name="sobre_el_tatuador">Webs</string>
     <string name="telefono">Mugikorra:</string>
     <string name="nombre">Izena:</string>
     <string name="direcci_n">Helbidea:</string>
@@ -35,9 +33,11 @@
     <string name="contraseñatitle">Pasahitza</string>
     <string name="contraseñabtn">Sartu</string>
     <string name="ModificarTatuador">Aldatu Tatuatzailea</string>
-    <string name="labelFichaEstudio">Estudioaren fitxa</string>
+    <string name="labelFichaEstudio">Estudioa</string>
     <string name="nuevaWeb">Web Berria</string>
-
-
+    <string name="log_successful">Saioa ongi hasi da</string>
+    <string name="log_unsuccessful">Ezin izan da saioa hasi</string>
+    <string name="fill_all">Bete eremu guztiak mesedez</string>
+    <string name="tatoo">Tatoo</string>
 
 </resources>
