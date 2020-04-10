@@ -95,8 +95,7 @@ El objetivo es desarrollar una aplicación facil de utilizar que de información
 ## Tareas
 <a name="tareas"/>
 
-Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
-
+Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1) e [Issues](https://github.com/osoitz/Inkler/issues) 
 
 ## Recursos Humanos
 <a name="recursoshumanos"/>
