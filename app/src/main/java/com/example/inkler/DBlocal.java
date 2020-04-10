@@ -506,7 +506,7 @@ class DBlocal   {
 
         abrirDB(true);
 
-        dbHelper.delete(db);
+        //dbHelper.delete(db);
 
         for (int pos = 0; pos < 10; pos++) {
 
