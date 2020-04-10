@@ -128,6 +128,7 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 * Firefox / Chrome
 * Git / GitHub
 * Markdown
+* Jitsi
 
 
 ## Riesgos
