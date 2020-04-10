@@ -21,6 +21,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -85,21 +86,23 @@ public class ActivityGaleria extends AppCompatActivity {
         }
         recyclerView.setLayoutManager(layoutManager);
         //onclick para ver la foto en grande
-        recyclerView.addOnItemTouchListener(new RecyclerViewListener(ActivityGaleria.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+
+        RecyclerViewListener fotoClick = new RecyclerViewListener(ActivityGaleria.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
-                zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
-
-            }
-/*
-            @Override
-            public void onLongItemClick(View view, int position) {
-                //Nicths
+                Drawable foto = imageviewTatuaje.getDrawable();
+                //zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
+                zoomImageFromThumb(imageviewTatuaje, foto);
             }
 
- */
-        }));
+        });
+
+        recyclerView.addOnItemTouchListener(fotoClick);
+
+
+
+
 
         shortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
@@ -122,7 +125,7 @@ public class ActivityGaleria extends AppCompatActivity {
         recyclerView.setAdapter(adaptador);
     }
 
-    private void zoomImageFromThumb(final View thumbView, int imageResId) {
+    private void zoomImageFromThumb(final View thumbView, Drawable foto) { //int imageResId
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
         if (currentAnimator != null) {
@@ -131,7 +134,8 @@ public class ActivityGaleria extends AppCompatActivity {
 
         // Load the high-resolution "zoomed-in" image.
         final ImageView expandedImageView = findViewById(R.id.imagenGrande);
-        expandedImageView.setImageResource(imageResId);
+        //expandedImageView.setImageResource(imageResId);
+        expandedImageView.setImageDrawable(foto);
 
         // Calculate the starting and ending bounds for the zoomed-in image.
         // This step involves lots of math. Yay, math.
