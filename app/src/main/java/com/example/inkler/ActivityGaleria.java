@@ -14,7 +14,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -22,10 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
@@ -37,24 +33,18 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 
 
 public class ActivityGaleria extends AppCompatActivity {
 
-    private RecyclerView.LayoutManager layoutManager;
     private int shortAnimationDuration;
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
-    private static final int PICK_IMAGE = 100;
+    // --Commented out by Inspection (2020/4/10 15:36):private static final int PICK_IMAGE = 100;
     private int idTatuador;
     private DBlocal db;
-    Bitmap bmp;
-    ArrayList<Bitmap> fotos;
-    AdaptadorGaleria adaptador;
-    RecyclerView recyclerView;
+    private RecyclerView recyclerView;
 
     //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
@@ -79,6 +69,7 @@ public class ActivityGaleria extends AppCompatActivity {
         rellenarAdaptador();
 
         ConstraintLayout cl = findViewById(R.id.activity_galeria);
+        RecyclerView.LayoutManager layoutManager;
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         } else {
@@ -110,7 +101,7 @@ public class ActivityGaleria extends AppCompatActivity {
     }
 
     private void rellenarAdaptador() {
-        fotos = new ArrayList<>();
+        ArrayList<Bitmap> fotos = new ArrayList<>();
         try {
             fotos = db.recogerFotosTatuador(idTatuador);
             //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
@@ -119,7 +110,7 @@ public class ActivityGaleria extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
         }
         //AAA
-        adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
+        AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
         recyclerView.setAdapter(adaptador);
     }
 
@@ -329,7 +320,7 @@ public class ActivityGaleria extends AppCompatActivity {
      *  FOTOS
      ******************************/
     //Este metodo lo usaremos para sacar la foto
-    public void sacarFoto(){
+    private void sacarFoto(){
         //Mediante un intente llamaremos a la camara para sacar una foto
         Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(i,0);
@@ -341,7 +332,7 @@ public class ActivityGaleria extends AppCompatActivity {
             //Una vez sacada esa foto vamos a cojerla del intent y la guardaremos en forma de bitmap
             Bundle ext = data.getExtras();
             if (ext != null){
-                bmp = (Bitmap) ext.get("data");
+                Bitmap bmp = (Bitmap) ext.get("data");
                 System.out.println("exito");
                 //saveTempBitmap(bmp);
                 saveImage(bmp);
