@@ -51,6 +51,9 @@ public class ActivityGaleria extends AppCompatActivity {
     private int idTatuador;
     private DBlocal db;
     Bitmap bmp;
+    ArrayList<Bitmap> fotos;
+    AdaptadorGaleria adaptador;
+    RecyclerView recyclerView;
 
     //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
@@ -60,29 +63,20 @@ public class ActivityGaleria extends AppCompatActivity {
         db = new DBlocal(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.setDisplayHomeAsUpEnabled(true);
+
         solicitarPermisos();
+
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         idTatuador = getIntent().getIntExtra("idTatuador", -1);
         //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
-        ArrayList<Bitmap> fotos = new ArrayList<>();
-        try {
-            fotos = db.recogerFotosTatuador(idTatuador);
-            Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception e){
-            Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
-        }
 
-        //Log.d("tag", "onCreate: "+ db.recogerFotos(idTatuador));
+        recyclerView = findViewById(R.id.recyclerGaleria);
 
-        RecyclerView recyclerView = findViewById(R.id.recyclerGaleria);
-        AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
-        recyclerView.setAdapter(adaptador);
+        rellenarAdaptador();
+
         ConstraintLayout cl = findViewById(R.id.activity_galeria);
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
@@ -111,6 +105,23 @@ public class ActivityGaleria extends AppCompatActivity {
                 android.R.integer.config_shortAnimTime);
 
     }
+
+    private void rellenarAdaptador() {
+
+        //AAA
+        fotos = new ArrayList<>();
+        try {
+            fotos = db.recogerFotosTatuador(idTatuador);
+            Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e){
+            Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
+        }
+        //AAA
+        adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
+        recyclerView.setAdapter(adaptador);
+    }
+
     private void zoomImageFromThumb(final View thumbView, int imageResId) {
         // If there's an animation in progress, cancel it
         // immediately and proceed with this one.
@@ -313,9 +324,8 @@ public class ActivityGaleria extends AppCompatActivity {
     }
 
     /******************************
-     *  Metodo "nuevo"
+     *  FOTOS
      ******************************/
-
     //Este metodo lo usaremos para sacar la foto
     public void sacarFoto(){
         //Mediante un intente llamaremos a la camara para sacar una foto
@@ -334,7 +344,17 @@ public class ActivityGaleria extends AppCompatActivity {
             saveImage(bmp);
         }
     }
-    //Aqui comprobaremos si tenemos los permisos de escritura y si no lo tenemos los pediremos
+
+
+    private void saveImage(Bitmap finalBitmap) {
+        //Guardamos la foto en la base de datos
+        long rowid = db.insertarFoto(App.getBytes(finalBitmap), idTatuador);
+        //Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
+        //Volvemos a rellenar el adaptador para que se vean todas las fotos
+        rellenarAdaptador();
+    }
+
+    //Comprobamos si tenemos permisos de escritura, y si no los pediremos
     private void solicitarPermisos(){
         int permissionCheck = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -347,74 +367,5 @@ public class ActivityGaleria extends AppCompatActivity {
             Log.i("Mensaje", "Tienes permiso para usar la camara.");
         }
     }
-
-    private void saveImage(Bitmap finalBitmap) {
-        //Con este metodo guardaremos la foto en la base de datos
-        //ContentValues values = new ContentValues();
-        long rowid = db.insertarFoto(App.getBytes(finalBitmap), idTatuador);
-        Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
-
-        /*
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/saved_images");
-        myDir.mkdirs();
-        String fname = IDfoto +".jpg";
-        File file = new File(myDir, fname);
-        if (file.exists()) file.delete ();
-        try {
-            //FileOutputStream out = new FileOutputStream(file);
-            //finalBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
-            //out.flush();
-            //out.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-         */
-    }
-
-    /* Aqui se comprobara si el almacenamiento esta disponible para leerlo y escribirlo */
-    public boolean isExternalStorageWritable() {
-        String state = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(state)) {
-            return true;
-        }
-        return false;
-    }
-
-
-
-    /*******************************
-     *  Metodo "antiguo"
-     *****************************/
-    /*
-    private void openGallery(){
-        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-        startActivityForResult(gallery, PICK_IMAGE);
-    }
-    //Este es el metodo que coge la foto de la galeria y la guarda en la BD
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE) {
-
-            Toast.makeText(getApplicationContext(), "Añadiendo foto a la BD", Toast.LENGTH_SHORT).show();
-            Uri imageUri = data.getData();
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getApplicationContext().getContentResolver(), imageUri);
-                long rowid = db.insertarFoto(App.getBytes(bitmap), idTatuador);
-                Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
-                db.insertarFoto(App.getBytes(bitmap), idTatuador);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                Log.e("Error","exceptions"+e);
-            }
-
-            //guardarImagen(imageInByte);
-
-        }
-    }
-    */
-
 
 }
