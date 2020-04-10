@@ -36,5 +36,6 @@
     <string name="ModificarTatuador">Modify Tattooist</string>
     <string name="labelFichaEstudio">Studio</string>
     <string name="nuevaWeb">New Web</string>
+    <string name="add">Add</string>
 
 </resources>

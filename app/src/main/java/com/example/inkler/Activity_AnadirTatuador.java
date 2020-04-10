@@ -67,7 +67,7 @@ public class Activity_AnadirTatuador extends AppCompatActivity {
                     input.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_URI);
                     alertDialog.setView(input);
 
-                    alertDialog.setPositiveButton(getString(R.string.contraseñabtn), new DialogInterface.OnClickListener() {
+                    alertDialog.setPositiveButton(getString(R.string.add), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             String web = input.getText().toString();
