@@ -43,7 +43,7 @@ public class AdaptadorGaleria extends RecyclerView.Adapter<AdaptadorGaleria.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //Meto los datos de libro al selector
+        //Meto los datos al selector
         Bitmap foto = fotos.get(position);
         try{
             //Log.d("tag", "onBindViewHolder: "+ galeria.tatuaje);
