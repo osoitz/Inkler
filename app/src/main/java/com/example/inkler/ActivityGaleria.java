@@ -110,12 +110,10 @@ public class ActivityGaleria extends AppCompatActivity {
     }
 
     private void rellenarAdaptador() {
-
-        //AAA
         fotos = new ArrayList<>();
         try {
             fotos = db.recogerFotosTatuador(idTatuador);
-            Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
@@ -342,10 +340,12 @@ public class ActivityGaleria extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             //Una vez sacada esa foto vamos a cojerla del intent y la guardaremos en forma de bitmap
             Bundle ext = data.getExtras();
-            bmp = (Bitmap) ext.get("data");
-            System.out.println("exito");
-            //saveTempBitmap(bmp);
-            saveImage(bmp);
+            if (ext != null){
+                bmp = (Bitmap) ext.get("data");
+                System.out.println("exito");
+                //saveTempBitmap(bmp);
+                saveImage(bmp);
+            }
         }
     }
 
