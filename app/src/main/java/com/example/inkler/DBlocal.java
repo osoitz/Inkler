@@ -28,7 +28,32 @@ class DBlocal   {
             this.db = dbHelper.getReadableDatabase();
         }
     }
-    
+
+    boolean checkEmpty(){
+        abrirDB(false);
+
+        int ntatuadores = 0;
+
+        boolean tatuadores = false;
+
+        //Columnas
+        String[] proyeccion = {DBHelper.entidadTatuador._ID};
+
+
+        //Respuesta
+        Cursor cursor = db.query(DBHelper.entidadTatuador.TABLE_NAME, proyeccion, null, null, null, null, null);
+
+        // recoger los datos
+        while (cursor.moveToNext()) {
+            ntatuadores++;
+        }
+        cursor.close();
+        db.close();
+        if (ntatuadores > 0){
+            tatuadores = true;
+        }
+        return tatuadores;
+    }
 
     List<Tatuador> recogerTatuadores(){
         abrirDB(false);
