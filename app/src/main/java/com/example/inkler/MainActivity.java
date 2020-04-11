@@ -2,6 +2,7 @@ package com.example.inkler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        DBlocal db = new DBlocal(getApplicationContext());
 
         InputStream inputStream = getResources().openRawResource(R.raw.datosejemplo);
         BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(inputStream));
@@ -50,15 +53,40 @@ public class MainActivity extends AppCompatActivity{
             for(int i=0;i<estudios.length();i++)
             {
                 JSONObject estudio = estudios.getJSONObject(i);
-                System.out.println(estudio.getString("nombre"));
-                //....
+                String enombre;
+                String edireccion;
+                double glat = 0;
+                double glong = 0;
+                String eemail;
+                String etelefono;
+
+                enombre = estudio.getString("nombre");
+                edireccion = estudio.getString("direccion");
+                JSONArray geo = estudio.getJSONArray("geo");
+                for(int j = 0; j < geo.length(); j++) {
+                    JSONObject egeo = geo.getJSONObject(j);
+                    glat = egeo.getDouble("latitud");
+                    glong = egeo.getDouble("longitud");
+                }
+                eemail = estudio.getString("email");
+                etelefono = estudio.getString("telefono");
+
+                Log.d("JSON", "NOMBRE: " + enombre);
+                Log.d("JSON", "DIRECCION: " + edireccion);
+                Log.d("JSON", "LATITUD: " + glat);
+                Log.d("JSON", "LONGITUD: " + glong);
+                Log.d("JSON", "EMAIL: " + eemail);
+                Log.d("JSON", "TELEFONO: " + etelefono);
+
+                //db.insertarEstudio(enombre, edireccion, egeo, , eemail, etelefono);
 
                 JSONArray tatuadores = estudio.getJSONArray("tatuadores");
 
                 for(int j = 0; j < tatuadores.length(); j++) {
                     JSONObject tatuador = tatuadores.getJSONObject(j);
-                    System.out.println(tatuador.getString("nombreArtistico"));
-                    //...
+                    Log.d("JSON", "NOMBRE ARTISTICO: " + tatuador.getString("nombreArtistico"));
+                    Log.d("JSON", "NOMBRE: " + tatuador.getString("nombre"));
+                    Log.d("JSON", "APELLIDOS: " + tatuador.getString("apellidos"));
 
                 }
             }
@@ -77,7 +105,6 @@ public class MainActivity extends AppCompatActivity{
         Tatuador t = gson.fromJson(jsonArray, Tatuador.class);
         Log.d("AAA", "Nombre: " + t.getNombre() + " Apellidos: " + t.getApellidos() + " ID: " + t.getId() + " Nombre Artistico: " + t.getNombreArtistico() + " ID Estudio: " + t.getIdEstudio());
 
-        DBlocal db = new DBlocal(getApplicationContext());
         boolean llena = db.checkEmpty();
         if (llena){
             Log.d("DBCHECK", "LA BASE DE DATOS TIENE INFORMACION");

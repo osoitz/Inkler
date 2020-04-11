@@ -3,8 +3,13 @@
     "estudios": [
       {
         "nombre": "Estudio Inkblood",
-        "direccion": "Gran Via, 1",
-        "geo": [43.01, -2.01],
+        "direccion": "Gran Via, 2",
+        "geo": [
+          {
+            "latitud": 43.01,
+            "longitud": -2.01
+          }
+        ],
         "email": "bloodink@mail.com",
         "telefono": "+3494789456",
         "tatuadores": [
