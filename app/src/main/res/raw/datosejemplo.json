@@ -1,0 +1,56 @@
+{
+
+    "estudios": [
+      {
+        "nombre": "Estudio Inkblood",
+        "direccion": "Gran Via, 1",
+        "geo": [43.01, -2.01],
+        "email": "bloodink@mail.com",
+        "telefono": "+3494789456",
+        "tatuadores": [
+          {
+            "nombreArtistico": "AKA",
+            "nombre": "Name",
+            "apellidos": "Surname"
+          },
+
+          {
+            "nombreArtistico": "AKA",
+            "nombre": "Name",
+            "apellidos": "Surname"
+          },
+          {
+            "nombreArtistico": "AKA",
+            "nombre": "Name",
+            "apellidos": "Surname"
+          }
+        ]
+      },
+
+      {
+        "nombre": "Pintamonas ink",
+        "direccion": "General Concha, 15",
+        "geo": [43.05, -2.07],
+        "email": "pintamonas@mail.com",
+        "telefono": "+3494123456",
+        "tatuadores": [
+          {
+            "nombreArtistico": "Amaro",
+            "nombre": "Amaro",
+            "apellidos": "Tatoo"
+          },
+
+          {
+            "nombreArtistico": "Beñat",
+            "nombre": "Dormilon",
+            "apellidos": "Despierta"
+          },
+          {
+            "nombreArtistico": "Nocturnal",
+            "nombre": "Kevin",
+            "apellidos": "Bacon"
+          }
+        ]
+      }
+    ]
+  }
