@@ -33,7 +33,7 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         et_nombre = findViewById(R.id.contentNombre);
         et_apellidos = findViewById(R.id.contentApellido);
         et_nombreArt = findViewById(R.id.contentNombreArtistico);
-        final boolean anadir = getIntent().getBooleanExtra("añadir", false);
+        final boolean anadir = getIntent().getBooleanExtra(getString(R.string.anadir), false);
         final Spinner spinner=findViewById(R.id.SpinnerNombreEstudios);
         SpinnerAdapter adapter;
         ArrayList<String> nombresEstudios = db.recogerNombresEstudios();
@@ -86,18 +86,18 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
                     String st_Estudio = spinner.getSelectedItem().toString();
                     int IdEstudio = db.recogerIdEstudio(st_Estudio);
                     if (st_nombre.equals("") || st_apellidos.equals("") || st_nombreArtistico.equals("") || st_Estudio.equals("")) {
-                        Toast.makeText(getApplicationContext(), "You may fill every empty land to insert something", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),  R.string.fill_all, Toast.LENGTH_SHORT).show();
                     } else if(anadir) {
 
                         db.insertarTatuador(st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
-                        Toast.makeText(getApplicationContext(), "El tatuador " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.tatuador) + st_nombre + getString(R.string.creado), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityListaTatuadores.class);
                         startActivity(intent);
                     } else{
                         db.modificarTatuador(App.getIdTatuador(),st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
-                        Toast.makeText(getApplicationContext(),"Los cambios se han realizado con exito", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),getString(R.string.cambios), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityFichaTatuador.class);
-                        intent.putExtra("id", App.getIdTatuador());
+                        intent.putExtra(getString(R.string.id), App.getIdTatuador());
                         startActivity(intent);
 
                     }

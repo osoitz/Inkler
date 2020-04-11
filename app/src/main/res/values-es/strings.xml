@@ -37,9 +37,20 @@
     <string name="labelFichaEstudio">Estudio</string>
     <string name="nuevaWeb">Nueva Web</string>
     <string name="add">Añadir</string>
+    <string name="anadir">añadir</string>
+    <string name="estudio">El estudio "</string>
+    <string name="modificado"> ha sido modificado"</string>
+    <string name="creado"> ha sido creado"</string>
     <string name="log_successful">Sesion iniciada exitosamente</string>
     <string name="log_unsuccessful">No se pudo iniciar sesión</string>
     <string name="fill_all">Por favor rellena todos los datos</string>
     <string name="tatoo">Tatoo</string>
+    <string name="tatuador">El tatuador </string>
+    <string name="cambios">Los cambios se han realizado con exito </string>
+    <string name="id">id</string>
+    <string name="idEstudio">idEstudio</string>
+    <string name="idTatuador">idTatuador</string>
+    <string name="url">url</string>
+    <string name="tel">tel:</string>
 
 </resources>

@@ -35,10 +35,10 @@ public class ActivityFichaTatuador extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final int idTatuador;
-        if(getIntent().getIntExtra("idTatuador", -1) == -1){
+        if(getIntent().getIntExtra(getString(R.string.idTatuador), -1) == -1){
             idTatuador = App.getIdTatuador();
         }else{
-            idTatuador = getIntent().getIntExtra("idTatuador", -1);
+            idTatuador = getIntent().getIntExtra(getString(R.string.idTatuador), -1);
             App.setIdTatuador(idTatuador);
         }
         setContentView(R.layout.activity_ficha_tatuador);
@@ -62,7 +62,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityFichaTatuador.this, ActivityGaleria.class);
-                intent.putExtra("idTatuador", idTatuador);
+                intent.putExtra(getString(R.string.idTatuador), idTatuador);
                 startActivity(intent);
             }
         });
@@ -73,7 +73,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityFichaTatuador.this, ActivityFichaEstudio.class);
-                intent.putExtra("idEstudio",idEstudio);
+                intent.putExtra(getString(R.string.idEstudio),idEstudio);
                 startActivity(intent);
             }
         });
@@ -85,7 +85,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
                 Intent intent = new Intent(ActivityFichaTatuador.this, ActivityNavegador.class);
 
                 Web w = webs.get(position);
-                intent.putExtra("url", w.getUrl());
+                intent.putExtra(getString(R.string.url), w.getUrl());
                 startActivity(intent);
             }
 /*
@@ -218,12 +218,12 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirTatuador.class);
             //boolean anadir = true;
-            intent.putExtra("añadir",true);
+            intent.putExtra(getString(R.string.anadir),true);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirEstudio.class);
-            intent.putExtra("añadir",true);
+            intent.putExtra(getString(R.string.anadir),true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_tatuador) {

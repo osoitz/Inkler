@@ -22,7 +22,7 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_estudio);
         final DBlocal db = new DBlocal(getApplicationContext());
-        final boolean anadir = getIntent().getBooleanExtra("añadir",false);
+        final boolean anadir = getIntent().getBooleanExtra(getString(R.string.anadir),false);
         final EditText et_nombre = findViewById(R.id.contentNombre);
         final EditText et_telefono = findViewById(R.id.contentTelefono);
         final EditText et_direccion = findViewById(R.id.contentDireccion);
@@ -87,10 +87,10 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
                     // Iniciar base de datos
                     if (anadir) {
                         db.insertarEstudio(st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
-                        Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido creado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.estudio) + st_nombre + getString(R.string.creado), Toast.LENGTH_SHORT).show();
                     } else {
                         db.modificarEstudio(db.recogerTatuador(App.getIdTatuador()).getIdEstudio(), st_nombre, st_direccion, latitud, longitud, st_email, st_telefono);
-                        Toast.makeText(getApplicationContext(), "El estudio " + st_nombre + " ha sido modificado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.estudio)  + st_nombre + getString(R.string.modificado) , Toast.LENGTH_SHORT).show();
                     }
                     Intent intent = new Intent(ActivityAnadirEstudio.this, ActivityListaTatuadores.class);
                     startActivity(intent);

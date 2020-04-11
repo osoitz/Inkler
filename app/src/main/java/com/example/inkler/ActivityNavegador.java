@@ -21,7 +21,7 @@ public class ActivityNavegador extends AppCompatActivity {
         }
 
 
-        String web = getIntent().getStringExtra("url");
+        String web = getIntent().getStringExtra(getString(R.string.url));
         WebView webView = findViewById(R.id.webview);
         webView.loadUrl(web);
         webView.setWebViewClient(new WebViewClient());

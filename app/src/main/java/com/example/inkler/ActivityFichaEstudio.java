@@ -49,7 +49,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         db = new DBlocal(getApplicationContext());
-        final int idEstudio = getIntent().getIntExtra("idEstudio",0);
+        final int idEstudio = getIntent().getIntExtra(getString(R.string.idEstudio),0);
         estudio = db.recogerEstudio(idEstudio);
         final int INITIAL_ZOOM = 14;
         super.onCreate(savedInstanceState);
@@ -65,7 +65,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaEstudio.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
-                intent.putExtra("id",tatuador.getId());
+                intent.putExtra(getString(R.string.id),tatuador.getId());
                 startActivity(intent);
             }
 /*
@@ -125,7 +125,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
                 String num= telefono.getText().toString();
-                intent.setData(Uri.parse("tel:"+num));
+                intent.setData(Uri.parse(getString(R.string.tel)+num));
                 startActivity(intent);
             }
         });
@@ -145,7 +145,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaEstudio.this, ActivityNavegador.class);
                 Web w = webs.get(position);
-                intent.putExtra("url", w.getUrl());
+                intent.putExtra(getString(R.string.url), w.getUrl());
                 startActivity(intent);
             }
 /*
@@ -223,12 +223,12 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         }
         else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirTatuador.class);
-            intent.putExtra("añadir",true);
+            intent.putExtra(getString(R.string.anadir),true);
             startActivity(intent);
             return true;
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
-            intent.putExtra("añadir",true);
+            intent.putExtra(getString(R.string.anadir),true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_tatuador) {

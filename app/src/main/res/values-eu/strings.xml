@@ -37,9 +37,21 @@
     <string name="labelFichaEstudio">Estudioa</string>
     <string name="nuevaWeb">Web Berria</string>
     <string name="add">Gehitu</string>
+    <string name="anadir">gehitu</string>
+    <string name="estudio">Estudioa "</string>
+    <string name="modificado"> aldatua izan da"</string>
+    <string name="creado"> sortu izan da"</string>
     <string name="log_successful">Saioa ongi hasi da</string>
     <string name="log_unsuccessful">Ezin izan da saioa hasi</string>
     <string name="fill_all">Bete eremu guztiak mesedez</string>
     <string name="tatoo">Tatoo</string>
+    <string name="tatuador">Tatuatzailea </string>
+    <string name="cambios">Aldaketak ondo aldatu dira </string>
+    <string name="id">id</string>
+    <string name="idEstudio">idEstudio</string>
+    <string name="idTatuador">idTatuador</string>
+    <string name="url">url</string>
+    <string name="tel">tel:</string>
+
 
 </resources>
