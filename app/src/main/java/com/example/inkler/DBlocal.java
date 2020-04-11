@@ -502,7 +502,7 @@ class DBlocal   {
         db.close();
     }
 
-    void rellenarDB (Context context) {
+    void rellenarDB() {
 
         abrirDB(true);
 

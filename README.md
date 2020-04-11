@@ -41,11 +41,11 @@ Los tatuadores que deseen aparecer en la aplicación deberan ponerse en contacto
 ### Descripcion
 <a name="descripcion"/>
 
-Inkler es una aplicación que permite encontrar tatuadores y los estudios donde trabajan con ejemplos.
+Inkler es una aplicación que permite encontrar tatuadores y los estudios donde trabajan.
 
-Contará con una galeria por artista para poder conocer sus trabajos anteriores.
+Cuenta con una galeria por artista para poder conocer sus trabajos anteriores.
 
-Contará con información de geolocalización de los estudios.
+Cuenta con información de geolocalización de los estudios.
 
 
 #### Pantallas
@@ -95,8 +95,7 @@ El objetivo es desarrollar una aplicación facil de utilizar que de información
 ## Tareas
 <a name="tareas"/>
 
-Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
-
+Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1) e [Issues](https://github.com/osoitz/Inkler/issues) 
 
 ## Recursos Humanos
 <a name="recursoshumanos"/>
@@ -128,6 +127,7 @@ Ver:  [Tareas](https://github.com/osoitz/Inkler/projects/1)
 * Firefox / Chrome
 * Git / GitHub
 * Markdown
+* Jitsi
 
 
 ## Riesgos

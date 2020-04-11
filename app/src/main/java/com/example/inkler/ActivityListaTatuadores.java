@@ -24,7 +24,6 @@ public class ActivityListaTatuadores extends AppCompatActivity {
 
     // Variables necesarias
     private RecyclerView recyclerView;
-    private RecyclerView.LayoutManager layoutManager;
     //private AdaptadorTatuadores adaptador;
     private List<Tatuador> tatuadores;
 
@@ -74,6 +73,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
 
         //TODO: ¿Podemos hacer esto sin cargarnos el id del layout?
         ConstraintLayout cl = findViewById(R.id.activity_lista_tatuadores);
+        RecyclerView.LayoutManager layoutManager;
         if (cl == null) {
             layoutManager = new GridLayoutManager(getApplicationContext(), 3);
         } else {

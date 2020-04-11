@@ -40,7 +40,8 @@ class DBHelper extends SQLiteOpenHelper {
 
     static class entidadFoto implements BaseColumns{
         static final String TABLE_NAME = "Fotos";
-        static final String COLUMN_NAME_FOTO ="Nombre";
+        static final String COLUMN_NAME_HASH ="Hash";
+        static final String COLUMN_NAME_FOTO ="Bitmap";
         static final String COLUMN_NAME_ID_TATUADOR ="ID_Tatuador";
     }
 
@@ -82,6 +83,7 @@ class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_CREATE_TABLE_FOTO =
             "CREATE TABLE " + entidadFoto.TABLE_NAME + " (" +
                     entidadFoto._ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
+                    entidadFoto.COLUMN_NAME_HASH + " NUMERIC," +
                     entidadFoto.COLUMN_NAME_FOTO + " BLOB," +
                     entidadFoto.COLUMN_NAME_ID_TATUADOR + " INTEGER)";
 

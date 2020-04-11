@@ -34,7 +34,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityFichaEstudio extends AppCompatActivity {
-    private RecyclerView recyclerViewWeb;
     //private RecyclerView.LayoutManager layoutManagerWeb;
     //private AdaptadorWeb adaptadorWeb;
     //private MapView mapView;
@@ -132,7 +131,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
     }
     private void rellenarWebsEstudio(List<Web> urls){
         webs.addAll(urls);
-        recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
+        RecyclerView recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
         AdaptadorWeb adaptadorWeb = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerViewWeb.setAdapter(adaptadorWeb);
         RecyclerView.LayoutManager layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);

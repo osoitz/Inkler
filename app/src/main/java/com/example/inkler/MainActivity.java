@@ -6,9 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity{
 
@@ -23,7 +20,7 @@ public class MainActivity extends AppCompatActivity{
             Log.d("DBCHECK", "LA BASE DE DATOS TIENE INFORMACION");
         } else {
             Log.d("DBCHECK", "LA BASE DE DATOS ESTA VACIA, RELLENANDO...");
-            db.rellenarDB(getApplicationContext());
+            db.rellenarDB();
         }
 
         Handler handler = new Handler();
