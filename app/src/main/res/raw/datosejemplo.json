@@ -35,7 +35,12 @@
       {
         "nombre": "Pintamonas ink",
         "direccion": "General Concha, 15",
-        "geo": [43.05, -2.07],
+        "geo": [
+          {
+            "latitud": 43.05,
+            "longitud": -2.07
+          }
+        ],
         "email": "pintamonas@mail.com",
         "telefono": "+3494123456",
         "tatuadores": [

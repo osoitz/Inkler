@@ -28,6 +28,27 @@ public class MainActivity extends AppCompatActivity{
 
         DBlocal db = new DBlocal(getApplicationContext());
 
+        boolean llena = db.checkEmpty();
+        if (llena){
+            Log.d("DBCHECK", "LA BASE DE DATOS TIENE INFORMACION");
+        } else {
+            Log.d("DBCHECK", "LA BASE DE DATOS ESTA VACIA, RELLENANDO...");
+            db.rellenarDB();
+            rellenarDB();
+        }
+
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, ActivityListaTatuadores.class);
+                startActivity(intent);
+            }
+        }, 5000);   //2 seconds
+
+    }
+
+    void rellenarDB(){
+        DBlocal db = new DBlocal(getApplicationContext());
         InputStream inputStream = getResources().openRawResource(R.raw.datosejemplo);
         BufferedReader bufferedReader= new BufferedReader(new InputStreamReader(inputStream));
         String eachline = null;
@@ -59,6 +80,7 @@ public class MainActivity extends AppCompatActivity{
                 double glong = 0;
                 String eemail;
                 String etelefono;
+                int idestudio;
 
                 enombre = estudio.getString("nombre");
                 edireccion = estudio.getString("direccion");
@@ -78,16 +100,23 @@ public class MainActivity extends AppCompatActivity{
                 Log.d("JSON", "EMAIL: " + eemail);
                 Log.d("JSON", "TELEFONO: " + etelefono);
 
-                //db.insertarEstudio(enombre, edireccion, egeo, , eemail, etelefono);
+                db.insertarEstudio(enombre, edireccion, glat, glong, eemail, etelefono);
+                idestudio = db.recogerIdEstudio(enombre);
+                Log.d("JSON", "ID ESTUDIO: " + idestudio);
 
                 JSONArray tatuadores = estudio.getJSONArray("tatuadores");
 
+
                 for(int j = 0; j < tatuadores.length(); j++) {
                     JSONObject tatuador = tatuadores.getJSONObject(j);
-                    Log.d("JSON", "NOMBRE ARTISTICO: " + tatuador.getString("nombreArtistico"));
-                    Log.d("JSON", "NOMBRE: " + tatuador.getString("nombre"));
-                    Log.d("JSON", "APELLIDOS: " + tatuador.getString("apellidos"));
+                    String tnombreart = tatuador.getString("nombreArtistico");
+                    String tnombre = tatuador.getString("nombre");
+                    String tapellidos = tatuador.getString("apellidos");
+                    Log.d("JSON", "NOMBRE ARTISTICO: " + tnombreart);
+                    Log.d("JSON", "NOMBRE: " + tnombre);
+                    Log.d("JSON", "APELLIDOS: " + tapellidos);
 
+                    db.insertarTatuador(tnombre, tapellidos, tnombreart, idestudio);
                 }
             }
 
@@ -95,32 +124,6 @@ public class MainActivity extends AppCompatActivity{
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-
-
-
-
-        Gson gson = new Gson();
-        String jsonArray = "{'id':25,'nombreArtistico':'AKA','nombre':'Name','apellidos':'Surname','idEstudio':1}";
-        Tatuador t = gson.fromJson(jsonArray, Tatuador.class);
-        Log.d("AAA", "Nombre: " + t.getNombre() + " Apellidos: " + t.getApellidos() + " ID: " + t.getId() + " Nombre Artistico: " + t.getNombreArtistico() + " ID Estudio: " + t.getIdEstudio());
-
-        boolean llena = db.checkEmpty();
-        if (llena){
-            Log.d("DBCHECK", "LA BASE DE DATOS TIENE INFORMACION");
-        } else {
-            Log.d("DBCHECK", "LA BASE DE DATOS ESTA VACIA, RELLENANDO...");
-            db.rellenarDB();
-        }
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                Intent intent = new Intent(MainActivity.this, ActivityListaTatuadores.class);
-                startActivity(intent);
-            }
-        }, 2000);   //2 seconds
-
     }
 
 
