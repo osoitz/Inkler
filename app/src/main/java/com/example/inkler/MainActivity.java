@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -145,6 +147,22 @@ public class MainActivity extends AppCompatActivity{
                         oWeb.setUrl(w);
                         db.insertarWeb(oWeb.getIdEstudio(), oWeb.getUrl(), oWeb.getIdTatuador());
                     }
+
+                    JSONArray fotosTatuador = tatuador.getJSONArray("fotos");
+                    for(int q = 0; q < fotosTatuador.length(); q++) {
+                        //Recoger datos de la web
+                        JSONObject foto = fotosTatuador.getJSONObject(q);
+                        String nombreFoto = foto.getString("foto");
+                        Log.d("JSON", "Foto: " + nombreFoto);
+                        InputStream imageStream = getResources().openRawResource(getResources().getIdentifier(nombreFoto,"raw", getPackageName()));
+                        //InputStream imageStream = this.getResources().openRawResource(R.raw.nombreFoto);
+                        Bitmap bitmap = BitmapFactory.decodeStream(imageStream);
+                        long rowid = db.insertarFoto(App.getBytes(bitmap), (int)idTatuador);
+                        Log.d("JSON", "Foto: " + nombreFoto + " Id: "+ rowid);
+
+                    }
+
+
                 }
             }
 

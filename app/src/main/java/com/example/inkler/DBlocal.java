@@ -459,7 +459,9 @@ class DBlocal   {
         values.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO,bitmap);
 
         //Devuelve rowid
-        return db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
+        long rowid = db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
+        db.close();
+        return rowid;
     }
 
     long borrarFoto (String idFoto) {

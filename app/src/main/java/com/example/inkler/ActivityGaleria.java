@@ -237,7 +237,10 @@ public class ActivityGaleria extends AppCompatActivity {
         expandedImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnBorrarFoto.setVisibility(View.GONE);
+                if (btnBorrarFoto != null) {
+                    btnBorrarFoto.setVisibility(View.GONE);
+                }
+
                 if (currentAnimator != null) {
                     currentAnimator.cancel();
                 }

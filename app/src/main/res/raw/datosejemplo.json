@@ -33,6 +33,13 @@
               {
                 "web": "https://www.instagram.com/unai_ibanez_negro/"
               }
+            ],
+            "fotos": [
+              {"foto": "f0001"},
+              {"foto": "f0002"},
+              {"foto": "f0003"},
+              {"foto": "f0004"},
+              {"foto": "f0005"}
             ]
           },
 
@@ -44,6 +51,13 @@
               {
                 "web": "https://www.instagram.com/nimenittt/"
               }
+            ],
+            "fotos": [
+              {"foto": "f0006"},
+              {"foto": "f0007"},
+              {"foto": "f0008"},
+              {"foto": "f0009"},
+              {"foto": "f0010"}
             ]
           },
           {
@@ -54,6 +68,9 @@
               {
                 "web": "https://www.instagram.com/el.dot.tattoo/"
               }
+            ],
+            "fotos": [
+
             ]
           },
           {
@@ -64,6 +81,13 @@
               {
                 "web": "https://www.instagram.com/bitxsefertattoo/"
               }
+            ],
+            "fotos": [
+              {"foto": "f0011"},
+              {"foto": "f0012"},
+              {"foto": "f0013"},
+              {"foto": "f0014"},
+              {"foto": "f0015"}
             ]
           },
           {
@@ -74,9 +98,15 @@
               {
                 "web": "https://www.instagram.com/gorkarttattoo/"
               }
+            ],
+            "fotos": [
+              {"foto": "f0016"},
+              {"foto": "f0017"},
+              {"foto": "f0018"},
+              {"foto": "f0019"},
+              {"foto": "f0020"}
             ]
           }
-
         ]
       },
 
@@ -106,6 +136,9 @@
               {
                 "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
               }
+            ],
+            "fotos": [
+
             ]
           },
 
@@ -117,6 +150,9 @@
               {
                 "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
               }
+            ],
+            "fotos": [
+
             ]
           },
           {
@@ -127,7 +163,11 @@
               {
                 "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
               }
+            ],
+            "fotos": [
+
             ]
+
           }
         ]
       },
@@ -157,6 +197,9 @@
               {
                 "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
               }
+            ],
+            "fotos": [
+
             ]
           },
 
@@ -168,7 +211,11 @@
               {
                 "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
               }
+            ],
+            "fotos": [
+
             ]
+
           },
           {
             "nombreArtistico": "Nocturnal",
@@ -178,7 +225,11 @@
               {
                 "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
               }
+            ],
+            "fotos": [
+
             ]
+
           }
         ]
       }
