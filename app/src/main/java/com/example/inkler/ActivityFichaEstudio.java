@@ -36,7 +36,7 @@ import java.util.List;
 public class ActivityFichaEstudio extends AppCompatActivity {
     //private RecyclerView.LayoutManager layoutManagerWeb;
     //private AdaptadorWeb adaptadorWeb;
-    //private MapView mapView;
+    private MapView mapView;
     private DBlocal db;
     private RecyclerView recyclerView;
     //private RecyclerView.LayoutManager layoutManager;
@@ -75,7 +75,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
   */
         }));
 
-        MapView mapView = findViewById(R.id.mapView);
+        mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
@@ -129,6 +129,44 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             }
         });
     }
+
+    // Add the mapView lifecycle to the activity's lifecycle methods
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mapView.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mapView.onStop();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mapView.onDestroy();
+    }
+
     private void rellenarWebsEstudio(List<Web> urls){
         webs.addAll(urls);
         RecyclerView recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
