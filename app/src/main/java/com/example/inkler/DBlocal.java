@@ -420,6 +420,33 @@ class DBlocal   {
         return idEstudio;
     }
 
+    int recogerIdTatuador(String nombreTatuador){
+        abrirDB(false);
+        int idTatuador = 0;
+
+        //Columnas
+        String[] proyeccion = {DBHelper.entidadTatuador._ID};
+        String selection = DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE + " = ?";
+        String[] selectionArgs = new String[] { "" + nombreTatuador } ;
+        //Respuesta
+        Cursor cursor = db.query(
+                DBHelper.entidadTatuador.TABLE_NAME,
+                proyeccion,
+                selection,
+                selectionArgs,
+                null,
+                null,
+                null);
+        if (cursor.getCount() > 0){
+            cursor.moveToFirst();
+
+            idTatuador = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
+        }
+        cursor.close();
+        db.close();
+        return idTatuador;
+    }
+
 
     long insertarFoto (byte[] bitmap, int idTatuador) {
         abrirDB(true);
