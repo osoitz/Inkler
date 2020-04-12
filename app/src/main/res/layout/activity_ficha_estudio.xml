@@ -102,7 +102,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
     <com.mapbox.mapboxsdk.maps.MapView
-        android:id="@+id/mapEstudioView"
+        android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/mapbox_compass_icon" />
