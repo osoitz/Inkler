@@ -130,18 +130,18 @@ public class MainActivity extends AppCompatActivity{
                     Log.d("JSON", "APELLIDOS: " + tapellidos);
 
                     //Insertar tatuador y recoger id
-                    db.insertarTatuador(tnombre, tapellidos, tnombreart, idestudio);
-                    int idTatuador = db.recogerIdTatuador(tnombre);
+                    long idTatuador = db.insertarTatuador(tnombre, tapellidos, tnombreart, idestudio);
+                    //int idTatuador = db.recogerIdTatuador(tnombre);
                     Log.d("JSON", "ID TATUADOR: " + idTatuador);
 
                     JSONArray webstatuador = tatuador.getJSONArray("webs");
-                    for(int p = 0; p < websestudio.length(); p++) {
+                    for(int p = 0; p < webstatuador.length(); p++) {
                         //Recoger datos de la web
                         JSONObject web = webstatuador.getJSONObject(p);
                         String w = web.getString("web");
                         Log.d("JSON", "WEB TATUADOR: " + w);
                         Web oWeb = new Web();
-                        oWeb.setIdTatuador(idTatuador);
+                        oWeb.setIdTatuador((int)idTatuador);
                         oWeb.setUrl(w);
                         db.insertarWeb(oWeb.getIdEstudio(), oWeb.getUrl(), oWeb.getIdTatuador());
                     }

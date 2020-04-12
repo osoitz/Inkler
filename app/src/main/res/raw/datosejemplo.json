@@ -1,6 +1,86 @@
 {
 
     "estudios": [
+
+      {
+        "nombre": "Tatoo Adicts",
+        "direccion": "Bilbao La Vieja 29 - 48003 Bilbao",
+        "geo": [
+          {
+            "latitud": 43.2633534,
+            "longitud": -2.951074
+          }
+        ],
+        "email": "bilbao@tattooadicts.com",
+        "telefono": "+34 944 790 447",
+        "webs": [
+          {
+            "web": "https://tattooadicts.com"
+          },
+          {
+            "web":"https://es-es.facebook.com/Tattoo-Adicts-128249480559393/"
+          },
+          {
+            "web":"https://www.instagram.com/bilbaotattooadicts/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Unai Ibañez",
+            "nombre": "Unai",
+            "apellidos": "Ibañez Negro",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/unai_ibanez_negro/"
+              }
+            ]
+          },
+
+          {
+            "nombreArtistico": "Nimeni",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/nimenittt/"
+              }
+            ]
+          },
+          {
+            "nombreArtistico": "El Dot",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/el.dot.tattoo/"
+              }
+            ]
+          },
+          {
+            "nombreArtistico": "Bitx Sefer Tatoo",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/bitxsefertattoo/"
+              }
+            ]
+          },
+          {
+            "nombreArtistico": "Gorka",
+            "nombre": "Gorka",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/gorkarttattoo/"
+              }
+            ]
+          }
+
+        ]
+      },
+
+
       {
         "nombre": "Estudio Inkblood",
         "direccion": "Gran Via, 2",

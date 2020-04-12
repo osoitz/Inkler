@@ -423,6 +423,7 @@ class DBlocal   {
         return idEstudio;
     }
 
+    /*
     int recogerIdTatuador(String nombreTatuador){
         abrirDB(false);
         int idTatuador = 0;
@@ -449,7 +450,7 @@ class DBlocal   {
         db.close();
         return idTatuador;
     }
-
+    */
 
     long insertarFoto (byte[] bitmap, int idTatuador) {
         abrirDB(true);
@@ -483,15 +484,16 @@ class DBlocal   {
 
 
 
-    void insertarTatuador(String st_nombre,String st_apellidos, String st_nombreArtistico, int idEstudio){
+    long insertarTatuador(String st_nombre,String st_apellidos, String st_nombreArtistico, int idEstudio){
         abrirDB(true);
         ContentValues values = new ContentValues();
         values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
         values.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
         values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, st_nombreArtistico);
         values.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, idEstudio);
-        db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, values);
+        long idTatuador = db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, values);
         db.close();
+        return idTatuador;
     }
 
     void modificarTatuador(int idTatuador, String st_nombre, String st_apellidos, String st_nombreArtistico, int IdEstudio){
