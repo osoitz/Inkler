@@ -355,13 +355,14 @@ class DBlocal   {
         return webs;
     }
 
-    ArrayList<Bitmap> recogerFotosTatuador (int idTatuador){
+    ArrayList<Foto> recogerFotosTatuador (int idTatuador){
         abrirDB(false);
         Log.d("HOLA!", "entramos en recogerFotosTatuador! " + idTatuador);
-        ArrayList<Bitmap> fotos = new ArrayList<>();
+        ArrayList<Foto> fotos = new ArrayList<>();
 
         // Definimos la query
         String[] projection = {
+                DBHelper.entidadFoto._ID,
                 DBHelper.entidadFoto.COLUMN_NAME_FOTO,
         };
 
@@ -380,10 +381,12 @@ class DBlocal   {
         );
 
         while (cursor.moveToNext()){
-            Log.d("HOLA!", "Estamos en el bucle de recogerFotosTatuador!");
+            //Log.d("HOLA!", "Estamos en el bucle de recogerFotosTatuador!");
+            //Long idFoto = cursor.getLong(cursor.getColumnIndex("_ID"));
+            Long idFoto = cursor.getLong(cursor.getColumnIndexOrThrow(DBHelper.entidadFoto._ID));
             byte[] fotoStream = cursor.getBlob(cursor.getColumnIndexOrThrow(DBHelper.entidadFoto.COLUMN_NAME_FOTO));
-            Bitmap foto = App.getImage(fotoStream);
-            fotos.add(foto);
+            Bitmap bitmap = App.getImage(fotoStream);
+            fotos.add(new Foto(idFoto, bitmap));
             //System.out.println("Hola");
         }
 
@@ -450,14 +453,32 @@ class DBlocal   {
 
     long insertarFoto (byte[] bitmap, int idTatuador) {
         abrirDB(true);
-
         ContentValues values = new ContentValues();
         values.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, idTatuador);
         values.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO,bitmap);
 
         //Devuelve rowid
         return db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
+    }
 
+    long borrarFoto (String idFoto) {
+        abrirDB(true);
+        /*
+        ContentValues values = new ContentValues();
+        values.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, idTatuador);
+        values.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO,bitmap);
+
+        //Devuelve rowid
+        return db.insert(DBHelper.entidadFoto.TABLE_NAME, null, values);
+         */
+
+        // Define 'where' part of query.
+        String selection = DBHelper.entidadFoto._ID + " = ?";
+        // Specify arguments in placeholder order.
+        String[] selectionArgs = { idFoto };
+        // Issue SQL statement.
+        int deletedRows = db.delete(DBHelper.entidadFoto.TABLE_NAME, selection, selectionArgs);
+        return deletedRows;
     }
 
 
