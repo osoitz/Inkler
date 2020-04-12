@@ -12,22 +12,42 @@
         ],
         "email": "bloodink@mail.com",
         "telefono": "+3494789456",
+        "webs": [
+          {
+            "web": "https://www.instagram.com/"
+          }
+        ],
         "tatuadores": [
           {
-            "nombreArtistico": "AKA",
-            "nombre": "Name",
-            "apellidos": "Surname"
+            "nombreArtistico": "Osoitz",
+            "nombre": "Osoitz",
+            "apellidos": "Ink",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ]
           },
 
           {
             "nombreArtistico": "AKA",
             "nombre": "Name",
-            "apellidos": "Surname"
+            "apellidos": "Surname",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ]
           },
           {
-            "nombreArtistico": "AKA",
-            "nombre": "Name",
-            "apellidos": "Surname"
+            "nombreArtistico": "Tatuator",
+            "nombre": "Pepe",
+            "apellidos": "Lopez",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ]
           }
         ]
       },
@@ -43,22 +63,42 @@
         ],
         "email": "pintamonas@mail.com",
         "telefono": "+3494123456",
+        "webs": [
+          {
+            "web": "https://www.instagram.com/"
+          }
+        ],
         "tatuadores": [
           {
             "nombreArtistico": "Amaro",
             "nombre": "Amaro",
-            "apellidos": "Tatoo"
+            "apellidos": "Tatoo",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ]
           },
 
           {
             "nombreArtistico": "Beñat",
             "nombre": "Dormilon",
-            "apellidos": "Despierta"
+            "apellidos": "Despierta",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ]
           },
           {
             "nombreArtistico": "Nocturnal",
             "nombre": "Kevin",
-            "apellidos": "Bacon"
+            "apellidos": "Bacon",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ]
           }
         ]
       }
