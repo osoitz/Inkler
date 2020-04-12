@@ -107,7 +107,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         TextView nombreEstudio =findViewById(R.id.nombreEstudio);
 
         nombreArtistico.setText(miTatuador.getNombreArtistico());
-        String nombre = "(" + miTatuador.getNombre() + " " + miTatuador.getApellidos() + ")";
+        String nombre = miTatuador.getNombre() + " " + miTatuador.getApellidos();
         nombreTatuador.setText(nombre);
 
         SpannableString mitextoU = new SpannableString(miestudio.getNombre());
