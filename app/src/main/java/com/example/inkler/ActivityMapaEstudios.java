@@ -72,10 +72,11 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                         //Añadimos los markers de los estudios y posicionameos la camara
                         final DBlocal db = new DBlocal(getApplicationContext());
                         ArrayList<Estudio> estudios = db.recogerEstudios();
-                        Double minLat = 90.0; //Estan al reves a posta, no lo corrijais!
-                        Double maxLat = -90.0;
-                        Double minLon = 180.0;
-                        Double maxLon = -180.0;
+
+                        Double minLat = null;
+                        Double maxLat = null;
+                        Double minLon = null;
+                        Double maxLon = null;
 
                         for (Estudio estudio : estudios) {
                             //Ponemos cada marker
@@ -84,6 +85,14 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                                     .title(estudio.getNombre())
                                     .setSnippet(estudio.getDireccion())
                             );
+
+                            //Si aun no tenemos datos  max min metemoslos del primer punto
+                            if (minLat == null){
+                                minLat = estudio.getLatitud();
+                                maxLat = estudio.getLatitud();
+                                minLon = estudio.getLongitud();
+                                maxLon = estudio.getLongitud();
+                            }
 
                             //Calculamos lat y lon min y max
                             if (estudio.getLatitud() < minLat) {
@@ -100,12 +109,17 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                             }
                         }
 
+                        System.out.println(minLat);
+                        System.out.println(maxLat);
+                        System.out.println(minLon);
+                        System.out.println(maxLon);
                         //Colocamos la camara en el centro del area delimitada por los puntos
                         CameraPosition position = new CameraPosition.Builder()
                                 .target(new LatLng((minLat + maxLat)/2, (minLon + maxLon)/2))
                                 .zoom(INITIAL_ZOOM)
                                 .tilt(20)
                                 .build();
+                        System.out.println(position.target.toString());
                         mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), millisecondSpeed);
 
                         //Floating Action Button
