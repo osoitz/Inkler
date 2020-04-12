@@ -31,7 +31,10 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -41,10 +44,12 @@ public class ActivityGaleria extends AppCompatActivity {
     private int shortAnimationDuration;
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
+    private FloatingActionButton btnBorrarFoto;
     // --Commented out by Inspection (2020/4/10 15:36):private static final int PICK_IMAGE = 100;
     private int idTatuador;
     private DBlocal db;
     private RecyclerView recyclerView;
+    private ImageView expandedImageView;
 
     //private static final int DSQLITE_DEFAULT_CACHE_SIZE=2000;
 
@@ -65,6 +70,7 @@ public class ActivityGaleria extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
 
         recyclerView = findViewById(R.id.recyclerGaleria);
+        expandedImageView = findViewById(R.id.imagenGrande);
 
         rellenarAdaptador();
 
@@ -76,40 +82,60 @@ public class ActivityGaleria extends AppCompatActivity {
             layoutManager = new GridLayoutManager(getApplicationContext(), 5);
         }
         recyclerView.setLayoutManager(layoutManager);
-        //onclick para ver la foto en grande
 
+        //onclick para ver la foto en grande
         RecyclerViewListener fotoClick = new RecyclerViewListener(ActivityGaleria.this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 imageviewTatuaje = view.findViewById(R.id.tatuaje);
+                TextView identificador = view.findViewById(R.id.identificador);
+                String idFoto = identificador.getText().toString();
                 Drawable foto = imageviewTatuaje.getDrawable();
                 //zoomImageFromThumb(imageviewTatuaje, (Integer) imageviewTatuaje.getTag());
                 zoomImageFromThumb(imageviewTatuaje, foto);
-            }
 
+                if ( App.isAdmin()) {
+                    activarBotonBorrar(idFoto);
+                }
+
+            }
         });
 
+
         recyclerView.addOnItemTouchListener(fotoClick);
-
-
-
-
-
         shortAnimationDuration = getResources().getInteger(
                 android.R.integer.config_shortAnimTime);
 
     }
 
+    private void activarBotonBorrar(final String idFoto) {
+        //Hacemos visible y activamos el boton borrar foto
+        System.out.println(idFoto);
+        btnBorrarFoto = findViewById(R.id.btnBorrarFoto);
+        btnBorrarFoto.setVisibility(View.VISIBLE);
+        btnBorrarFoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                db.borrarFoto (idFoto);
+                Toast.makeText(getApplicationContext(), "La foto " + idFoto + " ha sido borrada", Toast.LENGTH_SHORT).show();
+                expandedImageView.setVisibility(View.GONE);
+                btnBorrarFoto.setVisibility(View.GONE);
+                rellenarAdaptador();
+                }
+        });
+    }
+
+
     private void rellenarAdaptador() {
-        ArrayList<Bitmap> fotos = new ArrayList<>();
+        ArrayList<Foto> fotos = new ArrayList<>();
         try {
             fotos = db.recogerFotosTatuador(idTatuador);
             //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
+            System.out.println(e);
         }
-        //AAA
         AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
         recyclerView.setAdapter(adaptador);
     }
@@ -122,7 +148,6 @@ public class ActivityGaleria extends AppCompatActivity {
         }
 
         // Load the high-resolution "zoomed-in" image.
-        final ImageView expandedImageView = findViewById(R.id.imagenGrande);
         //expandedImageView.setImageResource(imageResId);
         expandedImageView.setImageDrawable(foto);
 
@@ -344,7 +369,6 @@ public class ActivityGaleria extends AppCompatActivity {
     private void saveImage(Bitmap finalBitmap) {
         //Guardamos la foto en la base de datos
         long rowid = db.insertarFoto(App.getBytes(finalBitmap), idTatuador);
-        //Toast.makeText(getApplicationContext(), "Foto añadida. ID: " + rowid + " Tatuador: " + idTatuador, Toast.LENGTH_SHORT).show();
         //Volvemos a rellenar el adaptador para que se vean todas las fotos
         rellenarAdaptador();
     }

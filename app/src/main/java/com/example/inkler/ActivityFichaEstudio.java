@@ -157,8 +157,6 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         }));
     }
     private void cargartatuadores() {
-
-
         String nombreEstudio = estudio.getNombre();
         int idEstudio = db.recogerIdEstudio(nombreEstudio);
         //String idEstudioMetodo = String.valueOf(idEstudio);
@@ -238,7 +236,6 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
             startActivity(intent);
             return true;
-
         }
 
         return super.onOptionsItemSelected(item);
