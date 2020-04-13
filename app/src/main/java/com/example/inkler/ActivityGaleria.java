@@ -289,9 +289,7 @@ public class ActivityGaleria extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (App.isAdmin()) {
-            menu.setGroupVisible(R.id.añadir, false);
-            menu.setGroupVisible(R.id.modificar, false);
-            menu.setGroupVisible(R.id.logout, false);
+            menu.setGroupVisible(R.id.logout, true);
             menu.setGroupVisible(R.id.foto, true);
         } else {
             menu.setGroupVisible(R.id.login, true);

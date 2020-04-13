@@ -190,8 +190,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (App.isAdmin()) {
-            menu.setGroupVisible(R.id.añadir, true);
-            menu.setGroupVisible(R.id.modificar, true);
+            menu.setGroupVisible(R.id.añadir_tat, true);
+            menu.setGroupVisible(R.id.modificar_tat, true);
             menu.setGroupVisible(R.id.logout, true);
         } else {
             menu.setGroupVisible(R.id.login, true);
@@ -240,22 +240,11 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
-        } else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirEstudio.class);
-            intent.putExtra("añadir",true);
-            startActivity(intent);
-            return true;
         } else if (id == R.id.modificar_tatuador) {
             Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirTatuador.class);
             intent.putExtra("idTatuador", idTatuador);
             startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_estudio) {
-            Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirEstudio.class);
-            intent.putExtra("idEstudio", idEstudio);
-            startActivity(intent);
-            return true;
-
         }
 
         return super.onOptionsItemSelected(item);

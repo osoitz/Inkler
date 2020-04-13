@@ -15,23 +15,29 @@
             android:title="@string/log_out"
             app:showAsAction="never" />
     </group>
-    <group android:id="@+id/añadir"
+    <group android:id="@+id/añadir_tat"
         android:visible="false">
         <item
             android:id="@+id/añadir_tatuador"
             android:title="@string/a_adir_tatuador"
             app:showAsAction="never" />
-        <item
-            android:id="@+id/añadir_estudio"
-            android:title="@string/a_adir_estudio"
-            app:showAsAction="never" />
     </group>
-    <group android:id="@+id/modificar"
+    <group android:id="@+id/modificar_tat"
         android:visible="false">
     <item
             android:id="@+id/modificar_tatuador"
             android:title="@string/modificar_tatuador"
             app:showAsAction="never" />
+    </group>
+    <group android:id="@+id/añadir_est"
+        android:visible="false">
+        <item
+            android:id="@+id/añadir_estudio"
+            android:title="@string/a_adir_estudio"
+            app:showAsAction="never" />
+    </group>
+    <group android:id="@+id/modificar_est"
+        android:visible="false">
         <item
             android:id="@+id/modificar_estudio"
             android:title="@string/modificar_estudio"
