@@ -30,8 +30,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
     private RecyclerView recyclerView;
     private int idTatuador;
     private int idEstudio;
+    private List<Web> webs = new ArrayList<>();
 
-    private final List<Web> webs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +57,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
 
         //Toast.makeText(getApplicationContext(),estudio.getLatitud() + " : " + estudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(tatuador, estudio);
-        rellenarWebsTatuador(db.recogerWebsTatuador(tatuador.getId()));
+        webs = db.recogerWebsTatuador(tatuador.getId());
+        rellenarWebsTatuador();
         rellenarFotos(idTatuador);
 
         ImageView vermas = findViewById(R.id.ivvermas);
@@ -85,9 +86,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaTatuador.this, ActivityNavegador.class);
-
-                Web w = webs.get(position);
-                intent.putExtra("url", w.getUrl());
+                Web web = webs.get(position);
+                intent.putExtra("url", web.getUrl());
                 startActivity(intent);
             }
 /*
@@ -119,8 +119,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
     }
 
 
-    private void rellenarWebsTatuador(List<Web> urls){
-        webs.addAll(urls);
+    private void rellenarWebsTatuador(){
+        //webs.addAll(urls);
         recyclerView = findViewById(R.id.recyclertatuadorweb);
         AdaptadorWeb adaptador = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerView.setAdapter(adaptador);

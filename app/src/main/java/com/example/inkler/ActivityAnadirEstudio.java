@@ -2,6 +2,8 @@ package com.example.inkler;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,16 +17,20 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ActivityAnadirEstudio extends AppCompatActivity {
     private static final String TAG = "ANADIR_ESTUDIO" ;
-    EditText et_nombre;
-    EditText et_telefono;
-    EditText et_direccion;
-    EditText et_email;
-    EditText et_longitud;
-    EditText et_latitud;
-    int idEstudio;
-
+    private EditText et_nombre;
+    private EditText et_telefono;
+    private EditText et_direccion;
+    private EditText et_email;
+    private EditText et_longitud;
+    private EditText et_latitud;
+    private int idEstudio;
+    private List<Web> webs = new ArrayList<>();
+    private RecyclerView recyclerViewWeb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,19 +43,23 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
         et_email = findViewById(R.id.contentMail);
         et_longitud = findViewById(R.id.contentLongitud);
         et_latitud = findViewById(R.id.contentLatitud);
+        recyclerViewWeb = findViewById(R.id.recycleranadirestudioweb);
 
         final FloatingActionButton botonGuardar = findViewById(R.id.btnAñadirEstudio);
         FloatingActionButton nuevaWeb = findViewById(R.id.estuAñadirWeb);
         nuevaWeb.setVisibility(View.GONE);
 
         final boolean anadir = getIntent().getBooleanExtra("añadir",false);
-        idEstudio = getIntent().getIntExtra("idEstudio", -1);
-        Log.d(TAG, "onCreate: " + anadir + " " + idEstudio);
+
 
         if (!anadir) {
             //Estamos en modificar
+            idEstudio = getIntent().getIntExtra("idEstudio", -1);
+            Log.d(TAG, "onCreate: " + anadir + " " + idEstudio);
             Estudio estudio =  db.recogerEstudio(idEstudio);
             rellenarDatos(estudio);
+            webs = db.recogerWebsEstudio(estudio.getIdEstudio());
+            rellenarWebsEstudio();
             nuevaWeb.setVisibility(View.VISIBLE);
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,6 +81,8 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
                             web.setUrl(input.getText().toString());
                             web.setIdEstudio(idEstudio);
                             db.insertarWeb(web);
+                            webs = db.recogerWebsEstudio(idEstudio);
+                            rellenarWebsEstudio();
                         }
                     });
                     alertDialog.show();
@@ -127,5 +139,12 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
         estudio.setLatitud(Double.parseDouble(et_latitud.getText().toString()));
         estudio.setLongitud(Double.parseDouble(et_longitud.getText().toString()));
         return estudio;
+    }
+
+    private void rellenarWebsEstudio(){
+        AdaptadorWeb adaptadorWeb = new AdaptadorWeb(getApplicationContext(), webs);
+        recyclerViewWeb.setAdapter(adaptadorWeb);
+        RecyclerView.LayoutManager layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerViewWeb.setLayoutManager(layoutManagerWeb);
     }
 }

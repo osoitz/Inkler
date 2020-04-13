@@ -2,6 +2,9 @@ package com.example.inkler;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,14 +20,19 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+
 //TODO: ¿es posible reducir llamadas a la BD y complejidad ciclomatica?
 public class ActivityAnadirTatuador extends AppCompatActivity {
 
     private EditText et_nombre;
     private EditText et_apellidos;
     private EditText et_nombreArt;
+    private RecyclerView recyclerView;
     private DBlocal db;
-    Spinner spinner;
+    private Spinner spinner;
+    private List<Web> webs = new ArrayList<>();
+
     int idTatuador;
 
     @Override
@@ -50,6 +58,8 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
             final Tatuador tatuador = db.recogerTatuador(idTatuador);
 
             rellenarDatosTatuador(tatuador);
+            webs = db.recogerWebsTatuador(tatuador.getId());
+            rellenarWebsTatuador();
 
             spinner.setSelection(posicionEstudio(nombresEstudios,tatuador.getIdEstudio()));
             nuevaWeb.setVisibility(View.VISIBLE);
@@ -74,6 +84,8 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
                             web.setUrl(input.getText().toString());
                             web.setIdTatuador(idTatuador);
                             db.insertarWeb(web);
+                            webs = db.recogerWebsTatuador(tatuador.getId());
+                            rellenarWebsTatuador();
                         }
                     });
                     alertDialog.show();
@@ -118,6 +130,17 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
             nombres[i]=stringarray.get(i);
         }
         return  nombres;
+    }
+
+    private void rellenarWebsTatuador(){
+        //List<Web> webs = new ArrayList<>();
+        //webs.addAll(urls);
+        recyclerView = findViewById(R.id.recycleranadirtatuadorweb);
+        AdaptadorWeb adaptador = new AdaptadorWeb(getApplicationContext(), webs);
+        recyclerView.setAdapter(adaptador);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        //recyclerView = findViewById(R.id.recyclertatuadorweb);
     }
 
     private int posicionEstudio(ArrayList<String> estudios, int idEstudio){
