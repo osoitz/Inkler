@@ -191,8 +191,7 @@ public class ActivityMapaEstudios extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (App.isAdmin()) {
-            menu.setGroupVisible(R.id.añadir, true);
-            menu.setGroupVisible(R.id.modificar, true);
+            menu.setGroupVisible(R.id.añadir_est, true);
             menu.setGroupVisible(R.id.logout, true);
         } else {
             menu.setGroupVisible(R.id.login, true);
@@ -234,26 +233,11 @@ public class ActivityMapaEstudios extends AppCompatActivity {
         } else if (id == R.id.noadmin) {
             App.setAdmin(false);
             invalidateOptionsMenu();
-        }
-        else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirTatuador.class);
-            intent.putExtra("añadir",true);
-            startActivity(intent);
-            return true;
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_tatuador) {
-            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirTatuador.class);
-            startActivity(intent);
-            return true;
-        } else if (id == R.id.modificar_estudio) {
-            Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirEstudio.class);
-            startActivity(intent);
-            return true;
-
         }
 
         return super.onOptionsItemSelected(item);
