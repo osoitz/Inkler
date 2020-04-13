@@ -90,7 +90,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (App.isAdmin()) {
-            menu.setGroupVisible(R.id.añadir, true);
+            menu.setGroupVisible(R.id.añadir_tat, true);
             menu.setGroupVisible(R.id.logout, true);
         } else {
             menu.setGroupVisible(R.id.login, true);
@@ -131,13 +131,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
         } else if (id == R.id.noadmin) {
             App.setAdmin(false);
             invalidateOptionsMenu();
-        }else if (id == R.id.añadir_estudio) {
-            Intent intent = new Intent(ActivityListaTatuadores.this, ActivityAnadirEstudio.class);
-            intent.putExtra("añadir",true);
-            startActivity(intent);
-            return true;
-        }
-        else if (id == R.id.añadir_tatuador) {
+        } else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(ActivityListaTatuadores.this, ActivityAnadirTatuador.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
