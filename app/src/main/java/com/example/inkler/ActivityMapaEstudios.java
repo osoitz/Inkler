@@ -18,6 +18,7 @@ import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.camera.CameraPosition;
 import com.mapbox.mapboxsdk.camera.CameraUpdateFactory;
 import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.geometry.LatLngBounds;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
@@ -36,13 +37,13 @@ import java.util.ArrayList;
 public class ActivityMapaEstudios extends AppCompatActivity {
 
     private MapView mapView;
-    private final int INITIAL_ZOOM = 5;
+    //private final int INITIAL_ZOOM = 10;
+    private final int padding = 100;
     private final int millisecondSpeed = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
 // Mapbox access token is configured here. This needs to be called either in your application
@@ -63,19 +64,16 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                         // Map is set up and the style has loaded. Now you can add data or make other map adjustments.
 
                         //Desactivamos la inclinacion del mapa, de esa forma no pueden aparecer los puntos dos veces
-                        UiSettings uiSettings = mapboxMap.getUiSettings();
-                        uiSettings.setTiltGesturesEnabled(false);
-
-                        //Limitar el zoom del mapa (tamaño españa)
-                        mapboxMap.setMinZoomPreference(5);
+                        mapboxMap.getUiSettings().setTiltGesturesEnabled(false);
 
                         //Añadimos los markers de los estudios y posicionameos la camara
                         final DBlocal db = new DBlocal(getApplicationContext());
                         ArrayList<Estudio> estudios = db.recogerEstudios();
-                        Double minLat = 90.0; //Estan al reves a posta, no lo corrijais!
-                        Double maxLat = -90.0;
-                        Double minLon = 180.0;
-                        Double maxLon = -180.0;
+
+                        Double minLat = null;
+                        Double maxLat = null;
+                        Double minLon = null;
+                        Double maxLon = null;
 
                         for (Estudio estudio : estudios) {
                             //Ponemos cada marker
@@ -86,6 +84,14 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                             );
 
                             //Calculamos lat y lon min y max
+                            //Si aun no tenemos datos max min metemos los del primer punto
+                            if (minLat == null){
+                                minLat = estudio.getLatitud();
+                                maxLat = estudio.getLatitud();
+                                minLon = estudio.getLongitud();
+                                maxLon = estudio.getLongitud();
+                            }
+
                             if (estudio.getLatitud() < minLat) {
                                 minLat = estudio.getLatitud();
                             }
@@ -100,13 +106,14 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                             }
                         }
 
+
                         //Colocamos la camara en el centro del area delimitada por los puntos
-                        CameraPosition position = new CameraPosition.Builder()
-                                .target(new LatLng((minLat + maxLat)/2, (minLon + maxLon)/2))
-                                .zoom(INITIAL_ZOOM)
-                                .tilt(20)
+                        LatLngBounds latLngBounds = new LatLngBounds.Builder()
+                                .include(new LatLng(maxLat, maxLon)) // Northeast
+                                .include(new LatLng(minLat, minLon)) // Southwest
                                 .build();
-                        mapboxMap.animateCamera(CameraUpdateFactory.newCameraPosition(position), millisecondSpeed);
+                        mapboxMap.easeCamera(CameraUpdateFactory.newLatLngBounds(latLngBounds, padding), millisecondSpeed);
+
 
                         //Floating Action Button
                         FloatingActionButton fabLista = findViewById(R.id.fabLista);

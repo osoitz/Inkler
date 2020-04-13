@@ -1,0 +1,338 @@
+{
+
+    "estudios": [
+
+      {
+        "nombre": "Tatoo Adicts",
+        "direccion": "Bilbao La Vieja 29 - 48003 Bilbao",
+        "geo": [
+          {
+            "latitud": 43.2633534,
+            "longitud": -2.951074
+          }
+        ],
+        "email": "bilbao@tattooadicts.com",
+        "telefono": "+34 944 790 447",
+        "webs": [
+          {
+            "web": "https://tattooadicts.com"
+          },
+          {
+            "web":"https://es-es.facebook.com/Tattoo-Adicts-128249480559393/"
+          },
+          {
+            "web":"https://www.instagram.com/bilbaotattooadicts/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Unai Ibañez",
+            "nombre": "Unai",
+            "apellidos": "Ibañez Negro",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/unai_ibanez_negro/"
+              }
+            ],
+            "fotos": [
+              {"foto": "f0001"},
+              {"foto": "f0002"},
+              {"foto": "f0003"},
+              {"foto": "f0004"},
+              {"foto": "f0005"}
+            ]
+          },
+
+          {
+            "nombreArtistico": "Nimeni",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/nimenittt/"
+              }
+            ],
+            "fotos": [
+              {"foto": "f0006"},
+              {"foto": "f0007"},
+              {"foto": "f0008"},
+              {"foto": "f0009"},
+              {"foto": "f0010"}
+            ]
+          },
+          {
+            "nombreArtistico": "El Dot",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/el.dot.tattoo/"
+              }
+            ],
+            "fotos": [
+
+            ]
+          },
+          {
+            "nombreArtistico": "Bitx Sefer Tatoo",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/bitxsefertattoo/"
+              }
+            ],
+            "fotos": [
+              {"foto": "f0011"},
+              {"foto": "f0012"},
+              {"foto": "f0013"},
+              {"foto": "f0014"},
+              {"foto": "f0015"}
+            ]
+          },
+          {
+            "nombreArtistico": "Gorka",
+            "nombre": "Gorka",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/gorkarttattoo/"
+              }
+            ],
+            "fotos": [
+              {"foto": "f0016"},
+              {"foto": "f0017"},
+              {"foto": "f0018"},
+              {"foto": "f0019"},
+              {"foto": "f0020"}
+            ]
+          }
+        ]
+      },
+
+
+      {
+        "nombre": "Estudio Inkblood",
+        "direccion": "Gran Via, 2",
+        "geo": [
+          {
+            "latitud": 43.01,
+            "longitud": -2.01
+          }
+        ],
+        "email": "bloodink@mail.com",
+        "telefono": "+3494789456",
+        "webs": [
+          {
+            "web": "https://www.instagram.com/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Osoitz",
+            "nombre": "Osoitz",
+            "apellidos": "Ink",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ],
+            "fotos": [
+
+            ]
+          },
+
+          {
+            "nombreArtistico": "AKA",
+            "nombre": "Name",
+            "apellidos": "Surname",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ],
+            "fotos": [
+
+            ]
+          },
+          {
+            "nombreArtistico": "Tatuator",
+            "nombre": "Pepe",
+            "apellidos": "Lopez",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ],
+            "fotos": [
+
+            ]
+
+          }
+        ]
+      },
+
+      {
+        "nombre": "Pintamonas ink",
+        "direccion": "General Concha, 15",
+        "geo": [
+          {
+            "latitud": 43.05,
+            "longitud": -2.07
+          }
+        ],
+        "email": "pintamonas@mail.com",
+        "telefono": "+3494123456",
+        "webs": [
+          {
+            "web": "https://www.instagram.com/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Amaro",
+            "nombre": "Amaro",
+            "apellidos": "Tatoo",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ],
+            "fotos": [
+
+            ]
+          },
+
+          {
+            "nombreArtistico": "Beñat",
+            "nombre": "Dormilon",
+            "apellidos": "Despierta",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ],
+            "fotos": [
+
+            ]
+
+          },
+          {
+            "nombreArtistico": "Nocturnal",
+            "nombre": "Kevin",
+            "apellidos": "Bacon",
+            "webs": [
+              {
+                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
+              }
+            ],
+            "fotos": [
+
+            ]
+
+          }
+        ]
+      },
+
+      {
+        "nombre": "Paris ink",
+        "direccion": "Rue Le Pincho, 33",
+        "geo": [
+          {
+            "latitud": 48.864716,
+            "longitud": 2.349014
+          }
+        ],
+        "email": "parisink@mail.com",
+        "telefono": "+33212345678",
+        "webs": [
+          {
+            "web": "https://www.latlong.net/place/paris-le-de-france-france-1666.html"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Francoise",
+            "nombre": "Monamour",
+            "apellidos": "Olala",
+            "webs": [
+              {
+                "web": "https://fr.wikipedia.org/wiki/Fromage"
+              }
+            ],
+            "fotos": [
+
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "California ink",
+        "direccion": "Surf Street",
+        "geo": [
+          {
+            "latitud": 36.778259,
+            "longitud": -119.417931
+          }
+        ],
+        "email": "california@mail.com",
+        "telefono": "+01212345678",
+        "webs": [
+          {
+            "web": "https://www.latlong.net/place/california-the-usa-2487.html"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Johnny Skull",
+            "nombre": "John",
+            "apellidos": "Smith",
+            "webs": [
+              {
+                "web": "https://en.wikipedia.org/wiki/Skull"
+              }
+            ],
+            "fotos": [
+
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Wuhan Tatoo",
+        "direccion": "",
+        "geo": [
+          {
+            "latitud": 30.5833333,
+            "longitud": 114.2666667
+          }
+        ],
+        "email": "wuhan@mail.com",
+        "telefono": "+01212345678",
+        "webs": [
+          {
+            "web": "l"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Cheng Lee",
+            "nombre": "Cheng",
+            "apellidos": "Lee",
+            "webs": [
+              {
+                "web": "https://en.wikipedia.org/wiki/Wuhan"
+              }
+            ],
+            "fotos": [
+
+            ]
+          }
+        ]
+      }
+
+
+    ]
+  }

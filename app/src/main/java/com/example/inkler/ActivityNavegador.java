@@ -23,6 +23,9 @@ public class ActivityNavegador extends AppCompatActivity {
 
         String web = getIntent().getStringExtra(getString(R.string.url));
         WebView webView = findViewById(R.id.webview);
+        //Si no se activa DomStorage Instagram no carga
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setDomStorageEnabled(true);
         webView.loadUrl(web);
         webView.setWebViewClient(new WebViewClient());
 
