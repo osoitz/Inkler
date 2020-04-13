@@ -122,6 +122,7 @@ public class MainActivity extends AppCompatActivity{
                     nuevoTatuador.setNombreArtistico(tatuador.getString("nombreArtistico"));
                     nuevoTatuador.setNombre(tatuador.getString("nombre"));
                     nuevoTatuador.setApellidos(tatuador.getString("apellidos"));
+                    nuevoTatuador.setIdEstudio(idEstudio);
 
                     Log.d("JSON", "NOMBRE ARTISTICO: " + nuevoTatuador.getNombreArtistico());
                     Log.d("JSON", "NOMBRE: " + nuevoTatuador.getNombre());
