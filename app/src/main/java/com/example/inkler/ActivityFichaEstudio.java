@@ -47,15 +47,24 @@ public class ActivityFichaEstudio extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        db = new DBlocal(getApplicationContext());
-        final int idEstudio = getIntent().getIntExtra("idEstudio",0);
-        estudio = db.recogerEstudio(idEstudio);
-        final int INITIAL_ZOOM = 14;
         super.onCreate(savedInstanceState);
+
+
+
+
+        //Variables
+        final int idEstudio = getIntent().getIntExtra("idEstudio",0);
         Mapbox.getInstance(this, App.mapBoxAcessToken);
+        final int INITIAL_ZOOM = 14;
         final int millisecondSpeed = 1000;
+
         setContentView(R.layout.activity_ficha_estudio);
 
+        //Coger datos
+        db = new DBlocal(getApplicationContext());
+        estudio = db.recogerEstudio(idEstudio);
+        rellenarCampos();
+        rellenarWebsEstudio(db.recogerWebsEstudio(estudio.getIdEstudio()));
         cargartatuadores();
 
         //Acciones del onclick y onlongclick del recycler
@@ -104,30 +113,9 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             }
         });
 
-        TextView NombreEstudio = findViewById(R.id.labelNombreEstudio);
-        NombreEstudio.setText(estudio.getNombre());
-        TextView DireccionEstudio = findViewById(R.id.printDireccion);
-        DireccionEstudio.setText(estudio.getDireccion());
-        rellenarWebsEstudio(db.recogerWebsEstudio(estudio.getIdEstudio()));
-        TextView Email = findViewById(R.id.contentMailEstudio);
-        Email.setText(estudio.getEmail());
 
 
 
-        final TextView telefono = findViewById(R.id.contentTelefono);
-
-        SpannableString mitextoU = new SpannableString(telefono.getText().toString());
-        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        telefono.setText(mitextoU);
-        telefono.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_DIAL);
-                String num= telefono.getText().toString();
-                intent.setData(Uri.parse("tel:"+num));
-                startActivity(intent);
-            }
-        });
     }
 
     // Add the mapView lifecycle to the activity's lifecycle methods
@@ -165,6 +153,32 @@ public class ActivityFichaEstudio extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         mapView.onDestroy();
+    }
+
+    private void rellenarCampos() {
+        TextView NombreEstudio = findViewById(R.id.labelNombreEstudio);
+        NombreEstudio.setText(estudio.getNombre());
+        TextView DireccionEstudio = findViewById(R.id.printDireccion);
+        DireccionEstudio.setText(estudio.getDireccion());
+
+        final TextView Email = findViewById(R.id.contentMailEstudio);
+        Email.setText(estudio.getEmail());
+
+        TextView contentTelefono = findViewById(R.id.contentTelefono);
+        final String telefono = estudio.getTelefono();
+
+        SpannableString mitextoU = new SpannableString(telefono);
+        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
+        contentTelefono.setText(mitextoU);
+        contentTelefono.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                //String num= telefono.getText().toString();
+                intent.setData(Uri.parse("tel:" + telefono));
+                startActivity(intent);
+            }
+        });
     }
 
     private void rellenarWebsEstudio(List<Web> urls){

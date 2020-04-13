@@ -232,6 +232,107 @@
 
           }
         ]
+      },
+
+      {
+        "nombre": "Paris ink",
+        "direccion": "Rue Le Pincho, 33",
+        "geo": [
+          {
+            "latitud": 48.864716,
+            "longitud": 2.349014
+          }
+        ],
+        "email": "parisink@mail.com",
+        "telefono": "+33212345678",
+        "webs": [
+          {
+            "web": "https://www.latlong.net/place/paris-le-de-france-france-1666.html"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Francoise",
+            "nombre": "Monamour",
+            "apellidos": "Olala",
+            "webs": [
+              {
+                "web": "https://fr.wikipedia.org/wiki/Fromage"
+              }
+            ],
+            "fotos": [
+
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "California ink",
+        "direccion": "Surf Street",
+        "geo": [
+          {
+            "latitud": 36.778259,
+            "longitud": -119.417931
+          }
+        ],
+        "email": "california@mail.com",
+        "telefono": "+01212345678",
+        "webs": [
+          {
+            "web": "https://www.latlong.net/place/california-the-usa-2487.html"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Johnny Skull",
+            "nombre": "John",
+            "apellidos": "Smith",
+            "webs": [
+              {
+                "web": "https://en.wikipedia.org/wiki/Skull"
+              }
+            ],
+            "fotos": [
+
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Wuhan Tatoo",
+        "direccion": "",
+        "geo": [
+          {
+            "latitud": 30.5833333,
+            "longitud": 114.2666667
+          }
+        ],
+        "email": "wuhan@mail.com",
+        "telefono": "+01212345678",
+        "webs": [
+          {
+            "web": "l"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Cheng Lee",
+            "nombre": "Cheng",
+            "apellidos": "Lee",
+            "webs": [
+              {
+                "web": "https://en.wikipedia.org/wiki/Wuhan"
+              }
+            ],
+            "fotos": [
+
+            ]
+          }
+        ]
       }
+
+
     ]
   }
