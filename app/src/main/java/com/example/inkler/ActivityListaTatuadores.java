@@ -50,7 +50,9 @@ public class ActivityListaTatuadores extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityListaTatuadores.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
+                App.setIdTatuador(tatuador.getId());
                 intent.putExtra("idTatuador",tatuador.getId());
+
                 startActivity(intent);
             }
 

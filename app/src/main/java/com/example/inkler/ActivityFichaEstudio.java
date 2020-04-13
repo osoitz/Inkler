@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityFichaEstudio extends AppCompatActivity {
+    private static final String TAG = "FICHAESTUDIO";
     //private RecyclerView.LayoutManager layoutManagerWeb;
     //private AdaptadorWeb adaptadorWeb;
     private MapView mapView;
@@ -48,9 +50,6 @@ public class ActivityFichaEstudio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
 
         //Variables
         final int idEstudio = getIntent().getIntExtra("idEstudio",0);
@@ -73,7 +72,8 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaEstudio.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
-                intent.putExtra("id",tatuador.getId());
+                //Log.d(TAG, "onItemClick: TATUADOR: " + tatuador.getId() );
+                intent.putExtra("idTatuador",tatuador.getId());
                 startActivity(intent);
             }
 /*
@@ -174,7 +174,6 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                //String num= telefono.getText().toString();
                 intent.setData(Uri.parse("tel:" + telefono));
                 startActivity(intent);
             }
