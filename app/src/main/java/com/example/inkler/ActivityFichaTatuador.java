@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,6 +26,7 @@ import java.util.List;
 
 
 public class ActivityFichaTatuador extends AppCompatActivity {
+    private static final String TAG = "FichaTatuador";
     private RecyclerView recyclerView;
 
     private final List<Web> webs = new ArrayList<>();
@@ -38,13 +40,13 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             idTatuador = getIntent().getIntExtra("idTatuador", -1);
             App.setIdTatuador(idTatuador);
         }
+        Log.d(TAG, "idTatuador: " + idTatuador);
         setContentView(R.layout.activity_ficha_tatuador);
 
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-
 
         //Instanciamos la clase que tiene los metodos de la DB
         DBlocal db = new DBlocal(getApplicationContext());
@@ -106,9 +108,12 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         String nombre = miTatuador.getNombre() + " " + miTatuador.getApellidos();
         nombreTatuador.setText(nombre);
 
-        SpannableString mitextoU = new SpannableString(miestudio.getNombre());
-        mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
-        nombreEstudio.setText(mitextoU);
+        if (miestudio.getNombre() != null){
+            SpannableString mitextoU = new SpannableString(miestudio.getNombre());
+            mitextoU.setSpan(new UnderlineSpan(), 0, mitextoU.length(), 0);
+            nombreEstudio.setText(mitextoU);
+        }
+
     }
 
 
