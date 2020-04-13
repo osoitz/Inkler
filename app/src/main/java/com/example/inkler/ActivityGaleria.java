@@ -357,11 +357,11 @@ public class ActivityGaleria extends AppCompatActivity {
         //Mediante un intent llamaremos a la camara para sacar una foto
 
         //Antes de ada los permisos
-        //int permissionCheck = ContextCompat.checkSelfPermission(
-        //        this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int permisocamara = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.CAMERA);
-        if (permisocamara != PackageManager.PERMISSION_GRANTED) { //permissionCheck != PackageManager.PERMISSION_GRANTED ||
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED || permisocamara != PackageManager.PERMISSION_GRANTED) {
             Log.i("Mensaje", "No se tiene permiso para la camara!.");
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE}, 225);
         } else {
@@ -369,24 +369,21 @@ public class ActivityGaleria extends AppCompatActivity {
             Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
             startActivityForResult(i,0);
         }
-
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            //Una vez sacada esa foto vamos a cojerla del intent y la guardaremos en forma de bitmap
+            //Una vez sacada esa foto vamos a cogerla del intent y la guardaremos en forma de bitmap
             Bundle ext = data.getExtras();
             if (ext != null){
                 Bitmap bmp = (Bitmap) ext.get("data");
-                //Log.d(TAG, "exito");
+                Log.d(TAG, "exito");
                 saveImage(bmp);
             }
         }
     }
-
-
 
     private void saveImage(Bitmap finalBitmap) {
         //Guardamos la foto en la base de datos

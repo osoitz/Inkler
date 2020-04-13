@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ActivityAnadirEstudio extends AppCompatActivity {
+    private static final String TAG = "ANADIR_ESTUDIO" ;
     EditText et_nombre;
     EditText et_telefono;
     EditText et_direccion;
@@ -29,8 +31,6 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anadir_estudio);
         final DBlocal db = new DBlocal(getApplicationContext());
-        Estudio estudio =  db.recogerEstudio(idEstudio);
-
         et_nombre = findViewById(R.id.contentNombre);
         et_telefono = findViewById(R.id.contentTelefono);
         et_direccion = findViewById(R.id.contentDireccion);
@@ -44,9 +44,11 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
 
         final boolean anadir = getIntent().getBooleanExtra("añadir",false);
         idEstudio = getIntent().getIntExtra("idEstudio", -1);
+        Log.d(TAG, "onCreate: " + anadir + " " + idEstudio);
 
         if (!anadir) {
             //Estamos en modificar
+            Estudio estudio =  db.recogerEstudio(idEstudio);
             rellenarDatos(estudio);
             nuevaWeb.setVisibility(View.VISIBLE);
             nuevaWeb.setOnClickListener(new View.OnClickListener() {
@@ -97,9 +99,6 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
             }
 
     });
-
-
-
 
 }
 
