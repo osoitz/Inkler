@@ -28,21 +28,22 @@ import java.util.List;
 public class ActivityFichaTatuador extends AppCompatActivity {
     private static final String TAG = "FichaTatuador";
     private RecyclerView recyclerView;
+    private int idTatuador;
+    private int idEstudio;
 
     private final List<Web> webs = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        final int idTatuador;
         if(getIntent().getIntExtra("idTatuador", -1) == -1){
             idTatuador = App.getIdTatuador();
         }else{
             idTatuador = getIntent().getIntExtra("idTatuador", -1);
             App.setIdTatuador(idTatuador);
         }
-        Log.d(TAG, "idTatuador: " + idTatuador);
-        setContentView(R.layout.activity_ficha_tatuador);
+        //Log.d(TAG, "idTatuador: " + idTatuador);
 
+        setContentView(R.layout.activity_ficha_tatuador);
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -50,8 +51,10 @@ public class ActivityFichaTatuador extends AppCompatActivity {
 
         //Instanciamos la clase que tiene los metodos de la DB
         DBlocal db = new DBlocal(getApplicationContext());
-        Tatuador tatuador = db.recogerTatuador(idTatuador);
-        final Estudio estudio = db.recogerEstudio(tatuador.getIdEstudio());
+        final Tatuador tatuador = db.recogerTatuador(idTatuador);
+        idEstudio = tatuador.getIdEstudio();
+        Estudio estudio = db.recogerEstudio(idEstudio);
+
         //Toast.makeText(getApplicationContext(),estudio.getLatitud() + " : " + estudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(tatuador, estudio);
         rellenarWebsTatuador(db.recogerWebsTatuador(tatuador.getId()));
@@ -66,14 +69,13 @@ public class ActivityFichaTatuador extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         TextView et_nombreEstudio = findViewById(R.id.nombreEstudio);
-        String nombreEstudio = et_nombreEstudio.getText().toString();
-        final int idEstudio = db.recogerIdEstudio(nombreEstudio);
         et_nombreEstudio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ActivityFichaTatuador.this, ActivityFichaEstudio.class);
-                intent.putExtra("idEstudio",idEstudio);
+                intent.putExtra("idEstudio", tatuador.getIdEstudio());
                 startActivity(intent);
             }
         });
@@ -101,8 +103,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
 
     private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
         TextView nombreArtistico = findViewById(R.id.nombreArtistico);
-        TextView nombreTatuador =findViewById(R.id.nombreApellidos);
-        TextView nombreEstudio =findViewById(R.id.nombreEstudio);
+        TextView nombreTatuador = findViewById(R.id.nombreApellidos);
+        TextView nombreEstudio = findViewById(R.id.nombreEstudio);
 
         nombreArtistico.setText(miTatuador.getNombreArtistico());
         String nombre = miTatuador.getNombre() + " " + miTatuador.getApellidos();
@@ -124,7 +126,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         recyclerView.setAdapter(adaptador);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
-        recyclerView = findViewById(R.id.recyclertatuadorweb);
+       //recyclerView = findViewById(R.id.recyclertatuadorweb);
     }
 
     private void rellenarFotos(int idTatuador) {
@@ -245,10 +247,12 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             return true;
         } else if (id == R.id.modificar_tatuador) {
             Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirTatuador.class);
+            intent.putExtra("idTatuador", idTatuador);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_estudio) {
             Intent intent = new Intent(ActivityFichaTatuador.this, ActivityAnadirEstudio.class);
+            intent.putExtra("idEstudio", idEstudio);
             startActivity(intent);
             return true;
 

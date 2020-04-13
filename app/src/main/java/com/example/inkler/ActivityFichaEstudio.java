@@ -36,23 +36,20 @@ import java.util.List;
 
 public class ActivityFichaEstudio extends AppCompatActivity {
     private static final String TAG = "FICHAESTUDIO";
-    //private RecyclerView.LayoutManager layoutManagerWeb;
-    //private AdaptadorWeb adaptadorWeb;
     private MapView mapView;
     private DBlocal db;
     private RecyclerView recyclerView;
-    //private RecyclerView.LayoutManager layoutManager;
-    //private AdaptadorTatuadores adaptador;
     private Estudio estudio;
     private final List<Web> webs = new ArrayList<>();
     private List<Tatuador> tatuadores = new ArrayList<>();
+    private int idEstudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         //Variables
-        final int idEstudio = getIntent().getIntExtra("idEstudio",0);
+       idEstudio = getIntent().getIntExtra("idEstudio",0);
         Mapbox.getInstance(this, App.mapBoxAcessToken);
         final int INITIAL_ZOOM = 14;
         final int millisecondSpeed = 1000;
@@ -72,7 +69,6 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaEstudio.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
-                //Log.d(TAG, "onItemClick: TATUADOR: " + tatuador.getId() );
                 intent.putExtra("idTatuador",tatuador.getId());
                 startActivity(intent);
             }
@@ -209,7 +205,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
     }
     private void cargartatuadores() {
         String nombreEstudio = estudio.getNombre();
-        int idEstudio = db.recogerIdEstudio(nombreEstudio);
+        //int idEstudio = db.recogerIdEstudio(nombreEstudio);
         //String idEstudioMetodo = String.valueOf(idEstudio);
         tatuadores = db.recogerTatuadoresEstudio(idEstudio);
 
@@ -279,12 +275,19 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_tatuador) {
+
+        }
+        /*
+        else if (id == R.id.modificar_tatuador) {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirTatuador.class);
             startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_estudio) {
+        }
+        */
+        else if (id == R.id.modificar_estudio) {
+
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
+            intent.putExtra("idEstudio", idEstudio);
             startActivity(intent);
             return true;
         }

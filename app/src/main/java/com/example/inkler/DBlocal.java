@@ -322,7 +322,6 @@ class DBlocal   {
         //ArrayList<String> webs = new ArrayList<>();
         List<Web> webs= new ArrayList<>();
 
-
         //Columnas
         String[] projection = {
                 DBHelper.entidadWeb.COLUMN_NAME_URL
@@ -423,34 +422,7 @@ class DBlocal   {
         return idEstudio;
     }
 
-    /*
-    int recogerIdTatuador(String nombreTatuador){
-        abrirDB(false);
-        int idTatuador = 0;
 
-        //Columnas
-        String[] proyeccion = {DBHelper.entidadTatuador._ID};
-        String selection = DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE + " = ?";
-        String[] selectionArgs = new String[] { "" + nombreTatuador } ;
-        //Respuesta
-        Cursor cursor = db.query(
-                DBHelper.entidadTatuador.TABLE_NAME,
-                proyeccion,
-                selection,
-                selectionArgs,
-                null,
-                null,
-                null);
-        if (cursor.getCount() > 0){
-            cursor.moveToFirst();
-
-            idTatuador = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.entidadTatuador._ID));
-        }
-        cursor.close();
-        db.close();
-        return idTatuador;
-    }
-    */
 
     long insertarFoto (byte[] bitmap, int idTatuador) {
         abrirDB(true);
@@ -464,7 +436,7 @@ class DBlocal   {
         return rowid;
     }
 
-    long borrarFoto (String idFoto) {
+    void borrarFoto (String idFoto) {
         abrirDB(true);
         /*
         ContentValues values = new ContentValues();
@@ -480,137 +452,79 @@ class DBlocal   {
         // Specify arguments in placeholder order.
         String[] selectionArgs = { idFoto };
         // Issue SQL statement.
-        int deletedRows = db.delete(DBHelper.entidadFoto.TABLE_NAME, selection, selectionArgs);
-        return deletedRows;
+        db.delete(DBHelper.entidadFoto.TABLE_NAME, selection, selectionArgs);
+
     }
 
-
-
-    long insertarTatuador(String st_nombre,String st_apellidos, String st_nombreArtistico, int idEstudio){
+    long insertarTatuador(Tatuador tatuador){
         abrirDB(true);
         ContentValues values = new ContentValues();
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, st_nombreArtistico);
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, idEstudio);
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, tatuador.getNombre());
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, tatuador.getApellidos());
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, tatuador.getNombreArtistico());
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, tatuador.getIdEstudio());
         long idTatuador = db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, values);
         db.close();
         return idTatuador;
     }
 
-    void modificarTatuador(int idTatuador, String st_nombre, String st_apellidos, String st_nombreArtistico, int IdEstudio){
+    void modificarTatuador(Tatuador tatuador){
         abrirDB(true);
         ContentValues values = new ContentValues();
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, st_nombre);
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, st_apellidos);
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, st_nombreArtistico);
-        values.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, IdEstudio);
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, tatuador.getNombre());
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, tatuador.getApellidos());
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, tatuador.getNombreArtistico());
+        values.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, tatuador.getIdEstudio());
         //Columnas del where
         String selection = DBHelper.entidadTatuador._ID + " = ?";
         //Argumentos del where
-        String [] selectionargs = { "" + idTatuador };
+        String [] selectionargs = { "" + tatuador.getIdEstudio() };
         db.update(DBHelper.entidadTatuador.TABLE_NAME,values,selection,selectionargs);
         db.close();
     }
 
-    void insertarEstudio (String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+    long insertarEstudio (Estudio estudio) {
         abrirDB(true);
         ContentValues values = new ContentValues();
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, email);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, Telefono);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud);
-        db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, values);
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, estudio.getNombre());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, estudio.getDireccion());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, estudio.getEmail());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, estudio.getTelefono());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, estudio.getLatitud());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, estudio.getLongitud());
+
+        long rowid = db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, values);
         db.close();
+        return rowid;
     }
 
-    void modificarEstudio (int idEstudio, String nombre, String direccion, double latitud, double longitud, String email, String Telefono) {
+    void modificarEstudio (Estudio estudio) {
         abrirDB(true);
         ContentValues values = new ContentValues();
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, nombre);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, direccion);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, email);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, Telefono);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, longitud);
-        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, latitud);
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, estudio.getNombre());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, estudio.getDireccion());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, estudio.getEmail());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, estudio.getTelefono());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, estudio.getLatitud());
+        values.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, estudio.getLongitud());
+
         //Columnas del where
         String selection = DBHelper.entidadEstudio._ID + " = ?";
         //Argumentos del where
-        String [] selectionargs = { "" + idEstudio };
+        String [] selectionargs = { "" + estudio.getIdEstudio() };
         db.update(DBHelper.entidadEstudio.TABLE_NAME,values,selection,selectionargs);
         db.close();
     }
 
-    void insertarWeb (int idEstudio, String web, int idTatuador) {
+    long insertarWeb (Web web) {
         abrirDB(true);
         ContentValues values = new ContentValues();
-        values.put(DBHelper.entidadWeb.COLUMN_NAME_URL, web);
-        values.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, idEstudio);
-        values.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, idTatuador);
-
-        db.insert(DBHelper.entidadWeb.TABLE_NAME, null, values);
+        values.put(DBHelper.entidadWeb.COLUMN_NAME_URL, web.getUrl());
+        values.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, web.getIdEstudio());
+        values.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, web.getIdTatuador());
+        long rowid = db.insert(DBHelper.entidadWeb.TABLE_NAME, null, values);
         db.close();
+        return rowid;
     }
-
-    void rellenarDB() {
-
-        abrirDB(true);
-
-        //dbHelper.delete(db);
-
-        for (int pos = 0; pos < 10; pos++) {
-
-            ContentValues e1 = new ContentValues();
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_NOMBRE, "Estudio " + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_DIRECCION, "Direccion " + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_EMAIL, "Email " + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_TELEFONO, "Telefono " + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LATITUD, 43 + pos);
-            e1.put(DBHelper.entidadEstudio.COLUMN_NAME_LONGITUD, -2 + pos);
-            db.insert(DBHelper.entidadEstudio.TABLE_NAME, null, e1);
-            //Log.d("Estudio", "Estudio " + pos + " , Direccion " + pos + " , Email " + pos + " , Telefono " + pos);
-
-            ContentValues t1 = new ContentValues();
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE_ARTISTICO, "Satan " + pos);
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_NOMBRE, "Beñat " + pos);
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_APELLIDOS, "Smith " + pos);
-            t1.put(DBHelper.entidadTatuador.COLUMN_NAME_ID_ESTUDIO, pos + 1);
-            db.insert(DBHelper.entidadTatuador.TABLE_NAME, null, t1);
-            //Log.d("Tatuador", "Satan " + pos + " , Beñat " + pos + " , Smith " + pos + " , SBS@gmail.com " + pos + " , 666666666 " + pos);
-
-            ContentValues w1 = new ContentValues();
-            w1.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "url " + pos);
-            w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, pos + 1);
-            w1.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos + 1);
-            db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w1);
-
-            ContentValues w12 = new ContentValues();
-            w12.put(DBHelper.entidadWeb.COLUMN_NAME_URL, "https://www.wikipedia.com/jkngsersnjgdkngrlkmñgsekmlñsgelkm");
-            w12.put(DBHelper.entidadWeb.COLUMN_NAME_ID_ESTUDIO, pos + 1);
-            w12.put(DBHelper.entidadWeb.COLUMN_NAME_ID_TATUADOR, pos + 1);
-            db.insert(DBHelper.entidadWeb.TABLE_NAME, null, w12);
-
-            //Log.d("webTatuador", "url " + pos);
-
-            //para la galeria
-            /*
-            ContentValues foto = new ContentValues();
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.calavera);
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
-            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, R.drawable.dragonlogo);
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 1);
-            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_FOTO, "content://com.google.android.apps.photos.contentprovider/0/1/content%3A%2F%2Fmedia%2Fexternal%2Fimages%2Fmedia%2F109/ORIGINAL/NONE/image%2Fjpeg/729250479");
-            foto.put(DBHelper.entidadFoto.COLUMN_NAME_ID_TATUADOR, 2);
-            db.insert(DBHelper.entidadFoto.TABLE_NAME, null, foto);
-
-             */
-        }
-        db.close();
-    }
-
 
 }
