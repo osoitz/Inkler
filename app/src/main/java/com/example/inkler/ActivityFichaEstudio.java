@@ -39,31 +39,35 @@ public class ActivityFichaEstudio extends AppCompatActivity {
     private MapView mapView;
     private DBlocal db;
     private RecyclerView recyclerView;
+    private RecyclerView recyclerViewWeb;
     private Estudio estudio;
-    private final List<Web> webs = new ArrayList<>();
+    private List<Web> webs = new ArrayList<>();
     private List<Tatuador> tatuadores = new ArrayList<>();
     private int idEstudio;
+    private int INITIAL_ZOOM = 14;
+    private int millisecondSpeed = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mapbox.getInstance(this, App.mapBoxAcessToken);
+        setContentView(R.layout.activity_ficha_estudio);
 
         //Variables
-       idEstudio = getIntent().getIntExtra("idEstudio",0);
-        Mapbox.getInstance(this, App.mapBoxAcessToken);
-        final int INITIAL_ZOOM = 14;
-        final int millisecondSpeed = 1000;
+        idEstudio = getIntent().getIntExtra("idEstudio",0);
+        recyclerView = findViewById(R.id.recyclerTatEstudio);
+        recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
 
-        setContentView(R.layout.activity_ficha_estudio);
 
         //Coger datos
         db = new DBlocal(getApplicationContext());
         estudio = db.recogerEstudio(idEstudio);
         rellenarCampos();
-        rellenarWebsEstudio(db.recogerWebsEstudio(estudio.getIdEstudio()));
+        webs = db.recogerWebsEstudio(estudio.getIdEstudio());
+        rellenarWebsEstudio();
         cargartatuadores();
 
-        //Acciones del onclick y onlongclick del recycler
+        // onclick  del recycler de tatuadores
         recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -78,6 +82,17 @@ public class ActivityFichaEstudio extends AppCompatActivity {
                 //Nichts
             }
   */
+        }));
+
+        //onclick del recycler de webs
+        recyclerViewWeb.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(ActivityFichaEstudio.this, ActivityNavegador.class);
+                Web web = webs.get(position);
+                intent.putExtra("url", web.getUrl());
+                startActivity(intent);
+            }
         }));
 
         mapView = findViewById(R.id.mapView);
@@ -176,40 +191,16 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         });
     }
 
-    private void rellenarWebsEstudio(List<Web> urls){
-        webs.addAll(urls);
-        RecyclerView recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
+    private void rellenarWebsEstudio(){
         AdaptadorWeb adaptadorWeb = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerViewWeb.setAdapter(adaptadorWeb);
         RecyclerView.LayoutManager layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerViewWeb.setLayoutManager(layoutManagerWeb);
-        recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
-
-        //Acciones del onclick y onlongclick del recycler
-        recyclerViewWeb.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(ActivityFichaEstudio.this, ActivityNavegador.class);
-                Web w = webs.get(position);
-                intent.putExtra("url", w.getUrl());
-                startActivity(intent);
-            }
-/*
-            @Override
-            public void onLongItemClick(View view, int position) {
-                //Nichts
-            }
-
- */
-        }));
     }
-    private void cargartatuadores() {
-        String nombreEstudio = estudio.getNombre();
-        //int idEstudio = db.recogerIdEstudio(nombreEstudio);
-        //String idEstudioMetodo = String.valueOf(idEstudio);
-        tatuadores = db.recogerTatuadoresEstudio(idEstudio);
 
-        recyclerView = findViewById(R.id.recyclerTatEstudio);
+
+    private void cargartatuadores() {
+        tatuadores = db.recogerTatuadoresEstudio(idEstudio);
         AdaptadorTatuadores adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
         recyclerView.setAdapter(adaptador);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
