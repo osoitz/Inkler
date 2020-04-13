@@ -28,14 +28,14 @@
             android:layout_height="match_parent"
             android:textStyle="bold"
             android:text="@string/direcci_n"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:textSize="16sp"
             />
         <TextView
             android:id="@+id/printDireccion"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.7"
             />
     </LinearLayout>
     <LinearLayout
@@ -48,14 +48,14 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:text="@string/email"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/contentMailEstudio"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"/>
+            android:layout_weight="0.7"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -66,14 +66,14 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:text="@string/telefono"
             android:textStyle="bold"/>
         <TextView
             android:id="@+id/contentTelefono"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.7"
             />
     </LinearLayout>
     <LinearLayout
@@ -86,14 +86,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:layout_weight="0.5"
+            android:layout_weight="0.3"
             android:text="@string/web"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerestudioweb"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.5"
+            android:layout_weight="0.7"
             android:foregroundGravity="center"
             android:scrollbars="vertical"
             app:layout_constraintEnd_toEndOf="parent"

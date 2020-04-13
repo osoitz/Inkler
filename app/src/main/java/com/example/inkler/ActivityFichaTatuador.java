@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.InputType;
 import android.text.SpannableString;
@@ -25,10 +26,6 @@ import java.util.List;
 
 public class ActivityFichaTatuador extends AppCompatActivity {
     private RecyclerView recyclerView;
-    //private RecyclerView.LayoutManager layoutManager;
-    //private AdaptadorWeb adaptador;
-    //private ImageView vermas;
-    //private boolean anadir;
 
     private final List<Web> webs = new ArrayList<>();
     @Override
@@ -42,8 +39,7 @@ public class ActivityFichaTatuador extends AppCompatActivity {
             App.setIdTatuador(idTatuador);
         }
         setContentView(R.layout.activity_ficha_tatuador);
-        //ActionBar actionBar = getSupportActionBar();
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -57,6 +53,8 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         //Toast.makeText(getApplicationContext(),estudio.getLatitud() + " : " + estudio.getLongitud(), Toast.LENGTH_LONG).show();
         rellenar_txt(tatuador, estudio);
         rellenarWebsTatuador(db.recogerWebsTatuador(tatuador.getId()));
+        rellenarFotos(idTatuador);
+
         ImageView vermas = findViewById(R.id.ivvermas);
         vermas.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,8 +95,6 @@ public class ActivityFichaTatuador extends AppCompatActivity {
  */
         }));
 
-
-
     }
 
     private void rellenar_txt(Tatuador miTatuador, Estudio miestudio){
@@ -124,6 +120,22 @@ public class ActivityFichaTatuador extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView = findViewById(R.id.recyclertatuadorweb);
+    }
+
+    private void rellenarFotos(int idTatuador) {
+        DBlocal db = new DBlocal(getApplicationContext());
+        ArrayList<Foto> fotos = db.recogerFotosTatuador(idTatuador);
+        ImageView imagen1 = findViewById(R.id.imagen1);
+        ImageView imagen2 = findViewById(R.id.imagen2);
+
+        if (fotos.size() > 0){
+            Bitmap bitmap1 = fotos.get(0).getBmp();
+            imagen1.setImageBitmap(bitmap1);
+        }
+        if (fotos.size() > 1){
+            Bitmap bitmap2 = fotos.get(1).getBmp();
+            imagen2.setImageBitmap(bitmap2);
+        }
     }
 
     @Override
