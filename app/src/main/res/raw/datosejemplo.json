@@ -310,7 +310,7 @@
 
       {
         "nombre": "Arcos Ermua",
-        "direccion": "IES Uni Eibar-Ermua BHI Éibar",
+        "direccion": "IES Uni Eibar-Ermua BHI Eibar",
         "geo": [
           {
             "latitud": 43.179295,
@@ -344,7 +344,204 @@
             ]
           }
         ]
+      },
+
+      {
+        "nombre": "KM13 Studio",
+        "direccion": "C/ Karl Marx 13, Astrabudua, Erandio. Bizkaia. CP 48950",
+        "geo": [
+          {
+            "latitud": 43.3175841,
+            "longitud": -2.9856236
+          }
+        ],
+        "email": "",
+        "telefono": "+34656763072",
+        "webs": [
+          {
+            "web": "https://km13studio.com"
+          },
+          {
+            "web": "https://www.facebook.com/KM13Studio/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Ruth Cuervilu",
+            "nombre": "Ruth",
+            "apellidos": "Cuervilu",
+            "webs": [
+              {"web": "https://cuervilutattoostudio.com/"},
+              {"web":  "https://www.instagram.com/ruth_cuervilu_tattoo/"},
+              {"web":  "https://www.youtube.com/channel/UCMLN078yEN5khz24wBqP0aA"}
+
+            ],
+            "fotos": [
+              {"foto": "ruth001"},
+              {"foto": "ruth002"},
+              {"foto": "ruth003"},
+              {"foto": "ruth004"},
+              {"foto": "ruth005"},
+              {"foto": "ruth006"},
+              {"foto": "ruth007"},
+              {"foto": "ruth008"},
+              {"foto": "ruth009"},
+              {"foto": "ruth010"},
+              {"foto": "ruth011"},
+              {"foto": "ruth012"},
+              {"foto": "ruth013"},
+              {"foto": "ruth014"},
+              {"foto": "ruth015"},
+              {"foto": "ruth016"},
+              {"foto": "ruth017"},
+              {"foto": "ruth018"},
+              {"foto": "ruth019"},
+              {"foto": "ruth020"},
+              {"foto": "ruth021"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Tatuajes Angel",
+        "direccion": "Plaza de Unamuno 3, L2 (junto a la salida del metro, Casco Viejo). CP 48005 Bilbao (Bizkaia)",
+        "geo": [
+          {
+            "latitud": 43.2585613,
+            "longitud": -2.9237658
+          }
+        ],
+        "email": "tatuajesangel@yahoo.es",
+        "telefono": "+34944154541",
+        "webs": [
+          {
+            "web": "https://www.tatuajesangel.com"
+          }
+
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Angel Villaverde",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.instagram.com/tatuajesangel/"}
+
+            ],
+            "fotos": [
+              {"foto": "f0045"},
+              {"foto": "f0046"},
+              {"foto": "f0047"},
+              {"foto": "f0048"},
+              {"foto": "f0049"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Tabú Tatoo & Piercing",
+        "direccion": "Plaza Pepe Ubis 6. Vitoria-Gasteiz.\n",
+        "geo": [
+          {
+            "latitud": 42.847384,
+            "longitud": -2.6620179
+          }
+        ],
+        "email": "",
+        "telefono": "+34945287448",
+        "webs": [
+          {
+            "web": "https://www.tattootabu.com"
+          }
+
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Rober Tabú",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.tattootabu.com/"}
+
+            ],
+            "fotos": [
+              {"foto": "tabu001"},
+              {"foto": "tabu002"},
+              {"foto": "tabu003"},
+              {"foto": "tabu004"},
+              {"foto": "tabu005"},
+              {"foto": "tabu006"},
+              {"foto": "tabu007"},
+              {"foto": "tabu008"}
+            ]
+          },
+          {
+            "nombreArtistico": "Dani Tabú",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.tattootabu.com/"}
+
+            ],
+            "fotos": [
+              {"foto": "tabudani001"},
+              {"foto": "tabudani002"},
+              {"foto": "tabudani003"},
+              {"foto": "tabudani004"},
+              {"foto": "tabudani005"},
+              {"foto": "tabudani006"},
+              {"foto": "tabudani007"},
+              {"foto": "tabudani008"},
+              {"foto": "tabudani009"},
+              {"foto": "tabudani010"},
+              {"foto": "tabudani011"},
+              {"foto": "tabudani012"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Gernika Tatoo & Piercing",
+        "direccion": "Juan Calzada, 14, 48300, Gernika",
+        "geo": [
+          {
+            "latitud": 43.3124938,
+            "longitud": -2.680892
+          }
+        ],
+        "email": "",
+        "telefono": "+34946257941",
+        "webs": [
+          {
+            "web": "https://www.facebook.com/GernikaTattooPiercing"
+          }
+
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Gernika Tatoo",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.facebook.com/GernikaTattooPiercing"}
+
+            ],
+            "fotos": [
+              {"foto": "f0035"},
+              {"foto": "f0036"},
+              {"foto": "f0037"},
+              {"foto": "f0038"},
+              {"foto": "f0039"}
+            ]
+          }
+        ]
       }
+
+
+
     ]
 }
 
