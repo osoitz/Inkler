@@ -2,6 +2,9 @@ package com.example.inkler;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,13 +20,20 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+
 //TODO: ¿es posible reducir llamadas a la BD y complejidad ciclomatica?
 public class ActivityAnadirTatuador extends AppCompatActivity {
 
     private EditText et_nombre;
     private EditText et_apellidos;
     private EditText et_nombreArt;
+    private RecyclerView recyclerView;
     private DBlocal db;
+    private Spinner spinner;
+    private List<Web> webs = new ArrayList<>();
+
+    int idTatuador;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +43,8 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         et_nombre = findViewById(R.id.contentNombre);
         et_apellidos = findViewById(R.id.contentApellido);
         et_nombreArt = findViewById(R.id.contentNombreArtistico);
-        final boolean anadir = getIntent().getBooleanExtra(getString(R.string.anadir), false);
-        final Spinner spinner=findViewById(R.id.SpinnerNombreEstudios);
+        final boolean anadir = getIntent().getBooleanExtra("añadir", false);
+        spinner = findViewById(R.id.SpinnerNombreEstudios);
         SpinnerAdapter adapter;
         ArrayList<String> nombresEstudios = db.recogerNombresEstudios();
         adapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item, rellenarSpinner(nombresEstudios));
@@ -44,10 +54,12 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         nuevaWeb.setVisibility(View.GONE);
 
         if(!anadir){
-            final int idTatuador = App.getIdTatuador();
+            idTatuador = App.getIdTatuador();
             final Tatuador tatuador = db.recogerTatuador(idTatuador);
 
             rellenarDatosTatuador(tatuador);
+            webs = db.recogerWebsTatuador(tatuador.getId());
+            rellenarWebsTatuador();
 
             spinner.setSelection(posicionEstudio(nombresEstudios,tatuador.getIdEstudio()));
             nuevaWeb.setVisibility(View.VISIBLE);
@@ -68,8 +80,12 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
                     alertDialog.setPositiveButton(getString(R.string.add), new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            String web = input.getText().toString();
-                            db.insertarWeb(tatuador.getIdEstudio(), web, idTatuador);
+                            Web web = new Web();
+                            web.setUrl(input.getText().toString());
+                            web.setIdTatuador(idTatuador);
+                            db.insertarWeb(web);
+                            webs = db.recogerWebsTatuador(tatuador.getId());
+                            rellenarWebsTatuador();
                         }
                     });
                     alertDialog.show();
@@ -80,24 +96,19 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String st_nombre = et_nombre.getText().toString();
-                    String st_apellidos = et_apellidos.getText().toString();
-                    String st_nombreArtistico = et_nombreArt.getText().toString();
-                    String st_Estudio = spinner.getSelectedItem().toString();
-                    int IdEstudio = db.recogerIdEstudio(st_Estudio);
-                    if (st_nombre.equals("") || st_apellidos.equals("") || st_nombreArtistico.equals("") || st_Estudio.equals("")) {
-                        Toast.makeText(getApplicationContext(),  R.string.fill_all, Toast.LENGTH_SHORT).show();
-                    } else if(anadir) {
+                    Tatuador tatuador = recogerDatos();
 
-                        db.insertarTatuador(st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
-                        Toast.makeText(getApplicationContext(), getString(R.string.tatuador) + st_nombre + getString(R.string.creado), Toast.LENGTH_SHORT).show();
+                    if (anadir) {
+                        db.insertarTatuador(tatuador);
+                        Toast.makeText(getApplicationContext(), "El tatuador " + tatuador.getNombre() + " ha sido creado", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityListaTatuadores.class);
                         startActivity(intent);
                     } else{
-                        db.modificarTatuador(App.getIdTatuador(),st_nombre,st_apellidos,st_nombreArtistico,IdEstudio);
-                        Toast.makeText(getApplicationContext(),getString(R.string.cambios), Toast.LENGTH_LONG).show();
+                        tatuador.setId(idTatuador);
+                        db.modificarTatuador(tatuador);
+                        Toast.makeText(getApplicationContext(),"Los cambios se han realizado con exito", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityFichaTatuador.class);
-                        intent.putExtra(getString(R.string.id), App.getIdTatuador());
+                        intent.putExtra("id", App.getIdTatuador());
                         startActivity(intent);
 
                     }
@@ -121,6 +132,17 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         return  nombres;
     }
 
+    private void rellenarWebsTatuador(){
+        //List<Web> webs = new ArrayList<>();
+        //webs.addAll(urls);
+        recyclerView = findViewById(R.id.recycleranadirtatuadorweb);
+        AdaptadorWeb adaptador = new AdaptadorWeb(getApplicationContext(), webs);
+        recyclerView.setAdapter(adaptador);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);
+        //recyclerView = findViewById(R.id.recyclertatuadorweb);
+    }
+
     private int posicionEstudio(ArrayList<String> estudios, int idEstudio){
         int posicionEstudio=0;
 
@@ -133,6 +155,23 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         }
 
         return posicionEstudio;
+    }
+
+    private Tatuador recogerDatos(){
+        /*
+        if (st_nombre.equals("") || st_apellidos.equals("") || st_nombreArtistico.equals("") || st_Estudio.equals("")) {
+                Toast.makeText(getApplicationContext(), "You may fill every empty land to insert something", Toast.LENGTH_SHORT).show();
+
+         */
+        Tatuador tatuador = new Tatuador();
+        tatuador.setNombre(et_nombre.getText().toString());
+        tatuador.setApellidos(et_apellidos.getText().toString());
+        tatuador.setNombreArtistico(et_nombreArt.getText().toString());
+        //TODO: Se puede coger el Id estudo mejor?
+        String st_Estudio = spinner.getSelectedItem().toString();
+        int idEstudio = db.recogerIdEstudio(st_Estudio);
+        tatuador.setIdEstudio(idEstudio);
+        return tatuador;
     }
 
 }

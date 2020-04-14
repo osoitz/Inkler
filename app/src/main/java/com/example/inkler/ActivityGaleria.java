@@ -41,6 +41,7 @@ import java.util.ArrayList;
 
 public class ActivityGaleria extends AppCompatActivity {
 
+    private static final String TAG = "ActivityGaleria";
     private int shortAnimationDuration;
     private Animator currentAnimator;
     private ImageView imageviewTatuaje;
@@ -60,7 +61,7 @@ public class ActivityGaleria extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_galeria);
 
-        solicitarPermisos();
+
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -110,7 +111,7 @@ public class ActivityGaleria extends AppCompatActivity {
 
     private void activarBotonBorrar(final String idFoto) {
         //Hacemos visible y activamos el boton borrar foto
-        System.out.println(idFoto);
+        //Log.d(TAG, idFoto);
         btnBorrarFoto = findViewById(R.id.btnBorrarFoto);
         btnBorrarFoto.setVisibility(View.VISIBLE);
         btnBorrarFoto.setOnClickListener(new View.OnClickListener() {
@@ -134,7 +135,8 @@ public class ActivityGaleria extends AppCompatActivity {
         }
         catch (Exception e){
             Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
-            System.out.println(e);
+            Log.d(TAG, e.toString());
+
         }
         AdaptadorGaleria adaptador = new AdaptadorGaleria(ActivityGaleria.this, fotos);
         recyclerView.setAdapter(adaptador);
@@ -287,9 +289,7 @@ public class ActivityGaleria extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (App.isAdmin()) {
-            menu.setGroupVisible(R.id.añadir, false);
-            menu.setGroupVisible(R.id.modificar, false);
-            menu.setGroupVisible(R.id.logout, false);
+            menu.setGroupVisible(R.id.logout, true);
             menu.setGroupVisible(R.id.foto, true);
         } else {
             menu.setGroupVisible(R.id.login, true);
@@ -325,6 +325,7 @@ public class ActivityGaleria extends AppCompatActivity {
                         App.setAdmin(true);
                         invalidateOptionsMenu();
                         Toast.makeText(getApplicationContext(), R.string.log_successful, Toast.LENGTH_SHORT).show();
+
                     }
                     else{
                         Toast.makeText(getApplicationContext(), R.string.log_unsuccessful, Toast.LENGTH_SHORT).show();
@@ -337,6 +338,7 @@ public class ActivityGaleria extends AppCompatActivity {
             invalidateOptionsMenu();
 
         }else if (id == R.id.añadir_foto) {
+
             //openGallery();
             sacarFoto();
             return true;
@@ -350,25 +352,36 @@ public class ActivityGaleria extends AppCompatActivity {
      ******************************/
     //Este metodo lo usaremos para sacar la foto
     private void sacarFoto(){
-        //Mediante un intente llamaremos a la camara para sacar una foto
-        Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(i,0);
+        //Mediante un intent llamaremos a la camara para sacar una foto
+
+        //Antes de ada los permisos
+        int permissionCheck = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisocamara = ContextCompat.checkSelfPermission(
+                this, Manifest.permission.CAMERA);
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED || permisocamara != PackageManager.PERMISSION_GRANTED) {
+            Log.i("Mensaje", "No se tiene permiso para la camara!.");
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.READ_EXTERNAL_STORAGE}, 225);
+        } else {
+            //Log.i("Mensaje", "Tienes permiso para usar la camara.");
+            Intent i = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(i,0);
+        }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == Activity.RESULT_OK) {
-            //Una vez sacada esa foto vamos a cojerla del intent y la guardaremos en forma de bitmap
+            //Una vez sacada esa foto vamos a cogerla del intent y la guardaremos en forma de bitmap
             Bundle ext = data.getExtras();
             if (ext != null){
                 Bitmap bmp = (Bitmap) ext.get("data");
-                System.out.println("exito");
-                //saveTempBitmap(bmp);
+                Log.d(TAG, "exito");
                 saveImage(bmp);
             }
         }
     }
-
 
     private void saveImage(Bitmap finalBitmap) {
         //Guardamos la foto en la base de datos
@@ -378,6 +391,7 @@ public class ActivityGaleria extends AppCompatActivity {
     }
 
     //Comprobamos si tenemos permisos de escritura, y si no los pediremos
+    /*
     private void solicitarPermisos(){
         int permissionCheck = ContextCompat.checkSelfPermission(
                 this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
@@ -390,5 +404,5 @@ public class ActivityGaleria extends AppCompatActivity {
             Log.i("Mensaje", "Tienes permiso para usar la camara.");
         }
     }
-
+    */
 }

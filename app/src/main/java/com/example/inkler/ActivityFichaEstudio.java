@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.text.InputType;
 import android.text.SpannableString;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,46 +35,45 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ActivityFichaEstudio extends AppCompatActivity {
-    //private RecyclerView.LayoutManager layoutManagerWeb;
-    //private AdaptadorWeb adaptadorWeb;
+    private static final String TAG = "FICHAESTUDIO";
     private MapView mapView;
     private DBlocal db;
     private RecyclerView recyclerView;
-    //private RecyclerView.LayoutManager layoutManager;
-    //private AdaptadorTatuadores adaptador;
+    private RecyclerView recyclerViewWeb;
     private Estudio estudio;
-    private final List<Web> webs = new ArrayList<>();
+    private List<Web> webs = new ArrayList<>();
     private List<Tatuador> tatuadores = new ArrayList<>();
+    private int idEstudio;
+    private int INITIAL_ZOOM = 14;
+    private int millisecondSpeed = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
-
+        Mapbox.getInstance(this, App.mapBoxAcessToken);
+        setContentView(R.layout.activity_ficha_estudio);
 
         //Variables
-        final int idEstudio = getIntent().getIntExtra("idEstudio",0);
-        Mapbox.getInstance(this, App.mapBoxAcessToken);
-        final int INITIAL_ZOOM = 14;
-        final int millisecondSpeed = 1000;
+        idEstudio = getIntent().getIntExtra("idEstudio",0);
+        recyclerView = findViewById(R.id.recyclerTatEstudio);
+        recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
 
-        setContentView(R.layout.activity_ficha_estudio);
 
         //Coger datos
         db = new DBlocal(getApplicationContext());
         estudio = db.recogerEstudio(idEstudio);
         rellenarCampos();
-        rellenarWebsEstudio(db.recogerWebsEstudio(estudio.getIdEstudio()));
+        webs = db.recogerWebsEstudio(estudio.getIdEstudio());
+        rellenarWebsEstudio();
         cargartatuadores();
 
-        //Acciones del onclick y onlongclick del recycler
+        // onclick  del recycler de tatuadores
         recyclerView.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaEstudio.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
-                intent.putExtra("id",tatuador.getId());
+                intent.putExtra("idTatuador",tatuador.getId());
                 startActivity(intent);
             }
 /*
@@ -82,6 +82,17 @@ public class ActivityFichaEstudio extends AppCompatActivity {
                 //Nichts
             }
   */
+        }));
+
+        //onclick del recycler de webs
+        recyclerViewWeb.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Intent intent = new Intent(ActivityFichaEstudio.this, ActivityNavegador.class);
+                Web web = webs.get(position);
+                intent.putExtra("url", web.getUrl());
+                startActivity(intent);
+            }
         }));
 
         mapView = findViewById(R.id.mapView);
@@ -174,47 +185,22 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                //String num= telefono.getText().toString();
                 intent.setData(Uri.parse("tel:" + telefono));
                 startActivity(intent);
             }
         });
     }
 
-    private void rellenarWebsEstudio(List<Web> urls){
-        webs.addAll(urls);
-        RecyclerView recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
+    private void rellenarWebsEstudio(){
         AdaptadorWeb adaptadorWeb = new AdaptadorWeb(getApplicationContext(), webs);
         recyclerViewWeb.setAdapter(adaptadorWeb);
         RecyclerView.LayoutManager layoutManagerWeb = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.VERTICAL, false);
         recyclerViewWeb.setLayoutManager(layoutManagerWeb);
-        recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
-
-        //Acciones del onclick y onlongclick del recycler
-        recyclerViewWeb.addOnItemTouchListener(new RecyclerViewListener(this, recyclerView, new RecyclerViewListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(ActivityFichaEstudio.this, ActivityNavegador.class);
-                Web w = webs.get(position);
-                intent.putExtra("url", w.getUrl());
-                startActivity(intent);
-            }
-/*
-            @Override
-            public void onLongItemClick(View view, int position) {
-                //Nichts
-            }
-
- */
-        }));
     }
-    private void cargartatuadores() {
-        String nombreEstudio = estudio.getNombre();
-        int idEstudio = db.recogerIdEstudio(nombreEstudio);
-        //String idEstudioMetodo = String.valueOf(idEstudio);
-        tatuadores = db.recogerTatuadoresEstudio(idEstudio);
 
-        recyclerView = findViewById(R.id.recyclerTatEstudio);
+
+    private void cargartatuadores() {
+        tatuadores = db.recogerTatuadoresEstudio(idEstudio);
         AdaptadorTatuadores adaptador = new AdaptadorTatuadores(getApplicationContext(), tatuadores);
         recyclerView.setAdapter(adaptador);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -226,8 +212,8 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_actions, menu);
         if (App.isAdmin()) {
-            menu.setGroupVisible(R.id.añadir, true);
-            menu.setGroupVisible(R.id.modificar, true);
+            menu.setGroupVisible(R.id.añadir_est, true);
+            menu.setGroupVisible(R.id.modificar_est, true);
             menu.setGroupVisible(R.id.logout, true);
         } else {
             menu.setGroupVisible(R.id.login, true);
@@ -269,23 +255,14 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         } else if (id == R.id.noadmin) {
             App.setAdmin(false);
             invalidateOptionsMenu();
-        }
-        else if (id == R.id.añadir_tatuador) {
-            Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirTatuador.class);
-            intent.putExtra("añadir",true);
-            startActivity(intent);
-            return true;
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
             intent.putExtra("añadir",true);
             startActivity(intent);
             return true;
-        } else if (id == R.id.modificar_tatuador) {
-            Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirTatuador.class);
-            startActivity(intent);
-            return true;
         } else if (id == R.id.modificar_estudio) {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
+            intent.putExtra("idEstudio", idEstudio);
             startActivity(intent);
             return true;
         }

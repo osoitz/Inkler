@@ -76,37 +76,31 @@ public class MainActivity extends AppCompatActivity{
             for(int i=0;i<estudios.length();i++)
             {
                 JSONObject estudio = estudios.getJSONObject(i);
-                String enombre;
-                String edireccion;
-                double glat = 0;
-                double glong = 0;
-                String eemail;
-                String etelefono;
-                int idestudio;
+                Estudio nuevoEstudio = new Estudio();
 
                 //Recoger datos del estudio del JSON
-                enombre = estudio.getString("nombre");
-                edireccion = estudio.getString("direccion");
+                nuevoEstudio.setNombre(estudio.getString("nombre"));
+                nuevoEstudio.setDireccion(estudio.getString("direccion"));
                 JSONArray geo = estudio.getJSONArray("geo");
                 for(int j = 0; j < geo.length(); j++) {
                     JSONObject egeo = geo.getJSONObject(j);
-                    glat = egeo.getDouble("latitud");
-                    glong = egeo.getDouble("longitud");
+                    nuevoEstudio.setLatitud(egeo.getDouble("latitud"));
+                    nuevoEstudio.setLongitud(egeo.getDouble("longitud"));
                 }
-                eemail = estudio.getString("email");
-                etelefono = estudio.getString("telefono");
+                nuevoEstudio.setEmail(estudio.getString("email"));
+                nuevoEstudio.setTelefono(estudio.getString("telefono"));
 
-                Log.d("JSON", "NOMBRE: " + enombre);
-                Log.d("JSON", "DIRECCION: " + edireccion);
-                Log.d("JSON", "LATITUD: " + glat);
-                Log.d("JSON", "LONGITUD: " + glong);
-                Log.d("JSON", "EMAIL: " + eemail);
-                Log.d("JSON", "TELEFONO: " + etelefono);
+                Log.d("JSON", "NOMBRE: " + nuevoEstudio.getNombre());
+                Log.d("JSON", "DIRECCION: " + nuevoEstudio.getDireccion());
+                Log.d("JSON", "LATITUD: " + nuevoEstudio.getLatitud());
+                Log.d("JSON", "LONGITUD: " + nuevoEstudio.getLongitud());
+                Log.d("JSON", "EMAIL: " + nuevoEstudio.getEmail());
+                Log.d("JSON", "TELEFONO: " + nuevoEstudio.getTelefono());
 
-                //Insertar y recoger el ID del estudio
-                db.insertarEstudio(enombre, edireccion, glat, glong, eemail, etelefono);
-                idestudio = db.recogerIdEstudio(enombre);
-                Log.d("JSON", "ID ESTUDIO: " + idestudio);
+                //Insertar el estudio y recoger su ID
+                int idEstudio = (int) db.insertarEstudio(nuevoEstudio);
+
+                Log.d("JSON", "ID ESTUDIO: " + idEstudio);
 
                 JSONArray websestudio = estudio.getJSONArray("webs");
                 for(int j = 0; j < websestudio.length(); j++) {
@@ -115,24 +109,27 @@ public class MainActivity extends AppCompatActivity{
                     String w = web.getString("web");
                     Log.d("JSON", "WEB ESTUDIO: " + w);
                     Web oWeb = new Web();
-                    oWeb.setIdEstudio(idestudio);
+                    oWeb.setIdEstudio(idEstudio);
                     oWeb.setUrl(w);
-                    db.insertarWeb(oWeb.getIdEstudio(), oWeb.getUrl(), oWeb.getIdTatuador());
+                    db.insertarWeb(oWeb);
                 }
 
                 JSONArray tatuadores = estudio.getJSONArray("tatuadores");
                 for(int j = 0; j < tatuadores.length(); j++) {
                     //Recoger datos del tatuador
                     JSONObject tatuador = tatuadores.getJSONObject(j);
-                    String tnombreart = tatuador.getString("nombreArtistico");
-                    String tnombre = tatuador.getString("nombre");
-                    String tapellidos = tatuador.getString("apellidos");
-                    Log.d("JSON", "NOMBRE ARTISTICO: " + tnombreart);
-                    Log.d("JSON", "NOMBRE: " + tnombre);
-                    Log.d("JSON", "APELLIDOS: " + tapellidos);
+                    Tatuador nuevoTatuador = new Tatuador();
+                    nuevoTatuador.setNombreArtistico(tatuador.getString("nombreArtistico"));
+                    nuevoTatuador.setNombre(tatuador.getString("nombre"));
+                    nuevoTatuador.setApellidos(tatuador.getString("apellidos"));
+                    nuevoTatuador.setIdEstudio(idEstudio);
+
+                    Log.d("JSON", "NOMBRE ARTISTICO: " + nuevoTatuador.getNombreArtistico());
+                    Log.d("JSON", "NOMBRE: " + nuevoTatuador.getNombre());
+                    Log.d("JSON", "APELLIDOS: " + nuevoTatuador.getApellidos());
 
                     //Insertar tatuador y recoger id
-                    long idTatuador = db.insertarTatuador(tnombre, tapellidos, tnombreart, idestudio);
+                    long idTatuador = db.insertarTatuador(nuevoTatuador);
                     //int idTatuador = db.recogerIdTatuador(tnombre);
                     Log.d("JSON", "ID TATUADOR: " + idTatuador);
 
@@ -145,7 +142,7 @@ public class MainActivity extends AppCompatActivity{
                         Web oWeb = new Web();
                         oWeb.setIdTatuador((int)idTatuador);
                         oWeb.setUrl(w);
-                        db.insertarWeb(oWeb.getIdEstudio(), oWeb.getUrl(), oWeb.getIdTatuador());
+                        db.insertarWeb(oWeb);
                     }
 
                     JSONArray fotosTatuador = tatuador.getJSONArray("fotos");
