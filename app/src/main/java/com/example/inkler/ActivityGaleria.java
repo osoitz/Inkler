@@ -67,7 +67,7 @@ public class ActivityGaleria extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        idTatuador = getIntent().getIntExtra("idTatuador", -1);
+        idTatuador = getIntent().getIntExtra(getString(R.string.idTatuador), -1);
         //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador, Toast.LENGTH_SHORT ).show();
 
         recyclerView = findViewById(R.id.recyclerGaleria);

@@ -329,8 +329,213 @@
             ]
           }
         ]
+      },
+
+
+      {
+        "nombre": "KDTattoo Studio",
+        "direccion": "Calle San Pelayo, 22, 48260 Ermua, Vizcaya País Vasco",
+        "geo": [
+          {
+            "latitud": 43.187996 ,
+            "longitud": -2.507224
+          }
+        ],
+        "email": "hola@kdtattoo.com",
+        "telefono": "+34669207364",
+        "webs": [
+          {
+            "web": "https://kdtattoo.com/contacto/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "kris_kd_tattoo",
+            "nombre": "Kris",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/p/B6tl70BpwNU/"
+              }
+            ],
+            "fotos": [
+
+            ]
+          }
+        ]
+      },
+
+
+      {
+        "nombre": "Eternal Soul Tattoo Studio",
+        "direccion": "Montevideo Etorbidea, 23, 48200 Durango, Bizkaia",
+        "geo": [
+          {
+            "latitud": 43.169597 ,
+            "longitud": -2.627111
+          }
+        ],
+        "email": "javiervi@eternalsoul.es",
+        "telefono": "+34944668583",
+        "webs": [
+          {
+            "web": "https://www.facebook.com/pg/EternalSoulTattooStudio/about/?ref=page_internal/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "javiervi_tattoos",
+            "nombre": "javier",
+            "apellidos": "Villar",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/javiervi_tattoos/?hl=es"
+              }
+            ],
+            "fotos": [
+              {"foto": "f0040"},
+              {"foto": "f0041"},
+              {"foto": "f0042"},
+              {"foto": "f0043"},
+              {"foto": "f0044"}
+            ]
+          }
+        ]
+      },
+
+
+
+      {
+        "nombre": "Brothers Tattoo Bilbao",
+        "direccion": "c/ Bertendona, 2 Bajo Bilbao",
+        "geo": [
+          {
+            "latitud": 43.259633,
+            "longitud": -2.931094
+          }
+        ],
+        "email": "",
+        "telefono": "+34674326773",
+        "webs": [
+          {
+            "web": "https://www.facebook.com/pg/Brothers-Tattoo-Bilbao-363221423812843/videos/?ref=page_internal"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "txitxo_sanchez",
+            "nombre": "txitxo",
+            "apellidos": "sanchez",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/txitxo_sanchez/?hl=es"
+              }
+            ],
+            "fotos": [
+              {"foto": "f0045"},
+              {"foto": "f0046"},
+              {"foto": "f0047"},
+              {"foto": "f0048"},
+              {"foto": "f0049"}
+            ]
+          }
+        ]
+      },
+
+
+      {
+        "nombre": "romeoyjulieta.tattoo",
+        "direccion": "Aita Lojendio Kalea, 3, 48008 Bilbo, Bizkaia",
+        "geo": [
+          {
+            "latitud": 43.260315,
+            "longitud": -2.929881
+          }
+        ],
+        "email": "",
+        "telefono": "",
+        "webs": [
+          {
+            "web": "https://www.instagram.com/romeoyjulieta.tattoo/?hl=es"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "ninkane",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/ninkane/?hl=es"
+              }
+            ],
+            "fotos": [
+            ]
+          },
+          {
+            "nombreArtistico": "cyntiartist",
+            "nombre": "Cynthia",
+            "apellidos": "Cabero Lluvia",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/cyntiartist/?hl=e"
+              }
+            ],
+            "fotos": [
+            ]
+          },
+          {
+            "nombreArtistico": "tadeo_ink",
+            "nombre": "Tadeo",
+            "apellidos": "",
+            "webs": [
+              {
+                "web": "https://www.instagram.com/tadeo_ink/?hl=es"
+              }
+            ],
+            "fotos": [
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Arcos Ermua",
+        "direccion": "IES Uni Eibar-Ermua BHI Éibar",
+        "geo": [
+          {
+            "latitud": 43.179295,
+            "longitud": -2.489553
+          }
+        ],
+        "email": "arcostatuajes@gmail.com",
+        "telefono": "+34674326773",
+        "webs": [
+          {
+            "web": "http://www.arcostattoo.com/"
+          },
+          {
+            "web": "web :https://www.facebook.com/arcos.ermua "
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Ana",
+            "nombre": "Ana",
+            "apellidos": "",
+            "webs": [
+
+            ],
+            "fotos": [
+              {"foto": "f0045"},
+              {"foto": "f0046"},
+              {"foto": "f0047"},
+              {"foto": "f0048"},
+              {"foto": "f0049"}
+            ]
+          }
+        ]
       }
-
-
     ]
-  }
+}
+
