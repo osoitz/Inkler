@@ -109,232 +109,11 @@
       },
 
 
-      {
-        "nombre": "Estudio Inkblood",
-        "direccion": "Gran Via, 2",
-        "geo": [
-          {
-            "latitud": 43.01,
-            "longitud": -2.01
-          }
-        ],
-        "email": "bloodink@mail.com",
-        "telefono": "+3494789456",
-        "webs": [
-          {
-            "web": "https://www.instagram.com/"
-          }
-        ],
-        "tatuadores": [
-          {
-            "nombreArtistico": "Osoitz",
-            "nombre": "Osoitz",
-            "apellidos": "Ink",
-            "webs": [
-              {
-                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
-              }
-            ],
-            "fotos": [
-
-            ]
-          },
-
-          {
-            "nombreArtistico": "AKA",
-            "nombre": "Name",
-            "apellidos": "Surname",
-            "webs": [
-              {
-                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
-              }
-            ],
-            "fotos": [
-
-            ]
-          },
-          {
-            "nombreArtistico": "Tatuator",
-            "nombre": "Pepe",
-            "apellidos": "Lopez",
-            "webs": [
-              {
-                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
-              }
-            ],
-            "fotos": [
-
-            ]
-
-          }
-        ]
-      },
-
-      {
-        "nombre": "Pintamonas ink",
-        "direccion": "General Concha, 15",
-        "geo": [
-          {
-            "latitud": 43.05,
-            "longitud": -2.07
-          }
-        ],
-        "email": "pintamonas@mail.com",
-        "telefono": "+3494123456",
-        "webs": [
-          {
-            "web": "https://www.instagram.com/"
-          }
-        ],
-        "tatuadores": [
-          {
-            "nombreArtistico": "Amaro",
-            "nombre": "Amaro",
-            "apellidos": "Tatoo",
-            "webs": [
-              {
-                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
-              }
-            ],
-            "fotos": [
-
-            ]
-          },
-
-          {
-            "nombreArtistico": "Beñat",
-            "nombre": "Dormilon",
-            "apellidos": "Despierta",
-            "webs": [
-              {
-                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
-              }
-            ],
-            "fotos": [
-
-            ]
-
-          },
-          {
-            "nombreArtistico": "Nocturnal",
-            "nombre": "Kevin",
-            "apellidos": "Bacon",
-            "webs": [
-              {
-                "web": "https://es.wikipedia.org/wiki/Wikipedia:Portada"
-              }
-            ],
-            "fotos": [
-
-            ]
-
-          }
-        ]
-      },
-
-      {
-        "nombre": "Paris ink",
-        "direccion": "Rue Le Pincho, 33",
-        "geo": [
-          {
-            "latitud": 48.864716,
-            "longitud": 2.349014
-          }
-        ],
-        "email": "parisink@mail.com",
-        "telefono": "+33212345678",
-        "webs": [
-          {
-            "web": "https://www.latlong.net/place/paris-le-de-france-france-1666.html"
-          }
-        ],
-        "tatuadores": [
-          {
-            "nombreArtistico": "Francoise",
-            "nombre": "Monamour",
-            "apellidos": "Olala",
-            "webs": [
-              {
-                "web": "https://fr.wikipedia.org/wiki/Fromage"
-              }
-            ],
-            "fotos": [
-
-            ]
-          }
-        ]
-      },
-
-      {
-        "nombre": "California ink",
-        "direccion": "Surf Street",
-        "geo": [
-          {
-            "latitud": 36.778259,
-            "longitud": -119.417931
-          }
-        ],
-        "email": "california@mail.com",
-        "telefono": "+01212345678",
-        "webs": [
-          {
-            "web": "https://www.latlong.net/place/california-the-usa-2487.html"
-          }
-        ],
-        "tatuadores": [
-          {
-            "nombreArtistico": "Johnny Skull",
-            "nombre": "John",
-            "apellidos": "Smith",
-            "webs": [
-              {
-                "web": "https://en.wikipedia.org/wiki/Skull"
-              }
-            ],
-            "fotos": [
-
-            ]
-          }
-        ]
-      },
-
-      {
-        "nombre": "Wuhan Tatoo",
-        "direccion": "Calle tiriri",
-        "geo": [
-          {
-            "latitud": 30.5833333,
-            "longitud": 114.2666667
-          }
-        ],
-        "email": "wuhan@mail.com",
-        "telefono": "+01212345678",
-        "webs": [
-          {
-            "web": "http://instagram.com"
-          }
-        ],
-        "tatuadores": [
-          {
-            "nombreArtistico": "Cheng Lee",
-            "nombre": "Cheng",
-            "apellidos": "Lee",
-            "webs": [
-              {
-                "web": "https://en.wikipedia.org/wiki/Wuhan"
-              }
-            ],
-            "fotos": [
-
-            ]
-          }
-        ]
-      },
 
 
       {
         "nombre": "KDTattoo Studio",
-        "direccion": "Calle San Pelayo, 22, 48260 Ermua, Vizcaya País Vasco",
+        "direccion": "Calle San Pelayo, 22, 48260 Ermua, Bizkaia",
         "geo": [
           {
             "latitud": 43.187996 ,
@@ -350,7 +129,7 @@
         ],
         "tatuadores": [
           {
-            "nombreArtistico": "kris_kd_tattoo",
+            "nombreArtistico": "Kris Kd Tattoo",
             "nombre": "Kris",
             "apellidos": "",
             "webs": [
@@ -359,6 +138,36 @@
               }
             ],
             "fotos": [
+              {"foto": "f0001"},
+              {"foto": "f0002"},
+              {"foto": "f0003"},
+              {"foto": "f0004"},
+              {"foto": "f0005"},
+              {"foto": "f0006"},
+              {"foto": "f0007"},
+              {"foto": "f0008"},
+              {"foto": "f0009"},
+              {"foto": "f0010"},
+              {"foto": "f0011"},
+              {"foto": "f0012"},
+              {"foto": "f0013"},
+              {"foto": "f0014"},
+              {"foto": "f0015"},
+              {"foto": "f0016"},
+              {"foto": "f0017"},
+              {"foto": "f0018"},
+              {"foto": "f0019"},
+              {"foto": "f0020"},
+              {"foto": "f0021"},
+              {"foto": "f0022"},
+              {"foto": "f0023"},
+              {"foto": "f0024"},
+              {"foto": "f0025"},
+              {"foto": "f0026"},
+              {"foto": "f0027"},
+              {"foto": "f0028"},
+              {"foto": "f0029"},
+              {"foto": "f0030"}
 
             ]
           }
@@ -384,8 +193,8 @@
         ],
         "tatuadores": [
           {
-            "nombreArtistico": "javiervi_tattoos",
-            "nombre": "javier",
+            "nombreArtistico": "Javiervi Tattoos",
+            "nombre": "Javier",
             "apellidos": "Villar",
             "webs": [
               {
@@ -423,9 +232,9 @@
         ],
         "tatuadores": [
           {
-            "nombreArtistico": "txitxo_sanchez",
-            "nombre": "txitxo",
-            "apellidos": "sanchez",
+            "nombreArtistico": "Txitxo Sanchez",
+            "nombre": "Txitxo",
+            "apellidos": "Sanchez",
             "webs": [
               {
                 "web": "https://www.instagram.com/txitxo_sanchez/?hl=es"
@@ -444,7 +253,7 @@
 
 
       {
-        "nombre": "romeoyjulieta.tattoo",
+        "nombre": "Romeo y Julieta Tattoo",
         "direccion": "Aita Lojendio Kalea, 3, 48008 Bilbo, Bizkaia",
         "geo": [
           {
@@ -461,7 +270,7 @@
         ],
         "tatuadores": [
           {
-            "nombreArtistico": "ninkane",
+            "nombreArtistico": "Ninkane",
             "nombre": "",
             "apellidos": "",
             "webs": [
@@ -473,7 +282,7 @@
             ]
           },
           {
-            "nombreArtistico": "cyntiartist",
+            "nombreArtistico": "Cyntiartist",
             "nombre": "Cynthia",
             "apellidos": "Cabero Lluvia",
             "webs": [
@@ -485,7 +294,7 @@
             ]
           },
           {
-            "nombreArtistico": "tadeo_ink",
+            "nombreArtistico": "Tadeo Ink",
             "nombre": "Tadeo",
             "apellidos": "",
             "webs": [
@@ -501,7 +310,7 @@
 
       {
         "nombre": "Arcos Ermua",
-        "direccion": "IES Uni Eibar-Ermua BHI Éibar",
+        "direccion": "IES Uni Eibar-Ermua BHI Eibar",
         "geo": [
           {
             "latitud": 43.179295,
@@ -535,7 +344,204 @@
             ]
           }
         ]
+      },
+
+      {
+        "nombre": "KM13 Studio",
+        "direccion": "C/ Karl Marx 13, Astrabudua, Erandio. Bizkaia. CP 48950",
+        "geo": [
+          {
+            "latitud": 43.3175841,
+            "longitud": -2.9856236
+          }
+        ],
+        "email": "",
+        "telefono": "+34656763072",
+        "webs": [
+          {
+            "web": "https://km13studio.com"
+          },
+          {
+            "web": "https://www.facebook.com/KM13Studio/"
+          }
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Ruth Cuervilu",
+            "nombre": "Ruth",
+            "apellidos": "Cuervilu",
+            "webs": [
+              {"web": "https://cuervilutattoostudio.com/"},
+              {"web":  "https://www.instagram.com/ruth_cuervilu_tattoo/"},
+              {"web":  "https://www.youtube.com/channel/UCMLN078yEN5khz24wBqP0aA"}
+
+            ],
+            "fotos": [
+              {"foto": "ruth001"},
+              {"foto": "ruth002"},
+              {"foto": "ruth003"},
+              {"foto": "ruth004"},
+              {"foto": "ruth005"},
+              {"foto": "ruth006"},
+              {"foto": "ruth007"},
+              {"foto": "ruth008"},
+              {"foto": "ruth009"},
+              {"foto": "ruth010"},
+              {"foto": "ruth011"},
+              {"foto": "ruth012"},
+              {"foto": "ruth013"},
+              {"foto": "ruth014"},
+              {"foto": "ruth015"},
+              {"foto": "ruth016"},
+              {"foto": "ruth017"},
+              {"foto": "ruth018"},
+              {"foto": "ruth019"},
+              {"foto": "ruth020"},
+              {"foto": "ruth021"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Tatuajes Angel",
+        "direccion": "Plaza de Unamuno 3, L2 (junto a la salida del metro, Casco Viejo). CP 48005 Bilbao (Bizkaia)",
+        "geo": [
+          {
+            "latitud": 43.2585613,
+            "longitud": -2.9237658
+          }
+        ],
+        "email": "tatuajesangel@yahoo.es",
+        "telefono": "+34944154541",
+        "webs": [
+          {
+            "web": "https://www.tatuajesangel.com"
+          }
+
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Angel Villaverde",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.instagram.com/tatuajesangel/"}
+
+            ],
+            "fotos": [
+              {"foto": "f0045"},
+              {"foto": "f0046"},
+              {"foto": "f0047"},
+              {"foto": "f0048"},
+              {"foto": "f0049"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Tabú Tatoo & Piercing",
+        "direccion": "Plaza Pepe Ubis 6. Vitoria-Gasteiz.\n",
+        "geo": [
+          {
+            "latitud": 42.847384,
+            "longitud": -2.6620179
+          }
+        ],
+        "email": "",
+        "telefono": "+34945287448",
+        "webs": [
+          {
+            "web": "https://www.tattootabu.com"
+          }
+
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Rober Tabú",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.tattootabu.com/"}
+
+            ],
+            "fotos": [
+              {"foto": "tabu001"},
+              {"foto": "tabu002"},
+              {"foto": "tabu003"},
+              {"foto": "tabu004"},
+              {"foto": "tabu005"},
+              {"foto": "tabu006"},
+              {"foto": "tabu007"},
+              {"foto": "tabu008"}
+            ]
+          },
+          {
+            "nombreArtistico": "Dani Tabú",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.tattootabu.com/"}
+
+            ],
+            "fotos": [
+              {"foto": "tabudani001"},
+              {"foto": "tabudani002"},
+              {"foto": "tabudani003"},
+              {"foto": "tabudani004"},
+              {"foto": "tabudani005"},
+              {"foto": "tabudani006"},
+              {"foto": "tabudani007"},
+              {"foto": "tabudani008"},
+              {"foto": "tabudani009"},
+              {"foto": "tabudani010"},
+              {"foto": "tabudani011"},
+              {"foto": "tabudani012"}
+            ]
+          }
+        ]
+      },
+
+      {
+        "nombre": "Gernika Tatoo & Piercing",
+        "direccion": "Juan Calzada, 14, 48300, Gernika",
+        "geo": [
+          {
+            "latitud": 43.3124938,
+            "longitud": -2.680892
+          }
+        ],
+        "email": "",
+        "telefono": "+34946257941",
+        "webs": [
+          {
+            "web": "https://www.facebook.com/GernikaTattooPiercing"
+          }
+
+        ],
+        "tatuadores": [
+          {
+            "nombreArtistico": "Gernika Tatoo",
+            "nombre": "",
+            "apellidos": "",
+            "webs": [
+              {"web": "https://www.facebook.com/GernikaTattooPiercing"}
+
+            ],
+            "fotos": [
+              {"foto": "f0035"},
+              {"foto": "f0036"},
+              {"foto": "f0037"},
+              {"foto": "f0038"},
+              {"foto": "f0039"}
+            ]
+          }
+        ]
       }
+
+
+
     ]
 }
 
