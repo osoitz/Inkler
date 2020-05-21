@@ -43,7 +43,7 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
         et_nombre = findViewById(R.id.contentNombre);
         et_apellidos = findViewById(R.id.contentApellido);
         et_nombreArt = findViewById(R.id.contentNombreArtistico);
-        final boolean anadir = getIntent().getBooleanExtra("añadir", false);
+        final boolean anadir = getIntent().getBooleanExtra(getString(R.string.add), false);
         spinner = findViewById(R.id.SpinnerNombreEstudios);
         SpinnerAdapter adapter;
         ArrayList<String> nombresEstudios = db.recogerNombresEstudios();
@@ -100,13 +100,13 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
 
                     if (anadir) {
                         db.insertarTatuador(tatuador);
-                        Toast.makeText(getApplicationContext(), "El tatuador " + tatuador.getNombre() + " ha sido creado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), getString(R.string.tatuador) + tatuador.getNombre() + getString(R.string.creado), Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityListaTatuadores.class);
                         startActivity(intent);
                     } else{
                         tatuador.setId(idTatuador);
                         db.modificarTatuador(tatuador);
-                        Toast.makeText(getApplicationContext(),"Los cambios se han realizado con exito", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(),getString(R.string.cambios), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityFichaTatuador.class);
                         intent.putExtra("id", App.getIdTatuador());
                         startActivity(intent);

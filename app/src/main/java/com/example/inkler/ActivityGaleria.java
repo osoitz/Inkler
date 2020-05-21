@@ -118,7 +118,7 @@ public class ActivityGaleria extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db.borrarFoto (idFoto);
-                Toast.makeText(getApplicationContext(), "La foto " + idFoto + " ha sido borrada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), getString(R.string.foto) + idFoto + getString(R.string.borrada), Toast.LENGTH_SHORT).show();
                 expandedImageView.setVisibility(View.GONE);
                 btnBorrarFoto.setVisibility(View.GONE);
                 rellenarAdaptador();
@@ -134,7 +134,7 @@ public class ActivityGaleria extends AppCompatActivity {
             //Toast.makeText(getApplicationContext(), "Tatuador: " + idTatuador + " Fotos recogidas de la BD: " + fotos.size(), Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
-            Toast.makeText(getApplicationContext(), "OMG!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), getString(R.string.omg), Toast.LENGTH_SHORT).show();
             Log.d(TAG, e.toString());
 
         }
@@ -376,7 +376,7 @@ public class ActivityGaleria extends AppCompatActivity {
             //Una vez sacada esa foto vamos a cogerla del intent y la guardaremos en forma de bitmap
             Bundle ext = data.getExtras();
             if (ext != null){
-                Bitmap bmp = (Bitmap) ext.get("data");
+                Bitmap bmp = (Bitmap) ext.get(getString(R.string.data));
                 Log.d(TAG, "exito");
                 saveImage(bmp);
             }

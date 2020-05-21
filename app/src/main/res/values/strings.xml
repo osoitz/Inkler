@@ -42,16 +42,20 @@
     <string name="tatoo">Tatoo</string>
     <string name="add">Add</string>
     <string name="anadir">add</string>
-    <string name="estudio">The Study "</string>
-    <string name="modificado"> has been modify"</string>
-    <string name="creado"> has been created"</string>
+    <string name="estudio">The Study </string>
+    <string name="modificado"> has been modify</string>
+    <string name="creado"> has been created</string>
+    <string name="borrada"> has been erased </string>
     <string name="tatuador">Tattoer </string>
     <string name="cambios">Changes has been coreectly change </string>
+    <string name="foto">The photo </string>
     <string name="id">id</string>
     <string name="idEstudio">idEstudio</string>
     <string name="idTatuador">idTatuador</string>
     <string name="url">url</string>
     <string name="tel">tel:</string>
+    <string name="omg">OMG!</string>
+    <string name="data">data</string>
 
 
 </resources>

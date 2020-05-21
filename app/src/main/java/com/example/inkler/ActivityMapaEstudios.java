@@ -132,7 +132,7 @@ public class ActivityMapaEstudios extends AppCompatActivity {
                             public boolean onMarkerClick(@NonNull Marker marker) {
                                 Toast.makeText(ActivityMapaEstudios.this, marker.getTitle(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getApplicationContext(), ActivityFichaEstudio.class);
-                                intent.putExtra("idEstudio", db.recogerIdEstudio(marker.getTitle()));
+                                intent.putExtra(getString(R.string.idEstudio), db.recogerIdEstudio(marker.getTitle()));
                                 startActivity(intent);
                                 //Si pasamos por aqui es que no nos hemos ido (creo)
                                 return false;
@@ -235,7 +235,7 @@ public class ActivityMapaEstudios extends AppCompatActivity {
             invalidateOptionsMenu();
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(ActivityMapaEstudios.this, ActivityAnadirEstudio.class);
-            intent.putExtra("añadir",true);
+            intent.putExtra(getString(R.string.add),true);
             startActivity(intent);
             return true;
         }

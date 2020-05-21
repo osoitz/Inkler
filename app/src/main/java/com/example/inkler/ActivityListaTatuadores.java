@@ -51,7 +51,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
                 Intent intent = new Intent(ActivityListaTatuadores.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
                 App.setIdTatuador(tatuador.getId());
-                intent.putExtra("idTatuador",tatuador.getId());
+                intent.putExtra(getString(R.string.idTatuador),tatuador.getId());
 
                 startActivity(intent);
             }
@@ -133,7 +133,7 @@ public class ActivityListaTatuadores extends AppCompatActivity {
             invalidateOptionsMenu();
         } else if (id == R.id.añadir_tatuador) {
             Intent intent = new Intent(ActivityListaTatuadores.this, ActivityAnadirTatuador.class);
-            intent.putExtra("añadir",true);
+            intent.putExtra(getString(R.string.add),true);
             startActivity(intent);
             return true;
         }

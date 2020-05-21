@@ -54,7 +54,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
         setContentView(R.layout.activity_ficha_estudio);
 
         //Variables
-        idEstudio = getIntent().getIntExtra("idEstudio",0);
+        idEstudio = getIntent().getIntExtra(getString(R.string.idEstudio),0);
         recyclerView = findViewById(R.id.recyclerTatEstudio);
         recyclerViewWeb = findViewById(R.id.recyclerestudioweb);
 
@@ -73,7 +73,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaEstudio.this, ActivityFichaTatuador.class);
                 Tatuador tatuador = tatuadores.get(position);
-                intent.putExtra("idTatuador",tatuador.getId());
+                intent.putExtra(getString(R.string.idTatuador),tatuador.getId());
                 startActivity(intent);
             }
 /*
@@ -90,7 +90,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             public void onItemClick(View view, int position) {
                 Intent intent = new Intent(ActivityFichaEstudio.this, ActivityNavegador.class);
                 Web web = webs.get(position);
-                intent.putExtra("url", web.getUrl());
+                intent.putExtra(getString(R.string.url), web.getUrl());
                 startActivity(intent);
             }
         }));
@@ -185,7 +185,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                intent.setData(Uri.parse("tel:" + telefono));
+                intent.setData(Uri.parse(getString(R.string.tel) + telefono));
                 startActivity(intent);
             }
         });
@@ -257,12 +257,12 @@ public class ActivityFichaEstudio extends AppCompatActivity {
             invalidateOptionsMenu();
         } else if (id == R.id.añadir_estudio) {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
-            intent.putExtra("añadir",true);
+            intent.putExtra(getString(R.string.add),true);
             startActivity(intent);
             return true;
         } else if (id == R.id.modificar_estudio) {
             Intent intent = new Intent(ActivityFichaEstudio.this, ActivityAnadirEstudio.class);
-            intent.putExtra("idEstudio", idEstudio);
+            intent.putExtra(getString(R.string.idEstudio), idEstudio);
             startActivity(intent);
             return true;
         }

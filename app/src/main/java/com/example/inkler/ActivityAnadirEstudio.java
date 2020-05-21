@@ -49,12 +49,12 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
         FloatingActionButton nuevaWeb = findViewById(R.id.estuAñadirWeb);
         nuevaWeb.setVisibility(View.GONE);
 
-        final boolean anadir = getIntent().getBooleanExtra("añadir",false);
+        final boolean anadir = getIntent().getBooleanExtra(getString(R.string.add),false);
 
 
         if (!anadir) {
             //Estamos en modificar
-            idEstudio = getIntent().getIntExtra("idEstudio", -1);
+            idEstudio = getIntent().getIntExtra(getString(R.string.idEstudio), -1);
             Log.d(TAG, "onCreate: " + anadir + " " + idEstudio);
             Estudio estudio =  db.recogerEstudio(idEstudio);
             rellenarDatos(estudio);
@@ -100,11 +100,11 @@ public class ActivityAnadirEstudio extends AppCompatActivity {
                 // Iniciar base de datos
                 if (anadir) {
                     db.insertarEstudio(nuevoEstudio);
-                    Toast.makeText(getApplicationContext(), "El estudio " + nuevoEstudio.getNombre() + " ha sido creado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.estudio)+ nuevoEstudio.getNombre() + getString(R.string.creado), Toast.LENGTH_SHORT).show();
                 } else {
                     nuevoEstudio.setIdEstudio(idEstudio);
                     db.modificarEstudio(nuevoEstudio);
-                    Toast.makeText(getApplicationContext(), "El estudio " + nuevoEstudio.getNombre() + " ha sido modificado", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getString(R.string.estudio)+ nuevoEstudio.getNombre() + getString(R.string.modificado), Toast.LENGTH_SHORT).show();
                 }
                 Intent intent = new Intent(ActivityAnadirEstudio.this, ActivityListaTatuadores.class);
                 startActivity(intent);
