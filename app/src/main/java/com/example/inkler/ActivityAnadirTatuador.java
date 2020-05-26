@@ -105,6 +105,7 @@ public class ActivityAnadirTatuador extends AppCompatActivity {
                         startActivity(intent);
                     } else{
                         tatuador.setId(idTatuador);
+
                         db.modificarTatuador(tatuador);
                         Toast.makeText(getApplicationContext(),"Los cambios se han realizado con exito", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(ActivityAnadirTatuador.this, ActivityFichaTatuador.class);
