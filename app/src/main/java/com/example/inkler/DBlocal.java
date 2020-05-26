@@ -478,7 +478,7 @@ class DBlocal   {
         //Columnas del where
         String selection = DBHelper.entidadTatuador._ID + " = ?";
         //Argumentos del where
-        String [] selectionargs = { "" + tatuador.getIdEstudio() };
+        String [] selectionargs = { "" + tatuador.getId() };
         db.update(DBHelper.entidadTatuador.TABLE_NAME,values,selection,selectionargs);
         db.close();
     }
