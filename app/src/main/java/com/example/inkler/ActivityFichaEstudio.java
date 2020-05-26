@@ -109,6 +109,7 @@ public class ActivityFichaEstudio extends AppCompatActivity {
                         mapboxMap.addMarker(new MarkerOptions()
                                 .position(new LatLng(estudio.getLatitud(), estudio.getLongitud()))
                                 .title(estudio.getNombre())
+                                .setSnippet(estudio.getDireccion())
                         );
 
                         //Kamera posiziora
