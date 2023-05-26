@@ -1,4 +1,4 @@
-# Inkler
+# Inkler (Trabajo de clase)
 Aurkitu zure Tatoo estudioa / Encuentra tu Estudio de Tatoo / Find your Tatoo estudio
 
 ## Table of Contents  
